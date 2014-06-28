@@ -11,15 +11,25 @@ define(['UIView'], function (UIView) {
     //默认属性
     propertys: function ($super) {
       $super();
+      this.mask = new UIMask();
 
+      //需要蒙版
+      this.needMask = true;
 
+      //需要点击蒙版删除
+      this.maskToHide = true;
 
     },
 
     initialize: function ($super, opts) {
-
       $super(opts);
 
+      this.clearRes();
+    },
+
+    //资源清理
+    clearRes: function () {
+      //      if (this.needMask == false) this.mask = null;
     },
 
     addEvent: function () {
@@ -27,10 +37,33 @@ define(['UIView'], function (UIView) {
         this.$el.addClass('cui-layer');
       });
 
+      this.on('onPreShow', function () {
+        var scope = this;
+
+        if (this.needMask) {
+          this.mask.show();
+        }
+
+        if (this.needMask && this.maskToHide) {
+          //mask显示之前为mask绑定关闭事件，一次执行便不予理睬了
+          this.mask.$el.on('click.uimask' + this.mask.id, function () {
+            scope.hide();
+          });
+        }
+
+      });
+
       this.on('onShow', function () {
         this.reposition();
         this.setzIndexTop();
       });
+
+      this.on('onHide', function () {
+        this.mask.$el.off('.uimask' + this.mask.id );
+        this.mask.hide();
+
+      });
+
     },
 
     //弹出层类垂直居中使用

@@ -28,6 +28,8 @@ define(['UILayer', getAppUITemplatePath('ui.alert')], function (UILayer, templat
         'click .cui-btns-ok': 'okAction',
         'click .cui-btns-cancel': 'cancelAction'
       };
+
+
     },
 
     initialize: function ($super, opts) {
@@ -39,6 +41,20 @@ define(['UILayer', getAppUITemplatePath('ui.alert')], function (UILayer, templat
       this.on('onCreate', function () {
         this.$el.addClass('cui-alert');
       });
+
+ 
+
+    },
+
+    okAction: function () {
+      this.hide();
+      console.log('ok');
+    },
+
+    cancelAction: function () {
+      this.hide();
+      console.log('cancel');
+
     },
 
     setDatamodel: function (datamodel, okAction, cancelAction) {
