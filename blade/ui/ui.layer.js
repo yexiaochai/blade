@@ -3,8 +3,7 @@
 用于继承的类，会自动垂直居中
 
 */
-define(['UIView'], function (UIView) {
-
+define(['UIView', 'UIMask'], function (UIView, UIMask) {
 
   return _.inherit(UIView, {
 
@@ -59,7 +58,7 @@ define(['UIView'], function (UIView) {
       });
 
       this.on('onHide', function () {
-        this.mask.$el.off('.uimask' + this.mask.id );
+        this.mask.$el.off('.uimask' + this.mask.id);
         this.mask.hide();
 
       });

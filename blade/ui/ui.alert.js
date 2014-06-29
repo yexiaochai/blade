@@ -61,7 +61,7 @@ define(['UILayer', getAppUITemplatePath('ui.alert')], function (UILayer, templat
       _.extend(this.datamodel, datamodel);
       this.okAction = okAction;
       this.cancelAction = cancelAction;
-      this.create();
+      this.refresh();
     }
 
 

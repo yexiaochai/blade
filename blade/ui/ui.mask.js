@@ -20,6 +20,11 @@ define(['UIView', getAppUITemplatePath('ui.mask')], function (UIView, template) 
       this.on('onCreate', function () {
         this.$el.addClass('cui-mask');
       });
+
+      this.on('onShow', function () {
+        this.setzIndexTop();
+      });
+
     }
 
   });

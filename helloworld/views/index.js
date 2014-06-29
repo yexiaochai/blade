@@ -1,8 +1,9 @@
-﻿define(['View', getViewTemplatePath('index'), 'UIAlert', 'UIMask', 'UILoading'], function (View, viewhtml, UIAlert, UIMask, UILoading) {
+﻿define(['View', getViewTemplatePath('index'), 'UIAlert', 'UIMask', 'UILoading', 'UIReLoading'], function (View, viewhtml, UIAlert, UIMask, UILoading, UIReLoading) {
 
   window.UIAlert = UIAlert;
   window.UIMask = UIMask;
   window.UILoading = UILoading;
+  window.UIReLoading = UIReLoading;
 
 
   return _.inherit(View, {

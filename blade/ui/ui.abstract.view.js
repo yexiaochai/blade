@@ -90,6 +90,26 @@
       this.trigger('onCreate');
     },
 
+    render: function (data, callback) {
+      data = this.getViewModel() || {};
+      var html = this.template;
+      if (!this.template) return '';
+      if (data) {
+        html = _.template(this.template)(data);
+      }
+      this.status = status;
+      typeof callback == 'function' && callback.call(this);
+      this.$el.html(html);
+      return html;
+    },
+
+    //刷新根据传入参数判断是否走onCreate事件
+    refresh: function (needEvent) {
+      if (needEvent) this.create();
+      else this.render();
+    },
+
+
     show: function () {
       this.wrapper.append(this.$el);
       this.trigger('onPreShow');
@@ -115,18 +135,7 @@
       return this.datamodel;
     },
 
-    render: function (data, callback) {
-      data = this.getViewModel() || {};
-      var html = this.template;
-      if (!this.template) return '';
-      if (data) {
-        html = _.template(this.template)(data);
-      }
-      this.status = status;
-      typeof callback == 'function' && callback.call(this);
-      this.$el.html(html);
-      return html;
-    },
+
 
     setzIndexTop: function (level) {
       if (!level || level > 10) level = 0;

@@ -26,7 +26,8 @@
       'UILayer': app + 'ui/ui.layer',
       'UIAlert': app + 'ui/ui.alert',
       'UIMask': app + 'ui/ui.mask',
-      'UILoading': app + 'ui/ui.loading'
+      'UILoading': app + 'ui/ui.loading',
+      'UIReLoading': app + 'ui/ui.reloading'
 
 
     }
