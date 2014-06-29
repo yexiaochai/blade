@@ -41,9 +41,7 @@ define(['UILayer', getAppUITemplatePath('ui.alert')], function (UILayer, templat
       this.on('onCreate', function () {
         this.$el.addClass('cui-alert');
       });
-
- 
-
+      this.maskToHide = false;
     },
 
     okAction: function () {
@@ -62,6 +60,7 @@ define(['UILayer', getAppUITemplatePath('ui.alert')], function (UILayer, templat
       this.okAction = okAction;
       this.cancelAction = cancelAction;
       this.refresh();
+      
     }
 
 

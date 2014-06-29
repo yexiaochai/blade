@@ -107,6 +107,8 @@
     refresh: function (needEvent) {
       if (needEvent) this.create();
       else this.render();
+      this.bindEvents();
+
     },
 
 
