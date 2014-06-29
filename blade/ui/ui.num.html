@@ -1,0 +1,5 @@
+﻿<span class="cui-number-ma">
+<i class="<%=minusClass %> <% if(min == curNum) { %>num-invalid<% } %>" ></i>
+  <input type="tel" class="<%=curClass %>" <%if(needText == false){ %>disabled="disabled"<%} %> value="<%=curNum %><%=unit %>">
+<i class="<%=addClass %> <% if(max == curNum) { %>num-invalid<% } %> "></i>
+</span>

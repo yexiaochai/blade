@@ -28,7 +28,9 @@
       'UIMask': app + 'ui/ui.mask',
       'UILoading': app + 'ui/ui.loading',
       'UIReLoading': app + 'ui/ui.reloading',
-      'UIToast': app + 'ui/ui.toast'
+      'UIToast': app + 'ui/ui.toast',
+      'UIInlineView': app + 'ui/ui.inline.view',
+      'UINum': app + 'ui/ui.num'
 
 
     }

@@ -1,17 +1,14 @@
-﻿define(['View', getViewTemplatePath('index'), 'UIAlert', 'UIMask', 'UILoading', 'UIReLoading', 'UIToast'], function (View, viewhtml, UIAlert, UIMask, UILoading, UIReLoading, UIToast) {
+﻿define(['View', getViewTemplatePath('index'), 'UIAlert', 'UIMask', 'UILoading', 'UIReLoading', 'UIToast', 'UINum'], function (View, viewhtml, UIAlert, UIMask, UILoading, UIReLoading, UIToast, UINum) {
 
   window.UIAlert = UIAlert;
   window.UIMask = UIMask;
   window.UILoading = UILoading;
   window.UIReLoading = UIReLoading;
   window.UIToast = UIToast;
+  window.UINum = UINum;
 
-  var t = new UIToast()
-  t.setDatamodel('111', function (e) {
-    var ssss = '';
-
-  });
-  t.show()
+  window.n = new UINum();
+  n.show();
 
 
   return _.inherit(View, {

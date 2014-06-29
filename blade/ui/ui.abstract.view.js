@@ -76,12 +76,20 @@
 
       //开始创建dom
       this.create();
+//      this.initElement();
 
+    },
+
+    $: function (selector) {
+      return this.$el.find(selector);
     },
 
     //各事件注册点，用于被继承
     addEvent: function () {
     },
+
+    //实例化需要用到到dom元素
+//    initElement: function () { },
 
     create: function () {
       this.trigger('onPreCreate');
