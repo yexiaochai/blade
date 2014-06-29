@@ -27,7 +27,8 @@
       'UIAlert': app + 'ui/ui.alert',
       'UIMask': app + 'ui/ui.mask',
       'UILoading': app + 'ui/ui.loading',
-      'UIReLoading': app + 'ui/ui.reloading'
+      'UIReLoading': app + 'ui/ui.reloading',
+      'UIToast': app + 'ui/ui.toast'
 
 
     }
