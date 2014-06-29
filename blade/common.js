@@ -25,7 +25,8 @@
       'UIView': app + 'ui/ui.abstract.view',
       'UILayer': app + 'ui/ui.layer',
       'UIAlert': app + 'ui/ui.alert',
-      'UIMask': app + 'ui/ui.mask'
+      'UIMask': app + 'ui/ui.mask',
+      'UILoading': app + 'ui/ui.loading'
 
 
     }

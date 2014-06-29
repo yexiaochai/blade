@@ -1,6 +1,9 @@
-﻿define(['View', getViewTemplatePath('index'), 'UIAlert'], function (View, viewhtml, UIAlert) {
+﻿define(['View', getViewTemplatePath('index'), 'UIAlert', 'UIMask', 'UILoading'], function (View, viewhtml, UIAlert, UIMask, UILoading) {
 
   window.UIAlert = UIAlert;
+  window.UIMask = UIMask;
+  window.UILoading = UILoading;
+
 
   return _.inherit(View, {
     onCreate: function () {

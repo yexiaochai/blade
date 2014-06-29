@@ -85,7 +85,8 @@
 
     create: function () {
       this.trigger('onPreCreate');
-      this.$el.html(this.render(this.getViewModel()));
+      //      this.$el.html(this.render(this.getViewModel()));
+      this.render();
       this.trigger('onCreate');
     },
 
@@ -110,12 +111,12 @@
       delete this;
     },
 
-
     getViewModel: function () {
       return this.datamodel;
     },
 
     render: function (data, callback) {
+      data = this.getViewModel() || {};
       var html = this.template;
       if (!this.template) return '';
       if (data) {
@@ -123,6 +124,7 @@
       }
       this.status = status;
       typeof callback == 'function' && callback.call(this);
+      this.$el.html(html);
       return html;
     },
 

@@ -2423,7 +2423,11 @@ input[type=text].place_search:empty {
 
 .cui-mask {
     background: rgba(0,0,0,.5);
-    z-index: 2000
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
 }
 
 .cui-warning-mask {
