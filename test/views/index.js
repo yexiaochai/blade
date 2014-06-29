@@ -14,7 +14,8 @@
 
     events: {
       'click button': function (e) {
-        this.forward('list');
+        var target = $(e.target);
+        this.forward(target.attr('hash'));
       }
     },
 
