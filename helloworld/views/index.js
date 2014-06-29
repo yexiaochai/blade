@@ -1,4 +1,4 @@
-﻿define(['View', getViewTemplatePath('index'), 'UIAlert', 'UIMask', 'UILoading', 'UIReLoading', 'UIToast', 'UINum'], function (View, viewhtml, UIAlert, UIMask, UILoading, UIReLoading, UIToast, UINum) {
+﻿define(['View', getViewTemplatePath('index'), 'UIAlert', 'UIMask', 'UILoading', 'UIReLoading', 'UIToast', 'UINum', 'UISwitch'], function (View, viewhtml, UIAlert, UIMask, UILoading, UIReLoading, UIToast, UINum, UISwitch) {
 
   window.UIAlert = UIAlert;
   window.UIMask = UIMask;
@@ -7,11 +7,7 @@
   window.UIToast = UIToast;
   window.UINum = UINum;
 
-  window.n = new UINum({
-    datamodel: {
-    curNum: 4
-    }
-  });
+  window.n = new UISwitch( );
   n.show();
 
 
