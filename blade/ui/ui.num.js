@@ -31,12 +31,16 @@ define(['UIView', getAppUITemplatePath('ui.num')], function (UIView, template) {
 
     },
 
+    initElement: function () {
+      this.curNum = this.$('.num-value-txt');
+    },
+
     txtFocus: function () {
-      this.$('.num-value-txt').val('');
+      this.curNum.val('');
     },
 
     txtBlur: function () {
-      this.setVal(this.$('.num-value-txt').val());
+      this.setVal(this.curNum.val());
     },
 
     addAction: function () {

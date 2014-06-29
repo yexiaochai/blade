@@ -83,7 +83,7 @@
 
       //开始创建dom
       this.create();
-      //      this.initElement();
+      this.initElement();
 
     },
 
@@ -96,7 +96,7 @@
     },
 
     //实例化需要用到到dom元素
-    //    initElement: function () { },
+    initElement: function () { },
 
     create: function () {
       this.trigger('onPreCreate');
@@ -122,6 +122,7 @@
     refresh: function (needEvent) {
       if (needEvent) this.create();
       else this.render();
+      this.initElement();
       this.bindEvents();
 
     },

@@ -7,7 +7,11 @@
   window.UIToast = UIToast;
   window.UINum = UINum;
 
-  window.n = new UINum();
+  window.n = new UINum({
+    datamodel: {
+    curNum: 4
+    }
+  });
   n.show();
 
 
