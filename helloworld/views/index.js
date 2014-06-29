@@ -1,4 +1,4 @@
-﻿define(['View', getViewTemplatePath('index'), 'UIAlert', 'UIMask', 'UILoading', 'UIReLoading', 'UIToast', 'UINum', 'UISwitch'], function (View, viewhtml, UIAlert, UIMask, UILoading, UIReLoading, UIToast, UINum, UISwitch) {
+﻿define(['View', getViewTemplatePath('index'), 'UIAlert', 'UIMask', 'UILoading', 'UIReLoading', 'UIToast', 'UINum', 'UISwitch', 'UIBubbleLayer'], function (View, viewhtml, UIAlert, UIMask, UILoading, UIReLoading, UIToast, UINum, UISwitch, UIBubbleLayer) {
 
   window.UIAlert = UIAlert;
   window.UIMask = UIMask;
@@ -6,8 +6,9 @@
   window.UIReLoading = UIReLoading;
   window.UIToast = UIToast;
   window.UINum = UINum;
+  window.UIBubbleLayer = UIBubbleLayer;
 
-  window.n = new UISwitch( );
+  window.n = new UIBubbleLayer();
   n.show();
 
 

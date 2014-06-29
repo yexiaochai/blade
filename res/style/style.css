@@ -2443,6 +2443,8 @@ input[type=text].place_search:empty {
     padding: 5px
 }
 
+
+
 .cui-alert {
     position: fixed;
     left: 50%;
@@ -4372,7 +4374,11 @@ input[type=text].place_search:empty {
     background: #f2f2f2;
     border: #bcbcbc 1px solid;
     border-width: 0 1px 1px;
-    border-radius: 3px
+    border-radius: 3px;
+    position: absolute;
+    left: 0;
+    top: 0;
+  color: #000;
 }
 
 .cui-f-layer li {

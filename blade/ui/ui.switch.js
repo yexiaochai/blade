@@ -78,7 +78,6 @@ define(['UIView', getAppUITemplatePath('ui.switch')], function (UIView, template
           }
           return;
         }, this));
-
       });
 
       this.on('onHide', function () {

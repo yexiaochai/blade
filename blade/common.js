@@ -31,7 +31,8 @@
       'UIToast': app + 'ui/ui.toast',
       'UIInlineView': app + 'ui/ui.inline.view',
       'UINum': app + 'ui/ui.num',
-      'UISwitch': app + 'ui/ui.switch'
+      'UISwitch': app + 'ui/ui.switch',
+      'UIBubbleLayer': app + 'ui/ui.bubble.layer'
 
 
     }
