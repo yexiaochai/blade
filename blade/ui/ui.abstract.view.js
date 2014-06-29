@@ -65,7 +65,14 @@
     },
 
     setOption: function (options) {
-      _.extend(this, options);
+      for (var k in options) {
+        if (k == 'datamodel') {
+          _.extend(this.datamodel, options[k]);
+          continue;
+        }
+        this[k] = options[k]
+      }
+      //      _.extend(this, options);
     },
 
     initialize: function (opts) {
@@ -76,7 +83,7 @@
 
       //开始创建dom
       this.create();
-//      this.initElement();
+      //      this.initElement();
 
     },
 
@@ -89,7 +96,7 @@
     },
 
     //实例化需要用到到dom元素
-//    initElement: function () { },
+    //    initElement: function () { },
 
     create: function () {
       this.trigger('onPreCreate');

@@ -12,7 +12,7 @@ define(['UIView', getAppUITemplatePath('ui.num')], function (UIView, template) {
       this.datamodel = {
         min: 1,
         max: 9,
-        curNum: 19,
+        curNum: 5,
         addClass: 'num-add',
         minusClass: 'num-minus',
         curClass: 'num-value-txt',
@@ -100,7 +100,6 @@ define(['UIView', getAppUITemplatePath('ui.num')], function (UIView, template) {
       this.on('onCreate', function () {
         this.$el.addClass('cui-add');
       });
-
     }
 
   });

@@ -11,6 +11,8 @@ define(['UILayer', getAppUITemplatePath('ui.loading')], function (UILayer, templ
       $super();
       //html模板
       this.template = template;
+      this.maskToHide = false;
+
     },
 
     initialize: function ($super, opts) {
