@@ -6,6 +6,13 @@
   window.UIReLoading = UIReLoading;
   window.UIToast = UIToast;
 
+  var t = new UIToast()
+  t.setDatamodel('111', function (e) {
+    var ssss = '';
+
+  });
+  t.show()
+
 
   return _.inherit(View, {
     onCreate: function () {
@@ -19,7 +26,7 @@
     },
 
     onPreShow: function () {
-  
+
 
 
       //      a.setContent('测试');
