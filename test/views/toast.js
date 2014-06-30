@@ -8,7 +8,7 @@ define(['View', 'UIToast', getViewTemplatePath('toast')], function (View, UIToas
 
     events: {
       'click .widget0': function (e) {
-        var toast = new UIToast();
+        var toast = new UIToast({text:"woca"});
         toast.show();
       },
 
