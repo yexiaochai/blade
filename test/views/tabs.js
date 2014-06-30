@@ -1,4 +1,4 @@
-define(['View', 'UITab', getViewTemplatePath('tabs')], function (View, UITab, viewhtml) {
+define(['View', 'UITabs', getViewTemplatePath('tabs')], function (View, UITabs, viewhtml) {
 
   return _.inherit(View, {
     onCreate: function () {
@@ -18,13 +18,14 @@ define(['View', 'UITab', getViewTemplatePath('tabs')], function (View, UITab, vi
 
     onPreShow: function () {
       console.log('onPreShow');
-      var uiTab = new UITab({
+      var uiTab = new UITabs({
         datamodel: {
 
         },
         wrapper: this.$el.find('.wrapper')
       });
       uiTab.show();
+      window.uiTab = uiTab
       this.turning();
     },
 

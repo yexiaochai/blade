@@ -20,7 +20,7 @@
         'click .cui-tab-mod>li': 'clickAction'
       };
 
-      this.onChange = function (e, data, i, el) {
+      this.onChange = function (data) {
 
         console.log(arguments);
       };
@@ -66,8 +66,8 @@
         }, this), 0);
       }
 
-      if (isChange == false && typeof this.changed == 'function') {
-        this.changed.call(this, d, e);
+      if (isChange == false && typeof this.onChange == 'function') {
+        this.onChange.call(this, d);
       }
 
     },

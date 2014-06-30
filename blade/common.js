@@ -33,7 +33,8 @@
       'UINum': app + 'ui/ui.num',
       'UISwitch': app + 'ui/ui.switch',
       'UIBubbleLayer': app + 'ui/ui.bubble.layer',
-      'UITab': app + 'ui/ui.tab'
+      'UITab': app + 'ui/ui.tab',
+      'UITabs': app + 'ui/ui.tabs'
 
 
     }
