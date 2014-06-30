@@ -27,6 +27,6 @@ button {
     width: 100%;
 }
 
-.wrapper {
+.wrapper, .wrapper1 {
     padding: 0 27px 0 26px;
 }
