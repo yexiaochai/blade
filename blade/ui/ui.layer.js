@@ -18,6 +18,9 @@ define(['UIView', 'UIMask'], function (UIView, UIMask) {
       //需要点击蒙版删除
       this.maskToHide = true;
 
+      //需要居中定位
+      this.needReposition = true;
+
     },
 
     initialize: function ($super, opts) {
@@ -53,7 +56,7 @@ define(['UIView', 'UIMask'], function (UIView, UIMask) {
       });
 
       this.on('onShow', function () {
-        this.reposition();
+        if (this.needReposition) this.reposition();
         this.setzIndexTop();
       });
 

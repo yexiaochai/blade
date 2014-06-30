@@ -8,8 +8,6 @@
   window.UINum = UINum;
   window.UIBubbleLayer = UIBubbleLayer;
 
-  window.n = new UIBubbleLayer();
-  n.show();
 
 
   return _.inherit(View, {
@@ -18,8 +16,22 @@
     },
 
     events: {
-      'click button': function (e) {
-        this.forward('list');
+      'click .cui-cond-bar li': function (e) {
+        var el = $(e.currentTarget);
+        var index = parseInt(Math.random() * 4);
+        var dir = (e.pageY > 200) ? 'down' : 'up';
+        console.log(index);
+
+        window.n = new UIBubbleLayer({
+          triggerEl: el,
+          datamodel: {
+            dir: dir,
+            index: index
+          }
+        });
+
+        n.show();
+
       }
     },
 

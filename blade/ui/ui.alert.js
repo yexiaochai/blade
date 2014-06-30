@@ -28,8 +28,6 @@ define(['UILayer', getAppUITemplatePath('ui.alert')], function (UILayer, templat
         'click .cui-btns-ok': 'okAction',
         'click .cui-btns-cancel': 'cancelAction'
       };
-
-
     },
 
     initialize: function ($super, opts) {

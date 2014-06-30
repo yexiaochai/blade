@@ -4378,7 +4378,7 @@ input[type=text].place_search:empty {
     position: absolute;
     left: 0;
     top: 0;
-  color: #000;
+    color: #000;
 }
 
 .cui-f-layer li {
