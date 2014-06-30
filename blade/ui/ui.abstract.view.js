@@ -155,10 +155,11 @@
 
 
 
-    setzIndexTop: function (level) {
+    setzIndexTop: function (el, level) {
+      if (!el) el = this.$el;
       if (!level || level > 10) level = 0;
       level = level * 1000;
-      this.$el.css('z-index', getBiggerzIndex(level));
+      el.css('z-index', getBiggerzIndex(level));
 
     },
 

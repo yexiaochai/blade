@@ -93,7 +93,7 @@ define(['UILayer', getAppUITemplatePath('ui.bubble.layer')], function (UILayer, 
       });
 
       this.on('onShow', function () {
-        this.setzIndexTop();
+        this.setzIndexTop(this.el);
       
       });
     }

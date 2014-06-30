@@ -1,4 +1,4 @@
-﻿define(['View', getViewTemplatePath('index'), 'UIAlert', 'UIMask', 'UILoading', 'UIReLoading', 'UIToast', 'UINum', 'UISwitch', 'UIBubbleLayer'], function (View, viewhtml, UIAlert, UIMask, UILoading, UIReLoading, UIToast, UINum, UISwitch, UIBubbleLayer) {
+﻿define(['View', getViewTemplatePath('index'), 'UIAlert', 'UIMask', 'UILoading', 'UIReLoading', 'UIToast', 'UINum', 'UISwitch', 'UIBubbleLayer', 'UITab'], function (View, viewhtml, UIAlert, UIMask, UILoading, UIReLoading, UIToast, UINum, UISwitch, UIBubbleLayer, UITab) {
 
   window.UIAlert = UIAlert;
   window.UIMask = UIMask;
@@ -7,6 +7,7 @@
   window.UIToast = UIToast;
   window.UINum = UINum;
   window.UIBubbleLayer = UIBubbleLayer;
+  window.UITab = UITab;
 
 
 
@@ -37,7 +38,8 @@
 
     onPreShow: function () {
 
-
+      var u = new UITab();
+      u.show();
 
       //      a.setContent('测试');
 

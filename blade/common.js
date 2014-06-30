@@ -32,7 +32,8 @@
       'UIInlineView': app + 'ui/ui.inline.view',
       'UINum': app + 'ui/ui.num',
       'UISwitch': app + 'ui/ui.switch',
-      'UIBubbleLayer': app + 'ui/ui.bubble.layer'
+      'UIBubbleLayer': app + 'ui/ui.bubble.layer',
+      'UITab': app + 'ui/ui.tab'
 
 
     }
