@@ -20,7 +20,8 @@ define(['UILayer', getAppUITemplatePath('ui.bubble.layer')], function (UILayer, 
         upClass: 'f-layer-before',
         downClass: 'f-layer-after',
         curClass: 'cui-fl-current',
-        index: 2
+        index: 2,
+        dir: 'up'  //箭头方向默认值
       };
 
       this.events = {
