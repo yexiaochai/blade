@@ -3196,10 +3196,8 @@ input[type=text].place_search:empty {
     background: #fff;
     width: 280px;
     margin: auto;
-    position: relative;
     overflow: hidden;
     border-radius: 3px;
-    z-index: 9999
 }
 
 .cui-text-center {
@@ -3274,7 +3272,6 @@ input[type=text].place_search:empty {
     border-bottom: #dfdfdf 1px solid;
     padding: 1em 2em 1em 1em;
     white-space: nowrap;
-    overflow: hidden;
     text-overflow: ellipsis;
     position: relative
 }

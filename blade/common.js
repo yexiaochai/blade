@@ -35,7 +35,8 @@
       'UIBubbleLayer': app + 'ui/ui.bubble.layer',
       'UITab': app + 'ui/ui.tab',
       'UITabs': app + 'ui/ui.tabs',
-      'UIScroll': app + 'ui/ui.scroll'
+      'UIScroll': app + 'ui/ui.scroll',
+      'UIlRadioList': app + 'ui/ui.radio.list'
 
 
     }
