@@ -1,5 +1,6 @@
 
 define([], function () {
+
   var utils = (function () {
     var me = {};
     var _elementStyle = document.createElement('div').style;
@@ -158,7 +159,7 @@ define([], function () {
 
     this.options = {
       //每次要求移动的步长
-      setp: false,
+      step: false,
       //是否具有滚动条
       scrollbars: true,
       // 其实时期Y的位置
@@ -496,12 +497,20 @@ define([], function () {
     _translate: function (x, y, isStep) {
 
       //处理步长
-      if (this.options.setp && !isStep) {
+      if (this.options.step && !isStep) {
         var flag2 = y > 0 ? 1 : -1; //这个会影响后面的计算结果
+        var flag3 = x > 0 ? 1 : -1; //这个会影响后面的计算结果
+
         var top = Math.abs(y);
-        var mod = top % this.options.setp;
-        top = (parseInt(top / this.options.setp) * this.options.setp + (mod > (this.options.setp / 2) ? this.options.setp : 0)) * flag2;
+        var left = Math.abs(x);
+
+        var mod = top % this.options.step;
+        var mod1 = left % this.options.step;
+
+        top = (parseInt(top / this.options.step) * this.options.step + (mod > (this.options.step / 2) ? this.options.step : 0)) * flag2;
+        left = (parseInt(left / this.options.step) * this.options.step + (mod1 > (this.options.step / 2) ? this.options.step : 0)) * flag3;
         y = top;
+        x = left;
       }
 
       this.scrollerStyle[utils.style.transform] = 'translate(' + x + 'px,' + y + 'px)' + this.translateZ;
