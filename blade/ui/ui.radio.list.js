@@ -51,7 +51,7 @@
       }
       if (index == -1) return;
       this.datamodel.selectId = id;
-      this.datamodel.index = id;
+      this.datamodel.index = index;
       this.setIndex(index);
     },
 

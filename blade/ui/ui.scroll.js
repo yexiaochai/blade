@@ -1,4 +1,9 @@
+/*
+待修复
+1 设置step时候，在达到max值时候会有问题
+2 设置step时候会导致滚动条不消失
 
+*/
 define([], function () {
 
   var utils = (function () {
@@ -165,6 +170,8 @@ define([], function () {
       // 其实时期Y的位置
       startY: 0,
 
+      scrollOffset: 0,
+
       //默认竖向滚动
       scrollType: 'y',
 
@@ -224,6 +231,11 @@ define([], function () {
       this.wrapperHeight = this.wrapper.clientHeight;
       this.scrollerHeight = this.scroller.offsetHeight;
       this.maxScrollY = this.wrapperHeight - this.scrollerHeight;
+
+
+      //增加偏移量概念
+      this.maxScrollX = this.maxScrollX - this.options.scrollOffset
+      this.maxScrollY = this.maxScrollY - this.options.scrollOffset;
 
       if (this.options.scrollType == 'y') {
         this.maxScrollX = 0;
@@ -339,12 +351,12 @@ define([], function () {
       newX = this.x + deltaX;
       newY = this.y + deltaY;
 
-      if (newX > 0 || newX < this.maxScrollX) {
-        newX = this.options.bounce ? this.x + deltaX / 3 : newX > 0 ? 0 : this.maxScrollX;
+      if (newX > this.options.scrollOffset || newX < this.maxScrollX) {
+        newX = this.options.bounce ? this.x + deltaX / 3 : newX > this.options.scrollOffset ? this.options.scrollOffset : this.maxScrollX;
       }
 
-      if (newY > 0 || newY < this.maxScrollY) {
-        newY = this.options.bounce ? this.y + deltaY / 3 : newY > 0 ? 0 : this.maxScrollY;
+      if (newY > this.options.scrollOffset || newY < this.maxScrollY) {
+        newY = this.options.bounce ? this.y + deltaY / 3 : newY > this.options.scrollOffset ? this.options.scrollOffset : this.maxScrollY;
       }
 
       if (!this.moved) {
@@ -416,7 +428,7 @@ define([], function () {
       }
 
       if (newX != this.x || newY != this.y) {
-        if (newX > 0 || newX < this.maxScrollX || newY > 0 || newY < this.maxScrollY) {
+        if (newX > this.options.scrollOffset || newX < this.maxScrollX || newY > this.options.scrollOffset || newY < this.maxScrollY) {
           easing = utils.ease.quadratic;
         }
 
@@ -513,6 +525,12 @@ define([], function () {
         x = left;
       }
 
+      if (this.options.scrollType == 'y') {
+        x = 0;
+      } else {
+        y = 0;
+      }
+
       this.scrollerStyle[utils.style.transform] = 'translate(' + x + 'px,' + y + 'px)' + this.translateZ;
 
       this.x = x;
@@ -530,14 +548,14 @@ define([], function () {
 
       time = time || 0;
 
-      if (this.options.scrollType == 'y' || this.x > 0) {
-        x = 0;
+      if (this.options.scrollType == 'y' || this.x > this.options.scrollOffset) {
+        x = this.options.scrollOffset;
       } else if (this.x < this.maxScrollX) {
         x = this.maxScrollX;
       }
 
-      if (!this.options.scrollType == 'x' || this.y > 0) {
-        y = 0;
+      if (!this.options.scrollType == 'x' || this.y > this.options.scrollOffset) {
+        y = this.options.scrollOffset;
       } else if (this.y < this.maxScrollY) {
         y = this.maxScrollY;
       }
@@ -547,7 +565,6 @@ define([], function () {
       }
 
       this.scrollTo(x, y, time, this.options.bounceEasing);
-
       return true;
     },
 
@@ -613,6 +630,9 @@ define([], function () {
       }
 
       this._transitionTime();
+
+      this._execEvent('animatEnd');
+
       if (!this.resetPosition(this.options.bounceTime)) {
         this.isInTransition = false;
         this._execEvent('scrollEnd');

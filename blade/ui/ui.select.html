@@ -1,0 +1,12 @@
+﻿<div class="cui-roller-bd cui-roller">
+  <ul class="ul-list" style="position: absolute; width: 100%; top: 0; left: 0; " id="wl">
+    <%for(var i = 0, len = data.length; i < len; i++) { %>
+    <li data-key="<%=data[i].id %>" data-index="<%=i%>" >
+      <%=data[i].name %></li>
+    <%} %>
+  </ul>
+  <div class="cui-mask-gray">
+  </div>
+  <div class="cui-lines">
+    &nbsp;</div>
+</div>

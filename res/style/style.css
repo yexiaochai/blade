@@ -3333,7 +3333,9 @@ input[type=text].place_search:empty {
     -ms-flex: 1;
     flex: 1
 }
-
+.cui-roller-bd{
+  overflow: hidden; position: relative; 
+}
 .cui-roller {
     width: 100%;
     overflow: hidden;
@@ -3348,18 +3350,18 @@ input[type=text].place_search:empty {
     flex: 2.5
 }
 
-.cui-roller .ul-list {
-    height: 100%;
+  .ul-list {
     text-align: center;
     font-size: 1.2em;
-    z-index: 2
+    z-index: 2;
 }
 
-.cui-roller .ul-list li.current {
+
+  .ul-list li.current {
     font-size: 1.3255em
 }
 
-.cui-roller .ul-list li {
+  .ul-list li {
     height: 44px;
     line-height: 44px;
     white-space: nowrap;

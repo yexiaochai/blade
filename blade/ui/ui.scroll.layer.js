@@ -13,7 +13,7 @@
           { name: 'cancel', className: 'cui-btns-cancel' },
           { name: 'ok', className: 'cui-btns-ok' }
         ]
-      }
+      };
 
       //事件机制
       this.events = {
@@ -38,7 +38,7 @@
       //          , '</div>'
       ].join('');
 
-      this.maxHeight = 400;
+      this.maxHeight = 300;
       this.sheight = 0;
 
     },
@@ -76,8 +76,6 @@
 
       this.swrapper.append(this.html);
       this.initWrapperHeight();
-
-
     },
 
     initWrapperHeight: function () {

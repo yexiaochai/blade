@@ -1,0 +1,32 @@
+﻿<div class="cui-pop-box">
+  <div class="cui-hd">
+    <div class="cui-text-center">
+      <%=title %></div>
+  </div>
+  <div class="cui-bd ">
+    <div class="cui-roller">
+      <%for(var i = 0, len = data.length; i < len; i++) { %>
+        <div class="cui-roller-bd">
+          <ul class="ul-list">
+            <%var _data = data[i]; %>
+            <%for(var j = 0, jlen =_data.length; j < jlen; j++ ){ %>
+            <li data-index="<%=j %>">
+            <%=_data[j].name || _data[j].id %>
+            </li>
+            <% } %>
+          </ul>
+        </div>
+      <% } %>
+      <div class="cui-mask-gray"></div>
+      <div class="cui-lines">&nbsp;</div>
+    </div>
+    <div class="cui-roller-tips">
+      <%=tips %></div>
+    <div class="cui-roller-btns">
+      <% for(var i = 0, len = btns.length; i < len; i++ ) {%>
+      <div class="cui-flexbd <%=btns[i].className%>">
+        <%=btns[i].name%></div>
+      <% } %>
+    </div>
+  </div>
+</div>
