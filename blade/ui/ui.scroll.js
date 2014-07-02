@@ -176,7 +176,7 @@ define([], function () {
       scrollType: 'y',
 
       //超出边界还原时间点
-      bounceTime: 600,
+      bounceTime: 400,
       //超出边界返回的动画
       bounceEasing: utils.ease.circular,
 
@@ -423,7 +423,12 @@ define([], function () {
         momentumY = utils.momentum(this.y, this.startY, duration, this.maxScrollY, this.options.bounce ? this.wrapperHeight : 0);
         newX = momentumX.destination;
         newY = momentumY.destination;
-        time = Math.max(momentumX.duration, momentumY.duration);
+
+        if (this.options.scrollType == 'y') {
+          time = Math.max(0, momentumY.duration);
+        } else {
+          time = Math.max(momentumX.duration, 0);
+        }
         this.isInTransition = 1;
       }
 
@@ -560,7 +565,7 @@ define([], function () {
         y = this.maxScrollY;
       }
 
-      if (x == this.x && y == this.y) {
+      if (x == this.x || y == this.y) {
         return false;
       }
 
@@ -570,7 +575,6 @@ define([], function () {
 
     //移动
     scrollTo: function (x, y, time, easing) {
-
       easing = easing || utils.ease.circular;
 
       this.isInTransition = time > 0;

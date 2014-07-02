@@ -1,4 +1,4 @@
-﻿define(['View', getViewTemplatePath('index'), 'UIAlert', 'UIMask', 'UILoading', 'UIReLoading', 'UIToast', 'UINum', 'UISwitch', 'UIBubbleLayer', 'UITab', 'UIlRadioList', 'UIScrollLayer', 'UISelect', 'UIGroupSelect'], function (View, viewhtml, UIAlert, UIMask, UILoading, UIReLoading, UIToast, UINum, UISwitch, UIBubbleLayer, UITab, UIlRadioList, UIScrollLayer, UISelect, UIGroupSelect) {
+﻿define(['View', getViewTemplatePath('index'), 'UIAlert', 'UIMask', 'UILoading', 'UIReLoading', 'UIToast', 'UINum', 'UISwitch', 'UIBubbleLayer', 'UITab', 'UIRadioList', 'UIScrollLayer', 'UISelect', 'UIGroupSelect'], function (View, viewhtml, UIAlert, UIMask, UILoading, UIReLoading, UIToast, UINum, UISwitch, UIBubbleLayer, UITab, UIRadioList, UIScrollLayer, UISelect, UIGroupSelect) {
 
   window.UIAlert = UIAlert;
   window.UIMask = UIMask;
@@ -8,7 +8,7 @@
   window.UINum = UINum;
   window.UIBubbleLayer = UIBubbleLayer;
   window.UITab = UITab;
-  window.UIlRadioList = UIlRadioList;
+  window.UIRadioList = UIRadioList;
 
 
 

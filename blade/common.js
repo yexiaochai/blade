@@ -37,7 +37,7 @@
       'UITabs': app + 'ui/ui.tabs',
       'UIScroll': app + 'ui/ui.scroll',
       'UIScrollLayer': app + 'ui/ui.scroll.layer',
-      'UIlRadioList': app + 'ui/ui.radio.list',
+      'UIRadioList': app + 'ui/ui.radio.list',
       'UISelect': app + 'ui/ui.select',
       'UIGroupSelect': app + 'ui/ui.group.select'
 
