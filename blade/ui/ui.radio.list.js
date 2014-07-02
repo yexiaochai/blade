@@ -66,7 +66,7 @@
       return this.datamodel.selectId;
     },
 
-    setIndex: function (i) {
+    setIndex: function (i, position) {
       i = parseInt(i);
       if (i < 0 || i >= this.datamodel.data.length) return;
       this.datamodel.index = i;
@@ -75,7 +75,7 @@
       //这里不以datamodel改变引起整个dom变化了，不划算
       this.$('li').removeClass('current');
       this.$('li[data-index="' + i + '"]').addClass('current');
-      this._position();
+      if (position) this._position();
     },
 
     getIndex: function () {
@@ -115,6 +115,8 @@
 
     addEvent: function ($super) {
       $super();
+
+      //这个要在第一位，因为后面会执行父类的position方法居中，尺寸没有就不行
       this.on('onShow', function () {
         this.initSize();
         if (this.scroll && this.scroll.destory) this.scroll.destory();
