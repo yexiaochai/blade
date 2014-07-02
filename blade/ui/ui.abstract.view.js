@@ -23,6 +23,10 @@
       //自定义事件
       //此处需要注意mask 绑定事件前后问题，考虑scroll.radio插件类型的mask应用，考虑组件通信
       this.eventArr = {};
+
+      //初始状态为实例化
+      this.status = 'init';
+
     },
 
     //绑定事件，这里应该提供一个方法，表明是insert 或者 push
@@ -102,6 +106,7 @@
       this.trigger('onPreCreate');
       //      this.$el.html(this.render(this.getViewModel()));
       this.render();
+      this.status = 'create';
       this.trigger('onCreate');
     },
 
@@ -112,7 +117,6 @@
       if (data) {
         html = _.template(this.template)(data);
       }
-      this.status = status;
       typeof callback == 'function' && callback.call(this);
       this.$el.html(html);
       return html;
@@ -120,11 +124,13 @@
 
     //刷新根据传入参数判断是否走onCreate事件
     refresh: function (needEvent) {
-      if (needEvent) this.create();
-      else this.render();
+      if (needEvent) {
+        this.create();
+      } else {
+        this.render();
+      }
       this.initElement();
-      this.bindEvents();
-
+      if (this.status == 'show') this.show();
     },
 
 
@@ -132,6 +138,7 @@
       this.wrapper.append(this.$el);
       this.trigger('onPreShow');
       this.$el.show();
+      this.status = 'show';
       this.bindEvents();
       this.trigger('onShow');
     },
@@ -139,6 +146,7 @@
     hide: function () {
       this.trigger('onPreHide');
       this.$el.hide();
+      this.status = 'hide';
       this.unBindEvents();
       this.trigger('onHide');
     },

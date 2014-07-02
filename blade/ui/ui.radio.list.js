@@ -7,7 +7,6 @@
       //html模板
       this.template = template;
 
-
       var data = [];
       for (var i = 0; i < 15; i++) {
         data.push({ id: '列表选项' + (i + 1) });
@@ -54,6 +53,13 @@
       this.datamodel.selectId = id;
       this.datamodel.index = id;
       this.setIndex(index);
+    },
+
+    //动态更新数据
+    setDatamodel: function (data) {
+      _.extend(this.datamodel, data);
+      this.itemNum = this.datamodel.data.length;
+      this.refresh();
     },
 
     getId: function () {
@@ -111,6 +117,7 @@
       $super();
       this.on('onShow', function () {
         this.initSize();
+        if (this.scroll && this.scroll.destory) this.scroll.destory();
         if (this.itemNum > this.displayNum) {
           this.scroll = new UIScroll({
             wrapper: this.swrapper,
@@ -128,8 +135,6 @@
         }
       });
     }
-
   });
-
 
 });
