@@ -16,6 +16,7 @@
       this.datamodel = {
         title: '标题',
         data: data,
+        selectId: null,
         index: 1
       };
 
@@ -38,15 +39,45 @@
     clickAction: function (e) {
       var el = $(e.currentTarget)
       var i = el.attr('data-index');
-      console.log(i);
+      this.setIndex(i);
+      if (this.onClick) this.onClick.call(this, e, this.getSelected());
+
+    },
+
+    setId: function (id) {
+      if (!id) return;
+      var index = -1, i, len;
+      for (i = 0, len = this.datamodel.data.length; i < len; i++) {
+        if (this.datamodel.data[i].id == id) { index = i; break; }
+      }
+      if (index == -1) return;
+      this.datamodel.selectId = id;
+      this.datamodel.index = id;
+      this.setIndex(index);
+    },
+
+    getId: function () {
+      return this.datamodel.selectId;
+    },
+
+    setIndex: function (i) {
+      i = parseInt(i);
+      if (i < 0 || i >= this.datamodel.data.length) return;
       this.datamodel.index = i;
+      this.datamodel.selectId = this.datamodel.data[i].id;
+
       //这里不以datamodel改变引起整个dom变化了，不划算
-      this.$('.cui-select-view li').removeClass('current');
-      el.addClass('current');
-      //      this.hide();
+      this.$('li').removeClass('current');
+      this.$('li[data-index="' + i + '"]').addClass('current');
+      this._position();
+    },
 
-      if (this.onClick) this.onClick.call(this, e, this.datamodel.data[i]);
+    getIndex: function () {
+      return this.datamodel.index;
+    },
 
+    getSelected: function () {
+      return this.datamodel.data[this.datamodel.index];
     },
 
     initElement: function () {
@@ -61,8 +92,15 @@
       this.itemHeight = parseInt(this.sheight / this.itemNum);
       if (num > this.itemNum) num = this.itemNum;
       this.swrapper.height(this.itemHeight * num);
+    },
 
+    _position: function () {
+      if (!this.scroll) return;
+      var index = this.datamodel.index, _top;
+      if (this.itemNum - index < this.displayNum) index = this.itemNum - this.displayNum;
 
+      _top = (this.itemHeight * index) * (-1);
+      this.scroll.scrollTo(0, _top);
     },
 
     initialize: function ($super, opts) {
@@ -78,12 +116,7 @@
             wrapper: this.swrapper,
             scroller: this.scroller
           });
-
-          var index = this.datamodel.index
-          if (this.itemNum - index < this.displayNum) index = this.itemNum - this.displayNum;
-
-          var _top = (this.itemHeight * index) * (-1);
-          this.scroll.scrollTo(0, _top);
+          this._position();
         }
 
       }, 1);
