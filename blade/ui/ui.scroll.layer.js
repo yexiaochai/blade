@@ -18,7 +18,8 @@
       //事件机制
       this.events = {
         'click .cui-btns-ok': 'okAction',
-        'click .cui-btns-cancel': 'cancelAction'
+        'click .cui-btns-cancel': 'cancelAction',
+        'click .cui-top-close': 'closeAction'
       };
 
       //body内部需要装载的dom结构，可能是包装过的dom结构
@@ -48,6 +49,10 @@
 
     cancelAction: function () {
       console.log('cancel');
+    },
+
+    closeAction: function () {
+      this.hide();
     },
 
     initElement: function () {
