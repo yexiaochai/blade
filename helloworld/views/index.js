@@ -1,4 +1,4 @@
-﻿define(['View', getViewTemplatePath('index'), 'UIAlert', 'UIMask', 'UILoading', 'UIReLoading', 'UIToast', 'UINum', 'UISwitch', 'UIBubbleLayer', 'UITab', 'UIlRadioList'], function (View, viewhtml, UIAlert, UIMask, UILoading, UIReLoading, UIToast, UINum, UISwitch, UIBubbleLayer, UITab, UIlRadioList) {
+﻿define(['View', getViewTemplatePath('index'), 'UIAlert', 'UIMask', 'UILoading', 'UIReLoading', 'UIToast', 'UINum', 'UISwitch', 'UIBubbleLayer', 'UITab', 'UIlRadioList', 'UIScrollLayer'], function (View, viewhtml, UIAlert, UIMask, UILoading, UIReLoading, UIToast, UINum, UISwitch, UIBubbleLayer, UITab, UIlRadioList, UIScrollLayer) {
 
   window.UIAlert = UIAlert;
   window.UIMask = UIMask;
@@ -39,7 +39,7 @@
 
     onPreShow: function () {
 
-      var u = new UIlRadioList();
+      var u = new UIScrollLayer();
       u.show();
       window.u = u;
       //      a.setContent('测试');

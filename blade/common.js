@@ -36,6 +36,7 @@
       'UITab': app + 'ui/ui.tab',
       'UITabs': app + 'ui/ui.tabs',
       'UIScroll': app + 'ui/ui.scroll',
+      'UIScrollLayer': app + 'ui/ui.scroll.layer',
       'UIlRadioList': app + 'ui/ui.radio.list'
 
 
