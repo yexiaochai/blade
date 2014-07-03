@@ -436,10 +436,12 @@ define([], function () {
         if (newX > this.options.scrollOffset || newX < this.maxScrollX || newY > this.options.scrollOffset || newY < this.maxScrollY) {
           easing = utils.ease.quadratic;
         }
+        if (time == 0) time = 1;
 
         this.scrollTo(newX, newY, time, easing);
         return;
       }
+
 
       this._execEvent('scrollEnd');
     },
@@ -528,6 +530,19 @@ define([], function () {
         left = (parseInt(left / this.options.step) * this.options.step + (mod1 > (this.options.step / 2) ? this.options.step : 0)) * flag3;
         y = top;
         x = left;
+
+        if (this.x > this.options.scrollOffset) {
+          x = this.options.scrollOffset;
+        } else if (this.x < this.maxScrollX) {
+          x = this.maxScrollX;
+        }
+
+        if (this.y > this.options.scrollOffset) {
+          y = this.options.scrollOffset;
+        } else if (this.y < this.maxScrollY) {
+          y = this.maxScrollY;
+        }
+
       }
 
       if (this.options.scrollType == 'y') {

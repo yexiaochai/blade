@@ -3361,6 +3361,10 @@ input[type=text].place_search:empty {
     font-size: 1.3255em
 }
 
+  .ul-list li.disabled {
+   color: rgb(209, 201, 196);
+}
+
   .ul-list li {
     height: 44px;
     line-height: 44px;
