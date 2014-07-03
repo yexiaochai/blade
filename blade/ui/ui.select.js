@@ -107,6 +107,11 @@
         this.setIndex(this.getIndexByPosition(), true)
       }, this));
 
+      //为了解决鼠标离屏幕时导致的问题
+      this.scroll.on('beforeScrollStart', $.proxy(function () {
+        this.setIndex(this.getIndexByPosition(), true)
+      }, this));
+      
     },
 
     reload: function (datamodel) {

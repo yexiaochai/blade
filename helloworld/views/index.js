@@ -1,4 +1,4 @@
-﻿define(['View', getViewTemplatePath('index'), 'UIAlert', 'UIMask', 'UILoading', 'UIReLoading', 'UIToast', 'UINum', 'UISwitch', 'UIBubbleLayer', 'UITab', 'UIRadioList', 'UIScrollLayer', 'UISelect', 'UIGroupSelect'], function (View, viewhtml, UIAlert, UIMask, UILoading, UIReLoading, UIToast, UINum, UISwitch, UIBubbleLayer, UITab, UIRadioList, UIScrollLayer, UISelect, UIGroupSelect) {
+﻿define(['View', getViewTemplatePath('index'), 'UIAlert', 'UIMask', 'UILoading', 'UIReLoading', 'UIToast', 'UINum', 'UISwitch', 'UIBubbleLayer', 'UITab', 'UIRadioList', 'UIScrollLayer', 'UISelect', 'UIGroupSelect', 'UIGroupList'], function (View, viewhtml, UIAlert, UIMask, UILoading, UIReLoading, UIToast, UINum, UISwitch, UIBubbleLayer, UITab, UIRadioList, UIScrollLayer, UISelect, UIGroupSelect, UIGroupList) {
 
   window.UIAlert = UIAlert;
   window.UIMask = UIMask;
@@ -39,11 +39,9 @@
 
     onPreShow: function () {
 
-      var u = new UISelect();
-      u.show();
 
 
-      var u = new UIGroupSelect();
+      var u = new UIGroupList();
       u.show();
       window.u = u;
       //      a.setContent('测试');

@@ -126,6 +126,11 @@
     return key ? urlParams[key] : urlParams;
   };
 
+
+  _.removeAllSpace = function (str) {
+    return str.replace(/\s+/g, "");
+  };
+
   //flip手势工具
   (function () {
 
