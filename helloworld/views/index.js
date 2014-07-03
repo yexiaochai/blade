@@ -41,6 +41,10 @@
 
       var u = new UISelect();
       u.show();
+
+
+      var u = new UIGroupSelect();
+      u.show();
       window.u = u;
       //      a.setContent('测试');
 

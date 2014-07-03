@@ -58,7 +58,7 @@
     initElement: function () {
 
       //几个容器的高度必须统一
-      this.swrapper = this.$('.cui-roller-bd');
+      this.swrapper = this.$el;
       this.scroller = this.$('.ul-list');
       this.resetNum();
 
@@ -165,7 +165,7 @@
     3 以上逻辑会加重changed触发事件以及重新设置index的复杂度
 
     */
-    setIndex: function (i, noPosition) {
+    setIndex: function (i, noPosition, noEvent) {
       if (typeof noPosition == 'undefined' && i == this.datamodel.index) noPosition = true;
       var tmpIndex = i;
       var tmpIndex2;
@@ -195,13 +195,17 @@
 
       if (!noPosition) this.adjustPosition(true);
       this.resetCss();
-      if (isChange) this.changed && this.changed.call(this, this.getSelected());
+      if (noEvent !== true && isChange) this.changed && this.changed.call(this, this.getSelected());
     },
 
     resetCss: function () {
       this.$('li').removeClass('current');
       this.$('li[data-index="' + this.datamodel.index + '"]').addClass('current');
 
+    },
+
+    resetIndex: function () {
+      this.setIndex(this.datamodel.index, true, true);
     },
 
     getIndex: function () {
@@ -216,13 +220,14 @@
       }
       if (index == -1) return;
       this.datamodel.index = index;
-      this.setIndex(index);
+      this.setIndex(index, false);
 
     },
 
     getId: function () {
       return this.getSelected().id;
     },
+
 
     getSelected: function () {
       return this.datamodel.data[this.datamodel.index];
@@ -242,6 +247,11 @@
     addEvent: function ($super) {
       $super();
 
+      this.on('onCreate', function () {
+        this.$el.addClass('cui-roller-bd');
+        this.$el.addClass('cui-roller');
+
+      });
 
       //这个要在第一位，因为后面会执行父类的position方法居中，尺寸没有就不行
       this.on('onShow', function () {
@@ -251,6 +261,9 @@
         this._initScroll();
         this.adjustPosition();
         this.resetCss();
+        //防止初始化定义index为不可选index
+        this.resetIndex();
+
       }, 1);
 
       this.on('onHide', function () {
