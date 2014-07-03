@@ -24,6 +24,8 @@
         index: 4
       };
 
+      this.animatTime = 100;
+
       this.itemNum = this.datamodel.data.length;
 
       //这里便只有一个接口了
@@ -74,7 +76,7 @@
       if (!this.scroll) return;
       var index = this.datamodel.index, _top, time = 0;
       _top = (this.itemHeight * index) * (-1) + this.scrollOffset;
-      if (hasAnimate) time = 50;
+      if (hasAnimate) time = this.animatTime;
       this.scroll.scrollTo(0, _top, time);
     },
 
