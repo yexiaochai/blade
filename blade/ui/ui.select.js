@@ -159,19 +159,25 @@
 
     //这里要处理不可选的状况
     setIndex: function (i, noPosition) {
-      if (typeof noPosition == 'undefined' && i == this.datamodel.index) noPosition = true, tmpIndex;
+      if (typeof noPosition == 'undefined' && i == this.datamodel.index) noPosition = true;
+      var tmpIndex;
+      //index值是否改变
       var isChange = this.datamodel.index != i;
       var dir = i > this.datamodel.index ? 'up' : 'down';
 
       i = parseInt(i);
       if (i < 0 || i >= this.itemNum) return;
-      this.datamodel.index = i;
       tmpIndex = this.datamodel.index;
+      this.datamodel.index = i;
       this.checkDisable(dir);
 
       //被改变过了
-      if (tmpIndex != this.datamodel.index)
+      if (tmpIndex != this.datamodel.index) {
         noPosition = false;
+        isChange = true;
+      } else {
+        isChange = false;
+      }
 
       if (!noPosition) this.adjustPosition(true);
       this.resetCss();
