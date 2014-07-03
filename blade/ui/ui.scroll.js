@@ -639,8 +639,6 @@ define([], function () {
       this._execEvent('destroy');
       this.indicator && this.indicator.destroy();
 
-      console.log('destroy')
-
     },
 
     _transitionEnd: function (e) {

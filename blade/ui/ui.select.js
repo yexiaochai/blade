@@ -21,6 +21,7 @@
       this.datamodel = {
         curClass: 'current',
         data: data1,
+        id: null,
         index: 4
       };
 
@@ -43,6 +44,17 @@
 
     },
 
+    //要求唯一标识，根据id确定index
+    resetPropery: function () {
+      if (!this.datamodel.id) return;
+      for (var i = 0, len = this.datamodel.data.length; i < len; i++) {
+        if (this.datamodel.id == this.datamodel.data[i].id) {
+          this.datamodel.index = i;
+          break;
+        }
+      }
+    },
+
     resetNum: function () {
       this.displayNum = this.displayNum % 2 == 0 ? this.displayNum + 1 : this.displayNum;
       this.itemNum = this.datamodel.data.length;
@@ -61,7 +73,6 @@
       this.swrapper = this.$el;
       this.scroller = this.$('.ul-list');
       this.resetNum();
-
     },
 
     initSize: function () {
@@ -242,6 +253,7 @@
 
     initialize: function ($super, opts) {
       $super(opts);
+
     },
 
     addEvent: function ($super) {

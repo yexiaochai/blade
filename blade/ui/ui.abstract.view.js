@@ -82,6 +82,7 @@
     initialize: function (opts) {
       this.propertys();
       this.setOption(opts);
+      this.resetPropery();
       this.createRoot();
       this.addEvent();
 
@@ -97,6 +98,10 @@
 
     //各事件注册点，用于被继承
     addEvent: function () {
+    },
+
+    //提供属性重置功能，对属性做检查
+    resetPropery: function () {
     },
 
     //实例化需要用到到dom元素
@@ -124,6 +129,7 @@
 
     //刷新根据传入参数判断是否走onCreate事件
     refresh: function (needEvent) {
+      this.resetPropery();
       if (needEvent) {
         this.create();
       } else {

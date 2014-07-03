@@ -45,7 +45,7 @@ define(['UILayer', getAppUITemplatePath('ui.group.select'), 'UISelect'], functio
 
       this.data = [data1, data2, data3];
       this.indexArr = [0, 0, 1];
-      this.idArr = [];
+      this.idArr = [1, 'w_9', 2];
       this.scrollArr = [];
       this.changedArr = [
         function (item) {
@@ -86,7 +86,7 @@ define(['UILayer', getAppUITemplatePath('ui.group.select'), 'UISelect'], functio
       for (i = 0, len = this.scrollArr.length; i < len; i++) {
         items.push(this.scrollArr[i].getSelected());
       }
-      this.onOkAction.call(this,  items);
+      this.onOkAction.call(this, items);
     },
 
     cancelAction: function (e) {
@@ -94,12 +94,13 @@ define(['UILayer', getAppUITemplatePath('ui.group.select'), 'UISelect'], functio
       for (i = 0, len = this.scrollArr.length; i < len; i++) {
         items.push(this.scrollArr[i].getSelected());
       }
-      this.onCancelAction.call(this,  items);
+      this.onCancelAction.call(this, items);
     },
 
     initElement: function () {
       this.scrollWrapper = this.$('.cui-roller');
     },
+
 
     _initScroll: function () {
       this._destroyScroll();
@@ -110,7 +111,8 @@ define(['UILayer', getAppUITemplatePath('ui.group.select'), 'UISelect'], functio
         this.scrollArr[i] = new UISelect({
           datamodel: {
             data: item,
-            index: this.indexArr[i]
+            index: this.indexArr[i],
+            id: this.idArr[i]
           },
           displayNum: this.displayNum,
           changed: $.proxy(this.changedArr[i], this),
@@ -124,7 +126,7 @@ define(['UILayer', getAppUITemplatePath('ui.group.select'), 'UISelect'], functio
       var i, len;
       for (i = 0, len = this.data.length; i < len; i++) {
         if (this.scrollArr[i]) {
-          this.scrollArr[i].destroy();
+          this.scrollArr[i].hide();
           this.scrollArr[i] = null;
         }
       }
@@ -133,6 +135,10 @@ define(['UILayer', getAppUITemplatePath('ui.group.select'), 'UISelect'], functio
 
     initialize: function ($super, opts) {
       $super(opts);
+    },
+
+    addEvent: function ($super) {
+      $super();
 
       //这个要在第一位，因为后面会执行父类的position方法居中，尺寸没有就不行
       this.on('onShow', function () {
@@ -140,11 +146,11 @@ define(['UILayer', getAppUITemplatePath('ui.group.select'), 'UISelect'], functio
 
       }, 1);
 
-    },
+      this.on('onHide', function () {
+        this._destroyScroll();
 
-    addEvent: function ($super) {
-      $super();
-      this._destroyScroll();
+      }, 1);
+
     }
 
   });
