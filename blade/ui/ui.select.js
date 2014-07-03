@@ -158,25 +158,39 @@
     },
 
     //这里要处理不可选的状况
+    /*
+    这段逻辑比较复杂，处理的逻辑较多
+    1 每次赋值时候判断是否改变，改变需要触发changed事件
+    2 每次赋值还得判断当前选项是否是disabled的，如果是disabled的话还得重置index
+    3 以上逻辑会加重changed触发事件以及重新设置index的复杂度
+
+    */
     setIndex: function (i, noPosition) {
       if (typeof noPosition == 'undefined' && i == this.datamodel.index) noPosition = true;
-      var tmpIndex;
+      var tmpIndex = i;
+      var tmpIndex2;
+
       //index值是否改变
       var isChange = this.datamodel.index != i;
       var dir = i > this.datamodel.index ? 'up' : 'down';
 
       i = parseInt(i);
       if (i < 0 || i >= this.itemNum) return;
-      tmpIndex = this.datamodel.index;
+
+      tmpIndex2 = this.datamodel.index;
+
       this.datamodel.index = i;
       this.checkDisable(dir);
 
       //被改变过了
-      if (tmpIndex != this.datamodel.index) {
-        noPosition = false;
+      if (tmpIndex2 != this.datamodel.index) {
         isChange = true;
       } else {
         isChange = false;
+      }
+
+      if (tmpIndex != this.datamodel.index) {
+        noPosition = false;
       }
 
       if (!noPosition) this.adjustPosition(true);
