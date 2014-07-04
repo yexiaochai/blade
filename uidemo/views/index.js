@@ -93,7 +93,6 @@
       //提示类
       var groupList1 = [
         { 'uiname': 'alert', 'name': '警告框' },
-        { 'uiname': 'confirm', 'name': '确认框' },
         { 'uiname': 'toast', 'name': 'toast框' },
         { 'uiname': 'loading', 'name': 'loading框' }
       ];

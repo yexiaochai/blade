@@ -11,7 +11,7 @@ define(['UILayer', getAppUITemplatePath('ui.toast')], function (UILayer, templat
       $super();
       this.template = template;
       this.datamodel = {
-        text: 'toast'
+        content: 'toast'
       };
       this.hideSec = 2000;
       this.TIMERRES = null;
@@ -46,8 +46,8 @@ define(['UILayer', getAppUITemplatePath('ui.toast')], function (UILayer, templat
       });
     },
 
-    setDatamodel: function (text, fn) {
-      this.datamodel.text = text;
+    setDatamodel: function (content, fn) {
+      this.datamodel.content = content;
       this.hideAction = fn;
       this.refresh();
     }
