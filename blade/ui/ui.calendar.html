@@ -7,20 +7,17 @@
 
 <section class="cui_cldunit">
 <%for(var j = 0; j < displayMonthNum; j++) { %>
-
 <%
-      var changedMonth = month + j;
-      var yyy =  parseInt(( month + j ) / 12);
-      if(changedMonth > 11) { 
-        changedMonth = changedMonth - 12 * yyy;
-      }
-      changedYear = year + yyy;
-      var d = new Date(changedYear, changedMonth);
-      var days = _.dateUtil.getDaysOfMonth(d);
-      var beginWeek = _.dateUtil.getBeginDayOfMouth(d);
+  var changedMonth = month + j;
+  var yyy =  parseInt(( month + j ) / 12);
+  if(changedMonth > 11) { 
+    changedMonth = changedMonth - 12 * yyy;
+  }
+  changedYear = year + yyy;
+  var d = new Date(changedYear, changedMonth);
+  var days = _.dateUtil.getDaysOfMonth(d);
+  var beginWeek = _.dateUtil.getBeginDayOfMouth(d);
 %>
-
-
   <h1 class="cui_cldmonth">
     <%=MonthClapFn(changedYear, changedMonth) %>
     </h1>
