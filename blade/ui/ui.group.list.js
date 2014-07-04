@@ -6,49 +6,10 @@ define(['UIView', getAppUITemplatePath('ui.group.list')], function (UIView, temp
     propertys: function ($super) {
       $super();
       this.template = template;
-      var groupList1 = [
-          { 'uiname': 'inputclear', 'name': 'input清除' },
-          { 'uiname': 'switch', 'name': 'switch切换' },
-          { 'uiname': 'num', 'name': '数字插件' },
-          { 'uiname': 'tabs', 'name': 'tabs标签插件' }
-      ];
-
-      //分组列表
-      var groupList2 = [
-          { 'uiname': 'selectcity', 'name': '城市列表' },
-          { 'uiname': 'qqlist', 'name': 'qq列表' },
-          { 'uiname': 'ajaxselect', 'name': '城市列表ajax' }
-      ];
-
-      //带滚动条的弹出层
-      var groupList3 = [
-          { 'uiname': 'scrollradio', 'name': 'scrollRadio用车时间/时间' },
-          { 'uiname': 'scrollradiolist', 'name': 'scrollRadioList插件' },
-          { 'uiname': 'tipslayer', 'name': 'tipslayer插件/装载html结构' },
-          { 'uiname': 'mask', 'name': 'mask组件/自定义html弹窗' }
-      ];
-
-      //提示类
-      var groupList4 = [
-          { 'uiname': 'alert', 'name': '警告框' },
-          { 'uiname': 'confirm', 'name': '确认框' },
-          { 'uiname': 'toast', 'name': 'toast框' },
-          { 'uiname': 'loading', 'name': 'loading框' },
-          { 'uiname': 'warning404', 'name': 'warning404' },
-          { 'uiname': 'headwarning', 'name': '带头部警告' }
-      ];
-
-      var uidata = [
-          { name: '常用插件', data: groupList1 },
-          { name: '分组列表', data: groupList2 },
-          { name: '带滚动条的弹出层', data: groupList3, needFold: true },
-          { name: '提示类', data: groupList4 }
-      ];
-
 
       this.datamodel = {
-        data: uidata,
-        filter: 'name, uiname'
+        data: [],
+        filter: 'name'
       };
 
       this.events = {
@@ -56,13 +17,12 @@ define(['UIView', getAppUITemplatePath('ui.group.list')], function (UIView, temp
         'click .cui-city-n>li': 'itemAction'
       };
 
-      this.OnGroupClick = function (index, items, e) {
+      this.onGroupClick = function (index, items, e) {
       };
 
-      this.OnItemClick = function (item, groupIndex, index, e) {
+      this.onItemClick = function (item, groupIndex, index, e) {
         console.log(arguments);
       };
-
     },
 
     itemAction: function (e) {
@@ -71,7 +31,7 @@ define(['UIView', getAppUITemplatePath('ui.group.list')], function (UIView, temp
       var index = el.attr('data-index');
       var item = this.datamodel.data[gindex].data[index];
 
-      if (this.OnItemClick) this.OnItemClick.call(this, item, gindex, index, e);
+      if (this.onItemClick) this.onItemClick.call(this, item, gindex, index, e);
     },
 
     groupAction: function (e) {
@@ -85,7 +45,12 @@ define(['UIView', getAppUITemplatePath('ui.group.list')], function (UIView, temp
         this.openGroup(index);
       }
 
-      if (this.OnGroupClick) this.OnGroupClick.call(this, index, items, e);
+      if (this.onGroupClick) this.onGroupClick.call(this, index, items, e);
+    },
+
+    getFilterList: function (key) {
+      var list = this.$('li[data-filter*="' + key + '"]');
+      return list.clone(); ;
     },
 
     openGroup: function (i) {
@@ -109,7 +74,6 @@ define(['UIView', getAppUITemplatePath('ui.group.list')], function (UIView, temp
 
     initElement: function () {
       this.groups = this.$('.cui-city-itmes');
-
     },
 
     initialize: function ($super, opts) {

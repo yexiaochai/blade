@@ -134,7 +134,7 @@
     //实例化需要用到到dom元素
     initElement: function () { },
 
-    render: function (data, +) {
+    render: function (data, callback) {
       data = this.getViewModel() || {};
       var html = this.template;
       if (!this.template) return '';
@@ -157,6 +157,7 @@
       this.initElement();
       if (this.status == 'show') this.show();
     },
+
 
     show: function () {
       this.wrapper.append(this.$el);
@@ -185,6 +186,8 @@
     getViewModel: function () {
       return this.datamodel;
     },
+
+
 
     setzIndexTop: function (el, level) {
       if (!el) el = this.$el;
