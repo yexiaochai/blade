@@ -24,7 +24,7 @@
         var dir = (e.pageY > 200) ? 'down' : 'up';
         console.log(index);
 
-        window.n = new UIBubbleLayer({
+        window.n = new UINum({
           triggerEl: el,
           datamodel: {
             dir: dir,
@@ -39,9 +39,7 @@
 
     onPreShow: function () {
 
-
-
-      var u = new UICalendar();
+      var u = new UINum();
       u.show();
       window.u = u;
       //      a.setContent('测试');

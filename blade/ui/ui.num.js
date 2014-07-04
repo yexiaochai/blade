@@ -17,6 +17,7 @@ define(['UIView', getAppUITemplatePath('ui.num')], function (UIView, template) {
         minusClass: 'num-minus',
         curClass: 'num-value-txt',
         unit: '个',
+
         needText: true
       };
 
@@ -28,7 +29,6 @@ define(['UIView', getAppUITemplatePath('ui.num')], function (UIView, template) {
         'focus .num-value-txt': 'txtFocus',
         'blur .num-value-txt': 'txtBlur'
       };
-
     },
 
     initElement: function () {

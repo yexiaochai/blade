@@ -12,13 +12,12 @@
 
     //默认属性
     propertys: function () {
+      //模板状态
+      this.template = '';
       this.datamodel = {};
       this.events = {};
       this.wrapper = $('body');
       this.id = _.uniqueId('ui-view-');
-
-      //模板状态
-      this.template = '';
 
       //自定义事件
       //此处需要注意mask 绑定事件前后问题，考虑scroll.radio插件类型的mask应用，考虑组件通信
@@ -26,6 +25,8 @@
 
       //初始状态为实例化
       this.status = 'init';
+
+//      this.availableFn = function () { }
 
     },
 
@@ -84,6 +85,8 @@
       this.setOption(opts);
       this.resetPropery();
       this.createRoot();
+      //添加系统级别事件
+      this.addSysEvents();
       this.addEvent();
 
       //开始创建dom
@@ -92,20 +95,33 @@
 
     },
 
-    $: function (selector) {
-      return this.$el.find(selector);
+    //内部重置event，加入全局控制类事件
+    addSysEvents: function () {
+      if (typeof this.availableFn != 'function') return;
+      this.removeSysEvents();
+      this.$el.on('click.system' + this.id, $.proxy(function (e) {
+        if (!this.availableFn()) {
+          e.preventDefault();
+          e.stopImmediatePropagation && e.stopImmediatePropagation();
+        }
+      }, this));
     },
 
-    //各事件注册点，用于被继承
-    addEvent: function () {
+    removeSysEvents: function () {
+      this.$el.off('.system' + this.id);
+    },
+
+    $: function (selector) {
+      return this.$el.find(selector);
     },
 
     //提供属性重置功能，对属性做检查
     resetPropery: function () {
     },
 
-    //实例化需要用到到dom元素
-    initElement: function () { },
+    //各事件注册点，用于被继承
+    addEvent: function () {
+    },
 
     create: function () {
       this.trigger('onPreCreate');
@@ -115,7 +131,10 @@
       this.trigger('onCreate');
     },
 
-    render: function (data, callback) {
+    //实例化需要用到到dom元素
+    initElement: function () { },
+
+    render: function (data, +) {
       data = this.getViewModel() || {};
       var html = this.template;
       if (!this.template) return '';
@@ -139,7 +158,6 @@
       if (this.status == 'show') this.show();
     },
 
-
     show: function () {
       this.wrapper.append(this.$el);
       this.trigger('onPreShow');
@@ -154,6 +172,7 @@
       this.$el.hide();
       this.status = 'hide';
       this.unBindEvents();
+      this.removeSysEvents();
       this.trigger('onHide');
     },
 
@@ -166,8 +185,6 @@
     getViewModel: function () {
       return this.datamodel;
     },
-
-
 
     setzIndexTop: function (el, level) {
       if (!el) el = this.$el;
