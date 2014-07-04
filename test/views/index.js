@@ -20,8 +20,6 @@
     },
 
     onPreShow: function () {
-  
-
 
       //      a.setContent('测试');
 
