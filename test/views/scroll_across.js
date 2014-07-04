@@ -1,4 +1,4 @@
-define(['View', 'UIScroll', getViewTemplatePath('scroll')], function (View, UIScroll, viewhtml) {
+define(['View', 'UIScroll', getViewTemplatePath('scroll_across')], function (View, UIScroll, viewhtml) {
 
   return _.inherit(View, {
     onCreate: function () {
@@ -20,7 +20,10 @@ define(['View', 'UIScroll', getViewTemplatePath('scroll')], function (View, UISc
       console.log('onPreShow');
       var s = new UIScroll({
         wrapper: $('#wrapper'),
-        scroller: $('#scroller')
+        scroller: $('#scroller'),
+        scrollType: 'x',
+        step:100,
+        scrollbars:true
       });
       this.turning();
     },
