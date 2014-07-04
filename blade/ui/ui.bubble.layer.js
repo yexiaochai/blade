@@ -1,7 +1,5 @@
 ﻿
 define(['UILayer', getAppUITemplatePath('ui.bubble.layer')], function (UILayer, template) {
-
-
   return _.inherit(UILayer, {
     propertys: function ($super) {
       $super();
@@ -11,12 +9,7 @@ define(['UILayer', getAppUITemplatePath('ui.bubble.layer')], function (UILayer, 
       //      this.needReposition = false;
 
       this.datamodel = {
-        data: [
-          { name: '价格/星级' },
-          { name: '位置区域' },
-          { name: '品牌' },
-          { name: '<span>测试</span>' }
-        ],
+        data: [ ],
         upClass: 'f-layer-before',
         downClass: 'f-layer-after',
         curClass: 'cui-fl-current',
@@ -77,22 +70,18 @@ define(['UILayer', getAppUITemplatePath('ui.bubble.layer')], function (UILayer, 
         top = (offset.top - this.el.offset().height - 8) + 'px';
         left = (offset.left + 2) + 'px';
       }
-
       this.el.css({
         width: w,
         top: top,
         left: left
       });
-
     },
 
     addEvent: function ($super) {
       $super();
-
       this.on('onCreate', function () {
         this.$el.removeClass('cui-layer');
       });
-
       this.on('onShow', function () {
         this.setzIndexTop(this.el);
       
@@ -100,6 +89,5 @@ define(['UILayer', getAppUITemplatePath('ui.bubble.layer')], function (UILayer, 
     }
 
   });
-
 
 });
