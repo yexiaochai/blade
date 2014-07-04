@@ -11,29 +11,6 @@ define(['UILayer', getAppUITemplatePath('ui.group.select'), 'UISelect'], functio
       //html模板
       this.template = template;
 
-      var data2 = [];
-      var data3 = [];
-
-
-      var data1 = [];
-
-      for (var i = 0; i < 10; i++) {
-        var obj = { id: 'q_' + i, name: '项目_' + i };
-
-        if (i % 3 == 0) obj.disabled = true;
-
-        data1.push(obj);
-
-      }
-
-      for (var i = 0; i < 10; i++) {
-        data2.push({ id: 'w_' + i, name: '项目_' + i });
-      }
-
-      for (var i = 0; i < 2; i++) {
-        data3.push({ id: 's_' + i, name: '项目_' + i });
-      }
-
       this.datamodel = {
         title: 'scrollLayer',
         tips: 'tips',
@@ -43,9 +20,9 @@ define(['UILayer', getAppUITemplatePath('ui.group.select'), 'UISelect'], functio
         ]
       };
 
-      this.data = [data1, data2, data3];
-      this.indexArr = [0, 0, 1];
-      this.idArr = [1, 'w_9', 2];
+      this.data = [];
+      this.indexArr = [0, 0, 0];
+      this.idArr = [];
       this.scrollArr = [];
       this.changedArr = [
         function (item) {

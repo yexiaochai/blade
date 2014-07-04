@@ -96,11 +96,20 @@
         { 'uiname': 'toast', 'name': 'toast框' },
         { 'uiname': 'loading', 'name': 'loading框' },
         { 'uiname': 'bubble.layer', 'name': '气泡框提示' }
+      ];
 
+      var groupList2 = [
+        { 'uiname': 'num', 'name': '数字组件' },
+        { 'uiname': 'select', 'name': 'select' },
+        { 'uiname': 'loading', 'name': 'loading框' },
+        { 'uiname': 'bubble.layer', 'name': '气泡框提示' }
       ];
 
       var uidata = [
-        { name: '提示类组件', data: groupList1 }
+        { name: '提示类组件', data: groupList1 },
+        { name: '常用组件', data: groupList2 }
+
+
       ];
 
       this.uidata = uidata;

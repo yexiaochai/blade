@@ -1,20 +1,14 @@
 ﻿define(['UILayer', getAppUITemplatePath('ui.radio.list'), 'UIScroll'], function (UILayer, template, UIScroll) {
 
-
   return _.inherit(UILayer, {
     propertys: function ($super) {
       $super();
       //html模板
       this.template = template;
 
-      var data = [];
-      for (var i = 0; i < 15; i++) {
-        data.push({ id: '列表选项' + (i + 1) });
-      }
-
       this.datamodel = {
         title: '标题',
-        data: data,
+        data: [],
         selectId: null,
         index: 1
       };

@@ -8,9 +8,6 @@
       this.template = template;
       this.datamodel = {
         data: [
-          { id: 1, name: '中国' },
-          { id: 2, name: '美国' },
-          { id: 3, name: '英国' }
         ],
         curClass: 'cui-tab-current',
         index: 0

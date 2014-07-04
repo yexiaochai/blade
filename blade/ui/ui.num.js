@@ -12,12 +12,11 @@ define(['UIView', getAppUITemplatePath('ui.num')], function (UIView, template) {
       this.datamodel = {
         min: 1,
         max: 9,
-        curNum: 5,
+        curNum: 1,
         addClass: 'num-add',
         minusClass: 'num-minus',
         curClass: 'num-value-txt',
         unit: '个',
-
         needText: true
       };
 
@@ -59,7 +58,7 @@ define(['UIView', getAppUITemplatePath('ui.num')], function (UIView, template) {
     setVal: function (v) {
       var isChange = true;
       var tmp = this.datamodel.curNum;
-
+      if (v == '') v = tmp;
       if (v == parseInt(v)) {
         //设置值不等的时候才触发reset
         v = parseInt(v);
@@ -89,13 +88,12 @@ define(['UIView', getAppUITemplatePath('ui.num')], function (UIView, template) {
     },
 
     //这里需要做数据验证
-    getViewModel: function () {
+    resetPropery: function () {
       if (this.datamodel.curNum > this.datamodel.max) {
         this.datamodel.curNum = this.datamodel.max;
       } else if (this.datamodel.curNum < this.datamodel.min) {
         this.datamodel.curNum = this.datamodel.min;
       }
-
       return this.datamodel;
     },
 

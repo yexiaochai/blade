@@ -7,20 +7,9 @@
       //html模板
       this.template = template;
 
-      var data1 = [];
-
-      for (var i = 0; i < 10; i++) {
-        var obj = { id: 'q_' + i, name: '项目_' + i };
-
-        if (i % 3 == 0) obj.disabled = true;
-
-        data1.push(obj);
-
-      }
-
       this.datamodel = {
         curClass: 'current',
-        data: data1,
+        data: [],
         id: null,
         index: 4
       };
@@ -53,6 +42,7 @@
           break;
         }
       }
+      this.resetNum();
     },
 
     resetNum: function () {
@@ -72,7 +62,6 @@
       //几个容器的高度必须统一
       this.swrapper = this.$el;
       this.scroller = this.$('.ul-list');
-      this.resetNum();
     },
 
     initSize: function () {
