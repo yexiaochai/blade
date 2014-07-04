@@ -54,11 +54,11 @@ define(['UILayer', getAppUITemplatePath('ui.alert')], function (UILayer, templat
     },
 
     setDatamodel: function (datamodel, okAction, cancelAction) {
+      if (!datamodel) datamodel = {};
       _.extend(this.datamodel, datamodel);
       this.okAction = okAction;
       this.cancelAction = cancelAction;
       this.refresh();
-      
     }
 
 
