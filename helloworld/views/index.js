@@ -1,4 +1,4 @@
-﻿define(['View', getViewTemplatePath('index'), 'UIAlert', 'UIMask', 'UILoading', 'UIReLoading', 'UIToast', 'UINum', 'UISwitch', 'UIBubbleLayer', 'UITab', 'UIRadioList', 'UIScrollLayer', 'UISelect', 'UIGroupSelect', 'UIGroupList'], function (View, viewhtml, UIAlert, UIMask, UILoading, UIReLoading, UIToast, UINum, UISwitch, UIBubbleLayer, UITab, UIRadioList, UIScrollLayer, UISelect, UIGroupSelect, UIGroupList) {
+﻿define(['View', getViewTemplatePath('index'), 'UIAlert', 'UIMask', 'UILoading', 'UIReLoading', 'UIToast', 'UINum', 'UISwitch', 'UIBubbleLayer', 'UITab', 'UIRadioList', 'UIScrollLayer', 'UISelect', 'UIGroupSelect', 'UIGroupList', 'UICalendar'], function (View, viewhtml, UIAlert, UIMask, UILoading, UIReLoading, UIToast, UINum, UISwitch, UIBubbleLayer, UITab, UIRadioList, UIScrollLayer, UISelect, UIGroupSelect, UIGroupList, UICalendar) {
 
   window.UIAlert = UIAlert;
   window.UIMask = UIMask;
@@ -41,7 +41,7 @@
 
 
 
-      var u = new UIGroupList();
+      var u = new UICalendar();
       u.show();
       window.u = u;
       //      a.setContent('测试');

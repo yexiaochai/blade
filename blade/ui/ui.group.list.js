@@ -107,7 +107,6 @@ define(['UIView', getAppUITemplatePath('ui.group.list')], function (UIView, temp
       el.removeClass(cls1);
     },
 
-
     initElement: function () {
       this.groups = this.$('.cui-city-itmes');
 

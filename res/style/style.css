@@ -3083,10 +3083,6 @@ input[type=text].place_search:empty {
 }
 
 .cui_cldweek {
-    position: fixed;
-    z-index: 2;
-    top: 48px;
-    left: 0;
     width: 100%;
     height: auto;
     overflow: hidden;
