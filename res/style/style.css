@@ -2769,14 +2769,11 @@ input[type=text].place_search:empty {
 }
 
 .main-viewport {
-    position: relative;
     height: 100%
 }
 
 .sub-viewport {
-    position: relative;
-    overflow-x: hidden;
-    min-height: 100%
+    overflow-x: hidden
 }
 
 @-webkit-keyframes sliderightout {

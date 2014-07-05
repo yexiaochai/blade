@@ -1,7 +1,5 @@
 ﻿define(['UIView', getAppUITemplatePath('ui.select'), 'UIScroll'], function (UIView, template, UIScroll) {
-  /*
-  该组件使用时，其父容器一定是显示状态，如果不是显示状态，高度计算会失效
-  */
+
 
   return _.inherit(UIView, {
     propertys: function ($super) {
@@ -32,9 +30,6 @@
       this.changed = function (item) {
         console.log(item);
       };
-
-      //用于检测父容器隐藏，导致高度失效问题问题
-      this.TIMERRES = null;
 
     },
 
@@ -74,15 +69,23 @@
     },
 
     initSize: function () {
-      this.sheight = this.scroller.height();
+      this.sheight = parseInt(this.scroller.css('height'));
       this.itemHeight = parseInt(this.sheight / this.itemNum);
 
       //偶尔不能正确获取高度，这里要处理
-      if (this.itemHeight == 0) {
+      if (this.itemHeight == 0 || isNaN(this.itemHeight)) {
         this.itemHeight = parseInt(window.getComputedStyle && getComputedStyle(this.scroller.find('li').eq(0)[0]).height);
-        this.scroller.height(this.itemHeight * this.itemNum);
+        this.scroller.css('height', (this.itemHeight * this.itemNum) + 'px');
+        if (this.scroller[0] && this.scroller.height() == 0) {
+          this.scroller[0].style.height = (this.itemHeight * this.itemNum) + 'px';
+        }
       }
-      this.swrapper.height(this.itemHeight * this.displayNum);
+
+      this.swrapper.css('height', (this.itemHeight * this.displayNum) + 'px');
+      if (this.swrapper[0] && this.swrapper.height() == 0) {
+        this.swrapper[0].style.height = (this.itemHeight * this.displayNum) + 'px';
+      }
+
       this.scrollOffset = ((this.displayNum - 1) / 2) * (this.itemHeight);
     },
 
@@ -265,21 +268,6 @@
 
     },
 
-    //用以解决父容器不显示导致高度失效问题
-    checkWrapperDisplay: function () {
-      //如果容器高度为0，一定是父容器高度不显示导致
-      this.TIMERRES && clearInterval(this.TIMERRES);
-      if (this.swrapper.height() == 0) {
-        this.TIMERRES = setInterval($.proxy(function () {
-          console.log('select组件开始检测容器高度......')
-          if (this.swrapper.height() > 0) {
-            this.TIMERRES && clearInterval(this.TIMERRES);
-            this.scroll && this.scroll.refresh();
-          }
-        }, this), 100);
-      }
-    },
-
     addEvent: function ($super) {
       $super();
 
@@ -295,12 +283,10 @@
 
         this.initSize();
         this._initScroll();
-
         this.adjustPosition();
         this.resetCss();
         //防止初始化定义index为不可选index
         this.resetIndex();
-        this.checkWrapperDisplay();
 
       }, 1);
 

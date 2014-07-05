@@ -234,5 +234,5 @@
         .off('touchend', onTouchEnd)
         .off('touchcancel', onTouchCancel);
   }
-})(Zepto)
+})($)
 
