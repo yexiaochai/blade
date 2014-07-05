@@ -775,7 +775,7 @@ define(['View', getViewTemplatePath('calendar'), 'UICalendar'], function (View, 
             if(el.hasClass('gray')) {
               console.log('invalidate date');
               return;
-            } 
+            }
             console.log(arguments)
           },
           wrapper: this.$el.find('.wrapper')
