@@ -30,7 +30,7 @@ define(['View', getViewTemplatePath('select2'), 'UISelect'], function (View, vie
 
       if (!this.demo1) {
         this.demo1 = new UISelect({
-          wrapper: $('.row1'),
+          wrapper: this.$('.row1'),
           datamodel: {
             data: data1
           }
@@ -38,7 +38,7 @@ define(['View', getViewTemplatePath('select2'), 'UISelect'], function (View, vie
       }
       if (!this.demo2) {
         this.demo2 = new UISelect({
-          wrapper: $('.row2'),
+          wrapper: this.$('.row2'),
           datamodel: {
             data: data2
           }
@@ -46,7 +46,7 @@ define(['View', getViewTemplatePath('select2'), 'UISelect'], function (View, vie
       }
       if (!this.demo3) {
         this.demo3 = new UISelect({
-          wrapper: $('.row3'),
+          wrapper: this.$('.row3'),
           datamodel: {
             data: data3
           }
