@@ -33,7 +33,7 @@ define(['UIView', getAppUITemplatePath('ui.calendar')], function (UIView, templa
         'click .cui_calendar_item ': 'itemAction'
       };
 
-      this.onItemClick = function (date, oldDay, e) {
+      this.onItemClick = function (date, e) {
         console.log(arguments);
       };
 
@@ -41,14 +41,13 @@ define(['UIView', getAppUITemplatePath('ui.calendar')], function (UIView, templa
 
     itemAction: function (e) {
       var el = $(e.currentTarget);
-      var oldDay = el.hasClass('cui_cld_daypass');
       var date = el.attr('data-date');
       date = date.split('-');
       if (date.length != 3) return false;
 
       date = new Date(date[0], date[1], date[2]);
 
-      if (this.onItemClick) this.onItemClick.call(this, date, oldDay, e);
+      if (this.onItemClick) this.onItemClick.call(this, date, e);
     },
 
     initElement: function () {
