@@ -10,24 +10,32 @@
       'click #filter': 'filterAction',
       'click #orderBy': 'orderByAction',
 
-      'click .demo1': 'demo1',
-      'click .demo2': 'demo2',
-      'click .demo3': 'demo3',
-      'click .demo4': 'demo4'
+      'click .demo1': 'demo1Action',
+      'click .demo2': 'demo2Action',
+      'click .demo3': 'demo3Action',
+      'click .demo4': 'demo4Action'
     },
 
-    filterAction: function (e) {
-      if(!this.filter) {
-        var data = [{ name: '价格/星级' },
-          { name: '位置区域' },
-          { name: '品牌' },
-          { name: '<span>测试</span>'}];
+    filterAction: function () {
+
+    },
+
+    orderByAction: function() {
+
+    },
+
+    demo1Action: function(e) {
+      if(!this.demo1) {
+        var data = [{ name: '<span class="center">价格/星级</span>' },
+          { name: '<span class="center">位置区域</span>' },
+          { name: '<span class="center">品牌</span>' },
+          { name: '<span class="center">测试</span>'}];
 
 
         var el = $(e.currentTarget);
         var index = parseInt(Math.random() * 4);
         var dir = (e.pageY > 200) ? 'down' : 'up';
-        this.filter = new UIBubbleLayer({
+        this.demo1 = new UIBubbleLayer({
           triggerEl: el,
           datamodel: {
             data: data,
@@ -41,7 +49,92 @@
           }
         });
       }
-      this.filter.show();
+      this.demo1.show();
+    },
+
+    demo2Action: function(e) {
+      if(!this.demo2) {
+        var data = [{ name: '<span class="center">价格/星级</span>' },
+          { name: '<span class="center">位置区域</span>' },
+          { name: '<span class="center">品牌</span>' },
+          { name: '<span class="center">测试</span>'}];
+
+
+        var el = $(e.currentTarget);
+        var index = parseInt(Math.random() * 4);
+        var dir = (e.pageY > 200) ? 'down' : 'up';
+        this.demo2 = new UIBubbleLayer({
+          triggerEl: el,
+          datamodel: {
+            data: data,
+            dir: dir,
+            index: index
+          },
+          onClick:  function (e, data, index, el) {
+            console.log(arguments);
+            this.setIndex(index);
+            this.hide();
+          }
+        });
+      }
+      this.demo2.show();
+    },
+
+    demo3Action: function(e) {
+      if(!this.demo3) {
+        var data = [{ name: '<span class="center">价格/星级</span>' },
+          { name: '<span class="center">位置区域</span>' },
+          { name: '<span class="center">品牌</span>' },
+          { name: '<span class="center">测试</span>'}];
+
+
+        var el = $(e.currentTarget);
+        var index = parseInt(Math.random() * 4);
+        var dir = (e.pageY > 200) ? 'down' : 'up';
+        this.demo3 = new UIBubbleLayer({
+          triggerEl: el,
+          datamodel: {
+            data: data,
+            dir: dir,
+            index: index
+          },
+          needMask:true,
+          onClick:  function (e, data, index, el) {
+            console.log(arguments);
+            this.setIndex(index);
+            this.hide();
+          }
+        });
+      }
+      this.demo3.show();
+    },
+
+    demo4Action: function(e) {
+      if(!this.demo4) {
+        var data = [{ name: '<span class="center">普通会员</span>' },
+          { name: '<span class="center">vip</span>' },
+          { name: '<span class="center">高级vip</span>' },
+          { name: '<span class="center">钻石vip</span>'}];
+
+
+        var el = $(e.currentTarget);
+        var index = parseInt(Math.random() * 4);
+        var dir = (e.pageY > 200) ? 'down' : 'up';
+        this.demo4 = new UIBubbleLayer({
+          triggerEl: el,
+          datamodel: {
+            data: data,
+            dir: dir,
+            index: index
+          },
+          onClick:  function (e, data, index, el) {
+            console.log(arguments);
+            this.setIndex(index);
+            this.hide();
+          }
+        });
+      }
+      this.demo4.show();
     },
 
     onPreShow: function () {
