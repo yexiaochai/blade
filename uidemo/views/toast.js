@@ -31,6 +31,7 @@
             content: 'two second close'
           },
           hideSec: 2000
+
         });
       }
       this.toast2.show();

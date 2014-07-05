@@ -21,8 +21,10 @@
     },
 
     demo2: function () {
+      console.log('loading:2');
       if (!this.loading2) {
         this.loading2 = new UILoading({
+
         });
       }
       this.loading2.show();
