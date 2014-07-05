@@ -93,7 +93,11 @@
     },
 
     _initScroll: function () {
-      if (this.scroll && this.scroll.destory) this.scroll.destory();
+      if (this.scroll) {
+        this.scroll.refresh();
+        return;
+      }
+
       this.scroll = new UIScroll({
         scrollbars: false,
         scrollOffset: this.scrollOffset,

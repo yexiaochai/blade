@@ -654,6 +654,7 @@ define([], function () {
       }
     },
     destroy: function () {
+      this.TIMERRES && clearInterval(this.TIMERRES);
       this._initEvents(true);
       this._execEvent('destroy');
       this.indicator && this.indicator.destroy();

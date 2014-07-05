@@ -77,14 +77,14 @@
     },
 
     buildEvent: function () {
-      requirejs.onError = function (e) {
-        if (e && e.requireModules) {
-          for (var i = 0; i < e.requireModules.length; i++) {
-            console.log('抱歉，当前的网络状况不给力，请刷新重试!');
-            break;
-          }
-        }
-      };
+//      requirejs.onError = function (e) {
+//        if (e && e.requireModules) {
+//          for (var i = 0; i < e.requireModules.length; i++) {
+//            console.log('抱歉，当前的网络状况不给力，请刷新重试!');
+//            break;
+//          }
+//        }
+//      };
 
       $(window).bind('hashchange', _.bind(this.onHashChange, this));
 
