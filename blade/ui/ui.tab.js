@@ -7,8 +7,7 @@
       //html模板
       this.template = template;
       this.datamodel = {
-        data: [
-        ],
+        data: [],
         curClass: 'cui-tab-current',
         index: 0
       };
@@ -23,6 +22,27 @@
       };
 
     },
+
+    //重置index与值的关系
+    resetPropery: function () {
+      if (this.datamodel.index < 0 || this.datamodel.index > this.datamodel.data.length) {
+        this.datamodel.index = 0;
+      }
+
+      if (!this.datamodel.selectedKey) {
+        this.datamodel.selectedKey = this.datamodel.data[this.datamodel.index].id;
+        return;
+      }
+
+      for (var i = 0, len = this.datamodel.data.length; i < len; i++) {
+        if (this.datamodel.selectedKey == this.datamodel.data[i].id) {
+          this.datamodel.index = i;
+          break;
+        }
+      }
+    },
+
+
 
     initElement: function () {
       this.el = this.$('.cui-tab-current');

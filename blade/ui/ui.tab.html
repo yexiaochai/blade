@@ -1,9 +1,5 @@
 ﻿<ul class="cui-tab-mod">
-  <%if(typeof index == 'undefined') index = 0; %>
   <%for(var i = 0, len = data.length; i < len; i++) { %>
-  <% if(typeof selectedKey != 'undefined' && data[i].id == selectedKey) { %>
-  <% index = i;%>
-  <%} %>
   <li data-key="<%=data[i].id %>" data-index="<%=i%>" <%if(i == index){ %>class=" <%=curClass %>"
     <%} %>>
     <%=data[i].name %></li>
