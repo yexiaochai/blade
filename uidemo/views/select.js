@@ -24,14 +24,14 @@
 
       }
 
-      if (!this.demo)
+      if (!this.demo) {
         this.demo = new UISelect({
-          wrapper: this.$('.wrapper'),
+          wrapper: this.$('.cui-citys-bd'),
           datamodel: {
             data: data1
           }
-
         });
+      }
 
       this.demo.show();
 

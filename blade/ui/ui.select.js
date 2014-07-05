@@ -35,6 +35,11 @@
 
     //要求唯一标识，根据id确定index
     resetPropery: function () {
+      this._resetNum();
+      this._resetIndex();
+    },
+
+    _resetIndex: function () {
       if (!this.datamodel.id) return;
       for (var i = 0, len = this.datamodel.data.length; i < len; i++) {
         if (this.datamodel.id == this.datamodel.data[i].id) {
@@ -42,10 +47,9 @@
           break;
         }
       }
-      this.resetNum();
     },
 
-    resetNum: function () {
+    _resetNum: function () {
       this.displayNum = this.displayNum % 2 == 0 ? this.displayNum + 1 : this.displayNum;
       this.itemNum = this.datamodel.data.length;
 
@@ -67,6 +71,8 @@
     initSize: function () {
       this.sheight = this.scroller.height();
       this.itemHeight = parseInt(this.sheight / this.itemNum);
+      if (this.itemHeight == 0) this.itemHeight = this.scroller.find('li').eq(0).height();
+
       this.swrapper.height(this.itemHeight * this.displayNum);
       this.scrollOffset = ((this.displayNum - 1) / 2) * (this.itemHeight);
     },
@@ -100,7 +106,7 @@
       this.scroll.on('beforeScrollStart', $.proxy(function () {
         this.setIndex(this.getIndexByPosition(), true)
       }, this));
-      
+
     },
 
     reload: function (datamodel) {
