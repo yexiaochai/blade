@@ -101,15 +101,32 @@
       var groupList2 = [
         { 'uiname': 'num', 'name': '数字组件' },
         { 'uiname': 'select', 'name': 'select' },
-        { 'uiname': 'loading', 'name': 'loading框' },
-        { 'uiname': 'bubble.layer', 'name': '气泡框提示' }
+        { 'uiname': 'switch', 'name': 'switch组件' },
+        { 'uiname': 'tab', 'name': 'tab组件' },
+        { 'uiname': 'calendar', 'name': '日历组件' },
+        { 'uiname': 'group.list', 'name': '分组列表' }
+      ];
+
+      var groupList3 = [
+        { 'uiname': 'radio.list', 'name': '单列表选择组件' },
+        { 'uiname': 'scroll.layer', 'name': '滚动层组件' },
+        { 'uiname': 'group.select', 'name': '日期选择类组件' },
+        { 'uiname': 'scroll', 'name': '滚动组件' },
+        { 'uiname': 'slider', 'name': 'slider组件（todo...）' }
+      ];
+
+      var groupList4 = [
+        { 'uiname': 'lazyload', 'name': '图片延迟加载' },
+        { 'uiname': 'inputclear', 'name': '带删除按钮的文本框(todo...)' },
+        { 'uiname': 'validate1', 'name': '工具类表单验证' },
+        { 'uiname': 'validate2', 'name': '集成表单验证' }
       ];
 
       var uidata = [
         { name: '提示类组件', data: groupList1 },
-        { name: '常用组件', data: groupList2 }
-
-
+        { name: '常用组件', data: groupList2 },
+        { name: '滚动类组件', data: groupList3 },
+        { name: '全局类', data: groupList4 }
       ];
 
       this.uidata = uidata;
