@@ -156,6 +156,7 @@ define([], function () {
     this.scroller = typeof opts.scroller == 'string' ? $(opts.scroller) : opts.scroller;
     if (!opts.wrapper[0] || !opts.scroller[0]) throw 'param error';
 
+    this.swrapper = this.wrapper;
     this.wrapper = this.wrapper[0];
     this.scroller = this.scroller[0];
 
@@ -210,9 +211,27 @@ define([], function () {
 
     this.enable();
 
+    this.checkWrapperDisplay();
+
   };
 
   IScroll.prototype = {
+    //用以解决父容器不显示导致高度失效问题
+    checkWrapperDisplay: function () {
+      //如果容器高度为0，一定是父容器高度不显示导致
+      this.TIMERRES && clearInterval(this.TIMERRES);
+      if (this.swrapper.height() == 0) {
+        this.TIMERRES = setInterval($.proxy(function () {
+          console.log('Scroll组件检测容器高度......')
+          if (this.swrapper.height() > 0) {
+            this.TIMERRES && clearInterval(this.TIMERRES);
+            console.log('Scroll组件检测容器高度结束，重设高度')
+            this.refresh();
+          }
+        }, this), 100);
+      }
+    },
+
     _init: function () {
       this._initEvents();
 

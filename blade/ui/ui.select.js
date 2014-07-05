@@ -33,9 +33,6 @@
         console.log(item);
       };
 
-      //用于检测父容器隐藏，导致高度失效问题问题
-      this.TIMERRES = null;
-
     },
 
     //要求唯一标识，根据id确定index
@@ -265,21 +262,6 @@
 
     },
 
-    //用以解决父容器不显示导致高度失效问题
-    checkWrapperDisplay: function () {
-      //如果容器高度为0，一定是父容器高度不显示导致
-      this.TIMERRES && clearInterval(this.TIMERRES);
-      if (this.swrapper.height() == 0) {
-        this.TIMERRES = setInterval($.proxy(function () {
-          console.log('select组件开始检测容器高度......')
-          if (this.swrapper.height() > 0) {
-            this.TIMERRES && clearInterval(this.TIMERRES);
-            this.scroll && this.scroll.refresh();
-          }
-        }, this), 100);
-      }
-    },
-
     addEvent: function ($super) {
       $super();
 
@@ -300,7 +282,6 @@
         this.resetCss();
         //防止初始化定义index为不可选index
         this.resetIndex();
-        this.checkWrapperDisplay();
 
       }, 1);
 
