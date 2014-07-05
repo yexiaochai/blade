@@ -20,6 +20,7 @@
       'View': app + 'mvc/abstract.view',
 
       'cLazyload': app + 'common/c.lazyload',
+      'cValidate': app + 'common/c.validate',
 
       //UI组件
       'UIView': app + 'ui/ui.abstract.view',
