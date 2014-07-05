@@ -22,7 +22,7 @@
       //简单实例化 ，固定在底部
       if (!this.demo) {
         this.demo = new UISelect({
-          wrapper: $('.cui-bottom-fixed'),
+          wrapper: this.$('.cui-bottom-fixed'),
           datamodel: {
             data: data1
           }
@@ -32,7 +32,7 @@
       //设置参数，重写change事件
       if (!this.demo2) {
         this.demo2 = new UISelect({
-          wrapper: $('.cui-citys-bd'),
+          wrapper: this.$('.cui-citys-bd'),
           datamodel: {
             data: data1
           },
