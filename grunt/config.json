@@ -1,0 +1,89 @@
+
+{
+  "requirejs": {
+    "libs": {
+      "options": {
+        "baseUrl": "<%= config.srcDir %>/libs",
+        "paths": {
+          "$": "zepto",
+          "_": "underscore",
+          "_e": "underscore.extend",
+          "F": "fastclick"
+        },
+        "include": [
+              "$",
+              "_",
+              "_e",
+              "F"
+            ],
+        "out": "<%= config.destDir %>/libs.js"
+      }
+    },
+    "blade": {
+      "options": {
+        "uglify": {
+          "except": ["$super"]
+        },
+        "baseUrl": "<%= config.srcDir %>",
+        "paths": {
+		  "common_r": "common_r",
+
+          "text": "libs/require.text",
+		  "App": "mvc/abstract.app",
+		  "View": "mvc/abstract.view",
+		  "cLazyload": "common/c.lazyload",
+		  "cValidate": "common/c.validate",
+		  "UIView": "ui/ui.abstract.view",
+		  "UILayer": "ui/ui.layer",
+		  "UIAlert": "ui/ui.alert",
+		  "UIMask": "ui/ui.mask",
+		  "UILoading": "ui/ui.loading",
+		  "UIReLoading": "ui/ui.reloading",
+		  "UIToast": "ui/ui.toast",
+		  "UIInlineView": "ui/ui.inline.view",
+		  "UINum": "ui/ui.num",
+		  "UISwitch": "ui/ui.switch",
+		  "UIBubbleLayer": "ui/ui.bubble.layer",
+		  "UITab": "ui/ui.tab",
+		  "UITabs": "ui/ui.tabs",
+		  "UIScroll": "ui/ui.scroll",
+		  "UIScrollLayer": "ui/ui.scroll.layer",
+		  "UIRadioList": "ui/ui.radio.list",
+		  "UISelect": "ui/ui.select",
+		  "UIGroupSelect": "ui/ui.group.select",
+		  "UIGroupList": "ui/ui.group.list",
+		  "UICalendar": "ui/ui.calendar"
+
+        },
+        "include": [
+		  "common_r",
+          "App",
+		  "View",
+		  "cLazyload",
+		  "cValidate",
+		  "UIView",
+		  "UILayer",
+		  "UIAlert",
+		  "UIMask",
+		  "UILoading",
+		  "UIReLoading",
+		  "UIToast",
+		  "UIInlineView",
+		  "UINum",
+		  "UISwitch",
+		  "UIBubbleLayer",
+		  "UITab",
+		  "UITabs",
+		  "UIScroll",
+		  "UIScrollLayer",
+		  "UIRadioList",
+		  "UISelect",
+		  "UIGroupSelect",
+		  "UIGroupList",
+		  "UICalendar"
+        ],
+        "out": "<%= config.destDir %>/common.js"
+      }
+    }
+  }
+}
