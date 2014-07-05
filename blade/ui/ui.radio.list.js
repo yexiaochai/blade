@@ -29,6 +29,29 @@
 
     },
 
+    //要求唯一标识，根据id确定index
+    resetPropery: function () {
+      this._resetNum();
+      this._resetIndex();
+
+    },
+
+    _resetIndex: function () {
+      if (!this.datamodel.selectId) return;
+      for (var i = 0, len = this.datamodel.data.length; i < len; i++) {
+        if (this.datamodel.selectId == this.datamodel.data[i].id) {
+          this.datamodel.index = i;
+          break;
+        }
+      }
+    },
+
+    _resetNum: function () {
+      this.displayNum = this.displayNum % 2 == 0 ? this.displayNum + 1 : this.displayNum;
+      this.itemNum = this.datamodel.data.length;
+
+    },
+
     clickAction: function (e) {
       var el = $(e.currentTarget)
       var i = el.attr('data-index');
