@@ -1,0 +1,1104 @@
+﻿<div id="headerview" style="height: 48px;">
+  <header>
+    <h1>
+      延迟加载组件</h1>
+  </header></div>
+
+  <h1>
+  华仔任务：<br />
+  50跳图片延迟加载<br />
+  加一个按钮动态增加50张图片，做到剩下图片也是延迟加载<br />
+  设置一个div定高作为容器测试<br />
+
+  </h1>
+<section class="cui-citys-bd">
+  <div  class="hotel-g-bd hotel-hot js_hotel_list img_show" id="imgLazyload" >
+    <ul class="hotel-g-list" id="img_list">
+      <li class="js_hotel_detail" data-hotelid="436187">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/437000/436187/0d4dc5223099409e99fe0c459c1b3c59_130_130.jpg"
+            width="96" height="96" src="http://images4.c-ctrip.com/target/hotel/437000/436187/0d4dc5223099409e99fe0c459c1b3c59_130_130.jpg"
+            >
+        </div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海宝安大酒店</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>428</b>起</span> <span class="rate-num">
+              <b>4.2</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">四星级酒店</span> <span class="ico-txt fr"><em class="ico-2">礼</em>
+              <em class="ico-1">APP专享</em> </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">4.8公里</span> <span class="cgray">浦东陆家嘴金融贸易区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="375211">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/26000/25951/223C7EBF-A242-4666-95C4-6378673595FA_130_130.jpg"
+            width="96" height="96" src="http://images4.c-ctrip.com/target/hotel/26000/25951/223C7EBF-A242-4666-95C4-6378673595FA_130_130.jpg"
+            >
+        </div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海恒硕公寓酒店</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>538</b>起</span> <span class="rate-num">
+              <b>4.2</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">高档型酒店</span> <span class="ico-txt fr"><em class="ico-3">团</em>
+              <em class="ico-1">APP专享</em> </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">9.2公里</span> <span class="cgray">虹桥地区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="425161">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/55000/54363/c51ad3aa651e4841b723b32afd5ddee0_130_130.jpg"
+            width="96" height="96" src="http://images4.c-ctrip.com/target/hotel/55000/54363/c51ad3aa651e4841b723b32afd5ddee0_130_130.jpg"
+            >
+        </div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海源深加州酒店</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>368</b>起</span> <span class="rate-num">
+              <b>4.1</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">高档型酒店</span> <span class="ico-txt fr"><em class="ico-2">促</em>
+              <em class="ico-1">APP专享</em> </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">6公里</span> <span class="cgray">浦东陆家嘴金融贸易区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="387241">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/27000/26991/74699199855042a99115251c13b83aac_130_130.jpg"
+            width="96" height="96" src="http://images4.c-ctrip.com/target/hotel/27000/26991/74699199855042a99115251c13b83aac_130_130.jpg"
+            >
+        </div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海千禧海鸥大酒店</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>897</b>起</span> <span class="rate-num">
+              <b>4.7</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">五星级酒店</span> <span class="ico-txt fr"><em class="ico-2">礼</em>
+              <em class="ico-1">APP专享</em> <em class="ico-2">可返</em> </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">8.4公里</span> <span class="cgray">虹桥地区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="375466">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/22000/21648/542d8c19b5ab4b93ad936c54d2b9453e_130_130.jpg"
+            width="96" height="96" src="http://images4.c-ctrip.com/target/hotel/22000/21648/542d8c19b5ab4b93ad936c54d2b9453e_130_130.jpg"
+            >
+        </div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海曼哈顿（外滩）商务酒店</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>388</b>起</span> <span class="rate-num">
+              <b>4.2</b>分</span> <i class="hotel-icon-wifi"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">舒适型酒店</span> <span class="ico-txt fr"><em class="ico-3">团</em>
+              <em class="ico-2">礼</em> <em class="ico-2">促</em> <em class="ico-1">APP专享</em>
+            </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">1.7公里</span> <span class="cgray">外滩地区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="437922">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/55000/54108/FBAD995D-E4FC-49B2-9DD0-F42790B4207C_130_130.jpg"
+            width="96" height="96" src="http://images4.c-ctrip.com/target/hotel/55000/54108/FBAD995D-E4FC-49B2-9DD0-F42790B4207C_130_130.jpg"
+            >
+        </div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海吉瑞酒店公寓</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>423</b>起</span> <span class="rate-num">
+              <b>4.0</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">高档型酒店</span> <span class="ico-txt fr"><em class="ico-3">团</em>
+              <em class="ico-2">礼</em> <em class="ico-2">促</em> <em class="ico-1">APP专享</em>
+            </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">4.6公里</span> <span class="cgray">浦东陆家嘴金融贸易区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="441507">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/442000/441507/945b82ca00e244838eea4d3758957943_130_130.jpg"
+            width="96" height="96" src="http://images4.c-ctrip.com/target/hotel/442000/441507/945b82ca00e244838eea4d3758957943_130_130.jpg"
+            >
+        </div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            桔子酒店·精选（上海静安店）</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>399</b>起</span> <span class="rate-num">
+              <b>4.5</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">舒适型酒店</span> <span class="ico-txt fr"></span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">3.6公里</span> <span class="cgray">长寿路商业区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="479654">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/480000/479654/d710636554554c919fa16a83df499d3a_130_130.jpg"
+            width="96" height="96" src="http://images4.c-ctrip.com/target/hotel/480000/479654/d710636554554c919fa16a83df499d3a_130_130.jpg"
+            >
+        </div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            桔子水晶酒店（上海北外滩店）</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>479</b>起</span> <span class="rate-num">
+              <b>4.6</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">高档型酒店</span> <span class="ico-txt fr"></span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">4.2公里</span> <span class="cgray">北外滩地区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="425164">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/53000/52741/941abc93388f496cb660691cf8b48bde_130_130.jpg"
+            width="96" height="96" src="http://images4.c-ctrip.com/target/hotel/53000/52741/941abc93388f496cb660691cf8b48bde_130_130.jpg"
+            >
+        </div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海南泉大酒店</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>229</b>起</span> <span class="rate-num">
+              <b>3.8</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">三星级酒店</span> <span class="ico-txt fr"><em class="ico-3">团</em>
+              <em class="ico-2">礼</em> <em class="ico-1">APP专享</em> </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">5公里</span> <span class="cgray">浦东陆家嘴金融贸易区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="427259">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/46000/45420/544ece016d22476cb09207760e90e399_130_130.jpg"
+            width="96" height="96"></div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海帝璟丽致大酒店</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>591</b>起</span> <span class="rate-num">
+              <b>4.4</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">豪华型酒店</span> <span class="ico-txt fr"><em class="ico-3">团</em>
+              <em class="ico-2">礼</em> <em class="ico-2">可返</em> </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">11.8公里</span> <span class="cgray">虹桥枢纽地区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="793325">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/794000/793325/ffc59538044b4da9bdab48ef10e55cd7_130_130.jpg"
+            width="96" height="96">
+        </div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海紫金通欣酒店</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>299</b>起</span> <span class="rate-num">
+              <b>4.7</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">高档型酒店</span> <span class="ico-txt fr"><em class="ico-2">礼</em>
+              <em class="ico-2">促</em> <em class="ico-1">APP专享</em> </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">25.7公里</span> <span class="cgray">马陆、嘉定城区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="444025">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/23000/22108/01ae2c70396b46cca88b654da2b65325_130_130.jpg"
+            width="96" height="96">
+        </div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海帝景苑酒店公寓</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>200</b>起</span> <span class="rate-num">
+              <b>4.3</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">高档型酒店</span> <span class="ico-txt fr"><em class="ico-3">团</em>
+              <em class="ico-2">促</em> <em class="ico-1">APP专享</em> </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">4.9公里</span> <span class="cgray">徐家汇地区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="437612">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/436000/435852/14d370f94b8145f4aafc993a39329e88_130_130.jpg"
+            width="96" height="96">
+        </div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海中航虹桥机场泊悦酒店（中国国际航空公司）</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>399</b>起</span> <span class="rate-num">
+              <b>4.5</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">豪华型酒店</span> <span class="ico-txt fr"><em class="ico-2">礼</em>
+              <em class="ico-2">促</em> <em class="ico-1">APP专享</em> <em class="ico-2">可返</em>
+            </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">14.6公里</span> <span class="cgray">虹桥枢纽地区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="662485">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/640000/639071/0abd8b2cd17944dc9051ccb0891d1fc2_130_130.jpg"
+            width="96" height="96">
+        </div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海柏阳君亭酒店</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>398</b>起</span> <span class="rate-num">
+              <b>4.5</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">高档型酒店</span> <span class="ico-txt fr"><em class="ico-3">团</em>
+              <em class="ico-2">礼</em> <em class="ico-2">促</em> <em class="ico-1">今夜甩卖</em>
+            </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">6.7公里</span> <span class="cgray">江湾、五角场商业区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="444194">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/56000/55631/45978ACA-E1D7-4D48-9219-9FB543BD2C6D_130_130.jpg"
+            width="96" height="96">
+        </div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海宾龙商务酒店</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>368</b>起</span> <span class="rate-num">
+              <b>4.3</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">高档型酒店</span> <span class="ico-txt fr"><em class="ico-3">团</em>
+              <em class="ico-2">礼</em> <em class="ico-2">促</em> <em class="ico-1">APP专享</em> <em
+                class="ico-2">返¥40</em> </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">1.5公里</span> <span class="cgray">外滩地区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="432130">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/77000/76277/568c2b746d3e4d4789f1cd6141063ebd_130_130.jpg"
+            width="96" height="96">
+        </div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海滨江欣景大酒店</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>550</b>起</span> <span class="rate-num">
+              <b>4.3</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">高档型酒店</span> <span class="ico-txt fr"><em class="ico-2">礼</em>
+              <em class="ico-2">促</em> <em class="ico-1">APP专享</em> <em class="ico-2">可返</em>
+            </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">2.6公里</span> <span class="cgray">外滩地区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="425179">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/139000/138447/D9CD65FA1C34428888D36017E39125AA_130_130.Jpg"
+            width="96" height="96">
+        </div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海衡山宾馆</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>598</b>起</span> <span class="rate-num">
+              <b>4.4</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">五星级酒店</span> <span class="ico-txt fr"><em class="ico-2">礼</em>
+              <em class="ico-2">促</em> <em class="ico-1">今夜甩卖</em> </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">4.4公里</span> <span class="cgray">徐家汇地区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="375534">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/6000/5832/825E540213594B0BBAEE5252AB39E903_130_130.Jpg"
+            width="96" height="96">
+        </div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海绿地九龙宾馆</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>398</b>起</span> <span class="rate-num">
+              <b>4.4</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">四星级酒店</span> <span class="ico-txt fr"><em class="ico-2">礼</em>
+              <em class="ico-2">促</em> <em class="ico-1">APP专享</em> <em class="ico-2">可返</em>
+            </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">3.2公里</span> <span class="cgray">四川北路商业区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="374920">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/6000/5817/0c3c46385b2a4470b81d5e6a846889f1_130_130.jpg"
+            width="96" height="96">
+        </div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海国信紫金山大酒店（原上海紫金山大酒店）</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>838</b>起</span> <span class="rate-num">
+              <b>4.5</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">五星级酒店</span> <span class="ico-txt fr"><em class="ico-2">礼</em>
+              <em class="ico-2">促</em> <em class="ico-1">APP专享</em> </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">4.8公里</span> <span class="cgray">浦东陆家嘴金融贸易区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="375470">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/1000/671/3e76e96e76dd45baabd914db8cfb2685_130_130.jpg"
+            width="96" height="96">
+        </div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海大厦</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>539</b>起</span> <span class="rate-num">
+              <b>4.5</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">五星级酒店</span> <span class="ico-txt fr"><em class="ico-2">礼</em>
+              <em class="ico-2">促</em> <em class="ico-1">APP专享</em> <em class="ico-2">可返</em>
+            </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">2.2公里</span> <span class="cgray">外滩地区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="397161">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/9000/8236/d4d4c2034b1342e5afb514a8105f5135_130_130.jpg"
+            width="96" height="96"></div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海明城大酒店</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>498</b>起</span> <span class="rate-num">
+              <b>4.3</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">四星级酒店</span> <span class="ico-txt fr"><em class="ico-3">团</em>
+              <em class="ico-2">礼</em> <em class="ico-2">促</em> <em class="ico-1">APP专享</em>
+            </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">4.8公里</span> <span class="cgray">浦东陆家嘴金融贸易区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="397161">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/9000/8236/d4d4c2034b1342e5afb514a8105f5135_130_130.jpg"
+            width="96" height="96"></div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海明城大酒店</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>498</b>起</span> <span class="rate-num">
+              <b>4.3</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">四星级酒店</span> <span class="ico-txt fr"><em class="ico-3">团</em>
+              <em class="ico-2">礼</em> <em class="ico-2">促</em> <em class="ico-1">APP专享</em>
+            </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">4.8公里</span> <span class="cgray">浦东陆家嘴金融贸易区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="397161">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/18000/17423/8d1e254728b9434dbd035725bb0e8ee0_130_130.jpg"
+            width="96" height="96"></div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海明城大酒店</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>498</b>起</span> <span class="rate-num">
+              <b>4.3</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">四星级酒店</span> <span class="ico-txt fr"><em class="ico-3">团</em>
+              <em class="ico-2">礼</em> <em class="ico-2">促</em> <em class="ico-1">APP专享</em>
+            </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">4.8公里</span> <span class="cgray">浦东陆家嘴金融贸易区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="397161">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/7000/6168/91ab856c99994da29784e06da2a67e64_130_130.jpg"
+            width="96" height="96"></div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海明城大酒店</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>498</b>起</span> <span class="rate-num">
+              <b>4.3</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">四星级酒店</span> <span class="ico-txt fr"><em class="ico-3">团</em>
+              <em class="ico-2">礼</em> <em class="ico-2">促</em> <em class="ico-1">APP专享</em>
+            </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">4.8公里</span> <span class="cgray">浦东陆家嘴金融贸易区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="397161">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/81000/80121/950d59e6881043fbb03aff878a9679c8_130_130.jpg"
+            width="96" height="96"></div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海明城大酒店</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>498</b>起</span> <span class="rate-num">
+              <b>4.3</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">四星级酒店</span> <span class="ico-txt fr"><em class="ico-3">团</em>
+              <em class="ico-2">礼</em> <em class="ico-2">促</em> <em class="ico-1">APP专享</em>
+            </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">4.8公里</span> <span class="cgray">浦东陆家嘴金融贸易区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="397161">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/539000/538193/635d3e1e7cff40109204122e903ab46e_130_130.jpg"
+            width="96" height="96"></div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海明城大酒店</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>498</b>起</span> <span class="rate-num">
+              <b>4.3</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">四星级酒店</span> <span class="ico-txt fr"><em class="ico-3">团</em>
+              <em class="ico-2">礼</em> <em class="ico-2">促</em> <em class="ico-1">APP专享</em>
+            </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">4.8公里</span> <span class="cgray">浦东陆家嘴金融贸易区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="397161">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/57000/56556/C4F864561FE74BABA5DD7EF9F1BD52C0_130_130.Jpg"
+            width="96" height="96"></div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海明城大酒店</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>498</b>起</span> <span class="rate-num">
+              <b>4.3</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">四星级酒店</span> <span class="ico-txt fr"><em class="ico-3">团</em>
+              <em class="ico-2">礼</em> <em class="ico-2">促</em> <em class="ico-1">APP专享</em>
+            </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">4.8公里</span> <span class="cgray">浦东陆家嘴金融贸易区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="397161">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/23000/22573/9afb0b0259ae473082737198ff664a27_130_130.jpg"
+            width="96" height="96"></div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海明城大酒店</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>498</b>起</span> <span class="rate-num">
+              <b>4.3</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">四星级酒店</span> <span class="ico-txt fr"><em class="ico-3">团</em>
+              <em class="ico-2">礼</em> <em class="ico-2">促</em> <em class="ico-1">APP专享</em>
+            </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">4.8公里</span> <span class="cgray">浦东陆家嘴金融贸易区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="397161">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/49000/48895/C975B2F1-4E00-4F86-886D-DFD416EE34FD_130_130.jpg"
+            width="96" height="96"></div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海明城大酒店</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>498</b>起</span> <span class="rate-num">
+              <b>4.3</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">四星级酒店</span> <span class="ico-txt fr"><em class="ico-3">团</em>
+              <em class="ico-2">礼</em> <em class="ico-2">促</em> <em class="ico-1">APP专享</em>
+            </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">4.8公里</span> <span class="cgray">浦东陆家嘴金融贸易区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="397161">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/22000/21329/a81715e00d5244d4bee8273e82ae0fae_130_130.jpg"
+            width="96" height="96"></div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海明城大酒店</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>498</b>起</span> <span class="rate-num">
+              <b>4.3</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">四星级酒店</span> <span class="ico-txt fr"><em class="ico-3">团</em>
+              <em class="ico-2">礼</em> <em class="ico-2">促</em> <em class="ico-1">APP专享</em>
+            </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">4.8公里</span> <span class="cgray">浦东陆家嘴金融贸易区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="397161">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/1000/709/50F737E2-425E-422A-8E47-4D82F52E1949_130_130.jpg"
+            width="96" height="96"></div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海明城大酒店</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>498</b>起</span> <span class="rate-num">
+              <b>4.3</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">四星级酒店</span> <span class="ico-txt fr"><em class="ico-3">团</em>
+              <em class="ico-2">礼</em> <em class="ico-2">促</em> <em class="ico-1">APP专享</em>
+            </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">4.8公里</span> <span class="cgray">浦东陆家嘴金融贸易区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="397161">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/6000/5835/61336F71252F460792EE5B3B20293BCE_130_130.Jpg"
+            width="96" height="96"></div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海明城大酒店</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>498</b>起</span> <span class="rate-num">
+              <b>4.3</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">四星级酒店</span> <span class="ico-txt fr"><em class="ico-3">团</em>
+              <em class="ico-2">礼</em> <em class="ico-2">促</em> <em class="ico-1">APP专享</em>
+            </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">4.8公里</span> <span class="cgray">浦东陆家嘴金融贸易区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="397161">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/1000/717/f51bb87a188c4fb6b35e3928f49605af_130_130.jpg"
+            width="96" height="96"></div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海明城大酒店</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>498</b>起</span> <span class="rate-num">
+              <b>4.3</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">四星级酒店</span> <span class="ico-txt fr"><em class="ico-3">团</em>
+              <em class="ico-2">礼</em> <em class="ico-2">促</em> <em class="ico-1">APP专享</em>
+            </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">4.8公里</span> <span class="cgray">浦东陆家嘴金融贸易区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="397161">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/1000/634/3732a505564540c888f8ef7cba0ce0bc_130_130.jpg"
+            width="96" height="96"></div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海明城大酒店</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>498</b>起</span> <span class="rate-num">
+              <b>4.3</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">四星级酒店</span> <span class="ico-txt fr"><em class="ico-3">团</em>
+              <em class="ico-2">礼</em> <em class="ico-2">促</em> <em class="ico-1">APP专享</em>
+            </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">4.8公里</span> <span class="cgray">浦东陆家嘴金融贸易区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="397161">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/65000/64164/1684EC16-8A01-4B39-814C-C4C4537CF790_130_130.jpg"
+            width="96" height="96"></div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海明城大酒店</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>498</b>起</span> <span class="rate-num">
+              <b>4.3</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">四星级酒店</span> <span class="ico-txt fr"><em class="ico-3">团</em>
+              <em class="ico-2">礼</em> <em class="ico-2">促</em> <em class="ico-1">APP专享</em>
+            </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">4.8公里</span> <span class="cgray">浦东陆家嘴金融贸易区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="397161">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/17000/16393/0a36fcbbed604f5793d736f20d4ef327_130_130.jpg"
+            width="96" height="96"></div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海明城大酒店</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>498</b>起</span> <span class="rate-num">
+              <b>4.3</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">四星级酒店</span> <span class="ico-txt fr"><em class="ico-3">团</em>
+              <em class="ico-2">礼</em> <em class="ico-2">促</em> <em class="ico-1">APP专享</em>
+            </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">4.8公里</span> <span class="cgray">浦东陆家嘴金融贸易区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="397161">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/79000/78668/f9addf0d454a423ca2f1e84a45ca8078_130_130.jpg"
+            width="96" height="96"></div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海明城大酒店</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>498</b>起</span> <span class="rate-num">
+              <b>4.3</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">四星级酒店</span> <span class="ico-txt fr"><em class="ico-3">团</em>
+              <em class="ico-2">礼</em> <em class="ico-2">促</em> <em class="ico-1">APP专享</em>
+            </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">4.8公里</span> <span class="cgray">浦东陆家嘴金融贸易区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="397161">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/62000/61446/22C79F6B-B7DA-4D82-B80E-1C4D9D3EA9CA_130_130.jpg"
+            width="96" height="96"></div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海明城大酒店</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>498</b>起</span> <span class="rate-num">
+              <b>4.3</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">四星级酒店</span> <span class="ico-txt fr"><em class="ico-3">团</em>
+              <em class="ico-2">礼</em> <em class="ico-2">促</em> <em class="ico-1">APP专享</em>
+            </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">4.8公里</span> <span class="cgray">浦东陆家嘴金融贸易区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="397161">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/26000/25229/A215FB5EF74B4FA390EECF3A5FC737E4_130_130.Jpg"
+            width="96" height="96"></div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海明城大酒店</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>498</b>起</span> <span class="rate-num">
+              <b>4.3</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">四星级酒店</span> <span class="ico-txt fr"><em class="ico-3">团</em>
+              <em class="ico-2">礼</em> <em class="ico-2">促</em> <em class="ico-1">APP专享</em>
+            </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">4.8公里</span> <span class="cgray">浦东陆家嘴金融贸易区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="397161">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/1000/669/0259829A-A7F1-485A-B819-BFEA4388A331_130_130.jpg"
+            width="96" height="96"></div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海明城大酒店</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>498</b>起</span> <span class="rate-num">
+              <b>4.3</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">四星级酒店</span> <span class="ico-txt fr"><em class="ico-3">团</em>
+              <em class="ico-2">礼</em> <em class="ico-2">促</em> <em class="ico-1">APP专享</em>
+            </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">4.8公里</span> <span class="cgray">浦东陆家嘴金融贸易区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="397161">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/22000/21262/C3A6C2E1-C3DB-4A07-AC4B-F98B1FF8EF0D_130_130.jpg"
+            width="96" height="96"></div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海明城大酒店</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>498</b>起</span> <span class="rate-num">
+              <b>4.3</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">四星级酒店</span> <span class="ico-txt fr"><em class="ico-3">团</em>
+              <em class="ico-2">礼</em> <em class="ico-2">促</em> <em class="ico-1">APP专享</em>
+            </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">4.8公里</span> <span class="cgray">浦东陆家嘴金融贸易区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="397161">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/45000/44770/CC8484F6-12D4-4D32-99FC-2D877069DF2A_130_130.jpg"
+            width="96" height="96"></div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海明城大酒店</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>498</b>起</span> <span class="rate-num">
+              <b>4.3</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">四星级酒店</span> <span class="ico-txt fr"><em class="ico-3">团</em>
+              <em class="ico-2">礼</em> <em class="ico-2">促</em> <em class="ico-1">APP专享</em>
+            </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">4.8公里</span> <span class="cgray">浦东陆家嘴金融贸易区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="397161">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/10000/9476/06A8C0FB11C046A09927DC31CE635400_130_130.Jpg"
+            width="96" height="96"></div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海明城大酒店</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>498</b>起</span> <span class="rate-num">
+              <b>4.3</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">四星级酒店</span> <span class="ico-txt fr"><em class="ico-3">团</em>
+              <em class="ico-2">礼</em> <em class="ico-2">促</em> <em class="ico-1">APP专享</em>
+            </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">4.8公里</span> <span class="cgray">浦东陆家嘴金融贸易区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="397161">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/49000/48952/70EB0AADE33644F2B410D4F3CCE9E298_130_130.Jpg"
+            width="96" height="96"></div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海明城大酒店</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>498</b>起</span> <span class="rate-num">
+              <b>4.3</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">四星级酒店</span> <span class="ico-txt fr"><em class="ico-3">团</em>
+              <em class="ico-2">礼</em> <em class="ico-2">促</em> <em class="ico-1">APP专享</em>
+            </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">4.8公里</span> <span class="cgray">浦东陆家嘴金融贸易区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="397161">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/62000/61494/394fcdde6f534b2587be32f1062f8bf0_130_130.jpg"
+            width="96" height="96"></div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海明城大酒店</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>498</b>起</span> <span class="rate-num">
+              <b>4.3</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">四星级酒店</span> <span class="ico-txt fr"><em class="ico-3">团</em>
+              <em class="ico-2">礼</em> <em class="ico-2">促</em> <em class="ico-1">APP专享</em>
+            </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">4.8公里</span> <span class="cgray">浦东陆家嘴金融贸易区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="397161">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/62000/61494/394fcdde6f534b2587be32f1062f8bf0_130_130.jpg"
+            width="96" height="96"></div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海明城大酒店</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>498</b>起</span> <span class="rate-num">
+              <b>4.3</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">四星级酒店</span> <span class="ico-txt fr"><em class="ico-3">团</em>
+              <em class="ico-2">礼</em> <em class="ico-2">促</em> <em class="ico-1">APP专享</em>
+            </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">4.8公里</span> <span class="cgray">浦东陆家嘴金融贸易区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="397161">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/12000/11744/f8a4a97c1e484f4884424ad4736332ff_130_130.jpg"
+            width="96" height="96"></div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海明城大酒店</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>498</b>起</span> <span class="rate-num">
+              <b>4.3</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">四星级酒店</span> <span class="ico-txt fr"><em class="ico-3">团</em>
+              <em class="ico-2">礼</em> <em class="ico-2">促</em> <em class="ico-1">APP专享</em>
+            </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">4.8公里</span> <span class="cgray">浦东陆家嘴金融贸易区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="397161">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/448000/447915/5ff71d3fcd9140868c49ea11e0a60fa7_130_130.jpg"
+            width="96" height="96"></div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海明城大酒店</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>498</b>起</span> <span class="rate-num">
+              <b>4.3</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">四星级酒店</span> <span class="ico-txt fr"><em class="ico-3">团</em>
+              <em class="ico-2">礼</em> <em class="ico-2">促</em> <em class="ico-1">APP专享</em>
+            </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">4.8公里</span> <span class="cgray">浦东陆家嘴金融贸易区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="397161">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/81000/80222/d03d0f6b78b64fc384ecdcb9fcfd55ec_130_130.jpg"
+            width="96" height="96"></div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海明城大酒店</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>498</b>起</span> <span class="rate-num">
+              <b>4.3</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">四星级酒店</span> <span class="ico-txt fr"><em class="ico-3">团</em>
+              <em class="ico-2">礼</em> <em class="ico-2">促</em> <em class="ico-1">APP专享</em>
+            </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">4.8公里</span> <span class="cgray">浦东陆家嘴金融贸易区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="397161">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/77000/76569/BE48C131-4EA0-4402-973A-C7585204FB23_130_130.jpg"
+            width="96" height="96"></div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海明城大酒店</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>498</b>起</span> <span class="rate-num">
+              <b>4.3</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">四星级酒店</span> <span class="ico-txt fr"><em class="ico-3">团</em>
+              <em class="ico-2">礼</em> <em class="ico-2">促</em> <em class="ico-1">APP专享</em>
+            </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">4.8公里</span> <span class="cgray">浦东陆家嘴金融贸易区</span>
+          </div>
+        </div>
+      </li>
+      <li class="js_hotel_detail" data-hotelid="397161">
+        <div class="hotel-g-proimg">
+          <img data-src="http://images4.c-ctrip.com/target/hotel/83000/82735/FC8EF785-D512-4D8D-8662-52B96B82DC39_130_130.jpg"
+            width="96" height="96"></div>
+        <div class="hotel-g-cbd">
+          <h4 class="ellips">
+            上海明城大酒店</h4>
+          <div class="list-c">
+            <span class="price-num fr"><b class="num"><small>¥</small>498</b>起</span> <span class="rate-num">
+              <b>4.3</b>分</span> <i class="hotel-icon-wifi"></i><i class="hotel-icon-park"></i>
+          </div>
+          <div class="list-c">
+            <span class="cgray">四星级酒店</span> <span class="ico-txt fr"><em class="ico-3">团</em>
+              <em class="ico-2">礼</em> <em class="ico-2">促</em> <em class="ico-1">APP专享</em>
+            </span>
+          </div>
+          <div class="list-c">
+            <span class="cgray fr">4.8公里</span> <span class="cgray">浦东陆家嘴金融贸易区</span>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>

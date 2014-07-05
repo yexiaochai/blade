@@ -19,9 +19,9 @@
       'App': app + 'mvc/abstract.app',
       'View': app + 'mvc/abstract.view',
 
+      'cLazyload': app + 'common/c.lazyload',
 
       //UI组件
-      'UIBase': app + 'mvc/ui.base',
       'UIView': app + 'ui/ui.abstract.view',
       'UILayer': app + 'ui/ui.layer',
       'UIAlert': app + 'ui/ui.alert',
