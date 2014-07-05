@@ -26,7 +26,7 @@
 
       if (!this.demo) {
         this.demo = new UISelect({
-          wrapper: $('.cui-citys-bd'),
+          wrapper: $('.cui-bottom-fixed'),
           datamodel: {
             data: data1
           }
