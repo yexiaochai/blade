@@ -1,11 +1,12 @@
 
 
-/**/
+/*
+code{border:1px solid #ddd; color:#000; line-height:1.5; border-radius:3px; -webkit-box-shadow:2px 2px 5px rgba(0,0,0,0.1);box-shadow:2px 2px 5px rgba(0,0,0,0.1);}
+*/
 body{background:#fff;}
 h2{font-size:1.5em; margin:10px 0; }
 p{margin-bottom:10px; font-size:14px;}
 input[type="button"]{ color:#fff; margin-bottom:10px; height:34px; width:auto !important; padding:0 20px; border-radius:3px; cursor:pointer; margin-left:27px;}
-code{border:1px solid #ddd; color:#000; line-height:1.5; border-radius:3px; -webkit-box-shadow:2px 2px 5px rgba(0,0,0,0.1);box-shadow:2px 2px 5px rgba(0,0,0,0.1);}
 .keyword{color:#0048AB;}
 .pane{ padding:20px; }
 
