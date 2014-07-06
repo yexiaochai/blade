@@ -100,7 +100,8 @@
 
       var groupList2 = [
         { 'uiname': 'num', 'name': '数字组件' },
-        { 'uiname': 'select', 'name': 'select' },
+        { 'uiname': 'select', 'name': 'select组件' },
+        { 'uiname': 'select2', 'name': 'select应用' },
         { 'uiname': 'switch', 'name': 'switch组件' },
         { 'uiname': 'tab', 'name': 'tab组件' },
         { 'uiname': 'calendar', 'name': '日历组件' },
@@ -111,7 +112,8 @@
         { 'uiname': 'radio.list', 'name': '单列表选择组件' },
         { 'uiname': 'scroll.layer', 'name': '滚动层组件' },
         { 'uiname': 'group.select', 'name': '日期选择类组件' },
-        { 'uiname': 'scroll', 'name': '滚动组件/横向纵向滚动' },
+        { 'uiname': 'scroll', 'name': '滚动组件/横向滚动' },
+        { 'uiname': 'scroll.across', 'name': '滚动组件/纵向滚动' },
         { 'uiname': 'slider', 'name': 'slider组件（todo...）' }
       ];
 
