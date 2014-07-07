@@ -219,7 +219,7 @@
         match = key.match(delegateEventSplitter);
         eventName = match[1], selector = match[2];
         method = _.bind(method, this);
-        eventName += '.delegateEvents' + this.id;
+        eventName += '.delegateUIEvents' + this.id;
 
         if (selector === '') {
           this.$el.on(eventName, method);
@@ -237,7 +237,7 @@
     * @return {object} 执行作用域
     */
     unBindEvents: function () {
-      this.$el.off('.delegateEvents' + this.id);
+      this.$el.off('.delegateUIEvents' + this.id);
       return this;
     }
 

@@ -38,7 +38,6 @@
             outView.hide();
           });
 
-
         },
         slideright: function (inView, outView) {
           var self = this;
