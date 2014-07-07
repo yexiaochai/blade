@@ -26,7 +26,7 @@
         },
         "baseUrl": "<%= config.srcDir %>",
         "paths": {
-		  "common_r": "common_r",
+		  "common_tmp": "common_tmp",
 
           "text": "libs/require.text",
 		  "App": "mvc/abstract.app",
@@ -56,11 +56,28 @@
 
         },
         "include": [
-		  "common_r",
+		  "common_tmp",
           "App",
 		  "View",
 		  "cLazyload",
 		  "cValidate",
+
+		  "text!ui/ui.alert.html",
+		  "text!ui/ui.bubble.layer.html",
+		  "text!ui/ui.calendar.html",
+		  "text!ui/ui.group.list.html",
+		  "text!ui/ui.group.select.html",
+		  "text!ui/ui.loading.html",
+		  "text!ui/ui.mask.html",
+		  "text!ui/ui.num.html",
+		  "text!ui/ui.radio.list.html",
+		  "text!ui/ui.reloading.html",
+		  "text!ui/ui.scroll.layer.html",
+		  "text!ui/ui.select.html",
+		  "text!ui/ui.switch.html",
+		  "text!ui/ui.tab.html",
+		  "text!ui/ui.toast.html",
+
 		  "UIView",
 		  "UILayer",
 		  "UIAlert",

@@ -13,9 +13,70 @@ module.exports = function (grunt) {
       channel: 'app'
     },
 
+    "copy": {
+      "main": {
+        flatten: true,
+        "src": "<%= config.srcDir %>/common.js",
+        "dest": "<%= config.srcDir %>/common_tmp.js"
+      },
+      'template': {
+        "files": [
+          {
+            "expand": true,
+            "cwd": "<%= config.srcDir %>",
+            "src": ["**/*.html"],
+            "dest": "<%= config.destDir %>"
+          }
+        ]
+      }
+    },
+
+    "htmlmin": {
+      "web": {
+        "files": [
+          {
+            "expand": true,
+            "cwd": "<%= config.srcDir%>/",
+            "src": ["ui/*.html"],
+            "dest": "<%= config.destDir%>/"
+          }
+        ]
+      }
+    },
+
     clean: {
       options: { force: true },
-      main: '<%= config.destDir%>'
+      main: '<%= config.destDir%>',
+      tmpsrc: '<%= config.srcDir%>/common_tmp.js'
+    },
+
+    "strip": {
+      "main": {
+        "src": "<%= config.destDir %>/**/*.js",
+        "options": {
+          "inline": true
+        }
+      }
+    },
+
+    //requireJS没有包含的文件也需要移过去
+    "uglify": {
+      "main": {
+        "options": {
+          "report": "false",
+          "mangle": {
+            "except": ['$super']
+          }
+        },
+        "files": [
+          {
+            "expand": true,
+            "cwd": "<%= config.srcDir %>",
+            "src": "**/*.js",
+            "dest": "<%= config.destDir %>"
+          }
+        ]
+      }
     }
 
   });
@@ -27,6 +88,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-strip');
   grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-replace');
+  grunt.loadNpmTasks('grunt-contrib-htmlmin');
 
 
   grunt.registerTask('default', 'default task', function () {
@@ -35,17 +97,19 @@ module.exports = function (grunt) {
 
   grunt.registerTask('blade', 'require demo', function () {
 
-    //第一步，读取配置信息
     var cfg = grunt.file.readJSON('config.json');
 
-    //第二步，设置参数
-    grunt.log.debug('参数：' + JSON.stringify(cfg, null, 2));
+    grunt.log.debug('参数：' + JSON.stringify(cfg.requirejs, null, 2));
 
-    //第三步跑任务
-    grunt.task.run(['clean']);
+    //改写参数，为ui组件添加文件
+
+
+    grunt.log.debug('参数1：' + JSON.stringify(cfg.requirejs, null, 2));
+
+
     grunt.config.set('requirejs', cfg.requirejs);
 
-    grunt.task.run(['clean', 'requirejs']);
+    grunt.task.run(['clean:main', 'uglify', 'copy:main', 'requirejs', 'clean:tmpsrc', 'copy:template', 'strip']);
 
 
   });

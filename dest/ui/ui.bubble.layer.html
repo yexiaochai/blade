@@ -1,0 +1,6 @@
+﻿<ul class="cui-f-layer <%if(dir == 'up'){ %> <%=upClass %> <% } else { %> <%=downClass %> <% } %>" >
+  <% for(var i = 0, len = data.length; i < len; i++) { %>
+  <% var itemData = data[i]; %>
+  <li data-index="<%=i%>" data-flag="c" class="<% if(index == i){ %><%=curClass %><%} %>"  ><%=itemData.name %></li>
+  <% } %>
+</ul>

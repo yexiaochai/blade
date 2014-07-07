@@ -1,9 +1,9 @@
 ﻿(function () {
 
-  var app = 'blade/';
+  var app = './blade/';
 
   window.getAppUITemplatePath = function (path) {
-    return 'text!blade/ui/' + path + '.html'; 
+    return 'text!' + app + 'ui/' + path + '.html'; 
   }
 
   require.config({

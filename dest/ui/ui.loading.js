@@ -1,0 +1,1 @@
+define(["UILayer",getAppUITemplatePath("ui.loading")],function(a,b){return _.inherit(a,{propertys:function($super){$super(),this.template=b,this.maskToHide=!1},initialize:function($super,a){$super(a)},addEvent:function($super){$super(),this.on("onCreate",function(){this.$el.addClass("cui-loading")})}})});
