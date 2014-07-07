@@ -1,6 +1,6 @@
 ﻿define([], function () {
 
-  var Appliction = _.inherit({
+  return _.inherit({
     propertys: function () {
       //view搜索目录
       this.viewRootPath = 'app/views/';
@@ -46,8 +46,6 @@
 
       //pushState的支持能力
       this.hasPushState = !!(window.history && window.history.pushState);
-
-      this.hasPushState = false;
 
 
       //动画名
@@ -316,8 +314,6 @@
       if (this.hasPushState) {
         this.loadViewByUrl();
       }
-
-
     },
 
     back: function (viewId, opts) {
@@ -340,5 +336,5 @@
     }
 
   });
-  return Appliction;
+
 });
