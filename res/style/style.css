@@ -4112,7 +4112,7 @@ input[type=text].place_search:empty {
     line-height: 20px;
     padding: 10px 30px 10px 10px;
     word-break: break-all;
-    color: #000
+    color: #333;
 }
 
 .cui-city-itmes .cui-city-n li.current {

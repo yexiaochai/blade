@@ -18,7 +18,7 @@ define(['View', getViewTemplatePath('select2'), 'UISelect'], function (View, vie
     confirmAction: function() {
       this.$('.date-widget').addClass('back').removeClass('move');
 
-      console.log(this.demo1.item);
+      this.$('.chooseDate').val(this.demo1.getSelected().name +this.demo2.getSelected().name + this.demo3.getSelected().name)
     },
 
     chooseDateAction: function() {
