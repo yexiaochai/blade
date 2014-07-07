@@ -216,7 +216,7 @@
 
       if (!this.isAnimat) this.animatName = this.animNoName;
 
-      if (this.animations[this.animatName]) {
+      if (this.animations[this.animatName] && outView) {
         this.animations[this.animatName].call(this, inView, outView, callback, this)
       } else {
 
