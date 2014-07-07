@@ -56,10 +56,6 @@ define(['UIView', getAppUITemplatePath('ui.calendar')], function (UIView, templa
 
     initialize: function ($super, opts) {
       $super(opts);
-    },
-
-    addEvent: function ($super) {
-      $super();
     }
 
   });

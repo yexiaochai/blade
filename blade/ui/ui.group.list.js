@@ -1,4 +1,6 @@
-﻿
+﻿/*
+getFilterList这块需要重新处理，不然事件会丢失
+*/
 define(['UIView', getAppUITemplatePath('ui.group.list')], function (UIView, template) {
 
 
@@ -78,11 +80,8 @@ define(['UIView', getAppUITemplatePath('ui.group.list')], function (UIView, temp
 
     initialize: function ($super, opts) {
       $super(opts);
-    },
-
-    addEvent: function ($super) {
-      $super();
     }
+
   });
 
 });

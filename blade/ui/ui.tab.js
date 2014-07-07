@@ -42,8 +42,6 @@
       }
     },
 
-
-
     initElement: function () {
       this.el = this.$('.cui-tab-current');
       this.tab = this.$('.cui-tab-scrollbar')

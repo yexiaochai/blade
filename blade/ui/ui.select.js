@@ -57,12 +57,6 @@
 
     },
 
-    //检测数据是否满足条件
-    checkData: function () {
-
-      return true;
-    },
-
     initElement: function () {
 
       //几个容器的高度必须统一
@@ -277,8 +271,6 @@
 
       //这个要在第一位，因为后面会执行父类的position方法居中，尺寸没有就不行
       this.on('onShow', function () {
-        if (!this.checkData()) return;
-
         this.initSize();
         this._initScroll();
 
