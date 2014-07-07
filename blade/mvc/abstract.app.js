@@ -9,13 +9,11 @@
       //请求对象
       this.request;
       //当前视图路径
-      this.viewpath;
+      this.viewId;
       //主框架
       this.mainframe;
       //视图框架
       this.viewport;
-      //状态框架
-      this.statedom;
       //视图集
       this.views = {};
       //当前视图
@@ -27,17 +25,17 @@
       this.isCreate = false;
       //历史记录
       this.history = [];
-      //hash的监听状态
-      this.stopListening = false;
+
+      //app状态
+      this.status = 'init';
 
       //上一次hash
       this.lastHash = '';
       //上一次完整hash
       this.lashFullHash = '';
-      //hash是否改变
-      this.isChangeHash = false;
 
       this.animations = {};
+
       //是否使用动画，这个属性只能控制单次是否开启动画
       this.isAnimat = true;
 
@@ -46,8 +44,14 @@
       this.animBackwardName = 'slideright';
       this.animNoName = 'noAnimate';
 
+      //pushState的支持能力
+      this.hasPushState = !!(window.history && window.history.pushState);
+
+      this.hasPushState = false;
+
+
       //动画名
-      this.animatName = this.animNoName;
+      this.animatName = null;
 
       this.path = [];
       this.query = {};
@@ -55,7 +59,7 @@
 
       this.container = $('body');
 
-      this.interface = [ 'forward', 'back' ];
+      this.interface = ['forward', 'back'];
 
     },
 
@@ -69,7 +73,7 @@
       this.pushHistory();
 
       //首次必须执行该方法加载相关view
-      this.onHashChange();
+      this.start();
 
     },
     setOption: function (options) {
@@ -77,65 +81,45 @@
     },
 
     buildEvent: function () {
-//      requirejs.onError = function (e) {
-//        if (e && e.requireModules) {
-//          for (var i = 0; i < e.requireModules.length; i++) {
-//            console.log('抱歉，当前的网络状况不给力，请刷新重试!');
-//            break;
-//          }
-//        }
-//      };
 
-      $(window).bind('hashchange', _.bind(this.onHashChange, this));
-
-    },
-
-    onHashChange: function () {
-
-      //首次为false，不在监听时候才能触发_onHashChange 切换view
-      if (!this.stopListening) {
-        var url = decodeURIComponent(location.href).replace(/^[^#]+(#(.+))?/g, '$2').toLowerCase();
-        this._onHashChange(url);
+      if (this.hasPushState) {
+        $(window).bind('popstate', _.bind(this.loadViewByUrl, this));
+      } else {
+        $(window).bind('hashchange', _.bind(this.loadViewByUrl, this));
       }
     },
 
-    _onHashChange: function (url, isForward) {
-      url = url.replace(/^#+/i, '');
-
-      this.localObserver(this.parseHash(url), isForward);
+    //第一次非hashChange触发
+    start: function () {
+      this.loadViewByUrl();
     },
+
+    loadViewByUrl: function (e) {
+
+      if (!this.animatName) this.animatName = this.animBackwardName;
+
+      this.parseUrl();
+
+      this.switchView(this.viewId);
+
+    },
+
     //处理URLhash
-    parseHash: function (hash) {
-      var fullhash = hash,
-        hash = hash.replace(/([^\|]*)(?:\|.*)?$/img, '$1'),
-        h = /^([^?&|]*)(.*)?$/i.exec(hash),
-        vp = h[1] ? h[1].split('!') : [],
-        viewpath = (vp.shift() || '').replace(/(^\/+|\/+$)/i, ''),
-        path = vp.length ? vp.join('!').replace(/(^\/+|\/+$)/i, '').split('/') : this.path;
+    parseUrl: function () {
+      var url = decodeURIComponent(location.href).toLowerCase();
+      var viewId = this.getViewIdRule(url);
+      var query = _.getUrlParam(url);
 
-      this.isChangeHash = !!(!this.lastHash && fullhash === this.lashFullHash) || !!(this.lastHash && this.lastHash !== hash);
+      viewId = viewId || this.defaultView;
+      this.viewId = viewId;
 
-      this.lastHash = hash;
-      this.lashFullHash = fullhash;
-      return {
-        viewpath: viewpath,
-        path: path,
-        query: _.getUrlParam(fullhash),
-        root: location.pathname + location.search,
-        fullhash: fullhash
+      this.request = {
+        viewId: viewId,
+        path: url,
+        query: query
       };
+
     },
-
-    //hashchange观察点函数，处理url，动画参数
-    localObserver: function (req, isForward) {
-      this.animatName = isForward ? this.animForwardName : this.animBackwardName;
-
-      this.request = req;
-      this.viewpath = this.request.viewpath || this.defaultView;
-      this.request.viewpath = this.viewpath;
-      this.switchView(this.viewpath);
-    },
-
 
     //根据根据id以及页面的类
     //定义view的turing方法，这里不是直接放出去，而是通过app接口放出，并会触发各个阶段的方法
@@ -158,7 +142,8 @@
       if (curView) {
 
         //如果当前要跳转的view就是当前view的话便不予处理
-        if (curView == this.curView && this.isChangeHash == false) {
+        //这里具体处理逻辑要改*************************************
+        if (curView == this.curView) {
           return;
         }
 
@@ -182,7 +167,7 @@
           //保存至队列
           this.views[id] = curView;
           //这个是唯一需要改变的
-          curView.turning = _.bind(function () {
+          curView.turning = _.bind($.proxy(function () {
             //            this.createViewPort();
             //动画会触发inView的show outView 的hide
             this.startAnimation(function (inView, outView) {
@@ -190,10 +175,10 @@
               $('.sub-viewport').hide();
               //防止白屏
               inView.$el.show();
-
+              this.animatName = null;
             });
 
-          }, this);
+          }, this), this);
 
           this.curView = curView;
 
@@ -222,11 +207,13 @@
 
         if (outView) outView.hide();
         inView.show();
-
+        this.animatName = null;
         callback && callback.call(this, inView, outView);
       }
       //此参数为一次性，调用一次后自动打开动画
       this.isAnimat = true;
+      this.animatName = null;
+
     },
 
     //加载view
@@ -266,55 +253,85 @@
       }
     },
 
-    startObserver: function () {
-      this.stopListening = false;
-    },
+    //@override
+    getViewIdRule: function (url) {
+      var viewId = '', hash = '', h, vp;
 
-    endObserver: function () {
-      this.stopListening = true;
-    },
+      if (this.hasPushState) {
 
-    forward: function (url, replace, isNotAnimat) {
-      url = url.toLowerCase();
-      if (isNotAnimat) this.isAnimat = false;
-      this.endObserver();
+        viewId = _.getUrlParam(url, 'viewid');
 
-      if (replace) {
-        window.location.replace(('#' + url).replace(/^#+/, '#'));
       } else {
-        window.location.href = ('#' + url).replace(/^#+/, '#');
+        viewId = url.replace(/^[^#]+(#(.+))?/g, '$2').toLowerCase().replace(/^#+/i, '');
+        h = /^([^?&|]*)(.*)?$/i.exec(viewId);
+        vp = h[1] ? h[1].split('!') : [];
+        viewId = (vp.shift() || '').replace(/(^\/+|\/+$)/i, '');
+      }
+      return viewId;
+    },
+
+    //@override
+    setUrlRule: function (viewId, replace) {
+      if (this.hasPushState) {
+        var k, loc = window.location.href, str = '', url = '';
+        if (param) {
+          for (k in param) {
+            str += '&' + k + '=' + param[k];
+          }
+        }
+        url = loc.indexOf('?') ? (loc.substr(0, loc.indexOf('?')) + '?viewid=' + viewId) : (loc + '?viewid=' + viewId);
+        if (replace) {
+          history.replaceState('', {}, url + str);
+        } else {
+          history.pushState('', {}, url + str);
+        }
+
+      } else {
+        if (replace) {
+          window.location.replace(('#' + viewId).replace(/^#+/, '#'));
+        } else {
+          window.location.href = ('#' + viewId).replace(/^#+/, '#');
+        }
       }
 
+    },
+
+    //此处需要一个更新逻辑，比如在index view再点击到index view不会有反应，下次改**************************
+    forward: function (viewId, opts) {
+      if (!viewId) return;
+      opts = opts || {};
+
+      var replace = opts.replace,
+      isNotAnimat = opts.isNotAnimat;
+      param = opts.param;
+      viewId = viewId.toLowerCase();
+
+      if (isNotAnimat) this.isAnimat = false;
+      this.animatName = opts.animatName || this.animForwardName;
+
+      this.setUrlRule(viewId, replace, param);
       //前进时填记录
       this.pushHistory();
 
-      this._onHashChange(url, true);
+      if (this.hasPushState) {
+        this.loadViewByUrl();
+      }
 
-      setTimeout(_.bind(this.startObserver, this), 1);
+
     },
 
-    back: function (url, isNotAnimat) {
-
+    back: function (viewId, opts) {
+      var isNotAnimat = opts.isNotAnimat;
       if (isNotAnimat) this.isAnimat = false;
+      this.animatName = this.animBackName;
 
-      var referrer = this.lastUrl();
-      //back时,弹出history中的最后一条记录 shbzhang 2014/5/20
-      if (referrer) {
-        this.history.pop();
-      }
-
-      if (url && (!referrer || referrer.indexOf(url) !== 0)) {
-        //hash不支持中文，大bug
-        //window.location.hash = url;
-        window.location.href = ('#' + url).replace(/^#+/, '#');
+      if (viewId) {
+        opts.animatName = this.animBackName;
+        this.forward(viewId, opts)
       } else {
-        url = this.request.query['refer'];
-        if (url) {
-          window.location.href = url;
-        } else {
-          history.back();
-        }
+        history.back();
       }
+
     },
 
     pushHistory: function () {

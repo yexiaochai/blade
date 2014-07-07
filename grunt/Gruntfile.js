@@ -1,5 +1,5 @@
 /**
- * Created by shbzhang on 13-11-21.
+ * yexiaochai 待续
  */
 module.exports = function (grunt) {
 
