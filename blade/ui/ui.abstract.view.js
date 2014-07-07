@@ -158,7 +158,6 @@
       if (this.status == 'show') this.show();
     },
 
-
     show: function () {
       this.wrapper.append(this.$el);
       this.trigger('onPreShow');
@@ -186,8 +185,6 @@
     getViewModel: function () {
       return this.datamodel;
     },
-
-
 
     setzIndexTop: function (el, level) {
       if (!el) el = this.$el;
