@@ -1,0 +1,21 @@
+﻿<%filter = _.removeAllSpace(filter).split(','); %>
+
+<ul class="cui-city-itmes">
+<%for(var i = 0, len = data.length; i < len; i++) { %>
+  <li data-groupindex="<%=i %>" class="<%if(typeof data[i].needFold != 'undefined' && data[i].needFold == true) { %>cui-arrow-close<%} else{ %> cui-arrow-open<% } %>" >
+  <span class="cui-city-t">
+   <%=data[i].name %> </span>
+   <%var item = data[i].data; %>
+   <%if(item && item.length > 0) { %>
+    <ul class="cui-city-n">
+
+     <%for(var j = 0, len1 = item.length; j < len1; j++) { %>
+      <li data-index="<%=j %>" data-group="<%=i %>" data-filter="<%for(var k in filter){ var v = filter[k]; if(typeof item[j][v]=='string') { %><%=item[j][v] %> <% } %><% } %>" ><%=item[j].name %> </li>
+     <% } %>
+    </ul>
+
+   <% } %>
+   
+<% } %>
+
+</ul>

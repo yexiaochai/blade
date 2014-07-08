@@ -1,0 +1,1 @@
+define(["UIView"],function(a){return _.inherit(a,{propertys:function($super){$super()},initialize:function($super,a){$super(a)}})});

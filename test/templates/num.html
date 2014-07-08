@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style>
+        .me_num-value-txt {
+            width: 33px;
+            height: 100%;
+            padding: 0;
+            color: #000;
+            margin: 0 33px;
+            text-align: center;
+        }
+        .cui-number-ma i.me_num-minus {
+            left: -10px;
+            font: 400 2.8em/25px Arial
+        }
+
+        .cui-number-ma i.me_num-add {
+            right: -10px;
+            font: 400 2.2em/29px Arial
+        }
+
+        .cui-number-ma i.me_num-minus:after {
+            content: "-";
+            left: 10px;
+            top: 7px;
+            background: orangered;
+        }
+
+        .cui-number-ma i.me_num-add:after {
+            content: "+";
+            right: 10px;
+            top: 7px;
+            background: orangered;
+        }
+    </style>
+</head>
+<body>
+<div><button class="back">back</button></div>
+<div><button class="widget0" widget="num">num简单应用</button></div>
+<div class="simple_num"></div>
+
+<div><button class="widget1" widget="num">分别设置min、max、单位、是否可以input输入值</button></div>
+<div class="simple_num1"></div>
+
+<div><button class="widget2" widget="num">分别设置加、减、text  Class</button></div>
+<div class="simple_num2"></div>
+
+<div><button class="widget3" widget="num">重写change事件</button></div>
+<div class="simple_num3"></div>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+button {
+    width: auto;
+    font-size: 14px;
+    color: #333;
+    margin:5px;
+    padding: 0 10px;
+    background: #fff;
+    border-radius: 3px;
+    border:1px solid #1da9e4;
+}
+
+
+.cui-tab-mod {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    height: 43px;
+    line-height: 43px;
+    border-bottom: #bcbcbc 1px solid;
+    background-color: #fafafa;
+    color: #666;
+    font-size: 15px;
+    position: relative;
+    display: table\9;
+    width: 100%;
+}
+
+.wrapper, .wrapper1 {
+    padding: 0 27px 0 26px;
+}

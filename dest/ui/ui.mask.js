@@ -1,0 +1,1 @@
+define(["UIView",getAppUITemplatePath("ui.mask")],function(a){return _.inherit(a,{propertys:function($super){$super()},initialize:function($super,a){$super(a)},addEvent:function($super){$super(),this.on("onCreate",function(){this.$el.addClass("cui-mask")}),this.on("onShow",function(){this.setzIndexTop()})}})});

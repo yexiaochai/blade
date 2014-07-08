@@ -1,0 +1,34 @@
+﻿<ul class="cui_cldweek">
+<% var i = 0, day1 = 0; console.log(arguments) %>
+<%for(day1 = 0; day1 < 7; day1++) { %>
+<li><%=weekDayArr[day1] %></li>
+<%} %>
+</ul>
+
+<section class="cui_cldunit">
+<%for(var j = 0; j < displayMonthNum; j++) { %>
+<%
+  var changedMonth = month + j;
+  var yyy =  parseInt(( month + j ) / 12);
+  if(changedMonth > 11) { 
+    changedMonth = changedMonth - 12 * yyy;
+  }
+  changedYear = year + yyy;
+  var d = new Date(changedYear, changedMonth);
+  var days = _.dateUtil.getDaysOfMonth(d);
+  var beginWeek = _.dateUtil.getBeginDayOfMouth(d);
+%>
+  <h1 class="cui_cldmonth">
+    <%=MonthClapFn(changedYear, changedMonth) %>
+    </h1>
+  <ul class="cui_cld_daybox">
+     <% for(i = 0; i < beginWeek; i++) { %>
+        <li class="cui_invalid"></li>
+      <% } %>
+      <% for(i = 0; i < days; i++) { %>
+        <% day = i + 1; %>
+        <li class="cui_calendar_item <%if(curTime > (new Date(changedYear, changedMonth, day + 1)).getTime()) { %> cui_cld_daypass <%} %>"data-date="<%=changedYear%>-<%=changedMonth%>-<%=day%>"><%=dayItemFn(changedYear, changedMonth, day)%> </li>
+      <% } %>
+  </ul>
+<%} %>
+</section>

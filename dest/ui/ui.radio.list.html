@@ -1,0 +1,13 @@
+﻿<div class="cui-pop-box">
+  <div class="cui-hd">
+    <div class="cui-text-center">
+      <%=title %></div>
+  </div>
+  <div class="cui-bd cui-roller-bd" style="overflow: hidden; position: relative;">
+    <ul class="cui-select-view " style="position: absolute; width: 100%; ">
+      <%for(var i = 0, len = data.length; i < len; i++) { %>
+        <li data-index="<%=i %>" <%if(i == index){ %>class="current"<%} %> ><%=data[i].name || data[i].id %></li>
+      <% } %>
+    </ul>
+  </div>
+</div>

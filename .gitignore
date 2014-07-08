@@ -1,0 +1,6 @@
+**/node_modules/
+**/.idea
+**/*.lock
+**/*.bak
+*.sublime-project
+*.sublime-workspace

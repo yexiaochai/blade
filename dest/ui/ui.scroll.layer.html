@@ -1,0 +1,16 @@
+﻿<div class="cui-pop-box">
+  <div class="cui-hd">
+    <%=title %><div class="lab-close-area">
+      <span class="cui-top-close">×</span></div>
+  </div>
+  <div class="cui-bd" style="overflow: hidden; position: relative; background-color: #fafafa;
+    width: 100%;">
+  
+  </div>
+  <div class="cui-roller-btns">
+    <% for(var i = 0, len = btns.length; i < len; i++ ) {%>
+    <div class="cui-flexbd <%=btns[i].className%>">
+      <%=btns[i].name%></div>
+    <% } %>
+  </div>
+</div>
