@@ -29,7 +29,7 @@
   })();
 
 
-  var UIAbstractView = _.inherit({
+  return _.inherit({
 
     //默认属性
     propertys: function () {
@@ -269,7 +269,5 @@
     }
 
   });
-
-  return UIAbstractView;
 
 });

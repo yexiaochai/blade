@@ -13,8 +13,8 @@
       'click .demo5': 'demo5'     //执行setDatamodel
     },
 
-    demo1: function() {
-      if(!this.alert1) {
+    demo1: function () {
+      if (!this.alert1) {
         this.alert1 = new UIAlert();
       }
       this.alert1.show();
@@ -61,11 +61,11 @@
             alert('知道了');
             this.hide();
           },
-          noAction: function() {
+          noAction: function () {
             alert('不知道');
             this.hide();
           },
-          unknownAction: function() {
+          unknownAction: function () {
             alert('未知');
             this.hide();
           }
@@ -74,7 +74,7 @@
       this.alert3.show();
     },
 
-    demo4: function() {
+    demo4: function () {
       if (!this.alert4) {
         this.alert4 = new UIAlert({
           datamodel: {
@@ -96,28 +96,28 @@
       this.alert4.show();
     },
 
-    demo5: function() {
+    demo5: function () {
       this.alert5 = null;
       if (!this.alert5) {
         this.alert5 = new UIAlert();
       }
       this.alert5.show();
 
-      setTimeout(function() {
+      setTimeout(function () {
         this.alert5.setDatamodel({
           title: 'setDatamodel',
           content: 'after 0.5s change setDatamodel'
 
         },
-        function() {
+        function () {
           alert('i am ok');
           this.hide();
         },
-        function() {
+        function () {
           alert('i am cancel');
           this.hide();
         });
-      }.bind(this), 500);
+      } .bind(this), 500);
 
     },
 
@@ -126,6 +126,10 @@
     },
 
     onShow: function () {
+      console.log(hljs);
+      hljs.initHighlightingOnLoad();
+
+
 
     },
 
