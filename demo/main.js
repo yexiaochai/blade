@@ -110,7 +110,7 @@
     //实例化App
     var app = new App({
       //选择pushState还是hashChange
-      hasPushState: true,
+      hasPushState: false,
       'defaultView': 'index',
       'viewRootPath': '' + project + '/views/',
       animations: animations
