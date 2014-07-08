@@ -26,7 +26,7 @@
       //初始状态为实例化
       this.status = 'init';
 
-//      this.availableFn = function () { }
+      //      this.availableFn = function () { }
 
     },
 
@@ -36,7 +36,7 @@
 
       //头部插入
       if (insert) {
-        this.eventArr[type].splice(0, 0, fn)
+        this.eventArr[type].splice(0, 0, fn);
       } else {
         this.eventArr[type].push(fn);
       }

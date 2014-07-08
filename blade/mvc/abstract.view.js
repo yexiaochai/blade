@@ -12,7 +12,6 @@ define([], function () {
         x: 0,
         y: 0
       };
-
     },
 
     //创建基础dom结构
@@ -97,6 +96,21 @@ define([], function () {
 
     },
 
+    //view刷新
+    refresh: function () {
+      this.load();
+    },
+
+    destroy: function () {
+      this.unBindEvents();
+      this.$el.remove();
+      delete this;
+    },
+
+    $: function (selector) {
+      return this.$el.find(selector);
+    },
+
     setScrollPos: function (x, y) {
       this.scrollPos = {
         x: x,
@@ -110,21 +124,6 @@ define([], function () {
       //      setTimeout($.proxy(function () {
       //        window.scrollTo(this.scrollPos.x, this.scrollPos.y);
       //      }, this), 20);
-    },
-
-    //view刷新
-    refresh: function () {
-      this.load();
-    },
-
-    $: function (selector) {
-      return this.$el.find(selector);
-    },
-
-    destroy: function () {
-      this.hide();
-      this.$el.remove();
-      delete this;
     },
 
     /**

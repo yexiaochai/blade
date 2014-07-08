@@ -29,11 +29,6 @@
       //app状态
       this.status = 'init';
 
-      //上一次hash
-      this.lastHash = '';
-      //上一次完整hash
-      this.lashFullHash = '';
-
       this.animations = {};
 
       //是否使用动画，这个属性只能控制单次是否开启动画
@@ -47,12 +42,9 @@
       //pushState的支持能力
       this.hasPushState = !!(window.history && window.history.pushState);
 
-
       //动画名
       this.animatName = null;
 
-      this.path = [];
-      this.query = {};
       this.viewMapping = {};
 
       this.container = $('body');
@@ -74,8 +66,25 @@
       this.start();
 
     },
+
     setOption: function (options) {
       _.extend(this, options);
+    },
+
+    //创建dom结构
+    createViewPort: function () {
+      if (this.isCreate) return;
+      var html = [
+        '<div class="main">',
+        '<div class="main-viewport"></div>',
+        '</div>'
+      ].join('');
+      this.mainframe = $(html);
+      this.viewport = this.mainframe.find('.main-viewport');
+
+      this.container.empty();
+      this.container.append(this.mainframe);
+      this.isCreate = true;
     },
 
     buildEvent: function () {
@@ -227,30 +236,6 @@
       return mappingPath ? mappingPath : this.viewRootPath + path;
     },
 
-    //创建dom结构
-    createViewPort: function () {
-      if (this.isCreate) return;
-      var html = [
-        '<div class="main">',
-        '<div class="main-viewport"></div>',
-        '</div>'
-      ].join('');
-      this.mainframe = $(html);
-      this.viewport = this.mainframe.find('.main-viewport');
-
-      this.container.empty();
-      this.container.append(this.mainframe);
-      this.isCreate = true;
-    },
-
-    lastUrl: function () {
-      if (this.history.length < 2) {
-        return document.referrer;
-      } else {
-        return this.history[this.history.length - 2];
-      }
-    },
-
     //@override
     getViewIdRule: function (url) {
       var viewId = '', hash = '', h, vp;
@@ -269,7 +254,7 @@
     },
 
     //@override
-    setUrlRule: function (viewId, replace) {
+    setUrlRule: function (viewId, replace, param) {
       if (this.hasPushState) {
         var k, loc = window.location.href, str = '', url = '';
         if (param) {
