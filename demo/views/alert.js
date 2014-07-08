@@ -126,15 +126,15 @@
     },
 
     onShow: function () {
-      console.log(hljs);
       hljs.initHighlightingOnLoad();
-
-
-
     },
 
     onHide: function () {
-
+      if(this.alert1 && this.alert1.status == 'show')  this.alert1.hide();
+      if(this.alert2 && this.alert2.status == 'show') this.alert2.hide();
+      if(this.alert3 && this.alert3.status == 'show') this.alert3.hide();
+      if(this.alert4 && this.alert4.status == 'show') this.alert4.hide();
+      if(this.alert5 && this.alert5.status == 'show') this.alert5.hide();
     }
 
   });
