@@ -1,4 +1,4 @@
-﻿define(['View', getViewTemplatePath('toast'), 'UIToast', 'res/style/highlight.pack'], function (View, viewhtml, UIToast, highlight) {
+﻿define(['View', getViewTemplatePath('toast'), 'UIToast'], function (View, viewhtml, UIToast) {
 
   return _.inherit(View, {
     onCreate: function () {
@@ -83,7 +83,6 @@
     },
 
     onShow: function () {
-      hljs.initHighlightingOnLoad();
     },
 
     onHide: function () {

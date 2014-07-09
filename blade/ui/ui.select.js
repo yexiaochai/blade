@@ -13,7 +13,7 @@
         curClass: 'current',
         data: [],
         id: null,
-        index: 4
+        index: 0
       };
 
       this.animatTime = 100;
@@ -54,7 +54,6 @@
     _resetNum: function () {
       this.displayNum = this.displayNum % 2 == 0 ? this.displayNum + 1 : this.displayNum;
       this.itemNum = this.datamodel.data.length;
-
     },
 
     initElement: function () {
@@ -114,9 +113,11 @@
     },
 
     reload: function (datamodel) {
-      this.datamodel.index = 0;
       _.extend(this.datamodel, datamodel);
-
+      if (this.scroll) {
+        this.scroll.destroy();
+        this.scroll = null;
+      }
       this.refresh();
     },
 

@@ -1,4 +1,4 @@
-﻿define(['View', getViewTemplatePath('alert'), 'UIAlert', 'res/style/highlight.pack'], function (View, viewhtml, UIAlert, highlight) {
+﻿define(['View', getViewTemplatePath('alert'), 'UIAlert'], function (View, viewhtml, UIAlert) {
 
   return _.inherit(View, {
     onCreate: function () {

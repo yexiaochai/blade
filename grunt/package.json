@@ -1,18 +1,14 @@
 {
   "name":            "blade",
-  "defaultChannel":  "app",
   "channels":        {
     "app": {
       "src":  "../blade",
       "dest": "../dest"
-      }
-  },
-  "tasks":           {
-    "app": [
-      "uglify",
-      "requirejs",
-      "strip"
-    ]
+      },
+	"demo": {
+      "src":  "../demo",
+      "dest": "../demo/dest"
+     }
   },
   "version":         "0.1.0",
   "description":     "将Grunt编译 App",

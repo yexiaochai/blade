@@ -1,4 +1,4 @@
-﻿define(['View', getViewTemplatePath('bubble.layer'), 'UIBubbleLayer', 'res/style/highlight.pack'], function (View, viewhtml, UIBubbleLayer, highlight) {
+﻿define(['View', getViewTemplatePath('bubble.layer'), 'UIBubbleLayer'], function (View, viewhtml, UIBubbleLayer) {
 
   return _.inherit(View, {
     onCreate: function () {
@@ -142,7 +142,6 @@
     },
 
     onShow: function () {
-      hljs.initHighlightingOnLoad();
     },
 
     onHide: function () {

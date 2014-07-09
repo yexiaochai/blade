@@ -15,12 +15,14 @@
     checkWrapperDisplay: function () {
       //如果容器高度为0，一定是父容器高度不显示导致
       if (this.isError) return;
+      this.TIMERRESCOUNT = 0;
       this.TIMERRES && clearInterval(this.TIMERRES);
       if ($(this.imgs[0]).offset().top == 0) {
         this.isError = true;
         this.TIMERRES = setInterval($.proxy(function () {
           console.log('检测img offset.....');
-          if ($(this.imgs[0]).offset().top > 0) {
+          this.TIMERRESCOUNT++;
+          if ($(this.imgs[0]).offset().top > 0 || this.TIMERRESCOUNT > 1000) {
             this.TIMERRES && clearInterval(this.TIMERRES);
             console.log('检测img offset结束，重设高度');
             this.isError = false;

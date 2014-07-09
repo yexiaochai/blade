@@ -9,7 +9,7 @@ define(['UIView', getAppUITemplatePath('ui.calendar')], function (UIView, templa
       this.template = template;
 
       var dateObj = new Date();
-      var curTime = (new Date(dateObj.getFullYear(), dateObj.getMonth(), dateObj.getDay())).getTime();
+      var curTime = (new Date(dateObj.getFullYear(), dateObj.getMonth(), dateObj.getDate())).getTime();
 
       //要求必须要传入日期对象
       this.datamodel = {
