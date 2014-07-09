@@ -49,6 +49,9 @@
 		  "views/bubble.layer",
           "text!templates/bubble.layer.html",
 
+		  "views/calendar",
+          "text!templates/calendar.html",
+
 		  "views/group.list",
           "text!templates/group.list.html",
 
