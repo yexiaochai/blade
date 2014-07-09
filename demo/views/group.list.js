@@ -44,6 +44,8 @@ define(['View', getViewTemplatePath('group.list'), 'UIGroupList'], function (Vie
           wrapper: this.$('.wrapper1')
         });
       }
+
+
       this.grouplist.show();
 
       //参数设置、事件重写
@@ -56,9 +58,7 @@ define(['View', getViewTemplatePath('group.list'), 'UIGroupList'], function (Vie
         ];
         groupList2 = [
           { 'gname': 'ipad3', 'name': 'Apple ipad3' },
-          { 'gname': 'ipad4', 'name': 'Apple ipad4' },
-          { 'gname': 'ipad5', 'name': 'Apple ipad5' },
-          { 'gname': 'ipad-air', 'name': 'Apple ipad Air' }
+          { 'gname': 'ipad4', 'name': 'Apple ipad4' }
         ];
         groupList3 = [
           { 'gname': 'mac-pro', 'name': 'Apple Mac-pro' },
@@ -75,12 +75,18 @@ define(['View', getViewTemplatePath('group.list'), 'UIGroupList'], function (Vie
           datamodel: {
             data: demodata2
           },
-          onItemClick: function(item, groupIndex, index, e) {
+          onItemClick: function (item, groupIndex, index, e) {
             console.log('自定义点击事件', arguments);
+          },
+          onGroupClick: function (index, items, e) {
+            this.closeGroup();
+            this.openGroup(index);
           },
           wrapper: this.$('.wrapper2')
         });
       }
+      this.grouplist2.closeGroup();
+      this.grouplist2.openGroup(0);
       this.grouplist2.show();
 
       this.turning();

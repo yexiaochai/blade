@@ -75,7 +75,7 @@ define(['UIView', getAppUITemplatePath('ui.group.list')], function (UIView, temp
     },
 
     initElement: function () {
-      this.groups = this.$('.cui-city-itmes');
+      this.groups = this.$('.cui-city-itmes>li');
     },
 
     initialize: function ($super, opts) {
