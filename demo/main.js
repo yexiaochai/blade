@@ -1,14 +1,15 @@
 ﻿
 (function () {
-  var project = 'demo';
+  var project = 'demo/';
 
   window.getViewTemplatePath = function (path) {
-    return 'text!' + project + '/templates/' + path + '.html';
+    return 'text!' + project + 'templates/' + path + '.html';
   }
 
   require.config({
     baseUrl: '../',
     paths: {
+      'View': project + 'ex_mvc/view'
     }
   });
 
@@ -106,13 +107,13 @@
     },
   };
 
-  require(['App'], function (App) {
+  require(['AbstractApp'], function (App) {
     //实例化App
     var app = new App({
       //选择pushState还是hashChange
       hasPushState: false,
       'defaultView': 'index',
-      'viewRootPath': '' + project + '/views/',
+      'viewRootPath': '' + project + 'views/',
       animations: animations
     });
 

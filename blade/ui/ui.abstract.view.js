@@ -8,6 +8,27 @@
     }
   })();
 
+  var UIContainerUtil = (function () {
+    //一个闭包对象存放所有实例化的ui实例
+    var UIContainer = {};
+
+    return {
+      addItem: function (id, ui) {
+        UIContainer[id] = ui;
+      },
+
+      removeItem: function (id) {
+        if (UIContainer[id]) delete UIContainer[id];
+      },
+
+      getItem: function (id) {
+        if (id) return UIContainer[id];
+        return UIContainer;
+      }
+    }
+  })();
+
+
   return _.inherit({
 
     //默认属性
@@ -93,6 +114,14 @@
       this.create();
       this.initElement();
 
+      //将当前的ui实例装入容器
+      UIContainerUtil.addItem(this.id, this);
+
+    },
+
+    //返回所有实例化的UI组件集合
+    getUIContainer: function () {
+      return UIContainerUtil.getItem();
     },
 
     //内部重置event，加入全局控制类事件
@@ -178,6 +207,7 @@
 
     destroy: function () {
       this.unBindEvents();
+      UIContainerUtil.removeItem(this.id);
       this.$el.remove();
       delete this;
     },

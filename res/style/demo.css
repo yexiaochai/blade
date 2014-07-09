@@ -22,3 +22,10 @@ code {
     -webkit-box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
     box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
 }
+.dh2 {
+    margin:10px;
+    font-size: 16px;
+}
+.demos .btn {
+    margin-left:10px !important;
+}

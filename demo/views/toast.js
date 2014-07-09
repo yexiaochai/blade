@@ -1,4 +1,4 @@
-﻿define(['View', getViewTemplatePath('toast'), 'UIToast'], function (View, viewhtml, UIToast) {
+﻿define(['View', getViewTemplatePath('toast'), 'UIToast', 'res/style/highlight.pack'], function (View, viewhtml, UIToast, highlight) {
 
   return _.inherit(View, {
     onCreate: function () {
@@ -13,18 +13,19 @@
       'click .demo5': 'demo5'
     },
 
-    demo1: function() {
+    demo1: function () {
       if (!this.toast1) {
         this.toast1 = new UIToast({
           datamodel: {
             content: 'content'
-          }
+          },
+          TIMERRES :  true
         });
       }
       this.toast1.show();
     },
 
-    demo2: function() {
+    demo2: function () {
       if (!this.toast2) {
         this.toast2 = new UIToast({
           datamodel: {
@@ -37,7 +38,7 @@
       this.toast2.show();
     },
 
-    demo3: function() {
+    demo3: function () {
       if (!this.toast3) {
         this.toast3 = new UIToast({
           datamodel: {
@@ -49,13 +50,13 @@
       this.toast3.show();
     },
 
-    demo4: function() {
+    demo4: function () {
       if (!this.toast4) {
         this.toast4 = new UIToast({
           datamodel: {
             content: 'callback'
           },
-          hideAction: function() {
+          hideAction: function () {
             console.log('my self hideAction');
           }
         });
@@ -63,7 +64,7 @@
       this.toast4.show();
     },
 
-    demo5: function() {
+    demo5: function () {
       if (!this.toast5) {
         this.toast5 = new UIToast({
           datamodel: {
@@ -72,7 +73,7 @@
         });
       }
       this.toast5.show();
-      this.toast5.setDatamodel('setDatamodel', function() {
+      this.toast5.setDatamodel('setDatamodel', function () {
         console.log('i am setDatamodel\'s hiden');
       });
     },
@@ -82,7 +83,7 @@
     },
 
     onShow: function () {
-
+      hljs.initHighlightingOnLoad();
     },
 
     onHide: function () {

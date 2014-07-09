@@ -1,4 +1,4 @@
-﻿define(['View', getViewTemplatePath('loading'), 'UILoading'], function (View, viewhtml, UILoading) {
+﻿define(['View', getViewTemplatePath('loading'), 'UILoading','res/style/highlight.pack'], function (View, viewhtml, UILoading, highlight) {
 
   return _.inherit(View, {
     onCreate: function () {
@@ -21,7 +21,6 @@
     },
 
     demo2: function () {
-      console.log('loading:2');
       if (!this.loading2) {
         this.loading2 = new UILoading({
 
@@ -53,11 +52,14 @@
     },
 
     onShow: function () {
-
+      hljs.initHighlightingOnLoad();
     },
 
     onHide: function () {
-
+      if(this.loading1 && this.loading1.status == 'show') this.loading1.hide();
+      if(this.loading2 && this.loading2.status == 'show') this.loading2.hide();
+      if(this.loading3 && this.loading3.status == 'show') this.loading3.hide();
+      if(this.loading4 && this.loading4.status == 'show') this.loading4.hide();
     }
 
   });
