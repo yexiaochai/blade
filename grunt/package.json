@@ -4,7 +4,11 @@
     "app": {
       "src":  "../blade",
       "dest": "../dest"
-      }
+      },
+	"demo": {
+      "src":  "../demo",
+      "dest": "../demo/dest"
+     }
   },
   "version":         "0.1.0",
   "description":     "将Grunt编译 App",

@@ -1,0 +1,1 @@
+define(["View",getViewTemplatePath("scroll"),"UIScroll"],function(a,b,c){return _.inherit(a,{onCreate:function(){this.$el.html(b)},events:{},onPreShow:function(){new c({wrapper:$("#wrapper"),scroller:$("#scroller")});this.turning()},onShow:function(){},onHide:function(){}})});

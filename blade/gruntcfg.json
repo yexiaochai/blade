@@ -26,7 +26,7 @@
         },
         "baseUrl": "<%= config.srcDir %>",
         "paths": {
-		  "common_tmp": "common_dest",
+		  "common_dest": "common_dest",
 
           "text": "libs/require.text",
 		  "AbstractApp": "mvc/abstract.app",

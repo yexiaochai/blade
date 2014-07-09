@@ -7,11 +7,7 @@ module.exports = function (grunt) {
 
     pkg: grunt.file.readJSON('package.json'),
 
-    config: {
-      srcDir: '<%= pkg.channels["app"].src%>',
-      destDir: '<%= pkg.channels["app"].dest%>',
-      channel: 'app'
-    },
+
 
     "copy": {
       "main": {
@@ -44,10 +40,10 @@ module.exports = function (grunt) {
       }
     },
 
-        clean: {
-          options: { force: true },
-          main: '<%= config.destDir%>'
-        },
+    clean: {
+      options: { force: true },
+      main: '<%= config.destDir%>'
+    },
 
     "strip": {
       "main": {
@@ -91,14 +87,33 @@ module.exports = function (grunt) {
 
 
   grunt.registerTask('default', 'default task', function () {
-    grunt.task.run(['blade']);
+    var pkg = grunt.file.readJSON('package.json');
+    var t = pkg.channels;
+    var tasks = [], k, v, item;
+    for (k in t) {
+      v = t[k];
+      item = 'blade:' + k
+      tasks.push(item)
+    }
+
+    grunt.task.run(tasks);
+
   });
 
-  grunt.registerTask('blade', 'require demo', function () {
+  grunt.registerTask('blade', 'require demo', function (channel) {
+    //默认打框架包
+    if (!channel) channel = 'app';
 
     var pkg = grunt.file.readJSON('package.json');
+    var cfg = grunt.file.readJSON(pkg.channels[channel].src + '/gruntcfg.json');
 
-    var cfg = grunt.file.readJSON(pkg.channels["app"].src + '/gruntcfg.json');
+    var config = {
+      srcDir: pkg.channels[channel].src,
+      destDir: pkg.channels[channel].dest
+    };
+
+    grunt.config.set('config', config);
+
 
     grunt.log.debug('参数：' + JSON.stringify(cfg.requirejs, null, 2));
 
