@@ -33,6 +33,8 @@
 
       'click .demo2': function () {
         var data1 = [], data2 = [], data3 = [];
+        //对应月份的最大天数
+        var dayFlag = { 1: 31, 2: 28, 3: 31, 4: 30, 5: 31, 6: 30, 7: 31, 8: 31, 9: 30, 10: 31, 11: 30, 12: 31 };
 
         for (var i = 2000; i <= 2014; i++) {
           var obj = { id: 'y_' + i, name:  i + '年' };
@@ -57,18 +59,31 @@
             },
             data: [data1, data2, data3],
             changedArr: [function(item) {
-              console.log('overwrite:', item);
+              console.log('my year:', item);
             }, function(item) {
-              console.log('overwrite:', item);
+              var  d = this.scrollArr[2],           //获取日select组件
+                   item_m = parseInt(item.name),      //获取当前选中的月
+                   tmp = dayFlag[item_m];
+
+              for(var i=31;i>28;i--) {
+                //重置可选
+                d.datamodel.data[i-1].disabled = false;
+                //如果当月最大日数小于i，则为不可选
+                if(i > tmp)  d.datamodel.data[i-1].disabled = true;
+              }
+              //重绘数据模型
+              this.scrollArr[2].reload();
+              console.log('my month:', item);
             },function(item) {
-              console.log('overwrite:', item);
+              console.log('my day:', item);
             }],
+            //
             onOkAction: function(item) {
-              console.log('overwrite okAction', item);
+              console.log('my okAction', item);
               this.hide();
             },
             onCancelAction: function(item) {
-              console.log('overwrite cancelAction', item);
+              console.log('my cancelAction', item);
               this.hide();
             }
           });
