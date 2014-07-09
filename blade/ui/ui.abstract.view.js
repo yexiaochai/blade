@@ -176,6 +176,7 @@
     },
 
     //刷新根据传入参数判断是否走onCreate事件
+    //这里原来的dom会被移除，事件会全部丢失 需要修复*****************************
     refresh: function (needEvent) {
       this.resetPropery();
       if (needEvent) {
@@ -207,6 +208,7 @@
 
     destroy: function () {
       this.unBindEvents();
+      this.removeSysEvents();
       UIContainerUtil.removeItem(this.id);
       this.$el.remove();
       delete this;

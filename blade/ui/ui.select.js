@@ -13,7 +13,7 @@
         curClass: 'current',
         data: [],
         id: null,
-        index: 4
+        index: 0
       };
 
       this.animatTime = 100;
@@ -114,9 +114,11 @@
     },
 
     reload: function (datamodel) {
-      this.datamodel.index = 0;
       _.extend(this.datamodel, datamodel);
-
+      if (this.scroll) {
+        this.scroll.destroy();
+        this.scroll = null;
+      }
       this.refresh();
     },
 
