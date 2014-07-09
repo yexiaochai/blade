@@ -16,7 +16,7 @@ define(['UIView', getAppUITemplatePath('ui.num')], function (UIView, template) {
         addClass: 'num-add',
         minusClass: 'num-minus',
         curClass: 'num-value-txt',
-        unit: '个',
+        unit: '',
         needText: true
       };
 
@@ -53,6 +53,10 @@ define(['UIView', getAppUITemplatePath('ui.num')], function (UIView, template) {
     //用于重写
     changed: function (num) {
       console.log('num changed ' + num);
+    },
+
+    getVal: function () {
+      return this.datamodel.curNum;
     },
 
     setVal: function (v) {

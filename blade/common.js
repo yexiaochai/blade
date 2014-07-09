@@ -16,8 +16,8 @@
       'text': app + 'libs/require.text',
 
       //核心MVC
-      'App': app + 'mvc/abstract.app',
-      'View': app + 'mvc/abstract.view',
+      'AbstractApp': app + 'mvc/abstract.app',
+      'AbstractView': app + 'mvc/abstract.view',
 
       'cLazyload': app + 'common/c.lazyload',
       'cValidate': app + 'common/c.validate',

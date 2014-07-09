@@ -2774,7 +2774,7 @@ input[type=text].place_search:empty {
 }
 
 .sub-viewport {
-    overflow-x: hidden
+    overflow: hidden
 }
 
 @-webkit-keyframes sliderightout {
@@ -4512,3 +4512,4 @@ input[type=text].place_search:empty {
 .cui-rate-r2 i:before {
     background: #099fde
 }
+

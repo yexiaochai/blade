@@ -121,7 +121,8 @@
         { 'uiname': 'lazyload', 'name': '图片延迟加载' },
         { 'uiname': 'inputclear', 'name': '带删除按钮的文本框(todo...)' },
         { 'uiname': 'validate1', 'name': '工具类表单验证' },
-        { 'uiname': 'validate2', 'name': '集成表单验证' }
+        { 'uiname': 'validate2', 'name': '集成表单验证' },
+        { 'uiname': 'filp', 'name': '简单flip手势工具' }
       ];
 
       var uidata = [
