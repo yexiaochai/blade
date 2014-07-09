@@ -44,7 +44,7 @@ define(['View', getViewTemplatePath('radio.list'), 'UIRadioList'], function (Vie
           myClickAction: function(e) {
             var el = $(e.target),  //获取当前点击的dom
                 i = el.attr('data-index');
-                this.setIndex(i);
+                this.setIndex(i);  //设置点击的选项
                 console.log('my click action ',  this.getSelected());
           }
         });
@@ -56,6 +56,7 @@ define(['View', getViewTemplatePath('radio.list'), 'UIRadioList'], function (Vie
       if (!this.radio3) {
         var beforeData3 =  [{ id:'红茶'}, { id:'绿茶'}, {id:'菊花茶' }, {id:'茉莉茶' },{id:'铁观音' }, {id:'乌龙茶' }, {id:'奶茶' }, {id:'打奶茶' }];
         var setData3 =  [{ id:'冰红茶'}, { id:'冰绿茶'}, {id:'玫瑰花茶' },{id:'薄荷茶' }];
+        //动态改变的数据
         var setDatamodel = {
           title: 'set茶',
           data: setData3
@@ -68,6 +69,7 @@ define(['View', getViewTemplatePath('radio.list'), 'UIRadioList'], function (Vie
         });
       }
       this.radio3.show();
+      //1秒后动态改变组件的数据
       setTimeout(function() {
         this.radio3.setDatamodel(setDatamodel);
       }.bind(this), 1000);
