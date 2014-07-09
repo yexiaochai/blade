@@ -54,8 +54,6 @@ hljs.registerLanguage("json", function(a) {
       this._initHead();
     },
 
-
-
     onPreShow: function ($super) {
       $super();
 

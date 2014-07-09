@@ -219,11 +219,13 @@ define([], function () {
     //用以解决父容器不显示导致高度失效问题
     checkWrapperDisplay: function () {
       //如果容器高度为0，一定是父容器高度不显示导致
+      this.TIMERRESCOUNT = 0;
       this.TIMERRES && clearInterval(this.TIMERRES);
-      if (this.swrapper.height() == 0) {
+      if (this.swrapper.height() == 0 && this.swrapper.width() == 0) {
         this.TIMERRES = setInterval($.proxy(function () {
-          console.log('Scroll组件检测容器高度......')
-          if (this.swrapper.height() > 0) {
+          console.log('Scroll组件检测容器高度......' + this.TIMERRESCOUNT)
+          this.TIMERRESCOUNT++;
+          if (this.swrapper.height() > 0 || this.swrapper.width() > 0 || this.TIMERRESCOUNT > 1000) {
             this.TIMERRES && clearInterval(this.TIMERRES);
             console.log('Scroll组件检测容器高度结束，重设高度')
             this.refresh();

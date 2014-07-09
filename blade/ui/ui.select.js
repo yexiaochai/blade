@@ -54,7 +54,6 @@
     _resetNum: function () {
       this.displayNum = this.displayNum % 2 == 0 ? this.displayNum + 1 : this.displayNum;
       this.itemNum = this.datamodel.data.length;
-
     },
 
     initElement: function () {
