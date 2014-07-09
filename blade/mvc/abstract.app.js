@@ -302,6 +302,7 @@
     },
 
     back: function (viewId, opts) {
+      opts = opts || {};
       var isNotAnimat = opts.isNotAnimat;
       if (isNotAnimat) this.isAnimat = false;
       this.animatName = this.animBackName;

@@ -31,6 +31,10 @@ define(['UIView', getAppUITemplatePath('ui.switch')], function (UIView, template
     },
 
     checked: function () {
+      if (typeof this.checkAvailabe == 'function' && !this.checkAvailabe()) {
+          return;
+      }
+
       if (this.getStatus()) return;
       this.el.addClass('current');
       this.switchBar.addClass('current');
@@ -39,6 +43,10 @@ define(['UIView', getAppUITemplatePath('ui.switch')], function (UIView, template
     },
 
     unChecked: function () {
+      if (typeof this.checkAvailabe == 'function' && !this.checkAvailabe()) {
+        return;
+      }
+
       if (!this.getStatus()) return;
       this.el.removeClass('current');
       this.switchBar.removeClass('current');
