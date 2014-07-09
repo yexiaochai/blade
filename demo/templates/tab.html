@@ -9,19 +9,85 @@
         <h1>tab组件</h1>
     </header></div>
 
-<section class="cui-citys-bd">
+    <h2 class="dh2">基本参数说明</h2>
 
-    <div><button class="widget0" widget="tab">tab简单应用</button></div>
+<pre><code>
+this.num = new UISelect({
+  //数据模型，会影响插件渲染
+  datamodel: {
+    data: [],
+    curClass: 'cui-tab-current',
+    selectedKey: null,
+    index: 0
+  },
+  //选项改变执行的事件
+  onChange: function (data) {
+    console.log(data);
+  };
+  //UI组件包裹器，会放到什么容器里面
+  wrapper: this.$('.simple_switch')
+});
+</code></pre>
+
+    <h2 class="dh2">tab简单应用</h2>
 
     <div class="wrapper"></div>
 
-    <div><button class="widget1" widget="tab">设置参数、重写change</button></div>
 
-    <div class="wrapper1"></div>
+<pre><code>
+this.tab = new UITab({
+  datamodel: {
+    data: [
+      { id: 1, name: '中国' },
+      { id: 2, name: '美国' },
+      { id: 3, name: '日本' }
+    ]
+  },
+  wrapper: this.$el.find('.wrapper')
+});
+this.tab.show();
+</code></pre>
 
-    <div>
-        <h3>自定义的getIndex、setIndex</h3>
-        <button class="getIndex">getIndex</button> <input type="text" class="getInfo"/>
-        <button class="setIndex">setIndex</button> <input type="text" class="setInfo"/>
-    </div>
-</section>
+<h2 class="dh2">
+  setIndex/getIndex</h2>
+<div class="wrapper1">
+</div>
+<div style="margin: 10px; padding: 10px;">
+  <button class="getIndex btn">
+    getIndex</button>
+  <input type="text" class="getInfo" />
+  <button class="setIndex btn">
+    setIndex</button>
+  <input type="text" class="setInfo" />
+</div>
+
+<pre><code>
+this.tab1 = new UITab({
+  datamodel: {
+    data: [
+      { id: 1, name: '图片' },
+      { id: 2, name: '音乐' },
+      { id: 3, name: '视频' },
+      { id: 4, name: '其它' }
+    ],
+    curClass: 'cui-tab-current',
+    index: 0
+  },
+  onChange: function() {
+    console.log('onChange myself:' + this.el.attr('data-key')+ this.el.html() );
+  },
+  wrapper: this.$el.find('.wrapper1')
+});
+this.tab1.show();
+
+//对应按钮事件
+getIndex: function() {
+  var index = this.tab1.getIndex();
+  this.$el.find('.getInfo').val(index);
+},
+setIndex: function() {
+  var index = this.$el.find('.setInfo').val() || 0;
+  this.tab1.setIndex(index);
+},
+
+</code></pre>
