@@ -44,11 +44,10 @@ module.exports = function (grunt) {
       }
     },
 
-    clean: {
-      options: { force: true },
-      main: '<%= config.destDir%>',
-      tmpsrc: '<%= config.srcDir%>/common_tmp.js'
-    },
+        clean: {
+          options: { force: true },
+          main: '<%= config.destDir%>'
+        },
 
     "strip": {
       "main": {
@@ -97,7 +96,9 @@ module.exports = function (grunt) {
 
   grunt.registerTask('blade', 'require demo', function () {
 
-    var cfg = grunt.file.readJSON('config.json');
+    var pkg = grunt.file.readJSON('package.json');
+
+    var cfg = grunt.file.readJSON(pkg.channels["app"].src + '/gruntcfg.json');
 
     grunt.log.debug('参数：' + JSON.stringify(cfg.requirejs, null, 2));
 
@@ -109,7 +110,7 @@ module.exports = function (grunt) {
 
     grunt.config.set('requirejs', cfg.requirejs);
 
-    grunt.task.run(['clean:main', 'uglify', 'copy:main', 'requirejs', 'clean:tmpsrc', 'copy:template', 'strip']);
+    grunt.task.run(['clean:main', 'uglify', 'requirejs', 'copy:template', 'strip']);
 
 
   });

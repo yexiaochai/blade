@@ -26,13 +26,15 @@
         },
         "baseUrl": "<%= config.srcDir %>",
         "paths": {
-		  "common_tmp": "common_tmp",
+		  "common_tmp": "common_dest",
 
           "text": "libs/require.text",
-		  "App": "mvc/abstract.app",
-		  "View": "mvc/abstract.view",
+		  "AbstractApp": "mvc/abstract.app",
+		  "AbstractView": "mvc/abstract.view",
 		  "cLazyload": "common/c.lazyload",
 		  "cValidate": "common/c.validate",
+		  "cHighlight": "common/c.highlight",
+
 		  "UIView": "ui/ui.abstract.view",
 		  "UILayer": "ui/ui.layer",
 		  "UIAlert": "ui/ui.alert",
@@ -56,11 +58,12 @@
 
         },
         "include": [
-		  "common_tmp",
-          "App",
-		  "View",
+		  "common_dest",
+          "AbstractApp",
+		  "AbstractView",
 		  "cLazyload",
 		  "cValidate",
+		  "cHighlight",
 
 		  "text!ui/ui.alert.html",
 		  "text!ui/ui.bubble.layer.html",
