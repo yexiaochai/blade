@@ -8,10 +8,7 @@ define(['View', getViewTemplatePath('scroll'), 'UIScroll'], function (View, view
     },
 
     onPreShow: function () {
-      var s = new UIScroll({
-        wrapper: $('#wrapper'),
-        scroller: $('#scroller')
-      });
+     
       this.turning();
     },
     onShow: function () {
