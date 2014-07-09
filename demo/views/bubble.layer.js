@@ -142,7 +142,6 @@
     },
 
     onShow: function () {
-      hljs.initHighlightingOnLoad();
     },
 
     onHide: function () {
