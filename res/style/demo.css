@@ -57,3 +57,18 @@ code {
     line-height: 500px;
     background: #d9d9d9;
 }
+.validate-form div {
+    margin-top: 10px;
+}
+.validate-form label {
+    width: 110px;
+    display: inline-block;
+    line-height: 30px;
+    text-align: right;
+}
+.validate-form input {
+    width: 200px;
+    height: 30px;
+    background: #fff;
+    border:1px solid #ccc;
+}
