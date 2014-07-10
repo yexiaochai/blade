@@ -42,6 +42,9 @@ code {
     background: lightsteelblue;
     overflow-y: auto;
 }
+.ml-10 {
+    margin-left:10px;
+}
 .mlr-10 {
     margin: 0 10px;
 }
@@ -66,7 +69,7 @@ code {
     line-height: 30px;
     text-align: right;
 }
-.validate-form input {
+.validate-form input, .d-input {
     width: 200px;
     height: 30px;
     background: #fff;
