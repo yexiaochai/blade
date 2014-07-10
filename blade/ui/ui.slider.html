@@ -1,0 +1,9 @@
+﻿<ul class="ul-list horizontal" style="position: absolute; top: 0; left: 0;">
+  <%for(var i = 0, len = data.length; i < len; i++) { %>
+  <li data-key="<%=data[i].id %>" data-index="<%=i%>" <%if(data[i].disabled){ %> class="disabled"
+    <%} %>>
+      <div style=" width: 100%; height: 98%; border: 1px solid black; "><%=data[i].name %></div>
+    </li>
+  <%} %>
+</ul>
+

@@ -113,7 +113,6 @@
         { 'uiname': 'scroll.layer', 'name': '滚动层组件' },
         { 'uiname': 'group.select', 'name': '日期选择类组件' },
         { 'uiname': 'scroll', 'name': '滚动组件/横向滚动' },
-        { 'uiname': 'scroll.across', 'name': '滚动组件/纵向滚动' },
         { 'uiname': 'slider', 'name': 'slider组件（todo...）' }
       ];
 
@@ -121,7 +120,7 @@
         { 'uiname': 'lazyload', 'name': '图片延迟加载' },
         { 'uiname': 'inputclear', 'name': '带删除按钮的文本框(todo...)' },
         { 'uiname': 'validate1', 'name': '工具类表单验证' },
-        { 'uiname': 'validate2', 'name': '集成表单验证' },
+        { 'uiname': 'validate2', 'name': '集成表单验证(todo...)' },
         { 'uiname': 'filp', 'name': '简单flip手势工具' }
       ];
 
