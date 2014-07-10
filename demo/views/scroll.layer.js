@@ -1,4 +1,4 @@
-define(['View', getViewTemplatePath('scroll.layer'), 'UIScrollLayer'], function (View, viewhtml, UIScrollLayer) {
+﻿define(['View', getViewTemplatePath('scroll.layer'), 'UIScrollLayer'], function (View, viewhtml, UIScrollLayer) {
   return _.inherit(View, {
     onCreate: function () {
       this.$el.html(viewhtml);
@@ -14,7 +14,7 @@ define(['View', getViewTemplatePath('scroll.layer'), 'UIScrollLayer'], function 
           html += '<p>this is scrollLayer'+ i +'</p>';
         }
         this.scrollLayer = new UIScrollLayer({
-          maxHeight: 400,  //出现scroll的最大高度
+          maxHeight: 400,  
           html: '<div class="s-tpl">'+ html +'</div>'
         });
       }
@@ -24,25 +24,23 @@ define(['View', getViewTemplatePath('scroll.layer'), 'UIScrollLayer'], function 
       if (!this.scrollLayer2) {
         var html = '';
         for(var i=0;i<40;i++) {
-          html += '<p>服务费'+ i +'</p>';
+          html += '<p>项目'+ i +'</p>';
         }
         this.scrollLayer2 = new UIScrollLayer({
           maxHeight: 400,
           html: '<div class="s-tpl">'+ html +'</div>',
           datamodel: {
-            title: '收费明细',
+            title: '测试',
             btns: [
-              { name: '取消', className: 'cui-btns-cancel' },
-              { name: '确定', className: 'cui-btns-ok' }
+              { name: '测试', className: 'cui-btns-cancel' },
+              { name: '测试', className: 'cui-btns-ok' }
             ]
           },
-          //重新绑定事件
           events: {
             'click .cui-btns-ok': 'myOkAction',
             'click .cui-btns-cancel': 'myCancelAction',
             'click .cui-top-close': 'myCloseAction'
           },
-          //分别重写三个按钮事件
           myOkAction: function() {
             console.log('my ok');
             this.hide();

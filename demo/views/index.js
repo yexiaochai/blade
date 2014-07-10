@@ -113,7 +113,6 @@
         { 'uiname': 'scroll.layer', 'name': '滚动层组件' },
         { 'uiname': 'group.select', 'name': '日期选择类组件' },
         { 'uiname': 'scroll', 'name': '滚动组件/横向滚动' },
-        { 'uiname': 'scroll.across', 'name': '滚动组件/纵向滚动' },
         { 'uiname': 'slider', 'name': 'slider组件（todo...）' }
       ];
 

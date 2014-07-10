@@ -54,7 +54,8 @@
 		  "UISelect": "ui/ui.select",
 		  "UIGroupSelect": "ui/ui.group.select",
 		  "UIGroupList": "ui/ui.group.list",
-		  "UICalendar": "ui/ui.calendar"
+		  "UICalendar": "ui/ui.calendar",
+		  "UISlider": "ui/ui.slider"
 
         },
         "include": [
@@ -80,6 +81,7 @@
 		  "text!ui/ui.switch.html",
 		  "text!ui/ui.tab.html",
 		  "text!ui/ui.toast.html",
+		  "text!ui/ui.slider.html",
 
 		  "UIView",
 		  "UILayer",
@@ -100,7 +102,8 @@
 		  "UISelect",
 		  "UIGroupSelect",
 		  "UIGroupList",
-		  "UICalendar"
+		  "UICalendar",
+		  "UISlider"
         ],
         "out": "<%= config.destDir %>/common.js"
       }

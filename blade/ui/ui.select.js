@@ -217,7 +217,6 @@
     resetCss: function () {
       this.$('li').removeClass('current');
       this.$('li[data-index="' + this.datamodel.index + '"]').addClass('current');
-
     },
 
     resetIndex: function () {
@@ -237,7 +236,6 @@
       if (index == -1) return;
       this.datamodel.index = index;
       this.setIndex(index, false);
-
     },
 
     getId: function () {
