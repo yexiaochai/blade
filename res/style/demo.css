@@ -36,3 +36,9 @@ code {
 .s-tpl {
     text-align: center;
 }
+.imgs-area {
+    margin:10px;
+    height: 500px;
+    background: lightsteelblue;
+    overflow-y: auto;
+}
