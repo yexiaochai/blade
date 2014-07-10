@@ -11,14 +11,19 @@
 
       this.turning();
     },
-    onShow: function () {
+
+    _initSlider: function () {
+      if (this.slider) return;
+
       var sec = this.$('.demo1_sec');
       var data = [
-  { id: 1, name: '中国' }, { id: 2, name: '美国' }, { id: 3, name: '英国' }
-];
+        { id: 1, name: '中国' }, { id: 2, name: '美国' }, { id: 3, name: '英国' }
+      ];
+
       for (var i = 0; i < 20; i++) {
         data.push({ id: i + 4, name: '中国' + i });
       }
+
       this.slider = new UISlider({
         datamodel: {
           data: data
@@ -29,6 +34,10 @@
         }
       });
       this.slider.show();
+    },
+
+    onShow: function () {
+      this._initSlider();
 
     },
     onHide: function () {

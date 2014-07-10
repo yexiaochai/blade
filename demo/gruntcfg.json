@@ -90,7 +90,10 @@
           "text!templates/tab.html",
 
 		   "views/toast",
-          "text!templates/toast.html"
+          "text!templates/toast.html",
+
+		   "views/scroll",
+          "text!templates/scroll.html"
          
         ],
         "out": "<%= config.destDir %>/main.js"
