@@ -1,0 +1,1 @@
+define(["View",getViewTemplatePath("validate2")],function(a,b){return _.inherit(a,{onCreate:function(){this.$el.html(b)},events:{"click .demo1":"demo1"},demo1:function(){},onPreShow:function(){this.turning()},onShow:function(){},onHide:function(){}})});

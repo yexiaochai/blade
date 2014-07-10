@@ -43,7 +43,8 @@
       'UISelect': app + 'ui/ui.select',
       'UIGroupSelect': app + 'ui/ui.group.select',
       'UIGroupList': app + 'ui/ui.group.list',
-      'UICalendar': app + 'ui/ui.calendar'
+      'UICalendar': app + 'ui/ui.calendar',
+      'UISlider': app + 'ui/ui.slider'
 
     }
 

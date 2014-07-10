@@ -36,7 +36,8 @@
 		  "UISelect": "http://ui/ui.select",
 		  "UIGroupSelect": "http://ui/ui.group.select",
 		  "UIGroupList": "http://ui/ui.group.list",
-		  "UICalendar": "http://ui/ui.calendar"
+		  "UICalendar": "http://ui/ui.calendar",
+		  "UISlider": "http://ui/ui.slider"
 		  
         },
         "include": [
