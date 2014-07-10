@@ -12,8 +12,6 @@
 
     demo1: function() {
 
-
-
       if (!this.sss) {
         var imgsArr =  "<li class='js_hotel_detail' data-hotelid='439749'><div class='hotel-g-proimg'><img data-src='http://images4.c-ctrip.com/target/hotel/65000/64164/1684EC16-8A01-4B39-814C-C4C4537CF790_130_130.jpg' width='96' height='96' ></div></li>"+
                 "<li class='js_hotel_detail' data-hotelid='439749'><div class='hotel-g-proimg'><img data-src='http://images4.c-ctrip.com/target/hotel/65000/64164/1684EC16-8A01-4B39-814C-C4C4537CF790_130_130.jpg' width='96' height='96' ></div></li>"+
