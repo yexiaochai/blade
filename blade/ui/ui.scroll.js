@@ -213,6 +213,9 @@ define([], function () {
 
     this.checkWrapperDisplay();
 
+
+
+
   };
 
   IScroll.prototype = {
