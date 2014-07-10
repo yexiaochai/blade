@@ -21,19 +21,19 @@
     <h2 class="dh2">基本参数说明</h2>
 
     <pre><code>
-        @param template     {String}    模板视图文本
-        @param needMask     {Bool}      是否需要mask
-        @param template     {String}    模板视图文本
-        @param events       {Object}    绑定事件
-        @param setDatamodel {Object}    动态设置属性、事件
-        @param datamodel    {
-          data:      {Array}            数据
-          upClass:   {String}           向上的class
-          upClass:   {String}           向上的class
-          upClass:   {String}           向上的class
-          index:     {Int}              选择的下标
-          dir:       {String}           箭头的方向
-        }     
+    @param template     {String}    模板视图文本
+    @param needMask     {Bool}      是否需要mask
+    @param template     {String}    模板视图文本
+    @param events       {Object}    绑定事件
+    @param setDatamodel {Object}    动态设置属性、事件
+    @param datamodel    {
+      data:      {Array}            数据
+      upClass:   {String}           向上的class
+      upClass:   {String}           向上的class
+      upClass:   {String}           向上的class
+      index:     {Int}              选择的下标
+      dir:       {String}           箭头的方向
+    }
     </code></pre>
 </section>
  
@@ -43,10 +43,10 @@
 <input type="button" class="demo1 btn" value="中间按钮" >
 <pre><code>
     if(!this.demo1) {
-        var data = [{ name: '<span class="center">价格/星级</span>' },
-          { name: '<span class="center">位置区域</span>' },
-          { name: '<span class="center">品牌</span>' },
-          { name: '<span class="center">测试</span>'}];
+        var data = [{ name: '&lt;span class="center">价格/星级&lt;/span>' },
+          { name: '&lt;span class="center">位置区域&lt;/span>' },
+          { name: '&lt;span class="center">品牌&lt;/span>' },
+          { name: '&lt;span class="center">测试&lt;/span>'}];
 
 
         var el = $(e.currentTarget);
@@ -73,10 +73,10 @@
 <input type="button" class="demo2 btn" value="点击选项关闭，在显示项目还在" >
 <pre><code>
       if(!this.demo2) {
-        var data = [{ name: '<span class="center">价格/星级</span>' },
-          { name: '<span class="center">位置区域</span>' },
-          { name: '<span class="center">品牌</span>' },
-          { name: '<span class="center">测试</span>'}];
+        var data = [{ name: '&lt;span class="center">价格/星级&lt;/span>' },
+          { name: '&lt;span class="center">位置区域&lt;/span>' },
+          { name: '&lt;span class="center">品牌&lt;/span>' },
+          { name: '&lt;span class="center">测试&lt;/span>'}];
 
 
         var el = $(e.currentTarget);
@@ -103,10 +103,10 @@
 <input type="button" class="demo3 btn" value="需要mask" >
 <pre><code>
       if(!this.demo3) {
-        var data = [{ name: '<span class="center">价格/星级</span>' },
-          { name: '<span class="center">位置区域</span>' },
-          { name: '<span class="center">品牌</span>' },
-          { name: '<span class="center">测试</span>'}];
+        var data = [{ name: '&lt;span class="center">价格/星级&lt;/span>' },
+          { name: '&lt;span class="center">位置区域&lt;/span>' },
+          { name: '&lt;span class="center">品牌&lt;/span>' },
+          { name: '&lt;span class="center">测试&lt;/span>'}];
 
 
         var el = $(e.currentTarget);
@@ -134,10 +134,10 @@
 <input type="button" class="demo4 btn" value="定制化每个冒泡项目">
 <pre><code>
       if(!this.demo4) {
-        var data = [{ name: '<span class="center">普通会员</span>' },
-          { name: '<span class="center">vip</span>' },
-          { name: '<span class="center">高级vip</span>' },
-          { name: '<span class="center">钻石vip</span>'}];
+        var data = [{ name: '&lt;span class="center">普通会员&lt;/span>' },
+          { name: '&lt;span class="center">vip&lt;/span>' },
+          { name: '&lt;span class="center">高级vip&lt;/span>' },
+          { name: '&lt;span class="center">钻石vip&lt;/span>'}];
 
 
         var el = $(e.currentTarget);

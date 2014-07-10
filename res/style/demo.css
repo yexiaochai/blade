@@ -42,3 +42,18 @@ code {
     background: lightsteelblue;
     overflow-y: auto;
 }
+.mlr-10 {
+    margin: 0 10px;
+}
+.ta-c {
+    text-align: center;
+}
+.f22 {
+    font-size: 22px;
+}
+.flip-content {
+    margin: 0 10px;
+    height: 500px;
+    line-height: 500px;
+    background: #d9d9d9;
+}
