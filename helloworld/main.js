@@ -11,7 +11,7 @@
     }
   });
 
-  require(['App'], function (App) {
+  require(['AbstractApp'], function (App) {
     //实例化App
     var app = new App({
       'defaultView': 'index',
