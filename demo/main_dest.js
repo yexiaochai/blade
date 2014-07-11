@@ -89,22 +89,22 @@
     slideright: function (inView, outView, callback, scope) {
       $('body').addClass('hiddenx');
 
-        outView.$el.addClass('animatestart');
-        outView.$el.addClass('sliderightout');
+      outView.$el.addClass('animatestart');
+      outView.$el.addClass('sliderightout');
 
       inView.show();
 
       var self = this;
       return setTimeout(function () {
         $('body').removeClass('hiddenx');
-          outView.$el.removeClass('animatestart');
-          outView.$el.removeClass('sliderightout');
-          outView.hide();
+        outView.$el.removeClass('animatestart');
+        outView.$el.removeClass('sliderightout');
+        outView.hide();
 
         callback && callback.call(scope, inView, outView);
 
       }, 340);
-    },
+    }
   };
 
   require(['AbstractApp'], function (App) {
@@ -116,7 +116,7 @@
       'viewRootPath': '' + project + 'views/',
       animations: animations
     });
-  $.bindFastClick && $.bindFastClick();
+    $.bindFastClick && $.bindFastClick();
 
   });
 })();
