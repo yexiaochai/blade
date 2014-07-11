@@ -95,6 +95,7 @@
         { 'uiname': 'alert', 'name': '警告框' },
         { 'uiname': 'toast', 'name': 'toast框' },
         { 'uiname': 'loading', 'name': 'loading框' },
+        { 'uiname': 'reloading', 'name': 'reloading框' },
         { 'uiname': 'bubble.layer', 'name': '气泡框提示' }
       ];
 
