@@ -213,9 +213,6 @@ define([], function () {
 
     this.checkWrapperDisplay();
 
-
-
-
   };
 
   IScroll.prototype = {
@@ -592,19 +589,23 @@ define([], function () {
 
       time = time || 0;
 
-      if (this.options.scrollType == 'y' || this.x > this.options.scrollOffset) {
-        x = this.options.scrollOffset;
-      } else if (this.x < this.maxScrollX) {
-        x = this.maxScrollX;
+      if (this.options.scrollType == 'x') {
+        if (this.x > this.options.scrollOffset) {
+          x = this.options.scrollOffset;
+        }
+        if (this.x < this.maxScrollX) {
+          x = this.maxScrollX;
+        }
+      } else {
+        if (this.y > this.options.scrollOffset) {
+          y = this.options.scrollOffset;
+        }
+        if (this.y < this.maxScrollY) {
+          y = this.maxScrollY;
+        }
       }
 
-      if (!this.options.scrollType == 'x' || this.y > this.options.scrollOffset) {
-        y = this.options.scrollOffset;
-      } else if (this.y < this.maxScrollY) {
-        y = this.maxScrollY;
-      }
-
-      if (x == this.x || y == this.y) {
+      if ((this.options.scrollType == 'x' && x == this.x) || (this.options.scrollType == 'y' && y == this.y)) {
         return false;
       }
 
