@@ -311,7 +311,11 @@
         opts.animatName = this.animBackName;
         this.forward(viewId, opts)
       } else {
-        history.back();
+        if (window.history.length == 1) {
+          this.forward(this.defaultView, opts)
+        } else {
+          history.back();
+        }
       }
 
     },
