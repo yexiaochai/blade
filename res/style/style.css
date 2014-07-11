@@ -3556,7 +3556,7 @@ input[type=text].place_search:empty {
     background-position: -76px 0
 }
 
-.cui-m-logo {
+/*.cui-m-logo {
     position: absolute;
     width: 24px;
     height: 28px;
@@ -3565,7 +3565,7 @@ input[type=text].place_search:empty {
     z-index: 9;
     margin: -15px 0 0 -12px;
     background-position: -132px 0
-}
+}*/
 
 .cui-w-loading,.cui-pro-radius {
     -webkit-animation: cui-loading 1.58s linear infinite;
@@ -4512,4 +4512,8 @@ input[type=text].place_search:empty {
 .cui-rate-r2 i:before {
     background: #099fde
 }
+/***************************   need  css **************************************/
 
+
+
+/***************************   need  css **************************************/

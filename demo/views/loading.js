@@ -25,7 +25,7 @@
     demo2: function () {
       if (!this.loading2) {
         this.loading2 = new UILoading({
-
+          maskToHide: true
         });
       }
       this.loading2.show();
