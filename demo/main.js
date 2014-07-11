@@ -115,6 +115,8 @@
       animations: animations
     });
 
+  $.bindFastClick && $.bindFastClick();
+
   });
 })();
 
