@@ -3,16 +3,36 @@
 <html class="ie">
 <!--<![endif]-->
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <title>hello world</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta content="telephone=no" name="format-detection" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
+<head>
+  <meta charset="utf-8" />
+  <title>blade-轻webapp框架</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta content="telephone=no" name="format-detection" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <link href="res/style/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body onselectstart="return false">
+  <div style="height: 48px;">
+    <header>
+      <h1>
+        blade导航</h1>
+    </header></div>
+  <section class="p10">
+    <ul class="list_st_border carlist carindex_20140414">
+      <li onclick="window.location='helloworld/index.html';">
+          <h2><a href="helloworld/index.html" style=" color: #105cb6; font-weight: bold; ">helloworld-简单MVC的实现</a> </h2>
+          <div>
+            <a href="helloworld/index.html">简单实现单页面MVC的切换，以ID作为键值</a></div>
+      </li>
 
-  </head>
-  <body onselectstart="return false">
-  简单测试
+        <li onclick="window.location='demo/dest.html';">
+          <h2><a href="demo/dest.html" style=" color: #105cb6;  font-weight: bold;">公用组件-组件及通用功能</a> </h2>
+          <div>
+            <a href="demo/dest.html">简单实现webapp基本UI以及通用工具</a></div>
+      </li>
 
-  </body>
+    </ul>
+  </section>
+
+</body>
 </html>
