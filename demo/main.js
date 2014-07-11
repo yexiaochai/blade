@@ -73,8 +73,7 @@
 
       inView.show();
 
-      var self = this;
-      return setTimeout(function () {
+      inView.$el.one('webkitAnimationEnd transitionend oTransitionEnd', function () {
         $('body').removeClass('hiddenx');
         inView.$el.removeClass('animatestart');
         inView.$el.removeClass('sliderightin');
@@ -94,8 +93,7 @@
 
       inView.show();
 
-      var self = this;
-      return setTimeout(function () {
+      outView.$el.one('webkitAnimationEnd transitionend oTransitionEnd',function () {
         $('body').removeClass('hiddenx');
           outView.$el.removeClass('animatestart');
           outView.$el.removeClass('sliderightout');

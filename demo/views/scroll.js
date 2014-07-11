@@ -36,9 +36,41 @@
       this.slider.show();
     },
 
+    /*
+ 
+
+    */
+    _imgSlider: function () {
+      if (this.imgSlider) return;
+
+      var data = [
+        { id: 1, src: 'http://res.m.ctrip.com/market/appimg/h5/20140704/1.jpg', href: 'http://pages.ctrip.com/commerce/promote/201406/other/xzkhd/index.html' },
+        { id: 2, src: 'http://res.m.ctrip.com/market/appimg/h5/20140704/2.jpg', href: 'http://pages.ctrip.com/commerce/promote/201406/other/xzkhd/index.html' },
+        { id: 3, src: 'http://res.m.ctrip.com/market/appimg/h5/20140704/3.jpg', href: 'http://pages.ctrip.com/commerce/promote/201406/other/xzkhd/index.html' },
+        { id: 4, src: 'http://res.m.ctrip.com/market/appimg/h5/20140704/4.jpg', href: 'http://pages.ctrip.com/commerce/promote/201406/vacation/h5/66h5_1.html' },
+      ];
+
+
+      this.imgSlider = new UISlider({
+        datamodel: {
+          data: data,
+          itemFn: function (item) {
+            return '<img src="' + item.src + '">';
+          }
+        },
+        displayNum: 1,
+        wrapper: this.$('.demo2'),
+        changed: function (item) {
+        }
+      });
+
+      this.imgSlider.show();
+
+    },
+
     onShow: function () {
       this._initSlider();
-
+      this._imgSlider();
     },
     onHide: function () {
     }

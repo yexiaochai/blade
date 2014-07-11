@@ -306,7 +306,7 @@
       //传入为时间格式需要处理
       if (_.dateUtil.isDate(year)) year = year.getFullYear()
       if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) return true;
-      else return false;
+      return false;
     },
 
     // @description 获取一个月份的天数

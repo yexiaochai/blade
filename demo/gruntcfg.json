@@ -93,7 +93,20 @@
           "text!templates/toast.html",
 
 		   "views/scroll",
-          "text!templates/scroll.html"
+          "text!templates/scroll.html",
+
+          "views/filp",
+          "text!templates/filp.html",
+
+          "views/validate1",
+          "text!templates/validate1.html",
+
+          "views/validate2",
+          "text!templates/validate2.html",
+
+          "views/slider",
+          "text!templates/slider.html"
+
          
         ],
         "out": "<%= config.destDir %>/main.js"

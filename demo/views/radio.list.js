@@ -8,13 +8,20 @@ define(['View', getViewTemplatePath('radio.list'), 'UIRadioList'], function (Vie
 
     events: {
       'click .demo1': 'demo1',
+      'click .demo-input1': 'demo_input1',
       'click .demo2': 'demo2',
       'click .demo3': 'demo3'
     },
 
+    demo_input1: function() {
+      console.log('nie')
+      this.demo1();
+    },
+
     demo1: function () {
       if (!this.radio1) {
-        var demodata1 =  [{ id:'华语'}, { id:'欧美'}, {id:'工作学习' }, {id:'粤语' },{id:'轻音乐' }, {id:'咖啡' }];
+        var demodata1 =  [{ id:'华语'}, { id:'欧美'}, {id:'工作学习' }, {id:'粤语' },{id:'轻音乐' }, {id:'咖啡' }],
+            scope = this;
         this.radio1 = new UIRadioList({
           //数据模型
           datamodel: {
@@ -23,7 +30,12 @@ define(['View', getViewTemplatePath('radio.list'), 'UIRadioList'], function (Vie
           },
           displayNum: 5,
           selectId: 4,
-          index: 4
+          index: 4,
+          onClick: function(e, data) {
+            console.log(data.id);
+            scope.$('.demo-input1').val(data.id);
+            this.hide();
+          }
         });
       }
       this.radio1.show();

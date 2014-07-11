@@ -1,4 +1,4 @@
-define(['View', getViewTemplatePath('slider')], function (View, viewhtml) {
+define(['View', getViewTemplatePath('slider'),'UISlider'], function (View, viewhtml,UISlider) {
 
   return _.inherit(View, {
     onCreate: function () {

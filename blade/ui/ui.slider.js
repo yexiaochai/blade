@@ -9,7 +9,7 @@
       this.datamodel = {
         curClass: 'current',
         data: [],
-        index: 6
+        index: 0
       };
 
       this.itemNum = 0;
@@ -43,6 +43,7 @@
       this._resetIndex();
     },
 
+    //这里差一个index值判断**************************
     _resetIndex: function () {
       if (!this.datamodel.id) return;
       for (var i = 0, len = this.datamodel.data.length; i < len; i++) {
@@ -65,9 +66,30 @@
       this.scroller = this.$('.ul-list');
     },
 
+    //处理存在图片的情况
+    _initImgSize: function () {
+      var item = this.scroller.find('img').eq(0);
+      if (!item[0]) return;
+      item.on('load', $.proxy(function () {
+        var h = item.height();
+        if (this.itemHeight < h) {
+          this.itemHeight = h;
+          this.swrapper.css({
+            height: this.itemHeight + 'px'
+          });
+          this.scroller.find('li').height(this.itemHeight);
+
+        }
+        var s = '';
+      }, this));
+
+    },
+
     initSize: function () {
       var item = this.scroller.find('li').eq(0);
       var itemOffset = item.offset();
+      var parent = this.$el.parent();
+      var ph = parent.height();
 
       this.wrapeWidth = this.swrapper.width();
 
@@ -79,6 +101,10 @@
 
       this.itemHeight = this.scroller.height();
 
+      if (ph > this.itemHeight) this.itemHeight = ph;
+
+      this.scroller.find('li').height(this.itemHeight);
+
       //样式还需调整
       this.swrapper.css({
         'background': '#f5f5f5',
@@ -86,7 +112,7 @@
       });
 
       this.scrollOffset = ((this.displayNum - 1) / 2) * (this.itemWidth);
-
+      this._initImgSize();
     },
 
     reload: function (datamodel) {
@@ -160,7 +186,7 @@
       //index值是否改变
       var isChange = this.datamodel.index != i;
       this.datamodel.index = i;
-      
+
       if (!noPosition) this.adjustPosition(true);
       this.resetCss();
       if (noEvent !== true && isChange) this.changed && this.changed.call(this, this.getSelected());
