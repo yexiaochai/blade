@@ -44,7 +44,7 @@ hljs.registerLanguage("json", function(a) {
 
     events: {
       'click .returnico': function () {
-        this.back();
+        this.back('index');
       }
     },
 
