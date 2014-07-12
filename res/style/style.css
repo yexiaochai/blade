@@ -1308,6 +1308,28 @@ header i {
         -webkit-transform: rotate(360deg)
     }
 }
+@-moz-keyframes cui-loading {
+    0% {
+        opacity: 1;
+        -moz-transform: rotate(0deg)
+    }
+
+    100% {
+        opacity: 1;
+        -moz-transform: rotate(360deg)
+    }
+}
+@keyframes cui-loading {
+    0% {
+        opacity: 1;
+        transform: rotate(0deg)
+    }
+
+    100% {
+        opacity: 1;
+        transform: rotate(360deg)
+    }
+}
 
 .cui-grayload-text {
     position: absolute;

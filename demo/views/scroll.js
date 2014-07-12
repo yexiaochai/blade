@@ -44,10 +44,10 @@
       if (this.imgSlider) return;
 
       var data = [
-        { id: 1, src: 'http://res.m.ctrip.com/market/appimg/h5/20140704/1.jpg', href: 'http://pages.ctrip.com/commerce/promote/201406/other/xzkhd/index.html' },
-        { id: 2, src: 'http://res.m.ctrip.com/market/appimg/h5/20140704/2.jpg', href: 'http://pages.ctrip.com/commerce/promote/201406/other/xzkhd/index.html' },
-        { id: 3, src: 'http://res.m.ctrip.com/market/appimg/h5/20140704/3.jpg', href: 'http://pages.ctrip.com/commerce/promote/201406/other/xzkhd/index.html' },
-        { id: 4, src: 'http://res.m.ctrip.com/market/appimg/h5/20140704/4.jpg', href: 'http://pages.ctrip.com/commerce/promote/201406/vacation/h5/66h5_1.html' },
+        { id: 1, src: './res/img/1.jpg', href: './res/img/1.jpg' },
+        { id: 2, src: './res/img/2.jpg', href: './res/img/2.jpg' },
+        { id: 3, src: './res/img/3.jpg', href: './res/img/3.jpg' },
+        { id: 4, src: './res/img/4.jpg', href: './res/img/4.jpg' }
       ];
 
 
