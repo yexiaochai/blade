@@ -24,7 +24,8 @@ define(['View', getViewTemplatePath('select2'), 'UISelect'], function (View, vie
     chooseDateAction: function() {
 
       if (!this.demo1 || !this.demo2 || !this.demo3) {
-        var data1 = [], data2 = [], data3 = [];
+        var dayFlag = { 1: 31, 2: 28, 3: 31, 4: 30, 5: 31, 6: 30, 7: 31, 8: 31, 9: 30, 10: 31, 11: 30, 12: 31 };
+        var data1 = [], data2 = [], data3 = [], scope = this;
         for (var i = 2000; i <= 2014; i++) {
           var obj = { id: 'y_' + i, name: i + '年'};
           data1.push(obj);
@@ -54,6 +55,18 @@ define(['View', getViewTemplatePath('select2'), 'UISelect'], function (View, vie
           wrapper: this.$('.row2'),
           datamodel: {
             data: data2
+          },
+          changed: function(item) {
+            var curMonth = parseInt(item.name);
+            var maxDay = dayFlag[curMonth];
+
+            for(var i=31;i>28;i--) {
+              scope.demo3.datamodel.data[i-1].disabled = false;
+              if(i>maxDay) {
+                scope.demo3.datamodel.data[i-1].disabled = true;
+              }
+            }
+            scope.demo3.reload()
           }
         });
 
