@@ -43,7 +43,7 @@ define(['View', getViewTemplatePath('validate1'), 'cValidate'], function (View, 
           error_info.style.cssText = 'position:absolute;top:'+($inputs.eq(i).position().top-10) + 'px;left:'+($inputs.eq(i).position().left+210)+'px;';
           error_info.className = 'error_info';
           $inputs.eq(i).after(error_info);
-        
+
           console.log($inputs.eq(i).prev('label').html() + ' is false');
         }
       }
