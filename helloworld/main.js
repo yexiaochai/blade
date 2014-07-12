@@ -14,6 +14,7 @@
   require(['AbstractApp'], function (App) {
     //实例化App
     var app = new App({
+      hasPushState: true,
       'defaultView': 'index',
       'viewRootPath': 'helloworld/views/'
     });

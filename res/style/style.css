@@ -1799,4 +1799,44 @@ input {
     word-break: break-all;
     color: #000
 }
+.btn_blue:active,header i:active,.icon_home:active,.icon_phone:active {
+    opacity: .7
+}
+.icon_home,.icon_phone {
+    width: 42px;
+    height: 100%;
+    top: 0;
+    position: relative;
+    z-index: 9;
+    float: right
+}
+.icon_home:before {
+    width: 20px;
+    height: 19px;
+    top: 14px;
+    right: 10px;
+    background-position: -145px 0
+}
+.list_st_border {
+    background: #fff;
+    border-bottom: 0;
+    border: 1px solid #cfcfcf
+}
+
+.list_st_border li {
+    position: relative;
+    padding: 0 10px;
+    line-height: 43px;
+    border-bottom: 1px solid #cfcfcf
+}
+
+.list_st_border li:last-child {
+    border-bottom: 0
+}
+.list_st_border li:active,.p_hinttxt:active,.search_cancel:active,.citylist dd:active {
+    background: #f8f8f8
+}
+.p10 {
+    padding: 10px
+}
 /***************************   need  css **************************************/

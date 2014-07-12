@@ -258,7 +258,6 @@ define([], function () {
       this.scrollerHeight = this.scroller.offsetHeight;
       this.maxScrollY = this.wrapperHeight - this.scrollerHeight;
 
-
       //增加偏移量概念
       this.maxScrollX = this.maxScrollX - this.options.scrollOffset
       this.maxScrollY = this.maxScrollY - this.options.scrollOffset;
