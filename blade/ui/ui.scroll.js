@@ -201,6 +201,11 @@ define([], function () {
     this.x = 0;
     this.y = 0;
     this._events = {};
+
+    //默认方向是向前
+    this.dir = 'forward';
+
+
     this._init();
 
     //更新滚动条位置
@@ -212,9 +217,6 @@ define([], function () {
     this.enable();
 
     this.checkWrapperDisplay();
-
-
-
 
   };
 
@@ -400,13 +402,20 @@ define([], function () {
         return;
       }
 
+      if (newX > this.x || newY > this.y) {
+        this.dir = 'forward';
+      } else {
+        this.dir = 'back';
+      }
+
       this._translate(newX, newY, true);
 
-      if (timestamp - this.startTime > 300) {
-        this.startTime = timestamp;
-        this.startX = this.x;
-        this.startY = this.y;
-      }
+      //防止过于灵敏
+      //      if (timestamp - this.startTime > 300) {
+      //        this.startTime = timestamp;
+      //        this.startX = this.x;
+      //        this.startY = this.y;
+      //      }
 
 
     },
@@ -454,6 +463,38 @@ define([], function () {
           time = Math.max(momentumX.duration, 0);
         }
         this.isInTransition = 1;
+      }
+
+
+      //处理步长
+      //这块处理有问题，需要重新写*******************************
+      if (this.options.step) {
+        var x = newX, y = newY;
+
+        var flag2 = y > 0 ? 1 : -1;  
+        var flag3 = x > 0 ? 1 : -1;  
+
+        var top = Math.abs(y);
+        var left = Math.abs(x);
+
+        var mod = top % this.options.step;
+        var mod1 = left % this.options.step;
+
+        top = (parseInt(top / this.options.step) * this.options.step + (mod > (this.options.step / 3) ? this.options.step : 0)) * flag2;
+        left = (parseInt(left / this.options.step) * this.options.step + (mod1 > (this.options.step / 3) ? this.options.step : 0)) * flag3;
+        y = top;
+        x = left;
+
+        time = Math.max(
+		  Math.max(
+			Math.min(Math.abs(newX - x), 1000),
+			Math.min(Math.abs(newY - y), 1000)
+		), 300);
+
+        newX = x;
+        newY = y;
+
+        easing = this.options.bounceEasing;
       }
 
       if (newX != this.x || newY != this.y) {
@@ -539,36 +580,6 @@ define([], function () {
     //移动x，y这里比较简单就不分离y了
     _translate: function (x, y, isStep) {
 
-      //处理步长
-      if (this.options.step && !isStep) {
-        var flag2 = y > 0 ? 1 : -1; //这个会影响后面的计算结果
-        var flag3 = x > 0 ? 1 : -1; //这个会影响后面的计算结果
-
-        var top = Math.abs(y);
-        var left = Math.abs(x);
-
-        var mod = top % this.options.step;
-        var mod1 = left % this.options.step;
-
-        top = (parseInt(top / this.options.step) * this.options.step + (mod > (this.options.step / 2) ? this.options.step : 0)) * flag2;
-        left = (parseInt(left / this.options.step) * this.options.step + (mod1 > (this.options.step / 2) ? this.options.step : 0)) * flag3;
-        y = top;
-        x = left;
-
-        if (this.x > this.options.scrollOffset) {
-          x = this.options.scrollOffset;
-        } else if (this.x < this.maxScrollX) {
-          x = this.maxScrollX;
-        }
-
-        if (this.y > this.options.scrollOffset) {
-          y = this.options.scrollOffset;
-        } else if (this.y < this.maxScrollY) {
-          y = this.maxScrollY;
-        }
-
-      }
-
       if (this.options.scrollType == 'y') {
         x = 0;
       } else {
@@ -592,19 +603,23 @@ define([], function () {
 
       time = time || 0;
 
-      if (this.options.scrollType == 'y' || this.x > this.options.scrollOffset) {
-        x = this.options.scrollOffset;
-      } else if (this.x < this.maxScrollX) {
-        x = this.maxScrollX;
+      if (this.options.scrollType == 'x') {
+        if (this.x > this.options.scrollOffset) {
+          x = this.options.scrollOffset;
+        }
+        if (this.x < this.maxScrollX) {
+          x = this.maxScrollX;
+        }
+      } else {
+        if (this.y > this.options.scrollOffset) {
+          y = this.options.scrollOffset;
+        }
+        if (this.y < this.maxScrollY) {
+          y = this.maxScrollY;
+        }
       }
 
-      if (!this.options.scrollType == 'x' || this.y > this.options.scrollOffset) {
-        y = this.options.scrollOffset;
-      } else if (this.y < this.maxScrollY) {
-        y = this.maxScrollY;
-      }
-
-      if (x == this.x || y == this.y) {
+      if ((this.options.scrollType == 'x' && x == this.x) || (this.options.scrollType == 'y' && y == this.y)) {
         return false;
       }
 
@@ -615,6 +630,7 @@ define([], function () {
     //移动
     scrollTo: function (x, y, time, easing) {
       easing = easing || utils.ease.circular;
+
 
       this.isInTransition = time > 0;
 

@@ -305,10 +305,10 @@
       opts = opts || {};
       var isNotAnimat = opts.isNotAnimat;
       if (isNotAnimat) this.isAnimat = false;
-      this.animatName = this.animBackName;
+      this.animatName = this.animBackwardName;
 
       if (viewId) {
-        opts.animatName = this.animBackName;
+        opts.animatName = this.animBackwardName;
         this.forward(viewId, opts)
       } else {
         if (window.history.length == 1) {

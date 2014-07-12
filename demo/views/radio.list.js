@@ -65,6 +65,13 @@ define(['View', getViewTemplatePath('radio.list'), 'UIRadioList'], function (Vie
     },
 
     demo3: function () {
+      //清空、销毁radio3
+      if(this.radio3) {
+        this.radio3.$el.next('.cui-mask').detach();
+        this.radio3.$el.detach();
+        this.radio3 = null;
+      }
+
       if (!this.radio3) {
         var beforeData3 =  [{ id:'红茶'}, { id:'绿茶'}, {id:'菊花茶' }, {id:'茉莉茶' },{id:'铁观音' }, {id:'乌龙茶' }, {id:'奶茶' }, {id:'打奶茶' }];
         var setData3 =  [{ id:'冰红茶'}, { id:'冰绿茶'}, {id:'玫瑰花茶' },{id:'薄荷茶' }];

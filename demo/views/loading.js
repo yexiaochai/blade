@@ -15,7 +15,9 @@
 
     demo1: function () {
       if (!this.loading1) {
-        this.loading1 = new UILoading();
+        this.loading1 = new UILoading({
+          maskToHide: true
+        });
       }
       this.loading1.show();
     },
@@ -23,7 +25,7 @@
     demo2: function () {
       if (!this.loading2) {
         this.loading2 = new UILoading({
-
+          maskToHide: true
         });
       }
       this.loading2.show();
