@@ -59,6 +59,7 @@
 		  "views/group.select",
           "text!templates/group.select.html",
 
+
 		  "views/index",
           "text!templates/index.html",
 		  
@@ -88,6 +89,9 @@
 
 		  "views/select",
           "text!templates/select.html",
+
+		  "views/select2",
+          "text!templates/select2.html",
 
 		   "views/switch",
           "text!templates/switch.html",

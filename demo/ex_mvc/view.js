@@ -40,11 +40,15 @@ hljs.registerLanguage("json", function(a) {
     _initHead: function () {
 
       this.$('header').append($('<i  class="returnico i_bef"></i>'));
+      this.$('header').append($('<i class="icon_home i_bef"></i>'));
     },
 
     events: {
       'click .returnico': function () {
         this.back('index');
+      },
+      'click .icon_home': function () {
+        window.location = '../index.html';
       }
     },
 
