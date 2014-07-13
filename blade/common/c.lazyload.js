@@ -97,8 +97,6 @@
         }
         this.imgContainer[offset.top].push(el);
 
-        el.parent().append($('<span>' + offset.top + '</span>'));
-
       }
     },
 
