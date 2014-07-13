@@ -15,7 +15,15 @@
         }
         this.scrollLayer = new UIScrollLayer({
           maxHeight: 400,  
-          html: '<div class="s-tpl">'+ html +'</div>'
+          html: '<div class="s-tpl">'+ html +'</div>',
+          okAction: function() {
+            console.log('that\'s ok');
+            this.hide();
+          },
+          cancelAction: function() {
+            console.log('that\'s cancel');
+            this.hide();
+          }
         });
       }
       this.scrollLayer.show();
@@ -32,8 +40,8 @@
           datamodel: {
             title: '测试',
             btns: [
-              { name: '测试', className: 'cui-btns-cancel' },
-              { name: '测试', className: 'cui-btns-ok' }
+              { name: '取消', className: 'cui-btns-cancel' },
+              { name: '确定', className: 'cui-btns-ok' }
             ]
           },
           events: {
