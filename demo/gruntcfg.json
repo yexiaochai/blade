@@ -114,6 +114,10 @@
           "views/validate2",
           "text!templates/validate2.html",
 
+		   "views/inputclear",
+          "text!templates/inputclear.html",
+
+
           "views/slider",
           "text!templates/slider.html"
 

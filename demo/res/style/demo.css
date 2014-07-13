@@ -38,9 +38,8 @@ code {
 }
 .imgs-area {
     margin:10px;
-    height: 500px;
+    min-height: 500px;
     background: lightgoldenrodyellow;
-    overflow-y: auto;
     text-align: center;
 }
 .imgs-area li {

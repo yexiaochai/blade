@@ -67,8 +67,7 @@
         this.$('.imgs-area').append(imgsArr);
 
         this.sss = new cLazyload({
-          imgs: this.$('.imgs-area img'),
-          container: this.$('.imgs-area')
+          imgs: this.$('.imgs-area img')
         });
       }
     },
