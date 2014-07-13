@@ -59,6 +59,9 @@
 		  "views/group.select",
           "text!templates/group.select.html",
 
+          "views/group.select2",
+          "text!templates/group.select2.html",
+
 		  "views/index",
           "text!templates/index.html",
 		  
