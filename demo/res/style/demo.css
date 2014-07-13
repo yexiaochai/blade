@@ -59,8 +59,8 @@ code {
 }
 .flip-content {
     margin: 0 10px;
-    height: 500px;
-    line-height: 500px;
+    height: 200px;
+    line-height: 200px;
     background: #d9d9d9;
 }
 .validate-form div {

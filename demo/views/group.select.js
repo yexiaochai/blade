@@ -25,7 +25,15 @@
 
         if (!this.groupSelect) {
           this.groupSelect = new UIGroupSelect({
-            data: [data1, data2]
+            data: [data1, data2],
+            onOkAction: function(items) {
+              console.log('ok', items);
+              this.hide();
+            },
+            onCancelAction:function() {
+              console.log('cancel');
+              this.hide();
+            }
           });
         }
         this.groupSelect.show();
