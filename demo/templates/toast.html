@@ -23,77 +23,77 @@
 
   	<h2 class="dh2">demo1</h2>
 	<input type="button" class="demo1 btn" value="简单使用" >
-	<pre><code>
-	if (!this.toast1) {
-        this.toast1 = new UIToast({
-          datamodel: {
-            content: 'content'
-          }
-        });
+<pre><code>
+if (!this.toast1) {
+    this.toast1 = new UIToast({
+      datamodel: {
+        content: 'content'
       }
-      this.toast1.show();
-	</code></pre>
+    });
+  }
+  this.toast1.show();
+</code></pre>
 
 	<h2 class="dh2">demo2</h2>
 	<input type="button" class="demo2 btn" value="2秒关闭" >
-	<pre><code>
-  	if (!this.toast2) {
-        this.toast2 = new UIToast({
-          datamodel: {
-            content: 'two second close'
-          },
-          hideSec: 2000
+<pre><code>
+if (!this.toast2) {
+    this.toast2 = new UIToast({
+      datamodel: {
+        content: 'two second close'
+      },
+      hideSec: 2000
 
-        });
-    }
-    this.toast2.show();
-	</code></pre>
+    });
+}
+this.toast2.show();
+</code></pre>
 
 	<h2 class="dh2">demo3</h2>	
 	<input type="button" class="demo3 btn" value="点击mask不关闭" >
-	<pre><code>
-      if (!this.toast3) {
-        this.toast3 = new UIToast({
-          datamodel: {
-            content: 'content01'
-          },
-          maskToHide: false
-        });
-      }
-      this.toast3.show();
-	</code></pre>
+<pre><code>
+  if (!this.toast3) {
+    this.toast3 = new UIToast({
+      datamodel: {
+        content: 'content01'
+      },
+      maskToHide: false
+    });
+  }
+  this.toast3.show();
+</code></pre>
 
 	<h2 class="dh2">demo4</h2>
 	<input type="button" class="demo4 btn" value="自动关闭并执行回调">
-	<pre><code>
-      if (!this.toast4) {
-        this.toast4 = new UIToast({
-          datamodel: {
-            content: 'callback'
-          },
-          hideAction: function () {
-            console.log('my self hideAction');
-          }
-        });
+<pre><code>
+  if (!this.toast4) {
+    this.toast4 = new UIToast({
+      datamodel: {
+        content: 'callback'
+      },
+      hideAction: function () {
+        console.log('my self hideAction');
       }
-      this.toast4.show();
-	</code></pre>
+    });
+  }
+  this.toast4.show();
+</code></pre>
 
 	<h2 class="dh2">demo5</h2>
 	<input type="button" class="demo5 btn" value="执行setDatamodel">
-	<pre><code>
-      if (!this.toast5) {
-        this.toast5 = new UIToast({
-          datamodel: {
-            content: 'content01'
-          }
-        });
+<pre><code>
+  if (!this.toast5) {
+    this.toast5 = new UIToast({
+      datamodel: {
+        content: 'content01'
       }
-      this.toast5.show();
-      this.toast5.setDatamodel('setDatamodel', function () {
-        console.log('i am setDatamodel\'s hiden');
-      });
-	</code></pre>
+    });
+  }
+  this.toast5.show();
+  this.toast5.setDatamodel('setDatamodel', function () {
+    console.log('i am setDatamodel\'s hiden');
+  });
+</code></pre>
 
 
 </section>

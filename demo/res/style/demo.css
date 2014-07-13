@@ -70,7 +70,7 @@ code {
     text-align: right;
 }
 .validate-form input, .d-input {
-    width: 200px;
+    width: 150px;
     height: 30px;
     background: #fff;
     border:1px solid #ccc;

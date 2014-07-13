@@ -8,13 +8,13 @@
     <h2 class="dh2">基本参数说明</h2>
 
     <pre><code>
-        @param html         {String}     scroll的内容
-        @param maxHeight    {Int}        最大高度
-        @param events       {Object}     绑定事件
-        @param datamodel    {
-            title:          {String}     标题
-            btns:           {Array}      按钮数组
-        }
+    @param html         {String}     scroll的内容
+    @param maxHeight    {Int}        最大高度
+    @param events       {Object}     绑定事件
+    @param datamodel    {
+        title:          {String}     标题
+        btns:           {Array}      按钮数组
+    }
     </code></pre>
 </section>
 
@@ -22,7 +22,7 @@
  	<h2 class="dh2">demo1</h2>
     <input type="button" class="demo1 btn" value="scrollLayer简单使用">
     <pre><code>
-      if (!this.scrollLayer) {
+    if (!this.scrollLayer) {
         var html = '';
         for(var i=0;i<40;i++) {
           html += "&lt;p>this is scrollLayer"+ i +"&lt;/p>";
@@ -31,14 +31,14 @@
           maxHeight: 400,  //出现scroll的最大高度
           html: '&lt;div class="s-tpl">'+ html +'&lt;/div>'
         });
-      }
+    }
       this.scrollLayer.show();
     </code></pre>
 
     <h2 class="dh2">demo2</h2>
     <input type="button" class="demo2 btn" value="参数设置、事件重写">
     <pre><code>
-      if (!this.scrollLayer2) {
+    if (!this.scrollLayer2) {
         var html = '';
         for(var i=0;i<40;i++) {
           html += '&lt;p>服务费'+ i +'&lt;/p>';
@@ -73,8 +73,8 @@
             this.hide();
           }
         });
-      }
-      this.scrollLayer2.show();
+    }
+    this.scrollLayer2.show();
     </code></pre>
 </section>
 

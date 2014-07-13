@@ -9,13 +9,20 @@ define(['View', getViewTemplatePath('radio.list'), 'UIRadioList'], function (Vie
     events: {
       'click .demo1': 'demo1',
       'click .demo-input1': 'demo_input1',
+      'click .demo-input2': 'demo_input2',
+      'click .demo-input3': 'demo_input3',
       'click .demo2': 'demo2',
       'click .demo3': 'demo3'
     },
 
     demo_input1: function() {
-      console.log('nie')
       this.demo1();
+    },
+    demo_input2: function() {
+      this.demo2();
+    },
+    demo_input3: function() {
+      this.demo3();
     },
 
     demo1: function () {
@@ -43,7 +50,8 @@ define(['View', getViewTemplatePath('radio.list'), 'UIRadioList'], function (Vie
 
     demo2: function () {
       if (!this.radio2) {
-        var demodata2 =  [{ id:'红茶'}, { id:'绿茶'}, {id:'菊花茶' }, {id:'茉莉茶' },{id:'铁观音' }, {id:'乌龙茶' }, {id:'奶茶' }, {id:'打奶茶' }];
+        var demodata2 =  [{ id:'红茶'}, { id:'绿茶'}, {id:'菊花茶' }, {id:'茉莉茶' },{id:'铁观音' }, {id:'乌龙茶' }, {id:'奶茶' }, {id:'打奶茶' }],
+            scope = this;
         this.radio2 = new UIRadioList({
           datamodel: {
             title: '茶',
@@ -57,7 +65,9 @@ define(['View', getViewTemplatePath('radio.list'), 'UIRadioList'], function (Vie
             var el = $(e.target),  //获取当前点击的dom
                 i = el.attr('data-index');
                 this.setIndex(i);  //设置点击的选项
+                scope.$('.demo-input2').val(this.getSelected().id);  //input里显示值
                 console.log('my click action ',  this.getSelected());
+                this.hide();
           }
         });
       }
@@ -73,8 +83,9 @@ define(['View', getViewTemplatePath('radio.list'), 'UIRadioList'], function (Vie
       }
 
       if (!this.radio3) {
-        var beforeData3 =  [{ id:'红茶'}, { id:'绿茶'}, {id:'菊花茶' }, {id:'茉莉茶' },{id:'铁观音' }, {id:'乌龙茶' }, {id:'奶茶' }, {id:'打奶茶' }];
-        var setData3 =  [{ id:'冰红茶'}, { id:'冰绿茶'}, {id:'玫瑰花茶' },{id:'薄荷茶' }];
+        var beforeData3 =  [{ id:'红茶'}, { id:'绿茶'}, {id:'菊花茶' }, {id:'茉莉茶' },{id:'铁观音' }, {id:'乌龙茶' }, {id:'奶茶' }, {id:'打奶茶' }],
+            setData3 =  [{ id:'冰红茶'}, { id:'冰绿茶'}, {id:'玫瑰花茶' },{id:'薄荷茶' }],
+            scope = this;;
         //动态改变的数据
         var setDatamodel = {
           title: 'set茶',
@@ -84,6 +95,10 @@ define(['View', getViewTemplatePath('radio.list'), 'UIRadioList'], function (Vie
           datamodel: {
             title: '1秒改变茶',
             data: beforeData3
+          },
+          onClick: function(e, data) {
+            scope.$('.demo-input3').val(data.id);  //input里显示值
+            this.hide();
           }
         });
       }
