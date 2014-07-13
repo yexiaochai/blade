@@ -3,7 +3,6 @@
   return _.inherit(View, {
     onCreate: function () {
       this.$el.html(viewhtml);
-
     },
 
     events: {
@@ -13,15 +12,24 @@
       'click .demo1': 'demo1Action',
       'click .demo2': 'demo2Action',
       'click .demo3': 'demo3Action',
-      'click .demo4': 'demo4Action'
+      'click .demo4': 'demo4Action',
+      'click .demo-input1': 'demo_input1',
+      'click .demo-input2': 'demo_input2',
+      'click .demo-input3': 'demo_input3',
+      'click .demo-input4': 'demo_input4'
     },
 
-    filterAction: function () {
-
+    demo_input1: function (e) {
+      this.demo1Action(e);
     },
-
-    orderByAction: function() {
-
+    demo_input2: function (e) {
+      this.demo2Action(e);
+    },
+    demo_input3: function (e) {
+      this.demo3Action(e);
+    },
+    demo_input4: function (e) {
+      this.demo4Action(e);
     },
 
     demo1Action: function(e) {
@@ -29,7 +37,8 @@
         var data = [{ name: '<span class="center">价格/星级</span>' },
           { name: '<span class="center">位置区域</span>' },
           { name: '<span class="center">品牌</span>' },
-          { name: '<span class="center">测试</span>'}];
+          { name: '<span class="center">测试</span>'}],
+            scope = this;
 
 
         var el = $(e.currentTarget);
@@ -45,6 +54,7 @@
           onClick:  function (e, data, index, el) {
             console.log(arguments);
             this.setIndex(index);
+            scope.$('.demo-input1').val(data.name.match(/>(.+)</)[1]);
             this.hide();
           }
         });
@@ -57,7 +67,8 @@
         var data = [{ name: '<span class="center">价格/星级</span>' },
           { name: '<span class="center">位置区域</span>' },
           { name: '<span class="center">品牌</span>' },
-          { name: '<span class="center">测试</span>'}];
+          { name: '<span class="center">测试</span>'}],
+            scope = this;
 
 
         var el = $(e.currentTarget);
@@ -73,6 +84,7 @@
           onClick:  function (e, data, index, el) {
             console.log(arguments);
             this.setIndex(index);
+            scope.$('.demo-input2').val(data.name.match(/>(.+)</)[1]);
             this.hide();
           }
         });
@@ -85,7 +97,8 @@
         var data = [{ name: '<span class="center">价格/星级</span>' },
           { name: '<span class="center">位置区域</span>' },
           { name: '<span class="center">品牌</span>' },
-          { name: '<span class="center">测试</span>'}];
+          { name: '<span class="center">测试</span>'}],
+            scope = this;
 
 
         var el = $(e.currentTarget);
@@ -102,6 +115,7 @@
           onClick:  function (e, data, index, el) {
             console.log(arguments);
             this.setIndex(index);
+            scope.$('.demo-input3').val(data.name.match(/>(.+)</)[1]);
             this.hide();
           }
         });
@@ -114,7 +128,8 @@
         var data = [{ name: '<span class="center">普通会员</span>' },
           { name: '<span class="center">vip</span>' },
           { name: '<span class="center">高级vip</span>' },
-          { name: '<span class="center">钻石vip</span>'}];
+          { name: '<span class="center">钻石vip</span>'}],
+            scope = this;
 
 
         var el = $(e.currentTarget);
@@ -130,6 +145,7 @@
           onClick:  function (e, data, index, el) {
             console.log(arguments);
             this.setIndex(index);
+            scope.$('.demo-input4').val(data.name.match(/>(.+)</)[1]);
             this.hide();
           }
         });
