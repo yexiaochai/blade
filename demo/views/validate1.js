@@ -40,7 +40,7 @@ define(['View', getViewTemplatePath('validate1'), 'cValidate'], function (View, 
           //创建错误提示气泡
           var error_info = document.createElement('div');
           error_info.innerHTML = $inputs.eq(i).prev('label').html() + '不正确';
-          error_info.style.cssText = 'position:absolute;top:'+($inputs.eq(i).position().top-10) + 'px;left:'+($inputs.eq(i).position().left+210)+'px;';
+          error_info.style.cssText = 'position:absolute;top:'+($inputs.eq(i).position().top-10) + 'px;left:'+($inputs.eq(i).position().left+160)+'px;';
           error_info.className = 'error_info';
           $inputs.eq(i).after(error_info);
 

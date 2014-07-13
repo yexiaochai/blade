@@ -117,7 +117,6 @@
     
   $.bindFastClick && $.bindFastClick();
 
-
   });
 })();
 

@@ -39,8 +39,12 @@ code {
 .imgs-area {
     margin:10px;
     height: 500px;
-    background: lightsteelblue;
+    background: lightgoldenrodyellow;
     overflow-y: auto;
+    text-align: center;
+}
+.imgs-area li {
+    list-style: none;
 }
 .ml-10 {
     margin-left:10px;
@@ -70,7 +74,7 @@ code {
     text-align: right;
 }
 .validate-form input, .d-input {
-    width: 200px;
+    width: 150px;
     height: 30px;
     background: #fff;
     border:1px solid #ccc;
