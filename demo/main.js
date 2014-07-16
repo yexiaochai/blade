@@ -114,8 +114,7 @@
       'viewRootPath': '' + project + 'views/',
       animations: animations
     });
-    
-  alert(0);
+      $.bindFastClick && $.bindFastClick();
 
   });
 })();

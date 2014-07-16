@@ -5,7 +5,7 @@
     var index = 3000;
     return function (level) {
       return level + (++index);
-    }
+    };
   })();
 
   var UIContainerUtil = (function () {
@@ -25,7 +25,7 @@
         if (id) return UIContainer[id];
         return UIContainer;
       }
-    }
+    };
   })();
 
 
