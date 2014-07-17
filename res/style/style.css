@@ -1839,4 +1839,52 @@ input {
 .p10 {
     padding: 10px
 }
+.clear-input {
+    display: none;
+    position: absolute;
+    z-index: 10;
+    top: 0!important;
+    right: 0!important;
+    width: 30px;
+    height: 100%
+}
+
+.clear-input span {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-radius: 30px;
+    top: 50%!important;
+    left: 50%;
+    margin: -8px 0 0 -8px;
+    background: #b1b1b1
+}
+
+.clear-input span:before,.clear-input span:after {
+    position: absolute;
+    content: "";
+    top: 4px;
+    left: 7px;
+    width: 2px;
+    height: 8px;
+    background: #fff;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg)
+}
+
+.clear-input span:before {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg)
+}
+
+.clear-input-box {
+    position: relative
+}
+
 /***************************   need  css **************************************/
