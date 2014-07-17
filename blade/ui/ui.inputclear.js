@@ -118,7 +118,10 @@ define(['UIView', getAppUITemplatePath('ui.inputclear'), 'UIInputClear'], functi
               }
         }).on('focusout', container, function(e) {
               var $target = $(e.currentTarget);
-              $target.next(defaultClearClass).hide();
+              //500毫秒后隐藏
+              setTimeout(function() {
+                $target.next(defaultClearClass).hide();
+              }, 500);
         });
 
         //点击删除
