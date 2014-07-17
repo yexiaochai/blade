@@ -102,3 +102,15 @@ code {
     left: -10px;
     border-right: 5px solid #ff8c00;
 }
+.pos-rel {
+    position: relative;
+}
+.d-input {
+    width: 200px;
+    background: #fff;
+}
+.input-div {
+    width: 200px;
+    margin-left:10px;
+    margin-bottom: 5px;
+}
