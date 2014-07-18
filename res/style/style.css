@@ -1842,11 +1842,7 @@ input {
 .clear-input {
     display: none;
     position: absolute;
-    z-index: 10;
-    top: 0!important;
-    right: 0!important;
     width: 30px;
-    height: 100%
 }
 
 .clear-input span {
