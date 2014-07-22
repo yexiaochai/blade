@@ -1,4 +1,4 @@
-define(['View', getViewTemplatePath('inputclear'), 'cInputclear'], function (View, viewhtml, cInputclear) {
+define(['View', getViewTemplatePath('inputclear2'), 'cInputclear'], function (View, viewhtml, cInputclear) {
 
   return _.inherit(View, {
     onCreate: function () {

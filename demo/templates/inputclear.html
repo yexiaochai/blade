@@ -10,14 +10,8 @@
     <pre><code>
     @param template      {String}    自定义模板
     @param clearCallback {Function}  点击删除的callback
-    @param getInputVal   {Function}  获取当前input的值
-    @param datamodel    {        数据模型
-        parent          {String}    父级Dom的class或id,委托绑定
-        container       {String}    input的class或id
-        clearClass      {String}    删除按钮的class
-        offset          {Object}    按钮的位置可设置top,left,bottom,right
-        clearEventClass {String}    默认删除按钮事件class，一般情况不作赋值
-    }
+
+
     </code></pre>
 </section>
 
@@ -25,30 +19,21 @@
 <section class="demos">
     <h2 class="dh2">demo1</h2>
     <div class="parent-div">
-        <div class="demo1div pos-rel input-div">
-            <input type="text" class="demo1 d-input" value="1"/>
-        </div>
-        <div class="demo1div pos-rel input-div">
-            <input type="text" class="demo1 d-input"  value="2"/>
-        </div>
-        <div class="demo1div pos-rel input-div">
-            <input type="text" class="demo1 d-input"  value="3"/>
-        </div>
+        <input type="text" class="d-input my-input" value="1"/>
+        <input type="text" class="d-input my-input"  value="2"/>
+        <input type="text" class="d-input my-input"  value="3"/>
     </div>
 
     <input type="button" class="new-input btn" value="新增input">
 
     <h2 class="dh2">demo2</h2>
-    <div class="demo1div pos-rel input-div">
-        <input type="text" class="demo2 d-input" value="1"/>
-    </div>
-    <div class="demo1div pos-rel input-div">
-        <input type="text" class="demo2 d-input"  value="2"/>
-    </div>
-    <div class="demo1div pos-rel input-div">
-        <input type="text" class="demo2 d-input"  value="3"/>
-    </div>
+    <input type="text" class="d-input my-input other-input" value="1"/>
+    <input type="text" class="d-input my-input other-input"  value="2"/>
+    <input type="text" class="d-input my-input other-input"  value="3"/>
 
+    <textarea class="my-area my-input">
+
+    </textarea>
 </section>
 
 
