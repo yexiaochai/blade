@@ -22,6 +22,7 @@
       'cLazyload': app + 'common/c.lazyload',
       'cValidate': app + 'common/c.validate',
       'cHighlight': app + 'common/c.highlight',
+      'cInputclear': app + 'common/c.inputclear',
 
       //UI组件
       'UIView': app + 'ui/ui.abstract.view',
