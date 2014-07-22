@@ -1842,6 +1842,7 @@ input {
 .clear-input {
     display: none;
     position: absolute;
+    z-index: 10;
     width: 30px;
 }
 
