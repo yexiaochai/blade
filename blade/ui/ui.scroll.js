@@ -34,12 +34,12 @@ define([], function () {
     me.getTime = Date.now || function getTime() { return new Date().getTime(); };
 
     me.addEvent = function (el, type, fn, capture) {
-      if (el[0]) el = el[0];
+      if (el[0] && el != window.top) el = el[0];
       el.addEventListener(type, fn, !!capture);
     };
 
     me.removeEvent = function (el, type, fn, capture) {
-      if (el[0]) el = el[0];
+      if (el[0] && el != window.top) el = el[0];
       el.removeEventListener(type, fn, !!capture);
     };
 

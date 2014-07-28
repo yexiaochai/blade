@@ -23,6 +23,7 @@
       this.msg.append($('<div>大家好，我是list的onPreShow事件，我每次都会执行，执行最后执行turning方法便可显示view</div>'));
 
       this.turning();
+      _.clearInterval();
     },
 
     onAfterShow: function () {

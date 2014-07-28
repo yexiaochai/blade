@@ -4,12 +4,12 @@ define([], function () {
 
     },
     //取当前input的值
-    getInputVal: function(val) {
-//      console.log('val:',val);
+    getInputVal: function (val) {
+      //      console.log('val:',val);
       return val;
     },
     //设置删除按钮的位置
-    setPosition: function(clearBtn) {
+    setPosition: function (clearBtn) {
       var offset = this.offset;
       if (offset.left) {
         clearBtn.css({
@@ -38,11 +38,14 @@ define([], function () {
     },
 
     initialize: function (opts) {
+      this.propertys();
       this.handleOpts(opts);
       this.init();
     },
 
-    handleOpts: function(opts) {
+    handleOpts: function (opts) {
+      _.extend(this, opts);
+
       this.clearClass = opts.clearClass || 'close-me';
       this.html = opts.html || '<a class="clear-input close-me" href="javascript:void(0);" style="display:none;"><span></span></a>';
 
@@ -55,16 +58,16 @@ define([], function () {
 
     },
 
-    init: function() {
+    init: function () {
       this.bindEvents();
     },
 
-    bindEvents: function() {
+    bindEvents: function () {
       var scope = this,
-          $inputClear = scope.wrapper.find('.'+scope.clearClass),
+          $inputClear = scope.wrapper.find('.' + scope.clearClass),
           $currentInput;  //当前input
 
-      this.wrapper.on('focus', this.inputs, function() {
+      this.wrapper.on('focus', this.inputs, function () {
         $inputClear.show();  //先show才能获取删除按钮的高度和宽度
         var offset = $(this).offset(),
             left = offset.left,
@@ -74,21 +77,21 @@ define([], function () {
             $inputClearWidth = $inputClear.width(),
             $inputClearHeight = $inputClear.height();
 
-        scope.offset = { left: left+width-$inputClearWidth, top: top +height/2-$inputClearHeight/2 };
+        scope.offset = { left: left + width - $inputClearWidth, top: top + height / 2 - $inputClearHeight / 2 };
         scope.setPosition($inputClear);
         $currentInput = $(this);
-      }).on('focusout', this.inputs, function() {
+      }).on('focusout', this.inputs, function () {
         $inputClear.hide();
-      }).on('input', this.inputs, function() {
-            if($(this).val() != '') {
-              $inputClear.show();
-            } else {
-              $inputClear.hide();
-            }
+      }).on('input', this.inputs, function () {
+        if ($(this).val() != '') {
+          $inputClear.show();
+        } else {
+          $inputClear.hide();
+        }
       });
 
       //删除按钮的callback
-      $inputClear.click(function(e) {
+      $inputClear.click(function (e) {
         $target = $(e.currentTarget);
         $currentInput.val('');
 

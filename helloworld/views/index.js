@@ -28,6 +28,11 @@
       console.log('大家好，我是onShow事件，我在onPreShow执行turning后会执行');
       this.msg.append($('<div>大家好，我是onShow事件，我在onPreShow执行turning后会执行</div>'));
 
+
+      _.setInterval(function () {
+        console.log('dsdd')
+      }, 1000);
+
     },
 
     onHide: function () {
