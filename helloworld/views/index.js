@@ -29,8 +29,16 @@
       this.msg.append($('<div>大家好，我是onShow事件，我在onPreShow执行turning后会执行</div>'));
 
 
+//      _.setInterval(function () {
+//        console.log('111')
+//      }, 1000, 'sss');
+
       _.setInterval(function () {
-        console.log('dsdd')
+        console.log('222')
+      }, 1000);
+
+      _.setInterval(function () {
+        console.log('333')
       }, 1000);
 
     },

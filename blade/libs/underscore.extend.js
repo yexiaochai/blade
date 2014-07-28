@@ -353,7 +353,7 @@
   };
 
   _.clearInterval = function (rid, ns) {
-    var k, v, i, len, resArr;
+    var k, v, k1, i, len, i1, len1, resArr, j;
 
     if(typeof rid == 'number'){
       //1 clearInterval， 清除数组
@@ -372,14 +372,15 @@
     if(typeof rid == 'string'){ 
       ns = rid;
       resArr = TimerRes[ns];
-      for(i = 0, len = resArr.length; i < len; i++) {
-        _.clearInterval(resArr[i]);
+      j = resArr.length;
+      while(j != 0){
+       _.clearInterval(resArr[resArr.length - 1]);
       }
     }
 
     if(arguments.length == 0) {
-       for(k in TimerRes) {
-       _.clearInterval(k);     
+       for(k1 in TimerRes) {
+       _.clearInterval(k1);     
        }
     }
     
