@@ -5,7 +5,6 @@
 */
 define(['UILayer', getAppUITemplatePath('ui.alert')], function (UILayer, template) {
 
-
   return _.inherit(UILayer, {
     propertys: function ($super) {
       $super();
@@ -61,8 +60,6 @@ define(['UILayer', getAppUITemplatePath('ui.alert')], function (UILayer, templat
       this.refresh();
     }
 
-
   });
-
 
 });

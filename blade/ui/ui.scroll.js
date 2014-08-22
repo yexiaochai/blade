@@ -441,7 +441,7 @@ define([], function () {
       if (this.resetPosition(this.options.bounceTime)) {
         return;
       }
-
+      
       this.scrollTo(newX, newY);
       if (!this.moved) {
         //click 的情况
@@ -470,8 +470,8 @@ define([], function () {
       if (this.options.step) {
         var x = newX, y = newY;
 
-        var flag2 = y > 0 ? 1 : -1;  
-        var flag3 = x > 0 ? 1 : -1;  
+        var flag2 = y > 0 ? 1 : -1;
+        var flag3 = x > 0 ? 1 : -1;
 
         var top = Math.abs(y);
         var left = Math.abs(x);
