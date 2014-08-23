@@ -7,6 +7,8 @@
       this.gameType = 'tank';
       //      this.template = template;
 
+      this.HP = 1;
+
     },
 
     //物体碰撞时要执行的动作,crashObj为被撞的对象，x，y为碰撞前的坐标
@@ -21,7 +23,20 @@
     //被击中，袭击者这里只能捕捉到子弹，而根据其creater可找到对应坦克
     passiveCrashAction: function (raider) {
 
-      s = '';
+      this.HP--;
+
+      //嗝屁了
+      if (this.HP <=0) {
+        this.app.createBoom({
+          datamodel: {
+            x: (this.datamodel.x + this.datamodel.width / 2),
+            y: (this.datamodel.y + this.datamodel.height / 2),
+            level: 4
+          }
+        });
+//        this.destroy();
+      }
+
     },
 
     //子弹爆炸时会触发发出者一个回调

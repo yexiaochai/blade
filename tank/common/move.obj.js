@@ -113,16 +113,15 @@
       //这里一个是主动发出，一个是被动发出，主动发出者需要知道撞了什么，被动发出者需要知道被什么撞了
       if (isCrash) {
         this.crashAction(crashObj, x, y);
-        this.passiveCrashAction(crashObj, x, y);
-        crashObj.passiveCrashAction.call(this)
+        crashObj.passiveCrashAction.call(crashObj, this);
       }
 
       return isCrash;
     },
 
     //被撞的时候发生的动作，好像无用
-    passiveCrashAction: function (raider) { 
-    
+    passiveCrashAction: function (raider) {
+
     },
 
     //物体碰撞时要执行的动作,crashObj为被撞的对象，x，y为碰撞前的坐标
