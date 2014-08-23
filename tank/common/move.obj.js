@@ -113,7 +113,7 @@
       //这里一个是主动发出，一个是被动发出，主动发出者需要知道撞了什么，被动发出者需要知道被什么撞了
       if (isCrash) {
         this.crashAction(crashObj, x, y);
-        crashObj.passiveCrashAction.call(crashObj, this);
+//        crashObj.passiveCrashAction.call(crashObj, this);
       }
 
       return isCrash;

@@ -22,7 +22,7 @@
       //            this.datamodel.x = x + this.speed;
       //            this.datamodel.y = y + this.speed;
       console.log('爆炸');
-
+      crashObj.passiveCrashAction();
       this.blast(2);
     },
 

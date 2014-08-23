@@ -30,6 +30,9 @@ define(['AbstractView', getViewTemplatePath('index'), 'MoveObj', 'Tank', 'Bullet
 
     _bindEvent: function () {
       document.onkeydown = $.proxy(function (evt) {
+
+        this.me = this.npc;
+
         evt = (evt) ? evt : window.event;
         var keyCode = evt.keyCode;
         var charCode = evt.charCode;
