@@ -206,6 +206,7 @@
     },
 
     destroy: function () {
+      this.status = 'destroy';
       this.unBindEvents();
       this.removeSysEvents();
       UIContainerUtil.removeItem(this.id);

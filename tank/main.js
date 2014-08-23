@@ -8,7 +8,10 @@
   require.config({
     baseUrl: '../',
     paths: {
-      'MoveObj': 'tank/common/move.obj'
+      'MoveObj': 'tank/common/move.obj',
+      'Tank': 'tank/common/tank',
+      'Bullet': 'tank/common/bullet',
+      'Boom': 'tank/common/boom'
 
     }
   });
