@@ -7,12 +7,20 @@
       this.gameType = 'tank';
       //      this.template = template;
 
-      this.HP = 2;
+      this.HP = 10;
+
+      this.level = 0;
+
+      this.datamodel.speed = 1;
+      this.datamodel.bulletSpeed = 4;
+
 
       //最大子弹数
-      this.maxBulletSize = 3;
+      this.maxBulletSize = 1;
       //发出数
       this.bulletSize = 0;
+
+      this.speciality = '';
 
       this.dirObj = {
         step: 28,
@@ -21,6 +29,15 @@
         flag: 0
       };
 
+      this.score = 0;
+
+    },
+
+    //这里需要做数据验证
+    resetPropery: function () {
+      if (this.speciality == 'hp') {
+        this.dirObj.init += 32;
+      }
     },
 
     //物体碰撞时要执行的动作,crashObj为被撞的对象，x，y为碰撞前的坐标
@@ -29,6 +46,22 @@
 
       this.datamodel.x = x;
       this.datamodel.y = y;
+
+    },
+
+    //击中地方时候触发的事件
+    hitEnemy: function (crashObj) {
+      //可能击中子弹，也可能击中坦克，击中坦克时候可能会有特殊处理，比如加血
+      //这里先简单处理只是英雄的情况
+      if (this.gameRule == 'hero') {
+        //查看被袭击对象是否为加血机，如果是加血坦克，这里会有回血动作
+        if (crashObj.gameRule == 'npc') {
+          this.score++;
+          if (crashObj.speciality == 'hp') {
+            this.HP++;
+          }
+        }
+      }
 
     },
 
@@ -60,12 +93,17 @@
 
     //坦克特有方法，开火
     fire: function () {
+      if (this.status == 'destroy') return;
+
       if (this.bulletSize == this.maxBulletSize) return;
       var bullet = this.app.createBullet({
+        gameRule: this.gameRule + 'Bullet',
         creater: this,
         datamodel: {
           x: (this.datamodel.x + this.datamodel.width / 2),
-          y: (this.datamodel.y + this.datamodel.height / 2)
+          y: (this.datamodel.y + this.datamodel.height / 2),
+          dir: this.datamodel.dir,
+          speed: this.datamodel.bulletSpeed
         }
       });
 
@@ -119,11 +157,6 @@
 
     initialize: function ($super, opts) {
       $super(opts);
-    },
-
-    //这里需要做数据验证
-    resetPropery: function () {
-
     },
 
     addEvent: function ($super) {

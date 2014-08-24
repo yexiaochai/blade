@@ -10,6 +10,7 @@
     paths: {
       'MoveObj': 'tank/common/move.obj',
       'Tank': 'tank/common/tank',
+      'NPCTank': 'tank/common/npc.tank',
       'Bullet': 'tank/common/bullet',
       'Boom': 'tank/common/boom'
 

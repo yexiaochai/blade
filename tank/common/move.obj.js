@@ -20,7 +20,7 @@
         status: 'stop',
         x: 0,
         y: 0,
-        speed: 2
+        speed: 1
       };
 
       //容器最大值与最小值
@@ -33,6 +33,18 @@
       //这里回调函数至少具有两个对象，观察者与被观察者，其它因素需要剥离
       this.observers = []
 
+    },
+
+    setOption: function (options) {
+
+      for (var k in options) {
+        if (k == 'datamodel' || k == 'dirObj') {
+          _.extend(this[k], options[k]);
+          continue;
+        }
+        this[k] = options[k]
+      }
+      //      _.extend(this, options);
     },
 
     //添加对象观察者
@@ -70,9 +82,11 @@
     **************/
     notifyMove: function (x, y) {
 
-      if (this.gameType == 'bullet') {
-        s = '';
-      }
+      //检测观察者是否被销毁，销毁了的话这里需要做处理
+      this.observers = _.filter(this.observers, function (item) {
+        return item.status !== 'destroy';
+      });
+
       var obj = null, i = 0, len = this.observers.length;
       for (i = 0; i < len; i++) {
         obj = this.observers[i];
@@ -113,7 +127,7 @@
       //这里一个是主动发出，一个是被动发出，主动发出者需要知道撞了什么，被动发出者需要知道被什么撞了
       if (isCrash) {
         this.crashAction(crashObj, x, y);
-//        crashObj.passiveCrashAction.call(crashObj, this);
+        //        crashObj.passiveCrashAction.call(crashObj, this);
       }
 
       return isCrash;
@@ -132,7 +146,7 @@
 
     //到达边界时的行为
     borderCrashAction: function () {
-
+      
     },
 
     //单纯做碰撞检测，如果四个点在发生重合则发生碰撞
@@ -206,6 +220,11 @@
       return true;
     },
 
+    //移动结束触发的事件
+    moveEndAction: function () {
+
+    },
+
     move: function () {
       if (this.datamodel.status == 'stop') return;
       var x = this.datamodel.x, y = this.datamodel.y;
@@ -220,7 +239,7 @@
 
       //      this.resetPosition();
       this.tanslate(this.datamodel.x, this.datamodel.y)
-
+      this.moveEndAction();
     },
 
     initElement: function () {

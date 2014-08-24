@@ -9,7 +9,7 @@
       //这里要做一个修正，不能覆盖
       this.datamodel.width = this.datamodel.height = 8;
 
-      this.datamodel.speed = 5;
+      this.datamodel.speed = 4;
 
       //      this.template = template;
 
@@ -21,8 +21,15 @@
 
       //            this.datamodel.x = x + this.speed;
       //            this.datamodel.y = y + this.speed;
-      console.log('爆炸');
       crashObj.passiveCrashAction();
+
+      //可能击中子弹，也可能击中坦克，击中坦克时候可能会有特殊处理，比如加血
+      this.creater.hitEnemy(crashObj);
+      this.blast(2);
+    },
+
+    //子弹被子弹击中了
+    passiveCrashAction: function () {
       this.blast(2);
     },
 
@@ -57,10 +64,22 @@
       this.datamodel.y -= this.datamodel.height / 2;
     },
 
+    //根据方向，设置样式
+    setStyle: function () {
+      var dir = {
+        up: 0,
+        right: this.datamodel.width * 1,
+        down: this.datamodel.width * 2,
+        left: this.datamodel.width * 3
+      };
+      this.$el.css('background-position', '-' + dir[this.datamodel.dir] + 'px 0px');
+    },
+
     addEvent: function ($super) {
       $super();
       this.on('onCreate', function () {
         this.$el.addClass('bullet');
+        this.setStyle();
       });
     }
 
