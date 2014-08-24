@@ -5,7 +5,7 @@
     var index = 3000;
     return function (level) {
       return level + (++index);
-    }
+    };
   })();
 
   var UIContainerUtil = (function () {
@@ -25,7 +25,7 @@
         if (id) return UIContainer[id];
         return UIContainer;
       }
-    }
+    };
   })();
 
 
@@ -86,8 +86,9 @@
       return results;
     },
 
-    createRoot: function () {
+    createRoot: function (html) {
       this.$el = $('<div class="view" style="display: none; " id="' + this.id + '"></div>');
+      this.$el.html(html);
     },
 
     setOption: function (options) {
@@ -105,13 +106,12 @@
       this.propertys();
       this.setOption(opts);
       this.resetPropery();
-      this.createRoot();
       //添加系统级别事件
-      this.addSysEvents();
       this.addEvent();
-
       //开始创建dom
       this.create();
+      this.addSysEvents();
+
       this.initElement();
 
       //将当前的ui实例装入容器
@@ -154,8 +154,8 @@
 
     create: function () {
       this.trigger('onPreCreate');
-      //      this.$el.html(this.render(this.getViewModel()));
-      this.render();
+      this.createRoot(this.render());
+
       this.status = 'create';
       this.trigger('onCreate');
     },
@@ -163,7 +163,7 @@
     //实例化需要用到到dom元素
     initElement: function () { },
 
-    render: function (data, callback) {
+    render: function (callback) {
       data = this.getViewModel() || {};
       var html = this.template;
       if (!this.template) return '';
@@ -171,7 +171,6 @@
         html = _.template(this.template)(data);
       }
       typeof callback == 'function' && callback.call(this);
-      this.$el.html(html);
       return html;
     },
 
@@ -207,6 +206,7 @@
     },
 
     destroy: function () {
+      this.status = 'destroy';
       this.unBindEvents();
       this.removeSysEvents();
       UIContainerUtil.removeItem(this.id);

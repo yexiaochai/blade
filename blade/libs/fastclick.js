@@ -88,12 +88,14 @@
         el = null;
         return false;
       }
-      if (IOSWithBadTarget) {
-        //解决ios7点击问题，看着这个代码我真想打自己......
-        el.blur();
-      }
 
-      el.focus();
+//      if (IOSWithBadTarget && needFocus(document.activeElement)) {
+//        //解决ios7点击问题，看着这个代码我真想打自己......
+//        $('#SYS_INPUT_MSG').focus();
+//      }
+
+      focus(el);
+
       if (tagName !== 'select') {
         el = null;
         e.preventDefault();
@@ -108,6 +110,17 @@
       sendClick(el, e);
     }
     return false;
+  }
+
+  function focus(targetElement) {
+    var length;
+
+    if (deviceIsIOS && targetElement.setSelectionRange && targetElement.type.indexOf('date') !== 0 && targetElement.type !== 'time') {
+      length = targetElement.value.length;
+      targetElement.setSelectionRange(length, length);
+    } else {
+      targetElement.focus();
+    }
   }
 
   function onTouchCancel(e) {
@@ -149,7 +162,7 @@
       case 'input':
         if ((isIOS && el.type === 'file') || el.disabled) return true;
         break;
-      //	    case 'label':         
+      //	    case 'label':            
       case 'video':
         return true;
     }

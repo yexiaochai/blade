@@ -21,6 +21,9 @@ define(['UIView', 'UIMask'], function (UIView, UIMask) {
       //需要居中定位
       this.needReposition = true;
 
+      //类型为layer
+      this.type = 'layer';
+
     },
 
     initialize: function ($super, opts) {
