@@ -189,11 +189,11 @@ define(['AbstractView', getViewTemplatePath('index'), 'MoveObj', 'Tank', 'Bullet
                 content: '英雄，要不我们再来一局？'
               },
               okAction: function () {
-                location.refresh();
+                window.location.refresh();
                 this.hide();
               },
               cancelAction: function () {
-                location.refresh();
+                  window.location.refresh();
                 this.hide();
               }
             });
