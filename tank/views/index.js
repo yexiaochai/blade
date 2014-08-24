@@ -1,7 +1,7 @@
 ﻿/*
 扮演游戏时钟，全局控制器角色
 */
-define(['AbstractView', getViewTemplatePath('index'), 'MoveObj', 'Tank', 'Bullet', 'Boom', 'NPCTank'], function (View, viewhtml, MoveObj, Tank, Bullet, Boom, NPCTank) {
+define(['AbstractView', getViewTemplatePath('index'), 'MoveObj', 'Tank', 'Bullet', 'Boom', 'NPCTank', 'UIAlert'], function (View, viewhtml, MoveObj, Tank, Bullet, Boom, NPCTank, UIAlert) {
 
   var rAF = window.requestAnimationFrame ||
 	window.webkitRequestAnimationFrame ||
@@ -183,6 +183,22 @@ define(['AbstractView', getViewTemplatePath('index'), 'MoveObj', 'Tank', 'Bullet
         tick: $.proxy(function () {
           if (this.me.status == 'destroy') {
             this.app.gameStatus = false;
+            var alert = new UIAlert({
+              datamodel: {
+                title: '游戏结束',
+                content: '英雄，要不我们再来一局？'
+              },
+              okAction: function () {
+                location.reload();
+                this.hide();
+              },
+              cancelAction: function () {
+                location.reload();
+                this.hide();
+              }
+            });
+            alert.show();
+
           }
 
           $.each(this.app.GAMEOBJ, $.proxy(function (k, v) {

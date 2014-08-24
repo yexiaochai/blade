@@ -114,7 +114,7 @@
     },
 
     moveEndAction: function () {
-      this.fire();
+//      this.fire();
     },
 
     //根据方向，设置样式
