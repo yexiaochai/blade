@@ -113,6 +113,10 @@
       this.bulletSize++;
     },
 
+    moveEndAction: function () {
+      this.fire();
+    },
+
     //根据方向，设置样式
     setStyle: function () {
       var pos = 0;
