@@ -102,3 +102,27 @@ code {
     left: -10px;
     border-right: 5px solid #ff8c00;
 }
+.pos-rel {
+    position: relative;
+}
+.d-input {
+    width: 200px;
+    background: #fff;
+    display: block;
+    margin: 10px;
+}
+.input-div {
+    width: 200px;
+    margin-left:10px;
+    margin-bottom: 5px;
+}
+.other-input {
+    width: 300px;
+    height: 50px;
+}
+.my-area {
+    width: 400px;
+    height: 200px;
+    resize: none;
+    margin:10px;
+}

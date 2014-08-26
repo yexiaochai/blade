@@ -242,7 +242,6 @@
       return this.getSelected().id;
     },
 
-
     getSelected: function () {
       return this.datamodel.data[this.datamodel.index];
     },
@@ -251,7 +250,7 @@
     getIndexByPosition: function () {
       var pos = this.scroll.y - this.scrollOffset;
       var index = Math.abs(pos) / this.itemHeight;
-      return index;
+      return Math.round(index);
     },
 
     initialize: function ($super, opts) {

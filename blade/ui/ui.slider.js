@@ -13,7 +13,7 @@
       };
 
       this.itemNum = 0;
-      this.displayNum = 3;
+      this.displayNum = 5;
       this.animatTime = 100;
 
       //该组件一定要设置宽高
@@ -55,7 +55,7 @@
     },
 
     _resetNum: function () {
-      this.displayNum = this.displayNum % 2 == 0 ? this.displayNum + 1 : this.displayNum;
+      //      this.displayNum = this.displayNum % 2 == 0 ? this.displayNum + 1 : this.displayNum;
       this.itemNum = this.datamodel.data.length;
     },
 
@@ -132,21 +132,28 @@
 
       this.scroll = new UIScroll({
         scrollbars: false,
-        //        scrollOffset: this.scrollOffset,
+        scrollOffset: this.scrollOffset,
         scrollType: 'x',
         step: this.itemWidth,
         wrapper: this.swrapper,
         bounceTime: 200,
+                momentum: false,
         scroller: this.scroller
 
       });
 
+      //重置包裹层尺寸，一定要是一个
+      //      this.swrapper.width(this.itemWidth * this.displayNum);
+
       this.scroll.on('scrollEnd', $.proxy(function () {
+        console.log(this.getIndexByPosition());
         this.setIndex(this.getIndexByPosition(), true)
       }, this));
 
       //为了解决鼠标离屏幕时导致的问题
       this.scroll.on('beforeScrollStart', $.proxy(function () {
+        console.log(this.getIndexByPosition());
+
         this.setIndex(this.getIndexByPosition(), true)
       }, this));
 
@@ -173,7 +180,8 @@
     getIndexByPosition: function () {
       var pos = this.scroll.x - this.scrollOffset;
       var index = Math.abs(pos) / this.itemWidth;
-      return index;
+      console.log(index)
+      return Math.round(index);
     },
 
     getIndex: function () {

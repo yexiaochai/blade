@@ -30,7 +30,7 @@
         },
         wrapper: this.$('.demo1'),
         changed: function (item) {
-          sec.html('当前选择：' + 'id: ' + item.id + ', ' + 'name: ' + item.name);
+//          sec.html('当前选择：' + 'id: ' + item.id + ', ' + 'name: ' + item.name);
         }
       });
       this.slider.show();
