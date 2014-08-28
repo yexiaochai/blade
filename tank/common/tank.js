@@ -113,8 +113,8 @@
       this.bulletSize++;
     },
 
-    moveEndAction: function () {
-//      this.fire();
+    moveStartAction: function () {
+            this.fire();
     },
 
     //根据方向，设置样式

@@ -26,12 +26,18 @@
 
       this.slider = new UISlider({
         datamodel: {
-          data: data
+          data: data,
+          itemFn: function (item) {
+            return '<div style="width: 90%; height: 95%; background: white; border: 1px solid black; ">' + item.name + '</div>';
+          }
         },
+        momentum: true,
+        displayNum: 3,
         wrapper: this.$('.demo1'),
         changed: function (item) {
-//          sec.html('当前选择：' + 'id: ' + item.id + ', ' + 'name: ' + item.name);
+          sec.html('当前选择：' + 'id: ' + item.id + ', ' + 'name: ' + item.name);
         }
+
       });
       this.slider.show();
     },
@@ -68,9 +74,58 @@
 
     },
 
+    _initSwitch: function () {
+      if (this.switch1) return;
+
+      var sec = this.$('.demo3_sec');
+      var data = [
+    { id: 'on', name: 'on', checked: true }, { id: 'off', name: 'off', checked: false}];
+
+      this.switch1 = new UISlider({
+        datamodel: {
+          data: data,
+          className: 'c-switch',
+          itemFn: function (item) {
+            var str = '';
+            if (item.id == 'on') {
+              return '<div ><span class="c-switch-show" style="font-size: 0.8em;">ON</span><label >&nbsp;</label></div>';
+            } 
+            if (item.id == 'off') {
+              return '<div ><label>&nbsp;</label><span  class="c-switch-hide" style="font-size: 0.8em;">OFF</span></div>';
+            }
+          }
+        },
+        animatTime: 500,
+        momentum: false,
+        displayNum: 1,
+        wrapper: this.$('.demo3'),
+        changed: function (item) {
+          sec.html('当前选择：' + 'id: ' + item.id + ', ' + 'name: ' + item.name);
+        },
+        itemClick: function (item) {
+          console.log(item.checked);
+          if (item.checked) {
+            this.setId('off');
+          } else {
+            this.setId('on');
+          }
+        }
+      });
+      this.switch1.show();
+
+      var item = this.switch1.getSelected();
+
+      sec.html('当前选择：' + 'id: ' + item.id + ', ' + 'name: ' + item.name);
+
+
+    },
+
+
     onShow: function () {
       this._initSlider();
       this._imgSlider();
+      this._initSwitch();
+
     },
     onHide: function () {
     }

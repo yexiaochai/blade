@@ -48,7 +48,7 @@ this.slider.show();
 
 <h2 class="dh2">图片slider</h2>
 
-<section class="demo2" style=" width: 92%;  border: 1px solid black; margin: 0 auto; "  >
+<section class="demo2" style=" height: 200px; width: 92%;  border: 1px solid black; margin: 0 auto; "  >
 </section>
 
 <pre><code>
@@ -74,4 +74,42 @@ changed: function (item) {
 });
 
 this.imgSlider.show();
+</code></pre>
+
+
+<h2 class="dh2">复杂使用</h2>
+<section class="demo3" style="height: 38px; width: 120px;  margin: 0 auto;" >
+</section>
+<br /><br />
+<div class="demo3_sec"></div>
+<pre><code>
+_initSwitch: function () {
+  if (this.switch1) return;
+
+  //      var sec = this.$('.demo1_sec');
+  var data = [
+    { id: 'on', name: 'on', checked: true }, { id: 'off', name: 'off', checked: false }
+  ];
+
+  this.switch1 = new UISlider({
+    datamodel: {
+      data: data
+    },
+    momentum: false,
+    displayNum: 1,
+    wrapper: this.$('.demo3'),
+    changed: function (item) {
+      console.log(item.checked);
+    },
+    itemClick: function (item) {
+      console.log(item.checked);
+      if (item.checked) {
+        this.setId('off');
+      } else {
+        this.setId('on');
+      }
+    }
+  });
+  this.switch1.show();
+},
 </code></pre>

@@ -239,8 +239,6 @@ define([], function () {
       this.scrollerHeight = this.scroller.offsetHeight;
       this.maxScrollY = this.wrapperHeight - this.scrollerHeight;
 
-      console.log('测试：' + this.maxScrollX + ', this.wrapperWidth: ' + this.wrapperWidth + ', this.scrollerWidth: ' + this.scrollerWidth);
-
       //增加偏移量概念
       this.maxScrollX = this.maxScrollX - this.options.scrollOffset
       this.maxScrollY = this.maxScrollY - this.options.scrollOffset;
@@ -249,11 +247,11 @@ define([], function () {
       //处理步长问题
       if (this.options.step) {
         if (this.maxScrollX % this.options.step != 0) {
-          this.maxScrollX = parseInt(this.maxScrollX / this.options.step) * this.options.step - this.options.step;
+          this.maxScrollX = Math.round(this.maxScrollX / this.options.step) * this.options.step;
           var s = '';
         }
         if (this.maxScrollY % this.options.step != 0) {
-          this.maxScrollY = parseInt(this.maxScrollY / this.options.step) * this.options.step - this.options.step;
+          this.maxScrollY = Math.round(this.maxScrollY / this.options.step) * this.options.step;
         }
       }
 
@@ -321,7 +319,6 @@ define([], function () {
         //移动过去
         this._translate(_x, _y);
         this._execEvent('scrollEnd');
-        console.log('scrollEnd')
 
       }
 
@@ -447,8 +444,6 @@ define([], function () {
       if (!this.moved) {
 
         //这里需要监听使用步长问题
-        console.log('scrollCancel')
-
         this._execEvent('scrollCancel');
         return;
       }
@@ -459,9 +454,6 @@ define([], function () {
         newX = momentumX.destination;
         newY = momentumY.destination;
 
-        tdistanceX = Math.abs(newX - this.startX);
-        tdistanceY = Math.abs(newY - this.startY);
-
         if (this.options.scrollType == 'y') {
           time = Math.max(0, momentumY.duration);
         } else {
@@ -469,6 +461,9 @@ define([], function () {
         }
         this.isInTransition = 1;
       }
+
+      tdistanceX = Math.abs(newX - this.startX);
+      tdistanceY = Math.abs(newY - this.startY);
 
       //处理步长
       //这块处理有问题，需要重新写*******************************
@@ -483,7 +478,7 @@ define([], function () {
         var difStepX = this.options.step - (tdistanceX % this.options.step);
         var difStepY = this.options.step - (tdistanceY % this.options.step);
 
-        console.log('left: ' + left + ', newX: ' + +newX + ', distanceX: ' + tdistanceX + ', step: ' + this.options.step + ', difStepX: ' + difStepX + ', scrollOffset: ' + this.options.scrollOffset + ', maxX: ' + this.maxScrollX + ', minX: ' + this.options.scrollOffset);
+//        console.log('left: ' + left + ', newX: ' + +newX + ', distanceX: ' + tdistanceX + ', step: ' + this.options.step + ', difStepX: ' + difStepX + ', scrollOffset: ' + this.options.scrollOffset + ', maxX: ' + this.maxScrollX + ', minX: ' + this.options.scrollOffset);
 
         if (this.dir == 'forward') {
           if (x > 0) {
@@ -497,6 +492,7 @@ define([], function () {
             y = top - difStepY;
           }
         } else {
+
           if (x > 0) {
             x = left - difStepX;
           } else {
@@ -509,16 +505,23 @@ define([], function () {
           }
         }
 
+        if (x % this.options.step != 0) {
+          x = Math.round((x / this.options.step)) * this.options.step;
+        }
+
+        if (y % this.options.step != 0) {
+          y = Math.round((y / this.options.step)) * this.options.step;
+        }
+
         x = x * flag1;
         y = y * flag2;
 
-        time = this.options.stepTime || 100;
+        time = this.options.stepTime || 200;
 
         newX = x;
         newY = y;
 
-        console.log('newX: ' + newX + '===' + newX / this.options.step);
-
+//        console.log('newX: ' + newX + '===' + newX / this.options.step);
 
         easing = this.options.bounceEasing;
       }
@@ -532,7 +535,6 @@ define([], function () {
         this.scrollTo(newX, newY, time, easing);
         return;
       }
-
 
       this._execEvent('scrollEnd');
     },
