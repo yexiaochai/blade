@@ -1460,7 +1460,7 @@ header i {
     z-index: 2;
 }
 .ul-list li.current {
-    font-size: 1.3255em
+    font-size: 1.3255em;
 }
 .ul-list li.disabled {
     color: rgb(209, 201, 196);

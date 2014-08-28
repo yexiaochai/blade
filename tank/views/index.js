@@ -139,7 +139,14 @@ define(['AbstractView', getViewTemplatePath('index'), 'MoveObj', 'Tank', 'Bullet
           { speed: 2, bulletSpeed: 6, maxBulletSize: 3, init: 64 },
           { speed: 2, bulletSpeed: 6, maxBulletSize: 4, init: 64 },
           { speed: 2, bulletSpeed: 6, maxBulletSize: 4, init: 96 },
-          { speed: 2, bulletSpeed: 7, maxBulletSize: 5, init: 96 }
+          { speed: 2, bulletSpeed: 7, maxBulletSize: 5, init: 96 },
+          { speed: 2, bulletSpeed: 7, maxBulletSize: 5, init: 96 },
+          { speed: 2, bulletSpeed: 8, maxBulletSize: 6, init: 96 },
+          { speed: 2, bulletSpeed: 8, maxBulletSize: 7, init: 96 },
+          { speed: 2, bulletSpeed: 9, maxBulletSize: 8, init: 96 },
+          { speed: 2, bulletSpeed: 9, maxBulletSize: 9, init: 96 },
+          { speed: 2, bulletSpeed: 9, maxBulletSize: 10, init: 96 }
+
         ],
         npcObj: {
           NO1: {
@@ -189,11 +196,11 @@ define(['AbstractView', getViewTemplatePath('index'), 'MoveObj', 'Tank', 'Bullet
                 content: '英雄，要不我们再来一局？'
               },
               okAction: function () {
-                location.refresh();
+                location.reload();
                 this.hide();
               },
               cancelAction: function () {
-                location.refresh();
+                location.reload();
                 this.hide();
               }
             });

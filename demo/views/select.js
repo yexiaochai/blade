@@ -95,14 +95,14 @@
     },
 
     onPreShow: function () {
-      this._initDemo1();
-      this._initDemo2();
+    
 
       this.turning();
     },
 
     onShow: function () {
-
+      this._initDemo1();
+      this._initDemo2();
     },
 
     onHide: function () {
