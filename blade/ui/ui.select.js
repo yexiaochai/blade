@@ -17,6 +17,8 @@
       };
 
       this.animatTime = 100;
+      
+      this.stepTime = 150;
 
       this.itemNum = this.datamodel.data.length;
 

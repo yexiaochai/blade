@@ -478,7 +478,7 @@ define([], function () {
         var difStepX = this.options.step - (tdistanceX % this.options.step);
         var difStepY = this.options.step - (tdistanceY % this.options.step);
 
-//        console.log('left: ' + left + ', newX: ' + +newX + ', distanceX: ' + tdistanceX + ', step: ' + this.options.step + ', difStepX: ' + difStepX + ', scrollOffset: ' + this.options.scrollOffset + ', maxX: ' + this.maxScrollX + ', minX: ' + this.options.scrollOffset);
+        //        console.log('left: ' + left + ', newX: ' + +newX + ', distanceX: ' + tdistanceX + ', step: ' + this.options.step + ', difStepX: ' + difStepX + ', scrollOffset: ' + this.options.scrollOffset + ', maxX: ' + this.maxScrollX + ', minX: ' + this.options.scrollOffset);
 
         if (this.dir == 'forward') {
           if (x > 0) {
@@ -517,11 +517,12 @@ define([], function () {
         y = y * flag2;
 
         time = this.options.stepTime || 200;
+        if ((this.options.scrollType == 'x' && tdistanceX < 50) || (this.options.scrollType == 'y' && tdistanceY < 50)) time = 100;
 
         newX = x;
         newY = y;
 
-//        console.log('newX: ' + newX + '===' + newX / this.options.step);
+        //        console.log('newX: ' + newX + '===' + newX / this.options.step);
 
         easing = this.options.bounceEasing;
       }
