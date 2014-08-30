@@ -245,15 +245,15 @@ define([], function () {
 
 
       //处理步长问题
-      if (this.options.step) {
-        if (this.maxScrollX % this.options.step != 0) {
-          this.maxScrollX = Math.round(this.maxScrollX / this.options.step) * this.options.step;
-          var s = '';
-        }
-        if (this.maxScrollY % this.options.step != 0) {
-          this.maxScrollY = Math.round(this.maxScrollY / this.options.step) * this.options.step;
-        }
-      }
+//      if (this.options.step) {
+//        if (this.maxScrollX % this.options.step != 0) {
+//          this.maxScrollX = Math.round(this.maxScrollX / this.options.step) * this.options.step;
+//          var s = '';
+//        }
+//        if (this.maxScrollY % this.options.step != 0) {
+//          this.maxScrollY = Math.round(this.maxScrollY / this.options.step) * this.options.step;
+//        }
+//      }
 
       if (this.options.scrollType == 'y') {
         this.maxScrollX = 0;

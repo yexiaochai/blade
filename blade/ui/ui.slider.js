@@ -46,9 +46,9 @@
     },
 
     //重新父类创建根节点方法
-//    createRoot: function (html) {
-//      this.$el = $(html).hide().attr('id', this.id);
-//    },
+    //    createRoot: function (html) {
+    //      this.$el = $(html).hide().attr('id', this.id);
+    //    },
 
     itemClickAction: function (e) {
       var el = $(e.currentTarget);
@@ -93,9 +93,9 @@
       var item = this.scroller.find('li').eq(0);
       var itemOffset = item.offset();
       var parent = this.$el.parent();
-      var ph = parent.height();
+      var ph = (parent[0] && parent[0].clientHeight) || parent.height();
 
-      this.wrapeWidth = this.swrapper.width();
+      this.wrapeWidth = (this.swrapper[0] && this.swrapper[0].clientWidth) || this.swrapper.width();
 
       this.itemWidth = parseInt(this.wrapeWidth / this.displayNum);
 
