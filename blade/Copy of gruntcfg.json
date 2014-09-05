@@ -64,7 +64,12 @@
 
         },
         "include": [
-		
+		  "common_dest",
+          "AbstractApp",
+		  "AbstractView",
+		  "cLazyload",
+		  "cValidate",
+		  "cHighlight",
 
 		  "text!ui/ui.alert.html",
 		  "text!ui/ui.bubble.layer.html",
@@ -82,8 +87,29 @@
 		  "text!ui/ui.tab.html",
 		  "text!ui/ui.toast.html",
 		  "text!ui/ui.slider.html",
-		  "text!ui/ui.warning404.html"
+		  "text!ui/ui.warning404.html",
 
+		  "UIView",
+		  "UILayer",
+		  "UIAlert",
+		  "UIMask",
+		  "UILoading",
+		  "UIReLoading",
+		  "UIToast",
+		  "UIInlineView",
+		  "UINum",
+		  "UISwitch",
+		  "UIBubbleLayer",
+		  "UITab",
+		  "UIScroll",
+		  "UIScrollLayer",
+		  "UIRadioList",
+		  "UISelect",
+		  "UIGroupSelect",
+		  "UIGroupList",
+		  "UICalendar",
+		  "UISlider",
+		  "UIWarning404"
 
         ],
         "out": "<%= config.destDir %>/common.js"

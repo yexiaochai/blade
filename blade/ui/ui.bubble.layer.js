@@ -9,7 +9,7 @@ define(['UILayer', getAppUITemplatePath('ui.bubble.layer')], function (UILayer, 
       //      this.needReposition = false;
 
       this.datamodel = {
-        data: [ ],
+        data: [],
         upClass: 'f-layer-before',
         downClass: 'f-layer-after',
         curClass: 'cui-fl-current',
@@ -27,12 +27,18 @@ define(['UILayer', getAppUITemplatePath('ui.bubble.layer')], function (UILayer, 
         var e = '';
       };
 
+      this.width = null;
+
       this.triggerEl = null;
 
     },
 
     initialize: function ($super, opts) {
       $super(opts);
+    },
+
+    createRoot: function (html) {
+      this.$el = $(html).hide().attr('id', this.id);
     },
 
     clickAction: function (e) {
@@ -43,7 +49,7 @@ define(['UILayer', getAppUITemplatePath('ui.bubble.layer')], function (UILayer, 
     },
 
     initElement: function () {
-      this.el = this.$('ul.cui-f-layer');
+      this.el = this.$el;
     },
 
     setIndex: function (i) {
@@ -71,7 +77,7 @@ define(['UILayer', getAppUITemplatePath('ui.bubble.layer')], function (UILayer, 
         left = (offset.left + 2) + 'px';
       }
       this.el.css({
-        width: w,
+        width: this.width || w,
         top: top,
         left: left
       });
@@ -81,10 +87,11 @@ define(['UILayer', getAppUITemplatePath('ui.bubble.layer')], function (UILayer, 
       $super();
       this.on('onCreate', function () {
         this.$el.removeClass('cui-layer');
+        this.$el.css({ position: 'absolute' });
       });
       this.on('onShow', function () {
         this.setzIndexTop(this.el);
-      
+
       });
     }
 

@@ -15,14 +15,8 @@
     //改变获取焦点位置，解决获取焦点难问题
     el = e.target;
 
-    //    if (needFocus(el)) {
-    ////      if (IOSWithBadTarget) {
-    ////        //解决ios7点击问题，看着这个代码我真想打自己......
-    ////        el.blur();
-    ////      }
-    //      el.focus();
-    //      return true;
-    //    }
+    var no_el = $(el).closest('.nofastclick');
+    if (no_el.length > 0 || needFocus(el)) return true;
 
     if (isIOS) {
       var selection = window.getSelection();
@@ -88,13 +82,18 @@
         el = null;
         return false;
       }
+      //      if (IOSWithBadTarget) {
+      //        //解决ios7点击问题，看着这个代码我真想打自己......
+      //        el.blur();
+      //      }
 
-//      if (IOSWithBadTarget && needFocus(document.activeElement)) {
-//        //解决ios7点击问题，看着这个代码我真想打自己......
-//        $('#SYS_INPUT_MSG').focus();
-//      }
-
-      focus(el);
+      var length;
+      if (isIOS && el.setSelectionRange && el.type.indexOf('date') !== 0 && el.type !== 'time') {
+        length = el.value.length;
+        el.setSelectionRange(length, length);
+      } else {
+        el.focus();
+      }
 
       if (tagName !== 'select') {
         el = null;
@@ -112,22 +111,15 @@
     return false;
   }
 
-  function focus(targetElement) {
-    var length;
-
-    if (deviceIsIOS && targetElement.setSelectionRange && targetElement.type.indexOf('date') !== 0 && targetElement.type !== 'time') {
-      length = targetElement.value.length;
-      targetElement.setSelectionRange(length, length);
-    } else {
-      targetElement.focus();
-    }
-  }
-
   function onTouchCancel(e) {
     trackingClick = false;
     el = null;
   }
   function onMouse(e) {
+    var el1 = e.target;
+    var no_el = $(el1).closest('.nofastclick');
+    if (no_el.length > 0 || needFocus(el1)) return true;
+
     if (!el) return true;
     if (e.touchEvent) return true; //表示为自己触发便跳出了
     if (!e.cancelable) return true;
@@ -162,7 +154,7 @@
       case 'input':
         if ((isIOS && el.type === 'file') || el.disabled) return true;
         break;
-      //	    case 'label':            
+      //	    case 'label':              
       case 'video':
         return true;
     }
@@ -247,5 +239,5 @@
         .off('touchend', onTouchEnd)
         .off('touchcancel', onTouchCancel);
   }
-})($)
+})(Zepto)
 

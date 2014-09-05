@@ -1,11 +1,28 @@
-define(['View', getViewTemplatePath('calendar'), 'UICalendar'], function (View, viewhtml, UICalendar) {
-
+define(['View', getViewTemplatePath('calendar'), 'UICalendar', 'UIPageView'], function (View, viewhtml, UICalendar, UIPageView) {
   return _.inherit(View, {
     onCreate: function () {
       this.$el.html(viewhtml);
     },
 
     events: {
+      'click .demo1': function () {
+        if (!this.calendarlayer) {
+          this.calendarlayer = new UIPageView({
+            inlineInstance: new UICalendar({
+              datamodel: {
+                displayMonthNum: 5
+              },
+              onShow: function () {
+                console.log('onShow');
+              },
+              onHide: function () {
+                console.log('onHide');
+              }
+            })
+          });
+        }
+        this.calendarlayer.animateShow();
+      }
     },
 
     demo1: function () {

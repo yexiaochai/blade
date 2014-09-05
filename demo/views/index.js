@@ -19,6 +19,8 @@
 
     events: {
       'focus .cui-input-box': 'seachTxtFocus',
+      'click .sss': function () {
+      },
       'click .cui-btn-cancle': function () {
         this.closeSearch();
       },
@@ -96,7 +98,8 @@
         { 'uiname': 'toast', 'name': 'toast框' },
         { 'uiname': 'loading', 'name': 'loading框' },
         { 'uiname': 'reloading', 'name': 'reloading框' },
-        { 'uiname': 'bubble.layer', 'name': '气泡框提示' }
+        { 'uiname': 'bubble.layer', 'name': '气泡框提示' },
+        { 'uiname': 'warning404', 'name': '404提醒' }
       ];
 
       var groupList2 = [
@@ -155,6 +158,9 @@
     },
 
     onShow: function () {
+
+
+  
 
     },
 

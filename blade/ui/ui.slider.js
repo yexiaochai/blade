@@ -7,6 +7,7 @@
       this.template = template;
 
       this.datamodel = {
+        key: this.id,
         className: '',
         curClass: 'current',
         data: [],
@@ -22,7 +23,6 @@
       this.itemWidth = 0;
       this.itemHeight = 0;
       this.scrollWidth = 0;
-
 
       //选择时候的偏移量
       this.scrollOffset = 0;
@@ -164,12 +164,14 @@
 
     },
 
-    adjustPosition: function (hasAnimate) {
+    adjustPosition: function (hasAnimate, time) {
       if (!this.scroll) return;
-      var index = this.datamodel.index, _dis, time = 0;
+      var index = this.datamodel.index, _dis, _time = 0;
       _dis = (this.itemWidth * index) * (-1) + this.scrollOffset;
-      if (hasAnimate) time = this.animatTime;
-      this.scroll.scrollTo(_dis, 0, time);
+      if (hasAnimate) _time = this.animatTime;
+      if (time) _time = time;
+
+      this.scroll.scrollTo(_dis, 0, _time);
     },
 
     resetCss: function () {
@@ -192,16 +194,19 @@
       return this.datamodel.index;
     },
 
-    setIndex: function (i, noPosition, noEvent) {
+    setIndex: function (i, noPosition, noEvent, time) {
       if (typeof noPosition == 'undefined' && i == this.datamodel.index) noPosition = true;
 
       //index值是否改变
       var isChange = this.datamodel.index != i;
       this.datamodel.index = i;
 
-      if (!noPosition) this.adjustPosition(true);
+      if (!noPosition) this.adjustPosition(true, time);
       this.resetCss();
-      if (noEvent !== true && isChange) this.changed && this.changed.call(this, this.getSelected());
+      if (noEvent !== true && isChange) {
+        this.changedAction && this.changedAction.call(this, this.getSelected());
+        this.changed && this.changed.call(this, this.getSelected());
+      }
     },
 
     setId: function (id) {
@@ -222,6 +227,17 @@
       return this.datamodel.data[this.datamodel.index];
     },
 
+    //释放给各用户的接口，操作每项
+    handleItem: function (index, wrapper) {
+
+    },
+
+    handleEachItem: function () {
+      for (var i = 0, len = this.datamodel.data.length; i < len; i++) {
+        this.handleItem && this.handleItem.call(this, i, this.$('li[data-index="' + i + '"]'));
+      }
+    },
+
     addEvent: function ($super) {
       $super();
 
@@ -238,7 +254,7 @@
         this.adjustPosition();
         this.resetCss();
         this.resetIndex();
-
+        this.handleEachItem();
       }, 1);
 
       this.on('onHide', function () {
@@ -246,6 +262,8 @@
           this.scroll.destroy();
           this.scroll = null;
           $(window).off('.silder' + this.id);
+          this.freeInstance();
+
         }
       });
 

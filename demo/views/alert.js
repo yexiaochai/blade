@@ -17,7 +17,7 @@
       if (!this.alert1) {
         this.alert1 = new UIAlert();
       }
-      this.alert1.show();
+      this.alert1.animateShow();
     },
 
     demo2: function () {

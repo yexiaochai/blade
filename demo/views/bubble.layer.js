@@ -51,6 +51,7 @@
             dir: dir,
             index: index
           },
+          width: 200,
           onClick:  function (e, data, index, el) {
             console.log(arguments);
             this.setIndex(index);
@@ -111,6 +112,7 @@
             dir: dir,
             index: index
           },
+          width: 300,
           needMask:true,
           onClick:  function (e, data, index, el) {
             console.log(arguments);

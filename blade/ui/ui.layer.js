@@ -37,6 +37,25 @@ define(['UIView', 'UIMask'], function (UIView, UIMask) {
       //      if (this.needMask == false) this.mask = null;
     },
 
+    animateShow: function ($super) {
+
+      this.show(function (el) {
+        el.css({
+          '-webkit-transform': 'translate(0, -30%)',
+          transform: 'translate(0,  -30%)'
+        });
+        el.show().animate({
+          '-webkit-transform': 'translate(0, 0)',
+          transform: 'translate(0, 0)'
+        }, 100, 'ease-in-out', $.proxy(function () {
+          //          this.$el.css({
+          //            '-webkit-transform': '',
+          //            transform: ''
+          //          });
+        }, this));
+      });
+    },
+
     addEvent: function () {
       this.on('onCreate', function () {
         this.$el.addClass('cui-layer');

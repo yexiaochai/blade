@@ -91,13 +91,23 @@
       this.$el.html(html);
     },
 
+    _isAddEvent: function (key) {
+      if (key == 'onCreate' || key == 'onPreShow' || key == 'onShow' || key == 'onRefresh' || key == 'onHide')
+        return true;
+      return false;
+    },
+
     setOption: function (options) {
+      //这里可以写成switch，开始没有想到有这么多分支
       for (var k in options) {
         if (k == 'datamodel') {
           _.extend(this.datamodel, options[k]);
           continue;
+        } else if (this._isAddEvent(k)) {
+          this.on(k, options[k])
+          continue;
         }
-        this[k] = options[k]
+        this[k] = options[k];
       }
       //      _.extend(this, options);
     },
@@ -177,28 +187,39 @@
     //刷新根据传入参数判断是否走onCreate事件
     //这里原来的dom会被移除，事件会全部丢失 需要修复*****************************
     refresh: function (needEvent) {
+      this.trigger('onRefresh');
       this.resetPropery();
       if (needEvent) {
         this.create();
       } else {
-        this.render();
+        this.$el.html(this.render());
       }
       this.initElement();
       if (this.status == 'show') this.show();
     },
 
-    show: function () {
+    show: function (animateAction) {
       this.wrapper.append(this.$el);
       this.trigger('onPreShow');
-      this.$el.show();
+
+      if (typeof animateAction == 'function')
+        animateAction.call(this, this.$el);
+      else
+        this.$el.show();
+
       this.status = 'show';
       this.bindEvents();
       this.trigger('onShow');
     },
 
-    hide: function () {
+    hide: function (animateAction) {
       this.trigger('onPreHide');
-      this.$el.hide();
+
+      if (typeof animateAction == 'function')
+        animateAction.call(this, this.$el);
+      else
+        this.$el.hide();
+
       this.status = 'hide';
       this.unBindEvents();
       this.removeSysEvents();

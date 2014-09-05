@@ -245,15 +245,15 @@ define([], function () {
 
 
       //处理步长问题
-//      if (this.options.step) {
-//        if (this.maxScrollX % this.options.step != 0) {
-//          this.maxScrollX = Math.round(this.maxScrollX / this.options.step) * this.options.step;
-//          var s = '';
-//        }
-//        if (this.maxScrollY % this.options.step != 0) {
-//          this.maxScrollY = Math.round(this.maxScrollY / this.options.step) * this.options.step;
-//        }
-//      }
+      //      if (this.options.step) {
+      //        if (this.maxScrollX % this.options.step != 0) {
+      //          this.maxScrollX = Math.round(this.maxScrollX / this.options.step) * this.options.step;
+      //          var s = '';
+      //        }
+      //        if (this.maxScrollY % this.options.step != 0) {
+      //          this.maxScrollY = Math.round(this.maxScrollY / this.options.step) * this.options.step;
+      //        }
+      //      }
 
       if (this.options.scrollType == 'y') {
         this.maxScrollX = 0;
@@ -331,7 +331,7 @@ define([], function () {
 
       this._execEvent('beforeScrollStart');
 
-      e.preventDefault();
+      //      e.preventDefault();
 
     },
 
@@ -339,7 +339,6 @@ define([], function () {
       if (!this.enabled || utils.eventType[e.type] !== this.initiated) {
         return;
       }
-      e.preventDefault();
 
       var point = e.touches ? e.touches[0] : e,
       deltaX = point.pageX - this.pointX,
@@ -347,6 +346,13 @@ define([], function () {
       timestamp = utils.getTime(),
       newX, newY,
       absDistX, absDistY;
+
+      var x1 = this.x;
+      var y1 = this.y;
+      var x2 = this.x + deltaX
+      var y2 = this.y + deltaY;
+
+      var dir = Math.abs(deltaX) >= Math.abs(deltaY) ? (x1 - x2 > 0 ? 'left' : 'right') : (y1 - y2 > 0 ? 'up' : 'down');
 
       this.pointX = point.pageX;
       this.pointY = point.pageY;
@@ -362,10 +368,18 @@ define([], function () {
       }
 
       if (this.options.scrollType == 'y') {
+        if (dir == 'top' || dir == 'down') {
+          e.preventDefault();
+        }
         deltaX = 0;
       } else {
+        if (dir == 'left' || dir == 'right') {
+          e.preventDefault();
+        }
         deltaY = 0;
       }
+
+      this.flipDir = dir;
 
       newX = this.x + deltaX;
       newY = this.y + deltaY;
