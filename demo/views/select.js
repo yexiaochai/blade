@@ -11,6 +11,8 @@
     },
 
     _initDemo1: function () {
+      return;
+
       if (this.demo1) return;
       //这里若是demo1有显示状态什么的需要注意资源释放
       var scope = this, curItem;
@@ -53,7 +55,7 @@
         md.val(scope.month.getSelected().name + scope.day.getSelected().name);
         md.attr('data-month', scope.month.getSelected().id);
         md.attr('data-day', scope.day.getSelected().id);
-      }
+      };
 
       this.month = new UISelect({
         datamodel: {
@@ -95,7 +97,7 @@
     },
 
     onPreShow: function () {
-    
+
 
       this.turning();
     },

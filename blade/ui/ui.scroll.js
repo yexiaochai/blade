@@ -171,6 +171,8 @@ define([], function () {
       // 其实时期Y的位置
       startY: 0,
 
+      preventDefault: true,
+
       scrollOffset: 0,
 
       //默认竖向滚动
@@ -331,7 +333,7 @@ define([], function () {
 
       this._execEvent('beforeScrollStart');
 
-      //      e.preventDefault();
+      if (this.options.preventDefault) e.preventDefault();
 
     },
 

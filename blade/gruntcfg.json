@@ -74,14 +74,18 @@
 		  "text!ui/ui.loading.html",
 		  "text!ui/ui.mask.html",
 		  "text!ui/ui.num.html",
+		  "text!ui/ui.pageview.html",
+
 		  "text!ui/ui.radio.list.html",
 		  "text!ui/ui.reloading.html",
 		  "text!ui/ui.scroll.layer.html",
 		  "text!ui/ui.select.html",
+		  "text!ui/ui.slider.html",
+
 		  "text!ui/ui.switch.html",
 		  "text!ui/ui.tab.html",
 		  "text!ui/ui.toast.html",
-		  "text!ui/ui.slider.html",
+
 		  "text!ui/ui.warning404.html"
 
 

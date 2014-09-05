@@ -17,7 +17,7 @@
       };
 
       this.animatTime = 100;
-      
+
       this.stepTime = 150;
 
       this.itemNum = this.datamodel.data.length;
@@ -66,14 +66,15 @@
     },
 
     initSize: function () {
-      this.sheight = this.scroller.height();
-      this.itemHeight = parseInt(this.sheight / this.itemNum);
+      //      this.sheight = Math.max(this.scroller.height(), this.scroller[0].scrollHeight);
+      //      this.sheight =  this.scroller.height() 
+      //      this.itemHeight = parseInt(this.sheight / this.itemNum);
 
       //偶尔不能正确获取高度，这里要处理
-      if (this.itemHeight == 0) {
-        this.itemHeight = parseInt(window.getComputedStyle && getComputedStyle(this.scroller.find('li').eq(0)[0]).height);
-        this.scroller.height(this.itemHeight * this.itemNum);
-      }
+      //      if (this.itemHeight == 0) {
+      this.itemHeight = parseInt(window.getComputedStyle && getComputedStyle(this.scroller.find('li').eq(0)[0]).height);
+      this.scroller.height(this.itemHeight * this.itemNum);
+      //      }
       this.swrapper.height(this.itemHeight * this.displayNum);
       this.scrollOffset = ((this.displayNum - 1) / 2) * (this.itemHeight);
     },
