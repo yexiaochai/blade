@@ -118,7 +118,7 @@ hljs.registerLanguage("json", function(a) {
 
       showPageview: function (instance, showAction, hideAction, animateSwitch) {
         this._pageview.addAction(showAction, hideAction);
-       this._pageview.animateSwitch = animateSwitch; 
+       this._pageview.animateSwitch = animateSwitch;
         this._pageview.animateShow(instance);
       },
 

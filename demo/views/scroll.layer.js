@@ -26,7 +26,7 @@
             this.hide();
           },
           html: html,
-          width: 300,
+          width: $(window).width() * 0.8,
           okAction: function () {
             console.log('that\'s ok');
             this.hide();

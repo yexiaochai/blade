@@ -31,7 +31,7 @@
       this.scroll = null;
 
       this.events = {
-        'click ul-list>li': 'itemClickAction'
+        'click .ul-list>li': 'itemClickAction'
 
       };
 
