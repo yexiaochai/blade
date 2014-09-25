@@ -190,17 +190,20 @@ define(['AbstractView', getViewTemplatePath('index'), 'MoveObj', 'Tank', 'Bullet
         tick: $.proxy(function () {
           if (this.me.status == 'destroy') {
             this.app.gameStatus = false;
+
+            var scope = this;
             var alert = new UIAlert({
               datamodel: {
                 title: '游戏结束',
                 content: '英雄，要不我们再来一局？'
               },
               okAction: function () {
-                location.reload();
+//                location.reload();
+                  scope.gameRestar();
                 this.hide();
               },
               cancelAction: function () {
-                location.reload();
+//                location.reload();
                 this.hide();
               }
             });
@@ -350,8 +353,23 @@ define(['AbstractView', getViewTemplatePath('index'), 'MoveObj', 'Tank', 'Bullet
     gameOver: function () {
 
     },
+  //重新开始
+  gameRestar: function() {
+      //创建英雄
+      this.app.createHero();
+      this.app.gameStatus = true;
+      this.me.status = 'move';
+      //清除npc坦克
+      $.each(this.app.GAMEOBJ.npc, function (i, item) {
+          item.destroy()
+      });
 
-    onShow: function () {
+      //开始游戏计时
+      this.app.tick();
+  },
+
+
+      onShow: function () {
       this.gameStart();
     },
 

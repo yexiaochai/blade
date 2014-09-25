@@ -6,11 +6,16 @@
     },
 
     events: {
+      'click .fxdemo': 'fxdemo',
       'click .demo1': 'demo1',
       'click .demo2': 'demo2',
       'click .demo3': 'demo3',
       'click .demo4': 'demo4',
       'click .demo5': 'demo5'
+    },
+
+    fxdemo: function () {
+      this.showToast('框架用法');
     },
 
     demo1: function () {
@@ -19,7 +24,7 @@
           datamodel: {
             content: 'content'
           },
-          TIMERRES :  true
+          TIMERRES: true
         });
       }
       this.toast1.show();
@@ -69,11 +74,13 @@
         this.toast5 = new UIToast({
           datamodel: {
             content: 'content01'
-          }
+          },
+          hideSec: 5000
+
         });
       }
       this.toast5.show();
-      this.toast5.setDatamodel('setDatamodel', function () {
+      this.toast5.setDatamodel('setDatamodel', 2000, function () {
         console.log('i am setDatamodel\'s hiden');
       });
     },

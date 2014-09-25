@@ -170,6 +170,7 @@ define([], function () {
       scrollbars: true,
       // 其实时期Y的位置
       startY: 0,
+      preventDefault: true,
 
       scrollOffset: 0,
 
@@ -206,6 +207,13 @@ define([], function () {
 
     //默认方向是向前
     this.dir = 'forward';
+
+    //尺寸不过关便不要实例化了
+//    if (this.options.scrollType == 'x') {
+//      if (this.wrapper.clientWidth > this.scroller.clientWidth) return;
+//    } else {
+//      if (this.wrapper.clientHeight > this.scroller.clientHeight)   return;
+//    }
 
     this._init();
 
@@ -245,15 +253,15 @@ define([], function () {
 
 
       //处理步长问题
-      if (this.options.step) {
-        if (this.maxScrollX % this.options.step != 0) {
-          this.maxScrollX = Math.round(this.maxScrollX / this.options.step) * this.options.step;
-          var s = '';
-        }
-        if (this.maxScrollY % this.options.step != 0) {
-          this.maxScrollY = Math.round(this.maxScrollY / this.options.step) * this.options.step;
-        }
-      }
+      //      if (this.options.step) {
+      //        if (this.maxScrollX % this.options.step != 0) {
+      //          this.maxScrollX = Math.round(this.maxScrollX / this.options.step) * this.options.step;
+      //          var s = '';
+      //        }
+      //        if (this.maxScrollY % this.options.step != 0) {
+      //          this.maxScrollY = Math.round(this.maxScrollY / this.options.step) * this.options.step;
+      //        }
+      //      }
 
       if (this.options.scrollType == 'y') {
         this.maxScrollX = 0;
@@ -331,7 +339,7 @@ define([], function () {
 
       this._execEvent('beforeScrollStart');
 
-      e.preventDefault();
+      //      e.preventDefault();
 
     },
 
@@ -339,7 +347,6 @@ define([], function () {
       if (!this.enabled || utils.eventType[e.type] !== this.initiated) {
         return;
       }
-      e.preventDefault();
 
       var point = e.touches ? e.touches[0] : e,
       deltaX = point.pageX - this.pointX,
@@ -347,6 +354,13 @@ define([], function () {
       timestamp = utils.getTime(),
       newX, newY,
       absDistX, absDistY;
+
+      var x1 = this.x;
+      var y1 = this.y;
+      var x2 = this.x + deltaX
+      var y2 = this.y + deltaY;
+
+      var dir = Math.abs(deltaX) >= Math.abs(deltaY) ? (x1 - x2 > 0 ? 'left' : 'right') : (y1 - y2 > 0 ? 'up' : 'down');
 
       this.pointX = point.pageX;
       this.pointY = point.pageY;
@@ -362,10 +376,18 @@ define([], function () {
       }
 
       if (this.options.scrollType == 'y') {
+        if (this.options.preventDefault && (dir == 'top' || dir == 'down')) {
+          e.preventDefault();
+        }
         deltaX = 0;
       } else {
+        if (this.options.preventDefault && (dir == 'left' || dir == 'right')) {
+          e.preventDefault();
+        }
         deltaY = 0;
       }
+
+      this.flipDir = dir;
 
       newX = this.x + deltaX;
       newY = this.y + deltaY;
@@ -478,7 +500,7 @@ define([], function () {
         var difStepX = this.options.step - (tdistanceX % this.options.step);
         var difStepY = this.options.step - (tdistanceY % this.options.step);
 
-//        console.log('left: ' + left + ', newX: ' + +newX + ', distanceX: ' + tdistanceX + ', step: ' + this.options.step + ', difStepX: ' + difStepX + ', scrollOffset: ' + this.options.scrollOffset + ', maxX: ' + this.maxScrollX + ', minX: ' + this.options.scrollOffset);
+        //        console.log('left: ' + left + ', newX: ' + +newX + ', distanceX: ' + tdistanceX + ', step: ' + this.options.step + ', difStepX: ' + difStepX + ', scrollOffset: ' + this.options.scrollOffset + ', maxX: ' + this.maxScrollX + ', minX: ' + this.options.scrollOffset);
 
         if (this.dir == 'forward') {
           if (x > 0) {
@@ -517,11 +539,12 @@ define([], function () {
         y = y * flag2;
 
         time = this.options.stepTime || 200;
+        if ((this.options.scrollType == 'x' && tdistanceX < 50) || (this.options.scrollType == 'y' && tdistanceY < 50)) time = 100;
 
         newX = x;
         newY = y;
 
-//        console.log('newX: ' + newX + '===' + newX / this.options.step);
+        //        console.log('newX: ' + newX + '===' + newX / this.options.step);
 
         easing = this.options.bounceEasing;
       }

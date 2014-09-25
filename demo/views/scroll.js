@@ -1,4 +1,4 @@
-﻿define(['View', getViewTemplatePath('scroll'), 'UISlider'], function (View, viewhtml, UISlider) {
+﻿define(['View', getViewTemplatePath('scroll'), 'UISlider', 'UICalendar', 'UIImageSlider'], function (View, viewhtml, UISlider, UICalendar, UIImageSlider) {
   return _.inherit(View, {
     onCreate: function () {
       this.$el.html(viewhtml);
@@ -56,20 +56,33 @@
         { id: 4, src: './res/img/4.jpg', href: './res/img/4.jpg' }
       ];
 
+      //      this.imgSlider = new UISlider({
+      //        datamodel: {
+      //          data: data,
+      //          itemFn: function (item) {
+      //            return '<img src="' + item.src + '">';
+      //          }
+      //        },
+      //        displayNum: 1,
+      //        wrapper: this.$('.demo2'),
+      //        changed: function (item) {
+      //        }
+      //      });
 
-      this.imgSlider = new UISlider({
+      this.imgSlider = new UIImageSlider({
         datamodel: {
           data: data,
           itemFn: function (item) {
-            return '<img src="' + item.src + '">';
+            return '<img data-src="' + item.src + '" src="' + item.src + '" >';
           }
         },
+        autoPlay: true,
+        handleItem: function (index, wrapper) {
+          var s = '';
+        },
         displayNum: 1,
-        wrapper: this.$('.demo2'),
-        changed: function (item) {
-        }
+        wrapper: this.$('.demo2')
       });
-
       this.imgSlider.show();
 
     },
@@ -89,7 +102,7 @@
             var str = '';
             if (item.id == 'on') {
               return '<div ><span class="c-switch-show" style="font-size: 0.8em;">ON</span><label >&nbsp;</label></div>';
-            } 
+            }
             if (item.id == 'off') {
               return '<div ><label>&nbsp;</label><span  class="c-switch-hide" style="font-size: 0.8em;">OFF</span></div>';
             }
@@ -120,14 +133,89 @@
 
     },
 
+    _initCalendar: function () {
+      if (this.slider1) return;
+      var scope = this;
+
+      var sec = this.$('.demo3_sec');
+      var data = [{}, {}, {}, {}, {}];
+
+      this.slider1 = new UISlider({
+        datamodel: {
+          data: data
+
+        },
+        momentum: false,
+        displayNum: 1,
+        wrapper: this.$('.demo4'),
+        changed: function (item) {
+          //          sec.html('当前选择：' + 'id: ' + item.id + ', ' + 'name: ' + item.name);
+        },
+        itemClick: function (item) {
+        },
+
+        freeInstance: function () {
+          if (!this.inlineInstance) return;
+          for (var i = 0, len = this.inlineInstance.length; i < len; i++) {
+            this.inlineInstance[i].destroy();
+          }
+          this.inlineInstance = null;
+        },
+
+        handleItem: function (index, wrapper) {
+          this.on('onRefresh', function () {
+            this.freeInstance();
+          });
+
+          this.on('onHide', function () {
+            this.freeInstance();
+          });
+
+          if (!this.inlineInstance) this.inlineInstance = [];
+          var dateObj = new Date();
+          var dateObj = new Date(dateObj.getFullYear(), dateObj.getMonth() + index, dateObj.getDate());
+          if (!this.inlineInstance[index]) {
+            this.inlineInstance[index] = new UICalendar({
+              dateObj: dateObj,
+              datamodel: {
+                displayMonthNum: 1
+              },
+              wrapper: wrapper,
+              onItemClick: function (date) {
+                scope.showToast(date);
+              }
+            });
+          }
+          this.inlineInstance[index].show();
+        }
+      });
+      this.slider1.show();
+
+      window.sss = this.slider1;
+
+
+    },
 
     onShow: function () {
+      var sss = function () {
+        var demo = this.$('.demo2');
+        var flag = parseInt(demo.width() - 400);
+        demo.height(150 + 0.4 * flag);
+      };
+      sss();
       this._initSlider();
       this._imgSlider();
       this._initSwitch();
+      this._initCalendar();
+
+      $(window).on('resize.ttt', $.proxy(function () {
+        sss();
+      }, this));
 
     },
     onHide: function () {
+      this.imgSlider.stop();
+      $(window).off('ttt');
     }
   });
 });

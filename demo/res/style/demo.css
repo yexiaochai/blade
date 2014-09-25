@@ -80,7 +80,7 @@ code {
 }
 
  .dh2 { font-weight: bold; margin-bottom: -1px; border: 1px solid #bcbcbc; background: #fff; padding: 5px 10px; margin: 10px 5px; }
-.horizontal li { float: left; width: 100px;border-radius: 5px; }
+.horizontal>li { float: left; width: 100px;border-radius: 5px; }
 .horizontal .slider-item-wrapper { width: 100%; height: 100%;}
 .error_info {
     position: absolute;
@@ -207,3 +207,4 @@ code {
 
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
 }
+

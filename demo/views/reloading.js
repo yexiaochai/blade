@@ -1,4 +1,4 @@
-define(['View', 'UIReLoading', getViewTemplatePath('reloading')], function (View, UIReLoading, viewhtml) {
+define(['View', 'UILoadingLayer', getViewTemplatePath('reloading')], function (View, UIReLoading, viewhtml) {
 
   return _.inherit(View, {
     onCreate: function () {
@@ -7,12 +7,37 @@ define(['View', 'UIReLoading', getViewTemplatePath('reloading')], function (View
     },
 
     events: {
+'click .fxdemo': function () {
+  this.showLoading();
+  setTimeout($.proxy(function () {
+    this.hideLoading();
+  }, this), 2000);
+
+},
+'click .fxdemo01': function () {
+  this.showLoading('我是文字');
+  setTimeout($.proxy(function () {
+    this.hideLoading();
+  }, this), 2000);
+},
+'click .fxdemo02': function () {
+  this.showLoading(null, function () {
+    this.hide();
+  });
+},
+'click .fxdemo03': function () {
+  this.showLoading('我是文字信息', function () {
+    this.hide();
+  });
+},
+
       'click .widget0': function () {
-        if(!this.reloading) {
+        if (!this.reloading) {
           this.reloading = new UIReLoading({
             datamodel: {
-              text: 'delete'
-            }
+              text: ''
+            },
+            maskToHide: true
           });
         }
 
@@ -20,7 +45,7 @@ define(['View', 'UIReLoading', getViewTemplatePath('reloading')], function (View
       },
 
       'click .widget1': function () {
-        if(!this.reloading1) {
+        if (!this.reloading1) {
           this.reloading1 = new UIReLoading({
             datamodel: {
               text: 'delete'
@@ -30,10 +55,16 @@ define(['View', 'UIReLoading', getViewTemplatePath('reloading')], function (View
         }
 
         this.reloading1.show();
+
+        setTimeout($.proxy(function () {
+          this.reloading1.hide();
+
+        }, this), 2000);
+
       },
 
       'click .widget2': function () {
-        if(!this.reloading2) {
+        if (!this.reloading2) {
           this.reloading2 = new UIReLoading({
             datamodel: {
               text: 'delete'
@@ -45,12 +76,12 @@ define(['View', 'UIReLoading', getViewTemplatePath('reloading')], function (View
         this.reloading2.show();
 
         //0.5s后 动态设置数据模型
-        setTimeout(function() {
-          this.reloading2.setDatamodel('动态的', function() {
+        setTimeout(function () {
+          this.reloading2.setDatamodel('动态的', function () {
             alert('closeing');
             this.hide();
           });
-        }.bind(this), 500);
+        } .bind(this), 500);
       }
     },
 

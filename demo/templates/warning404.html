@@ -1,0 +1,81 @@
+<div id="headerview" style="height: 48px;">
+    <header>
+        <h1>404</h1>
+    </header>
+</div>
+
+
+<section class="demos">
+
+
+ <h2 class="dh2">框架用法</h2>
+    <input type="button" class="fxdemo btn" value="框架基本用法">
+    <input type="button" class="fxdemo01 btn" value="框架基本用法-开动画">
+
+<pre><code>
+/*
+框架本身提供一个全局单例的warning404，其所依赖的是pageview组件
+
+callback为点击重试的回调
+showAction是pageview显示时候执行的回调，这个时候用户可以设置框架级别的headerview
+hideAction是pageview隐藏时候执行的回调，这个时候用户可以设置框架级别的headerview
+animateSwitch 为显示pageview时候是否需要动画暂时支持right, left, top, bottom, none
+telAction为点击电话时候执行的回调
+datamodel为对404组件的设置，这里不必关注，后面会说明
+这里需要强调的是里面的this指向为warning404，所以要关闭pageview的话，有所不同
+showAction与hideAction的this指向为pageview
+showWarning404: function (callback, showAction, hideAction, telAction, datamodel)
+showWarning404: function (callback, showAction, hideAction,  animateSwitch, telAction,datamodel )
+*/
+
+'click .fxdemo': function () {
+  var scope = this;
+  this.showWarning404(function () {
+    scope.showToast('刷新页面');
+    //注意这里注意关闭404的方法
+    scope.hideWarning404();
+  },
+  function () {
+    //注意因为pageview组件共享框架的zindex，所以这里的toast层级比404低，显示不出来
+    scope.showToast('pageview显示');
+  }, function () {
+    scope.showToast('pageview隐藏');
+  },
+  false,//不需要动画
+  function () {
+    scope.showToast('telAction');
+  });
+},
+'click .fxdemo01': function () {
+  var scope = this;
+  this.showWarning404(function () {
+    scope.showToast('刷新页面');
+    //注意这里注意关闭404的方法
+    scope.hideWarning404();
+  }, null, null, 'right');
+},
+</code></pre>
+
+
+
+    <h2 class="dh2">独立使用</h2>
+    <input type="button" class="demo1 btn" value="独立使用">
+<code><pre>
+/*
+一些情况下该组件可以内嵌页面，这里便与pageview没关系了
+*/   
+
+'click .demo1': function () {
+  if (!this.layer404) {
+    this.layer404 = new UIWarning404({
+      wrapper: this.$('.warningWrapper')
+
+    });
+  }
+  this.layer404.show();
+}
+</code></pre>
+
+<div class="warningWrapper"></div>
+</section>
+ 

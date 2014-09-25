@@ -73,7 +73,7 @@ define(['UIView', getAppUITemplatePath('ui.num')], function (UIView, template) {
         if (v > this.datamodel.max) {
           this.datamodel.curNum = this.datamodel.max;
         }
-
+        this.curNum.val(this.datamodel.curNum);
         isChange = (this.datamodel.curNum != tmp);
       }
 
@@ -98,7 +98,6 @@ define(['UIView', getAppUITemplatePath('ui.num')], function (UIView, template) {
       } else if (this.datamodel.curNum < this.datamodel.min) {
         this.datamodel.curNum = this.datamodel.min;
       }
-      return this.datamodel;
     },
 
     addEvent: function ($super) {

@@ -1,4 +1,4 @@
-﻿<ul class="cui_cldweek">
+﻿<ul class="cui_cldweek" style=" position: static; ">
 <% var i = 0, day1 = 0;  %>
 <%for(day1 = 0; day1 < 7; day1++) { %>
 <li><%=weekDayArr[day1] %></li>
@@ -26,8 +26,13 @@
         <li class="cui_invalid"></li>
       <% } %>
       <% for(i = 0; i < days; i++) { %>
-        <% day = i + 1; %>
-        <li class="cui_calendar_item <%if(curTime > (new Date(changedYear, changedMonth, day )).getTime()) { %> cui_cld_daypass <%} %>"data-date="<%=changedYear%>-<%=changedMonth%>-<%=day%>"><%=dayItemFn(changedYear, changedMonth, day)%> </li>
+        <% var day = i + 1; %>
+        <% var calendar_time = (new Date(changedYear, changedMonth, day )).getTime(); %>
+        <% var difftime = calendar_time - curTime; %>
+        <% var dateObj = new Date(changedYear, changedMonth, day ); %>
+
+
+        <li class="cui_calendar_item <%if(difftime < 0) { %> cui_cld_daypass <%} %>"data-date="<%=changedYear%>-<%=changedMonth%>-<%=day%>"><%=dayItemFn.call(scope, changedYear, changedMonth, day, dateObj, difftime)%> </li>
       <% } %>
   </ul>
 <%} %>

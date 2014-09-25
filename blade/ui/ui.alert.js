@@ -11,7 +11,7 @@ define(['UILayer', getAppUITemplatePath('ui.alert')], function (UILayer, templat
 
       //数据模型
       this.datamodel = {
-        title: 'alert',
+        title: '',
         content: 'content',
         btns: [
           { name: 'cancel', className: 'cui-btns-cancel' },
@@ -55,8 +55,8 @@ define(['UILayer', getAppUITemplatePath('ui.alert')], function (UILayer, templat
     setDatamodel: function (datamodel, okAction, cancelAction) {
       if (!datamodel) datamodel = {};
       _.extend(this.datamodel, datamodel);
-      this.okAction = okAction;
-      this.cancelAction = cancelAction;
+      okAction && (this.okAction = okAction);
+      cancelAction && (this.cancelAction = cancelAction);
       this.refresh();
     }
 

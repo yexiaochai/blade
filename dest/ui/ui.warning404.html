@@ -1,0 +1,25 @@
+﻿<div class="head-warning">
+  <div class="head-warning-padding">
+    <div class="head-warning-content">
+      <div class="cui-load-fail cui-text-center">
+        <div class="cui-load-error">
+          <div class="cui-i cui-wifi cui-fail-icon">
+          </div>
+        </div>
+        <p class="cui-gray">
+          <%=loadFail %></p>
+        <button type="button" class="cui-btns-retry">
+          <%=tryAgain %></button>
+        <%if(showContact) { %>
+          <div class="cui-404-tel">
+            <div class="cui-glines">
+            </div>
+            <p class="cui-grayc">
+              <%=telText %></p>
+            <span  class="cui-btns-tel"><span class="cui-i cui-warning-kf"></span><%=contact %></span></div>
+        <% } %>
+      </div>
+
+    </div>
+  </div>
+</div>

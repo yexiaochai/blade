@@ -1,0 +1,21 @@
+﻿<header>
+<%if (data.home) {%>
+<i class="icon_home i_bef" id="c-ui-header-home"></i>
+<%}%>
+<%if (data.customtitle) {%>
+<div><%=data.customtitle %></div>
+<%} else {%>
+<%if (data.tel) {%>
+<a href="tel:<%=data.tel.number||4000086666 %>" class="icon_phone i_bef __hreftel__" id="c-ui-header-tel"></a>
+<%}%>
+<%if (data.title) {%>
+<h1><%=data.title %></h1>
+<%}%>
+<%if (data.btn) {%>
+<i id="<%=data.btn.id%>" class="<%=data.btn.classname%> c-ui-header-btn"><%=data.btn.title %></i>
+<%}%>
+<%}%>
+<%if (data.back) {%>
+<i id="c-ui-header-return" class="returnico i_bef"></i>
+<%}%>
+</header>

@@ -113,3 +113,63 @@ _initSwitch: function () {
   this.switch1.show();
 },
 </code></pre>
+
+
+
+<h2 class="dh2">复杂日历使用</h2>
+
+<section class="demo4" style=" height: 340px; width: 96%; margin: 0 auto; "  >
+</section>
+<style>
+  .cui-roller .ul-list li.current { font-size: 1.3255em; color: #333; }
+</style>
+<pre><code>
+if (this.calendar) return;
+
+var sec = this.$('.demo3_sec');
+var data = [
+  {},
+  {},
+  {},
+  {},
+  {}
+];
+
+this.slider1 = new UISlider({
+  datamodel: {
+    data: data,
+    itemFn: function () {
+      return '<div style="width: 98%; height: 96%; border: 1px solid #bcbcbc;"></div>';
+    }
+  },
+  momentum: false,
+  displayNum: 1,
+  wrapper: this.$('.demo4'),
+  changed: function (item) {
+    //          sec.html('当前选择：' + 'id: ' + item.id + ', ' + 'name: ' + item.name);
+  },
+  itemClick: function (item) {
+  }
+});
+this.slider1.show();
+this.slider1.calendarArr = [];
+
+for (var i = 0, len = data.length; i < len; i++) {
+var dateObj = new Date();
+var dateObj = new Date(dateObj.getFullYear(), dateObj.getMonth() + i, dateObj.getDate());
+
+  this.slider1.calendarArr[i] = new UICalendar({
+    dateObj:dateObj,
+    datamodel: {
+      displayMonthNum: 1
+    },
+    wrapper: this.slider1.$('li[data-index="' + i + '"]').find('div')
+  });
+  this.slider1.calendarArr[i].show();
+}
+
+
+var item = this.slider1.getSelected();
+
+sec.html('当前选择：' + 'id: ' + item.id + ', ' + 'name: ' + item.name);
+</code></pre>

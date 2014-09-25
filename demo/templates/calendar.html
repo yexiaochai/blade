@@ -46,6 +46,37 @@ this.num = new UISelect({
 });
 </code></pre>
 
+  <h2 class="dh2">demo1</h2>
+    <input type="button" class="demo1 btn" value="弹出层使用">
+    
+    <pre>
+    <code>
+/*
+calendar本身不会遮盖整个view，这里是与pageview组件组合
+pageview提供一个全局遮盖层，在里面内嵌calendar
+*/
+var scope = this;
+if (!this.calendarlayer) {
+  this.calendarlayer = new UIPageView();
+}
+this.calendarlayer.animateShow(new UICalendar({
+  datamodel: {
+    displayMonthNum: 5
+  },
+  onShow: function () {
+    console.log('onShow');
+  },
+  onHide: function () {
+    console.log('onHide');
+  },
+  onItemClick: function (item) {
+    scope.calendarlayer.animateHide();
+    scope.showToast(item);
+  }
+}));    
+    </code>
+    </pre>
+
     <h2 class="dh2">calendar简单应用</h2>
     <div class="wrapper mlr-10"></div>
 
@@ -99,3 +130,48 @@ this.calendar2 = new UICalendar({
   wrapper: this.$el.find('.wrapper1')
 });
 </code></pre>
+
+ <h2 class="dh2">日历的复杂操作</h2>
+    <div class="wrapper1 mlr-10"></div>
+
+
+<style>
+  .checked_start { background: #0FC4D9; color: #FFF !important; position: relative;}
+.checked_middle { background: #EBF4FA;}
+.checked_back { background: #84D018; color: #FFF !important; position: relative;}
+
+.cale_con{ padding-top:72px;}
+.cale_item { background-color:#F5F5F5;border-bottom:1px solid #e2e2e2;height:72px;  top:48px; left:0; width:100%; z-index:99}
+.cale_item li{ float:left; text-align:center; width:50%; padding:10px 0;border-bottom:4px solid transparent;height:48px;font-size:12px;color:#666;}
+.cale_item li span{ display:block; line-height:18px;}
+.cale_item li .cale_t2{ font-size:18px;}
+.cale_item li .cale_t3{ font-size:14px;}
+.cale_item .cur {border-bottom:4px solid #1491C5;color:#1491C5;}
+.cale_item .cur .cale_t1{ color:#666;}
+.cale_t1:before{ content:""; background-position:-20px -240px; margin:-2px 6px 0 0; height:20px; width:20px; display:inline-block; vertical-align:middle}
+
+.cale_item2 { height:44px}
+.cale_item2 li{ height:20px;}
+/*== 图片 ==*/
+.all_pic {padding:10px 0;width:320px; margin:0 auto; box-sizing:border-box;}
+.all_pic:after {clear:both;content:'.';display:block;height:0;overflow:hidden;}
+.all_pic a,.all_pic img {width:150px;height:128px;}
+.all_pic a {float:left;margin:0 3px 6px;}
+
+.cui_cld_daybox .cui_cld_daypass {
+ color: #cfcfcf!important;
+}
+</style>
+
+<div id="fixed_date_panel">
+  <ul id="cale_tab" class="cale_item">
+    <li data-type="start" id="startType" class=""><span class="cale_t1">出发日期</span> <span
+      id="startT2" class="cale_t2">10月30日</span> <span id="startT3" class="cale_t3">2014年
+        星期四</span> </li>
+    <li data-type="back" id="backType" class="cur"><span class="cale_t1">返回日期</span> <span
+      id="destT2" class="cale_t2">11月14日</span> <span id="destT3" class="cale_t3">2014年
+        星期五</span> </li>
+  </ul>
+</div>
+<div id="cale_con" class="cale_con">
+</div>

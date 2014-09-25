@@ -30,8 +30,18 @@
       'UIAlert': app + 'ui/ui.alert',
       'UIMask': app + 'ui/ui.mask',
       'UILoading': app + 'ui/ui.loading',
-      'UIReLoading': app + 'ui/ui.reloading',
+      'UILoadingLayer': app + 'ui/ui.loading.layer',
       'UIToast': app + 'ui/ui.toast',
+
+
+
+      'T_UIToast': app + 'ui/ui.toast.html',
+
+//      'T_UIToast': 'http://localhost:5389/blade/demo/templates/toast.html',
+
+
+      'UIPageview': app + 'ui/ui.pageview',
+
       'UIInlineView': app + 'ui/ui.inline.view',
       'UINum': app + 'ui/ui.num',
       'UISwitch': app + 'ui/ui.switch',
@@ -45,7 +55,11 @@
       'UIGroupList': app + 'ui/ui.group.list',
       'UICalendar': app + 'ui/ui.calendar',
       'UISlider': app + 'ui/ui.slider',
-      'UIInputClear': app + 'ui/ui.inputclear'
+      'UIImageSlider': app + 'ui/ui.image.slider',
+
+      'UIInputClear': app + 'ui/ui.inputclear',
+      'UIWarning404': app + 'ui/ui.warning404'
+
 
     }
 

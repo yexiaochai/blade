@@ -15,6 +15,18 @@ define(['UIView', getAppUITemplatePath('ui.mask')], function (UIView, template) 
       $super(opts);
     },
 
+    setRootStyle: function () {
+      var h = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
+
+      this.$el.css({
+        width: '100%',
+        height: h + 'px',
+        position: 'absolute',
+        left: '0px',
+        top: '0px'
+      });
+    },
+
     addEvent: function ($super) {
       $super();
       this.on('onCreate', function () {
@@ -22,6 +34,7 @@ define(['UIView', getAppUITemplatePath('ui.mask')], function (UIView, template) 
       });
 
       this.on('onShow', function () {
+        this.setRootStyle();
         this.setzIndexTop();
       });
 
