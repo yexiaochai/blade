@@ -94,10 +94,10 @@
 
       //提示类
       var groupList1 = [
+        { 'uiname': 'pageview', 'name': '全局遮盖工具组件pageview' },
         { 'uiname': 'alert', 'name': '警告框' },
         { 'uiname': 'toast', 'name': 'toast框' },
-        { 'uiname': 'loading', 'name': 'loading框' },
-        { 'uiname': 'reloading', 'name': 'reloading框' },
+        { 'uiname': 'reloading', 'name': 'loading框' },
         { 'uiname': 'bubble.layer', 'name': '气泡框提示' },
         { 'uiname': 'warning404', 'name': '404提醒' }
       ];
@@ -105,11 +105,11 @@
       var groupList2 = [
         { 'uiname': 'num', 'name': '数字组件' },
         { 'uiname': 'select', 'name': 'select组件' },
-        { 'uiname': 'select2', 'name': 'select应用' },
         { 'uiname': 'switch', 'name': 'switch组件' },
         { 'uiname': 'tab', 'name': 'tab组件' },
         { 'uiname': 'calendar', 'name': '日历组件' },
-        { 'uiname': 'group.list', 'name': '分组列表' }
+        { 'uiname': 'group.list', 'name': '分组列表' },
+        { 'uiname': 'group.list', 'name': '搜索列表（城市搜索，地址搜索，待补充）' }
       ];
 
       var groupList3 = [

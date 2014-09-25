@@ -30,7 +30,7 @@
       if (!datamodel) datamodel = {};
       _.extend(this.datamodel, datamodel);
       this.retryAction = retryAction;
-      this.telAction = telAction;
+      this.callTelAction = telAction;
       this.refresh();
     },
 

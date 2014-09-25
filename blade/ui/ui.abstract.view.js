@@ -100,8 +100,8 @@
     setOption: function (options) {
       //这里可以写成switch，开始没有想到有这么多分支
       for (var k in options) {
-        if (k == 'datamodel') {
-          _.extend(this.datamodel, options[k]);
+        if (k == 'datamodel' || k == 'events') {
+          _.extend(this[k], options[k]);
           continue;
         } else if (this._isAddEvent(k)) {
           this.on(k, options[k])

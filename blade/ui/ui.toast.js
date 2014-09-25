@@ -3,7 +3,7 @@
 用于继承的类，会自动垂直居中
 
 */
-define(['UILayer', 'text!T_UIToast'], function (UILayer, template) {
+define(['UILayer', getAppUITemplatePath('ui.toast')], function (UILayer, template) {
 
 
   return _.inherit(UILayer, {
@@ -14,6 +14,7 @@ define(['UILayer', 'text!T_UIToast'], function (UILayer, template) {
         content: 'toast'
       };
       this.hideSec = 2000;
+      this.hasPushState = false;
       this.TIMERRES = null;
     },
 
@@ -46,9 +47,19 @@ define(['UILayer', 'text!T_UIToast'], function (UILayer, template) {
       });
     },
 
-    setDatamodel: function (content, fn) {
+    /**
+    * 显示Toast
+    * @param title 标题
+    * @param timeout 显示时长
+    * @param callback 隐藏时回调
+    * @param clickToHide 是否允许点击界面任一处,隐藏Toast
+    */
+    setDatamodel: function (content, timeout, hideAction, clickToHide) {
       this.datamodel.content = content;
-      this.hideAction = fn;
+      timeout && (this.hideSec = timeout);
+      hideAction && (this.hideAction = hideAction);
+      this.maskToHide = clickToHide;
+
       this.refresh();
     }
 

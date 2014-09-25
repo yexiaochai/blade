@@ -15,8 +15,8 @@ define(['UILayer', getAppUITemplatePath('ui.group.select'), 'UISelect'], functio
         title: 'scrollLayer',
         tips: 'tips',
         btns: [
-          { name: 'cancel', className: 'cui-btns-cancel' },
-          { name: 'ok', className: 'cui-btns-ok' }
+          { name: '取消', className: 'cui-btns-cancel' },
+          { name: '确定', className: 'cui-btns-ok' }
         ]
       };
 
@@ -26,30 +26,23 @@ define(['UILayer', getAppUITemplatePath('ui.group.select'), 'UISelect'], functio
       this.scrollArr = [];
       this.changedArr = [
         function (item) {
-          console.log(item);
         },
         function (item) {
-          console.log(item);
         },
         function (item) {
-          console.log(item);
         }
       ];
 
       this.onOkAction = function (items) {
-        console.log('ok');
-        console.log(items);
 
       };
 
       this.onCancelAction = function (items) {
-        console.log('cancel');
-        console.log(items);
-
+        this.hide();
       };
 
       //这里便只有一个接口了
-      this.displayNum = 3;
+      this.displayNum = 5;
 
       this.events = {
         'click .cui-btns-ok': 'okAction',
@@ -76,15 +69,16 @@ define(['UILayer', getAppUITemplatePath('ui.group.select'), 'UISelect'], functio
 
     initElement: function () {
       this.scrollWrapper = this.$('.cui-roller');
+      this.tips = this.$('.cui-roller-tips');
     },
 
 
     _initScroll: function () {
       this._destroyScroll();
-      var i, len, item;
+      var i, len, item, changeAction;
       for (i = 0, len = this.data.length; i < len; i++) {
         item = this.data[i];
-
+        changeAction = this.changedArr[i] || function () { };
         this.scrollArr[i] = new UISelect({
           datamodel: {
             data: item,
@@ -92,11 +86,17 @@ define(['UILayer', getAppUITemplatePath('ui.group.select'), 'UISelect'], functio
             id: this.idArr[i]
           },
           displayNum: this.displayNum,
-          changed: $.proxy(this.changedArr[i], this),
+          changed: $.proxy(changeAction, this),
           wrapper: this.scrollWrapper
         });
         this.scrollArr[i].show();
       }
+    },
+
+    //缺少接口
+    setTips: function (msg) {
+      this.datamodel.tips = msg;
+      this.tips.html(msg);
     },
 
     _destroyScroll: function () {

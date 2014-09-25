@@ -31,10 +31,10 @@ define(['UIView', getAppUITemplatePath('ui.mask')], function (UIView, template) 
       $super();
       this.on('onCreate', function () {
         this.$el.addClass('cui-mask');
-        this.setRootStyle();
       });
 
       this.on('onShow', function () {
+        this.setRootStyle();
         this.setzIndexTop();
       });
 

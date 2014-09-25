@@ -73,8 +73,12 @@
         datamodel: {
           data: data,
           itemFn: function (item) {
-            return '<img src="' + item.src + '">';
+            return '<img data-src="' + item.src + '" src="' + item.src + '" >';
           }
+        },
+        autoPlay: true,
+        handleItem: function (index, wrapper) {
+          var s = '';
         },
         displayNum: 1,
         wrapper: this.$('.demo2')
@@ -131,6 +135,7 @@
 
     _initCalendar: function () {
       if (this.slider1) return;
+      var scope = this;
 
       var sec = this.$('.demo3_sec');
       var data = [{}, {}, {}, {}, {}];
@@ -177,7 +182,7 @@
               },
               wrapper: wrapper,
               onItemClick: function (date) {
-                alert(date);
+                scope.showToast(date);
               }
             });
           }
@@ -192,13 +197,25 @@
     },
 
     onShow: function () {
+      var sss = function () {
+        var demo = this.$('.demo2');
+        var flag = parseInt(demo.width() - 400);
+        demo.height(150 + 0.4 * flag);
+      };
+      sss();
       this._initSlider();
       this._imgSlider();
       this._initSwitch();
       this._initCalendar();
 
+      $(window).on('resize.ttt', $.proxy(function () {
+        sss();
+      }, this));
+
     },
     onHide: function () {
+      this.imgSlider.stop();
+      $(window).off('ttt');
     }
   });
 });

@@ -83,7 +83,7 @@ define(['UIView', getAppUITemplatePath('ui.num')], function (UIView, template) {
 
     //重置当前值，由于数值不满足条件
     resetNum: function (isChange) {
-//      this.refresh();
+      this.refresh();
       if (isChange) this.changed.call(this, this.datamodel.curNum);
     },
 

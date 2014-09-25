@@ -21,6 +21,11 @@ define(['UIView', 'UIMask'], function (UIView, UIMask) {
       //需要居中定位
       this.needReposition = true;
 
+      //是否具有后退关闭弹出层需求
+      this.hasPushState = (history && history.pushState);
+      //是否为浏览器回退
+      this.historyBack = false;
+
       //类型为layer
       this.type = 'layer';
 
@@ -41,19 +46,51 @@ define(['UIView', 'UIMask'], function (UIView, UIMask) {
 
       this.show(function (el) {
         el.css({
-          '-webkit-transform': 'translate(0, -30%)',
-          transform: 'translate(0,  -30%)'
+          '-webkit-transform': 'translate(0, -50%)',
+          transform: 'translate(0,  -50%)'
         });
         el.show().animate({
           '-webkit-transform': 'translate(0, 0)',
           transform: 'translate(0, 0)'
-        }, 100, 'ease-in-out', $.proxy(function () {
+        }, 200, 'ease-in-out', $.proxy(function () {
           //          this.$el.css({
           //            '-webkit-transform': '',
           //            transform: ''
           //          });
         }, this));
       });
+    },
+
+    _addTouchEvent: function () {
+      var scope = this;
+      this._removeTouchEvent();
+
+      var _handler = function (e) {
+        e.preventDefault();
+      };
+
+      this.$el.on('touchmove.layertouchmove' + this.id, _handler);
+      this.$el.on('mousemove.layertouchmove' + this.id, _handler);
+
+    },
+
+    _removeTouchEvent: function () {
+      this.$el.off('.layertouchmove' + this.id);
+    },
+
+    _addPushStateEvent: function () {
+      if (!this.hasPushState) return;
+      history.pushState({}, document.title, location.href);
+      this.historyBack = false;
+      $(window).on('popstate.pageviewpopstate' + this.id, $.proxy(function (e) {
+        this.historyBack = true;
+        this.hide();
+      }, this));
+    },
+
+    _removePushStateEvent: function () {
+      if (!this.hasPushState) return;
+      $(window).off('.pageviewpopstate' + this.id);
     },
 
     addEvent: function () {
@@ -80,11 +117,28 @@ define(['UIView', 'UIMask'], function (UIView, UIMask) {
       this.on('onShow', function () {
         if (this.needReposition) this.reposition();
         this.setzIndexTop();
+        this._addTouchEvent();
+        this._addPushStateEvent();
+
+      });
+
+      this.on('onPreHide', function () {
+        //执行两次hide方法
+        if (this.hasPushState && !this.historyBack) {
+          history.back();
+          return;
+        }
+
       });
 
       this.on('onHide', function () {
+        if (this.hasPushState && !this.historyBack) {
+          return;
+        }
         this.mask.$el.off('.uimask' + this.mask.id);
         this.mask.hide();
+        this._removeTouchEvent();
+        this._removePushStateEvent();
 
       });
 
@@ -93,8 +147,8 @@ define(['UIView', 'UIMask'], function (UIView, UIMask) {
     //弹出层类垂直居中使用
     reposition: function () {
       this.$el.css({
-        'margin-left': -($(this.$el).width() / 2) + 'px',
-        'margin-top': -($(this.$el).height() / 2) + 'px'
+        'margin-left': -(this.$el.width() / 2) + 'px',
+        'margin-top': -(this.$el.height() / 2) + 'px'
       });
     }
 

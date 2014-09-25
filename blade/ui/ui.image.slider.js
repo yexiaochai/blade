@@ -8,7 +8,7 @@
       this.delaySec = 3000;
       this.playTime = 500;
       this.sliderNav = null;
-
+      this.displayNum = 1;
     },
 
     //循环播放
@@ -53,15 +53,23 @@
     _addTouchEvent: function () {
       var scope = this;
       this._removeTouchEvent();
-      this.$el.on('touchstart.imageslidertouchmove' + this.id, function (e) {
+
+      var _handlerStop = function (e) {
         scope.stop();
-      });
-      this.$el.on('touchmove.imageslidertouchmove' + this.id, function (e) {
-        scope.stop();
-      });
-      this.$el.on('touchend.imageslidertouchmove' + this.id, function (e) {
+      };
+
+      var _handlerPlay = function (e) {
         scope.play();
-      });
+      };
+
+      this.$el.on('touchstart.imageslidertouchmove' + this.id, _handlerStop);
+      this.$el.on('touchmove.imageslidertouchmove' + this.id, _handlerStop);
+      this.$el.on('touchend.imageslidertouchmove' + this.id, _handlerPlay);
+
+      this.$el.on('mousedown.imageslidertouchmove' + this.id, _handlerStop);
+      this.$el.on('mousemove.imageslidertouchmove' + this.id, _handlerStop);
+      this.$el.on('mouseup.imageslidertouchmove' + this.id, _handlerPlay);
+
     },
 
     _removeTouchEvent: function () {
@@ -79,6 +87,10 @@
 
     addEvent: function ($super) {
       $super();
+      this.on('onRefresh', function () {
+        this.sliderNav = null;
+      });
+
       this.on('onShow', function () {
         this.createNav();
         this.play();

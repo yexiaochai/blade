@@ -54,7 +54,7 @@
 
       //满足条件就重写
       if (ancestor && typeof value == 'function') {
-        var argslist = /^\s*function\s*\(([^\(\)]*?)\)\s*?\{/i.exec(value.toString())[1].replace(/\s/i, '').split(',');
+        var argslist = /^\s*function\s*\(([^\(\)]*?)\)\s*?\{/i.exec(value.toString())[1].replace(/\s/g, '').split(',');
         //只有在第一个参数为$super情况下才需要处理（是否具有重复方法需要用户自己决定）
         if (argslist[0] === '$super' && ancestor[k]) {
           value = (function (methodName, fn) {

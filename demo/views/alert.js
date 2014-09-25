@@ -6,12 +6,31 @@
     },
 
     events: {
+      'click .fxdemo': 'fxdemo',    //简单使用
+      'click .fxdemo01': 'fxdemo01',    //简单使用
+      'click .fxdemo02': 'fxdemo02',    //简单使用
+
+
       'click .demo1': 'demo1',    //简单使用
-      'click .demo2': 'demo2',    //单按钮
       'click .demo3': 'demo3',    //三按钮
       'click .demo4': 'demo4',    //content定制化
       'click .demo5': 'demo5'     //执行setDatamodel
     },
+
+fxdemo: function () {
+  this.showMessage('框架使用');
+},
+
+fxdemo01: function () {
+  this.showMessage('框架使用', '带标题');
+},
+
+fxdemo02: function () {
+  this.showMessage('框架使用', null, '重置文本', function () {
+    alert('重置回调');
+    this.hide();
+  });
+},
 
     demo1: function () {
       if (!this.alert1) {
@@ -129,11 +148,11 @@
     },
 
     onHide: function () {
-      if(this.alert1 && this.alert1.status == 'show') this.alert1.hide();
-      if(this.alert2 && this.alert2.status == 'show') this.alert2.hide();
-      if(this.alert3 && this.alert3.status == 'show') this.alert3.hide();
-      if(this.alert4 && this.alert4.status == 'show') this.alert4.hide();
-      if(this.alert5 && this.alert5.status == 'show') this.alert5.hide();
+      if (this.alert1 && this.alert1.status == 'show') this.alert1.hide();
+      if (this.alert2 && this.alert2.status == 'show') this.alert2.hide();
+      if (this.alert3 && this.alert3.status == 'show') this.alert3.hide();
+      if (this.alert4 && this.alert4.status == 'show') this.alert4.hide();
+      if (this.alert5 && this.alert5.status == 'show') this.alert5.hide();
     }
 
   });

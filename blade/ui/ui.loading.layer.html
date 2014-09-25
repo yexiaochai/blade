@@ -1,0 +1,18 @@
+﻿<%
+var hasText = (typeof text == 'string' && text.length > 0);
+ %>
+<div class="cui-grayload-text" style=" <% if(!hasText && !closeBtn){%> width: 80px; height: 70px; <%}%> " >
+  <div class="cui-i cui-w-loading">
+  </div>
+  <div class="cui-i cui-m-logo">
+  </div>
+  <%if(closeBtn) %>
+  <div class="cui-grayload-close">
+  </div>
+  <% %>
+  <div class="cui-grayload-bfont">
+  <%if(hasText){ %>
+    <%=text %>
+    <%} %>
+    </div>
+</div>

@@ -30,7 +30,7 @@
       'UIAlert': app + 'ui/ui.alert',
       'UIMask': app + 'ui/ui.mask',
       'UILoading': app + 'ui/ui.loading',
-      'UIReLoading': app + 'ui/ui.reloading',
+      'UILoadingLayer': app + 'ui/ui.loading.layer',
       'UIToast': app + 'ui/ui.toast',
 
 
@@ -40,7 +40,7 @@
 //      'T_UIToast': 'http://localhost:5389/blade/demo/templates/toast.html',
 
 
-      'UIPageView': app + 'ui/ui.pageview',
+      'UIPageview': app + 'ui/ui.pageview',
 
       'UIInlineView': app + 'ui/ui.inline.view',
       'UINum': app + 'ui/ui.num',

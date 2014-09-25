@@ -1,8 +1,6 @@
 ﻿
-/*
-用于继承的类，会自动垂直居中
+//define(['UIView', getAppUITemplatePath('ui.pageview'), 'cWidgetFactory', 'cWidgetGuider'], function (UIView, template, WidgetFactory) {
 
-*/
 define(['UIView', getAppUITemplatePath('ui.pageview')], function (UIView, template) {
 
   return _.inherit(UIView, {
@@ -14,35 +12,27 @@ define(['UIView', getAppUITemplatePath('ui.pageview')], function (UIView, templa
 
       this.noTouchMove = false;
 
-      this.datamodel = {
-        title: 'title'
-      };
-
-      this.events = {
-        'click .returnico': 'backAction'
-      };
-
       //类型为layer
       this.type = 'pageview';
 
-      this.animateSwitch = 'top';      //right, left, top, bottom, none
+      this.animateSwitch = false;      //right, left, top, bottom, none
 
       //使用的内嵌实例
       this.inlineInstance = null;
 
-    },
+      //是否具有后退关闭弹出层需求
+      this.hasPushState = (history && history.pushState);
+      //是否为浏览器回退
+      this.historyBack = false;
 
-    backAction: function (e) {
-      if (this.animateSwitch) {
-        this.animateHide();
-      } else {
-        this.hide();
-      }
+
+      this.showAction = function () { };
+      this.hideAction = function () { };
+
     },
 
     initialize: function ($super, opts) {
       $super(opts);
-
     },
 
     initElement: function () {
@@ -53,7 +43,6 @@ define(['UIView', getAppUITemplatePath('ui.pageview')], function (UIView, templa
     createRoot: function (html) {
       this.$el = $(html).hide().attr('id', this.id);
     },
-
 
     _addTouchEvent: function () {
       if (!this.noTouchMove) return;
@@ -68,13 +57,18 @@ define(['UIView', getAppUITemplatePath('ui.pageview')], function (UIView, templa
     },
 
     _addPushStateEvent: function () {
+      if (!this.hasPushState) return;
+      history.pushState({}, document.title, location.href);
+      this.historyBack = false;
       $(window).on('popstate.pageviewpopstate' + this.id, $.proxy(function (e) {
-        this.hide();
+        this.historyBack = true;
+        this.animateHide();
       }, this));
     },
 
     _removePushStateEvent: function () {
-      this.$el.off('.pageviewpopstate' + this.id);
+      if (!this.hasPushState) return;
+      $(window).off('.pageviewpopstate' + this.id);
     },
 
     //处理动画方向
@@ -103,7 +97,25 @@ define(['UIView', getAppUITemplatePath('ui.pageview')], function (UIView, templa
 
     animateShow: function (inlineInstance) {
 
-      if (inlineInstance && !this.inlineInstance) this.inlineInstance = inlineInstance;
+      if (inlineInstance) {
+        //如果该pageview已经被使用，则需要消耗内嵌实例，再重新赋值
+        if (this.inlineInstance && this.inlineInstance != inlineInstance) this.inlineInstance.destroy();
+        this.inlineInstance = inlineInstance;
+      } else {
+        if (this.inlineInstance) {
+          this.inlineInstance.destroy();
+          this.inlineInstance = null;
+        }
+        $('.main-frame, .main').hide();
+        this.show();
+        return;
+      }
+
+      if (!this.animateSwitch) {
+        $('.main-frame, .main').hide();
+        this.show();
+        return;
+      }
 
       this.show(function (el) {
         var prepareCss = this.animateHandler();
@@ -116,24 +128,35 @@ define(['UIView', getAppUITemplatePath('ui.pageview')], function (UIView, templa
           '-webkit-transform': 'translate(0, 0)',
           transform: 'translate(0, 0)'
         }, 400, 'ease-in-out', function () {
-          $('.main').hide();
-
-          //            $el.css({
-          //              '-webkit-transform': '',
-          //              transform: ''
-          //            });
+          setTimeout(function () {
+            $('.main-frame, .main').hide();
+          }, 20);
+          el.css({
+            '-webkit-transform': '',
+            transform: ''
+          });
         });
       });
     },
 
     animateHide: function () {
+      if (!this.animateSwitch) {
+        $('.main-frame, .main').show();
+        this.hide();
+        return;
+      }
+
       this.hide(function (el) {
         var prepareCss = this.animateHandler();
         el.animate({
           '-webkit-transform': prepareCss,
           transform: prepareCss
         }, 400, 'ease-in-out', function () {
-          el.hide()
+          el.hide();
+          el.css({
+            '-webkit-transform': '',
+            transform: ''
+          });
         });
       });
     },
@@ -164,6 +187,23 @@ define(['UIView', getAppUITemplatePath('ui.pageview')], function (UIView, templa
       });
     },
 
+    addAction: function (showAction, hideAction) {
+      if (!showAction)
+        this.showAction = function () { };
+      else
+        this.showAction = showAction;
+
+      if (!hideAction)
+        this.hideAction = function () { };
+      else
+        this.hideAction = hideAction;
+    },
+
+    removeAction: function () {
+      this.showAction = function () { };
+      this.hideAction = function () { };
+    },
+
     addEvent: function () {
 
       this.on('onPreShow', function () {
@@ -171,17 +211,56 @@ define(['UIView', getAppUITemplatePath('ui.pageview')], function (UIView, templa
       });
 
       this.on('onShow', function () {
+        var self = this;
+        self.$el.css('top', '48px');
+
+        //处理头部问题
+        //        Guider.apply({
+        //          hybridCallback: function () {
+        //          },
+        //          callback: function () {
+        //            self.$el.css('top', '48px');
+        //          }
+        //        });
+
+        this.showAction.call(this);
+
         this.setzIndexTop();
         this._addTouchEvent();
+        this._addPushStateEvent();
+
         this.showInlineInstance();
         this._reSize();
+
+      });
+
+      this.on('onPreHide', function () {
+
+        //执行两次hide方法
+        if (this.hasPushState && !this.historyBack) {
+          history.back();
+          return;
+        }
+
       });
 
       this.on('onHide', function () {
-        this._removeTouchEvent();
-        this.hideInlineInstance();
-        $('.main').show();
+        if (this.hasPushState && !this.historyBack) {
+          return;
+        }
 
+        this.hideAction.call(this);
+
+        this._removeTouchEvent();
+        this._removePushStateEvent();
+
+        //这里代码需要优化
+        setTimeout($.proxy(function () {
+          this.hideInlineInstance();
+        }, this), 400);
+
+        $('.main-frame, .main').show();
+        this.removeAction();
       });
 
     }

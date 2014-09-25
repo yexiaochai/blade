@@ -170,7 +170,6 @@ define([], function () {
       scrollbars: true,
       // 其实时期Y的位置
       startY: 0,
-
       preventDefault: true,
 
       scrollOffset: 0,
@@ -208,6 +207,13 @@ define([], function () {
 
     //默认方向是向前
     this.dir = 'forward';
+
+    //尺寸不过关便不要实例化了
+//    if (this.options.scrollType == 'x') {
+//      if (this.wrapper.clientWidth > this.scroller.clientWidth) return;
+//    } else {
+//      if (this.wrapper.clientHeight > this.scroller.clientHeight)   return;
+//    }
 
     this._init();
 
@@ -333,7 +339,7 @@ define([], function () {
 
       this._execEvent('beforeScrollStart');
 
-      if (this.options.preventDefault) e.preventDefault();
+      //      e.preventDefault();
 
     },
 
@@ -370,12 +376,12 @@ define([], function () {
       }
 
       if (this.options.scrollType == 'y') {
-        if (dir == 'top' || dir == 'down') {
+        if (this.options.preventDefault && (dir == 'top' || dir == 'down')) {
           e.preventDefault();
         }
         deltaX = 0;
       } else {
-        if (dir == 'left' || dir == 'right') {
+        if (this.options.preventDefault && (dir == 'left' || dir == 'right')) {
           e.preventDefault();
         }
         deltaY = 0;

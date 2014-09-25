@@ -40,7 +40,7 @@
 		  "UIAlert": "ui/ui.alert",
 		  "UIMask": "ui/ui.mask",
 		  "UILoading": "ui/ui.loading",
-		  "UIReLoading": "ui/ui.reloading",
+		  "UILoadingLayer": "ui/ui.loading.layer",
 		  "UIToast": "ui/ui.toast",
 		  "UIInlineView": "ui/ui.inline.view",
 		  "UINum": "ui/ui.num",
@@ -77,7 +77,7 @@
 		  "text!ui/ui.pageview.html",
 
 		  "text!ui/ui.radio.list.html",
-		  "text!ui/ui.reloading.html",
+		  "text!ui/ui.loading.layer.html",
 		  "text!ui/ui.scroll.layer.html",
 		  "text!ui/ui.select.html",
 		  "text!ui/ui.slider.html",
@@ -85,6 +85,8 @@
 		  "text!ui/ui.switch.html",
 		  "text!ui/ui.tab.html",
 		  "text!ui/ui.toast.html",
+
+		  "text!ui/ui.header.html",
 
 		  "text!ui/ui.warning404.html"
 

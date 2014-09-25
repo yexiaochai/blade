@@ -31,16 +31,16 @@
       this.scroll = null;
 
       this.events = {
-        'click li': 'itemClickAction'
+        'click ul-list>li': 'itemClickAction'
 
       };
 
       this.changed = function (item) {
-        console.log(item);
+//        console.log(item);
       };
 
       this.itemClick = function (item) {
-        console.log(item);
+//        console.log(item);
       };
 
     },
