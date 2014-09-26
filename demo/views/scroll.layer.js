@@ -159,8 +159,10 @@
         this.scroll4 = new UIScrollLayer({
           maxHeight: 300,
           html: html,
-          scrollbars: false,
-          preventDefault: false,
+          scrollOpts: {
+            scrollbars: false,
+            bounce: false
+          },
           datamodel: {
             title: '高级大床房',
             btns: '<div class="hotel-detail-layer"><ul class="layer-bd"><li><button class="hotel-g-btn js_btn_book ">预订</button><em class="g-price"><small>¥</small>830</em></li></ul></div>'
@@ -211,6 +213,7 @@
               return '<img src="' + item.src + '" class="xslide-image-loading">';
             }
           },
+
           displayNum: 1,
           wrapper: slider_wrapper,
           changed: function (item) {

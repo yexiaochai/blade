@@ -103,6 +103,7 @@
       ];
 
       var groupList2 = [
+        { 'uiname': 'imageslider', 'name': '图片轮播' },
         { 'uiname': 'num', 'name': '数字组件' },
         { 'uiname': 'select', 'name': 'select组件' },
         { 'uiname': 'switch', 'name': 'switch组件' },
@@ -114,7 +115,7 @@
 
       var groupList3 = [
         { 'uiname': 'radio.list', 'name': '单列表选择组件' },
-        { 'uiname': 'scroll.layer', 'name': '滚动层组件' },
+        { 'uiname': 'scroll.layer', 'name': '滚动层组件（可定制化弹出层，比较常用）' },
         { 'uiname': 'group.select', 'name': '日期选择类组件' },
         { 'uiname': 'scroll', 'name': '滚动组件/横向滚动' },
       ];

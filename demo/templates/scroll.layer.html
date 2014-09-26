@@ -483,8 +483,10 @@ if (!this.scroll4) {
   this.scroll4 = new UIScrollLayer({
     maxHeight: 300,
     html: html,
-    scrollbars: false,
-    preventDefault: false,
+    scrollOpts: {
+      scrollbars: false,
+      bounce: false
+    },
     datamodel: {
       title: '高级大床房',
       btns: 'html....'

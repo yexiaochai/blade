@@ -118,7 +118,7 @@ define(['View', getViewTemplatePath('calendar'), 'UICalendar', 'UIPageview'], fu
       if (!this.calendar3) {
         this.calendar3 = new UICalendar({
           datamodel: {
-            displayMonthNum: 5,
+            displayMonthNum: 3,
             dayItemFn: function (year, month, day, dateObj, difftime) {
               //当前时间戳
               var curTime = dateObj.getTime();
@@ -193,6 +193,10 @@ define(['View', getViewTemplatePath('calendar'), 'UICalendar', 'UIPageview'], fu
       this.calendar3.show();
       this.calendar3.refresh();
 
+    },
+
+    demo4: function () {
+      
 
     },
 
@@ -200,6 +204,7 @@ define(['View', getViewTemplatePath('calendar'), 'UICalendar', 'UIPageview'], fu
       this.demo1();
       this.demo2();
       this.demo3();
+      this.demo4();
 
       this.turning();
     },
