@@ -21,33 +21,33 @@
     },
 
     fxdemo: function () {
-      this.showMessage({
-        datamodel: {
-          content: '框架使用'
-        }
-      });
+this.showMessage({
+  datamodel: {
+    content: '框架使用'
+  }
+});
     },
 
     fxdemo01: function () {
-      this.showMessage({
-        datamodel: {
-          title: '带标题',
-          content: '框架使用'
-        }
-      });
+this.showMessage({
+  datamodel: {
+    title: '带标题',
+    content: '框架使用'
+  }
+});
     },
 
     fxdemo02: function () {
-      this.showMessage({
-        datamodel: {
-          title: '带标题',
-          content: '框架使用'
-        },
-        okAction: function () {
-          alert('重置回调');
-          this.hide();
-        }
-      });
+this.showMessage({
+  datamodel: {
+    title: '带标题',
+    content: '框架使用'
+  },
+  okAction: function () {
+    alert('重置回调');
+    this.hide();
+  }
+});
     },
 
     fxdemo03: function () {

@@ -49,14 +49,31 @@ okAction为按钮回调函数
 showMessage: function (message, title, okTxt, okAction)
 */
 
-this.showMessage('框架使用');
-
-this.showMessage('框架使用', '带标题');
-
-this.showMessage('框架使用', null, '重置文本', function () {
-  alert('重置回调');
-  this.hide();
+//如果参数只有一个，并且是字符串时候，便只是设置显示的文字
+this.showMessage({
+  datamodel: {
+    content: '框架使用'
+  }
 });
+
+this.showMessage({
+  datamodel: {
+    title: '带标题',
+    content: '框架使用'
+  }
+});
+
+this.showMessage({
+  datamodel: {
+    title: '带标题',
+    content: '框架使用'
+  },
+  okAction: function () {
+    alert('重置回调');
+    this.hide();
+  }
+});
+
 </code></pre>
 
 
