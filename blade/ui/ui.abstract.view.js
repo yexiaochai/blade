@@ -199,7 +199,11 @@
     },
 
     show: function (animateAction) {
-      this.wrapper.append(this.$el);
+      //如果包含就不要乱搞了
+      if (!$.contains(this.wrapper[0], this.$el[0])) {
+        this.wrapper.append(this.$el);
+      }
+
       this.trigger('onPreShow');
 
       if (typeof animateAction == 'function')
@@ -213,6 +217,8 @@
     },
 
     hide: function (animateAction) {
+      if (!this.$el || this.status !== 'show') return;
+
       this.trigger('onPreHide');
 
       if (typeof animateAction == 'function')

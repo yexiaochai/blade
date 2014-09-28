@@ -44,15 +44,15 @@
           scope.hideWarning404();
         }, null, null, 'right');
       },
-'click .demo1': function () {
-  if (!this.layer404) {
-    this.layer404 = new UIWarning404({
-      wrapper: this.$('.warningWrapper')
+      'click .demo1': function () {
+        if (!this.layer404) {
+          this.layer404 = new UIWarning404({
+            wrapper: this.$('.warningWrapper')
 
-    });
-  }
-  this.layer404.show();
-}
+          });
+        }
+        this.layer404.show();
+      }
     },
 
     onPreShow: function () {
@@ -64,7 +64,7 @@
     },
 
     onHide: function () {
-
+      this.hideWarning404();
     }
 
   });

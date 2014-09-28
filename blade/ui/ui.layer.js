@@ -23,6 +23,8 @@ define(['UIView', 'UIMask'], function (UIView, UIMask) {
 
       //是否具有后退关闭弹出层需求
       this.hasPushState = (history && history.pushState);
+      this.hasPushState = false;
+
       //是否为浏览器回退
       this.historyBack = false;
 
