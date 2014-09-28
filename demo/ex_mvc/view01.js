@@ -53,85 +53,58 @@ hljs.registerLanguage("json", function(a) {
 
     },
 
-     showMessage: function (params) {
-        if(!params) params = {};
-        if(typeof params == 'string') {
-          params = {
-            datamodel : {
-              content: params
-            }
-          };
+     showMessage: function (message, title, okTxt, okAction) {
+        if (typeof message == 'object' && message.message) {
+          this._alert.setDatamodel(message);
+        } else {
+          this._alert.setDatamodel({
+            content: message,
+            title: title,
+            btns: [
+              {
+                name: (okTxt || '知道了'),
+                className: 'cui-btns-ok'
+              }
+            ]
+          },
+            okAction
+          );
         }
-
-       //每次需要重置属性，以防组件互相影响
-        this._alert.resetDefaultProperty();
-        this._alert.setOption(params);
-        this._alert.refresh();
         this._alert.show();
-
       },
 
       hideMessage: function () {
         this.alert.hide();
       },
 
-      showConfirm: function (params) {
-        if(!params) params = {};
-        if(typeof params == 'string') {
-          params = {
-            datamodel : {
-              content: params
-            }
-          };
+      showConfirm: function (message, title, okFn, cancelFn, okTxt, cancelTxt) {
+        //如果传入的是对象的话，直接用作初始化
+        if (typeof message == 'object' && message.message) {
+          this._confirm.setDatamodel(message);
+        } else {
+          this._confirm.setDatamodel({
+            content: message,
+            title: title,
+            btns: [
+              {
+                name: (cancelTxt || '取消'),
+                className: 'cui-btns-cancel'
+              },
+              {
+                name: (okTxt || '确定'),
+                className: 'cui-btns-ok'
+              }
+            ]
+          },
+          okFn,
+          cancelFn
+          );
         }
-
-        this._confirm.resetDefaultProperty();
-
-        //与showMessage不一样的地方
-        this._confirm.datamodel.btns = [
-          { name: '取消', className: 'cui-btns-cancel' },
-          { name: '确定', className: 'cui-btns-ok' }
-        ];
-        this._confirm.setOption(params);
-        this._confirm.refresh();
         this._confirm.show();
       },
 
       hideConfirm: function () {
         this._confirm.hide();
-      },
-
-      showToast: function (params) {
-        if(!params) params = {};
-          if(typeof params == 'string') {
-          params = {
-            datamodel : {
-              content: params
-            }
-          };
-        }
-
-        this._toast.resetDefaultProperty();
-        this._toast.setOption(params);
-        this._toast.refresh();
-        this._toast.show();
-      },
-
-      hideToast: function () {
-        this._toast.hide();
-      },
-
-      showLoading: function (params) {
-        if(!params) params = {};
-
-        this._loading.resetDefaultProperty();
-        this._loading.setOption(params);
-        this._loading.refresh();
-        this._loading.show();
-      },
-
-      hideLoading: function () {
-        this._loading.hide();
       },
 
       showWarning404: function (callback, showAction, hideAction,  animateSwitch, telAction,datamodel ) {
@@ -151,6 +124,25 @@ hljs.registerLanguage("json", function(a) {
 
       hidePageview: function () {
         this._pageview.animateHide();
+      },
+
+      showToast: function (title, timeout, hideAction, clickToHide) {
+        clickToHide = (typeof clickToHide != 'undefined') ? clickToHide : true;
+        this._toast.setDatamodel(title, timeout, hideAction, clickToHide);
+        this._toast.show();
+      },
+
+      hideToast: function () {
+        this._toast.hide();
+      },
+
+      showLoading: function (message, hideAction) {
+        this._loading.setDatamodel(message, hideAction);
+        this._loading.show();
+      },
+
+      hideLoading: function () {
+        this._loading.hide();
       },
 
     _initHead: function () {
@@ -181,7 +173,7 @@ hljs.registerLanguage("json", function(a) {
 
     show: function ($super) {
       $super();
-      window.sss = this;
+
       hljs.initHighlighting(this);
 
     }

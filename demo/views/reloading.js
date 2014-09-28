@@ -7,29 +7,41 @@ define(['View', 'UILoadingLayer', getViewTemplatePath('reloading')], function (V
     },
 
     events: {
-'click .fxdemo': function () {
-  this.showLoading();
-  setTimeout($.proxy(function () {
-    this.hideLoading();
-  }, this), 2000);
+      'click .fxdemo': function () {
+        this.showLoading();
+        setTimeout($.proxy(function () {
+          this.hideLoading();
+        }, this), 2000);
 
-},
-'click .fxdemo01': function () {
-  this.showLoading('我是文字');
-  setTimeout($.proxy(function () {
-    this.hideLoading();
-  }, this), 2000);
-},
-'click .fxdemo02': function () {
-  this.showLoading(null, function () {
-    this.hide();
-  });
-},
-'click .fxdemo03': function () {
-  this.showLoading('我是文字信息', function () {
-    this.hide();
-  });
-},
+      },
+      'click .fxdemo01': function () {
+        this.showLoading({
+          datamodel: {
+            content: '我是文字'
+          }
+        });
+        setTimeout($.proxy(function () {
+          this.hideLoading();
+        }, this), 2000);
+      },
+      'click .fxdemo02': function () {
+
+        this.showLoading({
+          datamodel: {
+            content: '',
+            closeBtn: true
+          }
+        });
+
+      },
+      'click .fxdemo03': function () {
+        this.showLoading({
+          datamodel: {
+            content: '加载中',
+            closeBtn: true
+          }
+        });
+      },
 
       'click .widget0': function () {
         if (!this.reloading) {

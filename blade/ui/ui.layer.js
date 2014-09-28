@@ -11,7 +11,14 @@ define(['UIView', 'UIMask'], function (UIView, UIMask) {
     propertys: function ($super) {
       $super();
       this.mask = new UIMask();
+      //类型为layer
+      this.type = 'layer';
 
+      this.resetDefaultProperty();
+
+    },
+
+    resetDefaultProperty: function () {
       //需要蒙版
       this.needMask = true;
 
@@ -28,9 +35,9 @@ define(['UIView', 'UIMask'], function (UIView, UIMask) {
       //是否为浏览器回退
       this.historyBack = false;
 
-      //类型为layer
-      this.type = 'layer';
-
+    
+      this.animateShowAction = null;
+      this.animateHideAction = null;
     },
 
     initialize: function ($super, opts) {
@@ -39,28 +46,11 @@ define(['UIView', 'UIMask'], function (UIView, UIMask) {
       this.clearRes();
     },
 
+
+
     //资源清理
     clearRes: function () {
       //      if (this.needMask == false) this.mask = null;
-    },
-
-    animateShow: function ($super) {
-
-      this.show(function (el) {
-        el.css({
-          '-webkit-transform': 'translate(0, -50%)',
-          transform: 'translate(0,  -50%)'
-        });
-        el.show().animate({
-          '-webkit-transform': 'translate(0, 0)',
-          transform: 'translate(0, 0)'
-        }, 200, 'ease-in-out', $.proxy(function () {
-          //          this.$el.css({
-          //            '-webkit-transform': '',
-          //            transform: ''
-          //          });
-        }, this));
-      });
     },
 
     _addTouchEvent: function () {

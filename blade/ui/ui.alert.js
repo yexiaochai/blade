@@ -8,14 +8,19 @@ define(['UILayer', getAppUITemplatePath('ui.alert')], function (UILayer, templat
   return _.inherit(UILayer, {
     propertys: function ($super) {
       $super();
+    },
+
+    resetDefaultProperty: function ($super) {
+      $super();
+
+      this.maskToHide = false;
 
       //数据模型
       this.datamodel = {
         title: '',
         content: 'content',
         btns: [
-          { name: 'cancel', className: 'cui-btns-cancel' },
-          { name: 'ok', className: 'cui-btns-ok' }
+          { name: '知道了', className: 'cui-btns-ok' }
         ]
       };
 
@@ -27,6 +32,15 @@ define(['UILayer', getAppUITemplatePath('ui.alert')], function (UILayer, templat
         'click .cui-btns-ok': 'okAction',
         'click .cui-btns-cancel': 'cancelAction'
       };
+
+      this.okAction = function () {
+        this.hide();
+      };
+
+      this.cancelAction = function () {
+        this.hide();
+      };
+
     },
 
     initialize: function ($super, opts) {
@@ -39,17 +53,6 @@ define(['UILayer', getAppUITemplatePath('ui.alert')], function (UILayer, templat
         this.$el.addClass('cui-alert');
       });
       this.maskToHide = false;
-    },
-
-    okAction: function () {
-      this.hide();
-      console.log('ok');
-    },
-
-    cancelAction: function () {
-      this.hide();
-      console.log('cancel');
-
     },
 
     setDatamodel: function (datamodel, okAction, cancelAction) {
