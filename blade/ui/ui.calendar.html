@@ -17,6 +17,7 @@
   var d = new Date(changedYear, changedMonth);
   var days = _.dateUtil.getDaysOfMonth(d);
   var beginWeek = _.dateUtil.getBeginDayOfMouth(d);
+  var endDateTime = endDate.getTime();
 
   var str_month = MonthClapFn(changedYear, changedMonth);
 %>
@@ -35,8 +36,7 @@
         <% var difftime = calendar_time - curTime; %>
         <% var dateObj = new Date(changedYear, changedMonth, day ); %>
 
-
-        <li class="cui_calendar_item <%if(difftime < 0) { %> cui_cld_daypass <%} %>"data-date="<%=changedYear%>-<%=changedMonth%>-<%=day%>"><%=dayItemFn.call(scope, changedYear, changedMonth, day, dateObj, difftime)%> </li>
+        <li class="cui_calendar_item <%if(calendar_time == endDateTime){ %>cui_endDate <%} %> <%if(difftime < 0) { %> cui_cld_daypass <%} %>"data-date="<%=changedYear%>-<%=changedMonth%>-<%=day%>"><%=dayItemFn.call(scope, changedYear, changedMonth, day, dateObj, difftime)%> </li>
       <% } %>
   </ul>
 <%} %>

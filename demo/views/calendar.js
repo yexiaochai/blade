@@ -62,97 +62,100 @@ define(['View', getViewTemplatePath('calendar'), 'UICalendar', 'UISlider'], func
     },
 
     demo11: function () {
-var scope = this;
+      var scope = this;
 
-//日历显示索引
-this.cIndex = 0;
-this.preCalendar = this.curCalendar = this.nextCalendar = null;
+      //日历显示索引
+      this.cIndex = 0;
+      this.preCalendar = this.curCalendar = this.nextCalendar = null;
 
-var data = [];
-for (var i = 0; i < 20; i++) {
-  data[i] = {};
-}
-
-if (!this.cSlider1) {
-  this.cSlider1 = new UISlider({
-    datamodel: { data: data,
-      itemFn: function (item, key, index) {
-        return '';
+      var data = [];
+      for (var i = 0; i < 20; i++) {
+        data[i] = {};
       }
-    },
-    momentum: false,
-    displayNum: 1,
-    wrapper: this.$('.wrapper11'),
-    changed: function (item) {
+
+      if (!this.cSlider1) {
+        this.cSlider1 = new UISlider({
+          datamodel: { data: data,
+            itemFn: function (item, key, index) {
+              return '';
+            }
+          },
+          momentum: false,
+          displayNum: 1,
+          wrapper: this.$('.wrapper11'),
+          changed: function (item) {
+            monthChanged();
+          },
+          onRefresh: function () {
+            monthChanged();
+          }
+        });
+      }
+      this.cSlider1.show();
+
+      var monthChanged = $.proxy(function () {
+        this.cIndex = this.cSlider1.getIndex();
+
+        var dateObj = new Date();
+
+        if (!this.preCalendar) {
+          this.preCalendar = new UICalendar({
+            datamodel: {
+              MonthClapFn: function () {
+                return '';
+              },
+              displayMonthNum: 1
+            }
+          });
+        }
+        if (!this.curCalendar) {
+          this.curCalendar = new UICalendar({
+            datamodel: {
+              MonthClapFn: function () {
+                return '';
+              },
+              displayMonthNum: 1
+            }
+          });
+        }
+        if (!this.nextCalendar) {
+          this.nextCalendar = new UICalendar({
+            datamodel: {
+              MonthClapFn: function () {
+                return '';
+              },
+              displayMonthNum: 1
+            }
+          });
+        }
+
+        this.preCalendar.dateObj = new Date(dateObj.getFullYear(), (dateObj.getMonth() + this.cIndex - 1), dateObj.getDate());
+        this.preCalendar.wrapper = this.cSlider1.$el.find('li[data-index="' + (this.cIndex - 1) + '"]');
+
+        this.curCalendar.dateObj = new Date(dateObj.getFullYear(), (dateObj.getMonth() + this.cIndex), dateObj.getDate());
+        this.curCalendar.wrapper = this.cSlider1.$el.find('li[data-index="' + (this.cIndex) + '"]');
+
+        this.nextCalendar.dateObj = new Date(dateObj.getFullYear(), (dateObj.getMonth() + this.cIndex + 1), dateObj.getDate());
+        this.nextCalendar.wrapper = this.cSlider1.$el.find('li[data-index="' + (this.cIndex + 1) + '"]');
+
+        if (this.cSlider1.$el.find('li[data-index="' + (this.cIndex - 1) + '"]')[0]) {
+          this.preCalendar.refresh();
+          this.preCalendar.show();
+        } else {
+          this.preCalendar.hide();
+        }
+
+        this.curCalendar.refresh();
+        this.curCalendar.show();
+
+        this.nextCalendar.refresh();
+        this.nextCalendar.show();
+
+        scope.$('.cur_calendar').html(this.curCalendar.dateObj.getFullYear() + '年' + (this.curCalendar.dateObj.getMonth() + 1) + '月');
+
+      }, this);
+
       monthChanged();
-    }
-  });
-}
-this.cSlider1.show();
-
-var monthChanged = $.proxy(function () {
-  this.cIndex = this.cSlider1.getIndex();
-
-  var dateObj = new Date();
-
-  if (!this.preCalendar) {
-    this.preCalendar = new UICalendar({
-      datamodel: {
-        MonthClapFn: function () {
-          return '';
-        },
-        displayMonthNum: 1
-      }
-    });
-  }
-  if (!this.curCalendar) {
-    this.curCalendar = new UICalendar({
-      datamodel: {
-        MonthClapFn: function () {
-          return '';
-        },
-        displayMonthNum: 1
-      }
-    });
-  }
-  if (!this.nextCalendar) {
-    this.nextCalendar = new UICalendar({
-      datamodel: {
-        MonthClapFn: function () {
-          return '';
-        },
-        displayMonthNum: 1
-      }
-    });
-  }
-
-  this.preCalendar.dateObj = new Date(dateObj.getFullYear(), (dateObj.getMonth() + this.cIndex - 1), dateObj.getDate());
-  this.preCalendar.wrapper = this.cSlider1.$el.find('li[data-index="' + (this.cIndex - 1) + '"]');
-
-  this.curCalendar.dateObj = new Date(dateObj.getFullYear(), (dateObj.getMonth() + this.cIndex), dateObj.getDate());
-  this.curCalendar.wrapper = this.cSlider1.$el.find('li[data-index="' + (this.cIndex) + '"]');
-
-  this.nextCalendar.dateObj = new Date(dateObj.getFullYear(), (dateObj.getMonth() + this.cIndex + 1), dateObj.getDate());
-  this.nextCalendar.wrapper = this.cSlider1.$el.find('li[data-index="' + (this.cIndex + 1) + '"]');
-
-  if (this.cSlider1.$el.find('li[data-index="' + (this.cIndex - 1) + '"]')[0]) {
-    this.preCalendar.refresh();
-    this.preCalendar.show();
-  } else {
-    this.preCalendar.hide();
-  }
-
-  this.curCalendar.refresh();
-  this.curCalendar.show();
-
-  this.nextCalendar.refresh();
-  this.nextCalendar.show();
-
-  scope.$('.cur_calendar').html(this.curCalendar.dateObj.getFullYear() + '年' + (this.curCalendar.dateObj.getMonth() + 1) + '月');
-
-}, this);
-
-monthChanged();
 
     },
 
@@ -304,10 +307,10 @@ monthChanged();
     },
 
     onPreShow: function () {
-            this.demo1();
-            this.demo2();
-            this.demo3();
-            this.demo4();
+      this.demo1();
+      this.demo2();
+      this.demo3();
+      this.demo4();
 
       this.turning();
     },

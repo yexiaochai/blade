@@ -42,7 +42,8 @@ define(['UIView', getAppUITemplatePath('ui.calendar')], function (UIView, templa
     resetPropery: function () {
       this.datamodel.year = this.dateObj.getFullYear();
       this.datamodel.month = this.dateObj.getMonth();
-
+      //结束日期
+      this.datamodel.endDate = new Date(this.datamodel.year, this.datamodel.month + this.datamodel.displayMonthNum, 0);
     },
 
     itemAction: function (e) {
