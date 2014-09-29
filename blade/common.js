@@ -40,8 +40,6 @@
 //      'T_UIToast': 'http://localhost:5389/blade/demo/templates/toast.html',
 
 
-      'UIPageview': app + 'ui/ui.pageview',
-
       'UIInlineView': app + 'ui/ui.inline.view',
       'UINum': app + 'ui/ui.num',
       'UISwitch': app + 'ui/ui.switch',

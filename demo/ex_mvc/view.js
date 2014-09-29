@@ -1,12 +1,10 @@
-﻿define(['AbstractView', 'cHighlight',  'UILoadingLayer','UIWarning404', 'UIAlert', 'UIToast', 'UIPageview'], function (AbstractView, cHighlight, Loading, Warning404, Alert, Toast, UIPageview) {
+﻿define(['AbstractView', 'cHighlight',  'UILoadingLayer', 'UIAlert', 'UIToast'], function (AbstractView, cHighlight, Loading,  Alert, Toast) {
 
 
       var _loading = new Loading();
        var _alert = new Alert();
          var _confirm = new Alert();
          var _toast = new Toast();
-         var _warning404 = new Warning404();
-         var _pageview = new UIPageview();
 
 
   var hljs = new cHighlight();
@@ -48,8 +46,6 @@ hljs.registerLanguage("json", function(a) {
         this._alert = _alert;
         this._confirm = _confirm;
         this._toast = _toast;
-        this._warning404 = _warning404;
-        this._pageview = _pageview;
 
     },
 
@@ -132,25 +128,6 @@ hljs.registerLanguage("json", function(a) {
 
       hideLoading: function () {
         this._loading.hide();
-      },
-
-      showWarning404: function (callback, showAction, hideAction,  animateSwitch, telAction,datamodel ) {
-        if (callback) this._warning404.setDatamodel(datamodel, callback, telAction);
-        this.showPageview(this._warning404, showAction, hideAction, animateSwitch);
-      },
-
-      hideWarning404: function () {
-        this.hidePageview();
-      },
-
-      showPageview: function (instance, showAction, hideAction, animateSwitch) {
-        this._pageview.addAction(showAction, hideAction);
-       this._pageview.animateSwitch = animateSwitch;
-        this._pageview.animateShow(instance);
-      },
-
-      hidePageview: function () {
-        this._pageview.animateHide();
       },
 
     _initHead: function () {

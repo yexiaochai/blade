@@ -7,24 +7,7 @@ define(['View', getViewTemplatePath('calendar'), 'UICalendar', 'UISlider'], func
     events: {
       'click .demo1': function () {
         var scope = this;
-        if (!this.calendarlayer) {
-          this.calendarlayer = new UIPageView();
-        }
-        this.calendarlayer.animateShow(new UICalendar({
-          datamodel: {
-            displayMonthNum: 5
-          },
-          onShow: function () {
-            console.log('onShow');
-          },
-          onHide: function () {
-            console.log('onHide');
-          },
-          onItemClick: function (item) {
-            scope.calendarlayer.animateHide();
-            scope.showToast(item);
-          }
-        }));
+        this.showToast('正在更新...');
       },
       'click #cale_tab li': function (e) {
         var el = $(e.currentTarget);

@@ -94,7 +94,6 @@
 
       //提示类
       var groupList1 = [
-        { 'uiname': 'pageview', 'name': '全局遮盖工具组件pageview' },
         { 'uiname': 'alert', 'name': '警告框' },
         { 'uiname': 'toast', 'name': 'toast框' },
         { 'uiname': 'reloading', 'name': 'loading框' },
