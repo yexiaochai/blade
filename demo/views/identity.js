@@ -4,9 +4,6 @@
 define(['View', getViewTemplatePath('identity'), 'UIIdentitycard'], function (View, html, UIIdentitycard) {
   "use strict";
 
-  var s = null;
-  var sss;
-
   var View = _.inherit(View, {
     render: function () {
       this.$el.html(html);

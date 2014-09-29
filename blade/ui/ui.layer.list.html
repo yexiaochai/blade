@@ -1,0 +1,8 @@
+﻿<ul class="list">
+  <%for(var i = 0, len = list.length; i < len; i++) {%>
+  <li data-index="<%=i%>" <%if(i == index) { %>class="current" <% } %>><%=((typeof itemFn == "function" && itemFn(list[i])) || list[i].name)%></li>
+  <%}%>
+</ul>
+<ul>
+  <li class="cancel"><%=cancelText%></li>
+</ul>

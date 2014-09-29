@@ -57,6 +57,7 @@
 
 
       'UIIdentitycard': app + 'ui/ui.identitycard',
+      'UILayerList': app + 'ui/ui.layer.list',
 
 
 
