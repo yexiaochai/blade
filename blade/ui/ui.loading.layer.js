@@ -9,11 +9,16 @@ define(['UILayer', getAppUITemplatePath('ui.loading.layer')], function (UILayer,
   return _.inherit(UILayer, {
     propertys: function ($super) {
       $super();
+
+    },
+
+    resetDefaultProperty: function ($super) {
+      $super();
       //html模板
       this.template = template;
       this.datamodel = {
         closeBtn: false,
-        text: ''
+        content: ''
       };
 
       this.events = {
@@ -22,6 +27,10 @@ define(['UILayer', getAppUITemplatePath('ui.loading.layer')], function (UILayer,
 
       this.maskToHide = false;
       this.hasPushState = false;
+
+      this.closeAction = function (e) {
+        this.hide();
+      };
 
     },
 
@@ -47,17 +56,13 @@ define(['UILayer', getAppUITemplatePath('ui.loading.layer')], function (UILayer,
       });
     },
 
-    closeAction: function (e) {
-      this.hide();
-    },
-
-    setDatamodel: function (text, fn) {
+    setDatamodel: function (content, fn) {
       var isChange = false;
-      if (text) {
-        this.datamodel.text = text;
-        isChange = true; 
+      if (content) {
+        this.datamodel.content = content;
+        isChange = true;
       } else {
-        this.datamodel.text = '';
+        this.datamodel.content = '';
       }
       if (fn) {
         this.closeAction = fn; isChange = true;

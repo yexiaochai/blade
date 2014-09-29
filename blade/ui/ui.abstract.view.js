@@ -34,11 +34,12 @@
     //默认属性
     propertys: function () {
       //模板状态
+      this.wrapper = $('body');
+      this.id = _.uniqueId('ui-view-');
+
       this.template = '';
       this.datamodel = {};
       this.events = {};
-      this.wrapper = $('body');
-      this.id = _.uniqueId('ui-view-');
 
       //自定义事件
       //此处需要注意mask 绑定事件前后问题，考虑scroll.radio插件类型的mask应用，考虑组件通信
@@ -46,6 +47,9 @@
 
       //初始状态为实例化
       this.status = 'init';
+
+      this.animateShowAction = null;
+      this.animateHideAction = null;
 
       //      this.availableFn = function () { }
 
@@ -198,12 +202,17 @@
       if (this.status == 'show') this.show();
     },
 
-    show: function (animateAction) {
-      this.wrapper.append(this.$el);
+    show: function () {
+      if (!this.wrapper[0] || !this.$el[0]) return;
+      //如果包含就不要乱搞了
+      if (!$.contains(this.wrapper[0], this.$el[0])) {
+        this.wrapper.append(this.$el);
+      }
+
       this.trigger('onPreShow');
 
-      if (typeof animateAction == 'function')
-        animateAction.call(this, this.$el);
+      if (typeof this.animateShowAction == 'function')
+        this.animateShowAction.call(this, this.$el);
       else
         this.$el.show();
 
@@ -212,11 +221,13 @@
       this.trigger('onShow');
     },
 
-    hide: function (animateAction) {
+    hide: function () {
+      if (!this.$el || this.status !== 'show') return;
+
       this.trigger('onPreHide');
 
-      if (typeof animateAction == 'function')
-        animateAction.call(this, this.$el);
+      if (typeof this.animateHideAction == 'function')
+        this.animateHideAction.call(this, this.$el);
       else
         this.$el.hide();
 

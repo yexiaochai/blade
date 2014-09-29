@@ -29,8 +29,7 @@
 
       this.maxHeight = 300;
       this.sheight = 0;
-      this.scrollbars = true;
-      this.preventDefault = true;
+      this.scrollOpts = {};
 
     },
 
@@ -93,12 +92,9 @@
     _initScroll: function () {
       if (this.scroll && this.scroll.destory) this.scroll.destory();
       if (this.sheight >= this.maxHeight) {
-        this.scroll = new UIScroll({
-          scrollbars: this.scrollbars,
-          preventDefault: this.preventDefault,
-          wrapper: this.swrapper,
-          scroller: this.html
-        });
+        this.scrollOpts.wrapper = this.swrapper;
+        this.scrollOpts.scroller = this.html;
+        this.scroll = new UIScroll(this.scrollOpts);
       }
     },
 

@@ -9,6 +9,10 @@ define(['UILayer', getAppUITemplatePath('ui.toast')], function (UILayer, templat
   return _.inherit(UILayer, {
     propertys: function ($super) {
       $super();
+    },
+
+    resetDefaultProperty: function ($super) {
+      $super();
       this.template = template;
       this.datamodel = {
         content: 'toast'
@@ -16,10 +20,11 @@ define(['UILayer', getAppUITemplatePath('ui.toast')], function (UILayer, templat
       this.hideSec = 2000;
       this.hasPushState = false;
       this.TIMERRES = null;
-    },
 
-    hideAction: function () {
-      console.log('hide')
+      this.hideAction = function () {
+        console.log('hide')
+      };
+
     },
 
     initialize: function ($super, opts) {

@@ -1,5 +1,5 @@
 ﻿<%
-var hasText = (typeof text == 'string' && text.length > 0);
+var hasText = (typeof content == 'string' && content.length > 0);
  %>
 <div class="cui-grayload-text" style=" <% if(!hasText && !closeBtn){%> width: 80px; height: 70px; <%}%> " >
   <div class="cui-i cui-w-loading">
@@ -12,7 +12,7 @@ var hasText = (typeof text == 'string' && text.length > 0);
   <% %>
   <div class="cui-grayload-bfont">
   <%if(hasText){ %>
-    <%=text %>
+    <%=content %>
     <%} %>
     </div>
 </div>

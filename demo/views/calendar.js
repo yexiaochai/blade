@@ -1,4 +1,4 @@
-define(['View', getViewTemplatePath('calendar'), 'UICalendar', 'UIPageview'], function (View, viewhtml, UICalendar, UIPageView) {
+define(['View', getViewTemplatePath('calendar'), 'UICalendar', 'UISlider'], function (View, viewhtml, UICalendar, UISlider) {
   return _.inherit(View, {
     onCreate: function () {
       this.$el.html(viewhtml);
@@ -33,7 +33,15 @@ define(['View', getViewTemplatePath('calendar'), 'UICalendar', 'UIPageview'], fu
         this.curDateType = el.attr('data-type');
         this.calendar3.refresh();
 
+      },
+      'click .pre_calendar': function () {
+        if (this.cSlider1) this.cSlider1.setIndex(this.cSlider1.getIndex() - 1);
+      },
+
+      'click .next_calendar': function () {
+        if (this.cSlider1) this.cSlider1.setIndex(this.cSlider1.getIndex() + 1);
       }
+
     },
 
     demo1: function () {
@@ -45,12 +53,107 @@ define(['View', getViewTemplatePath('calendar'), 'UICalendar', 'UIPageview'], fu
             displayMonthNum: 1
           },
           onItemClick: function (date, el) {
-            scope.showToast(date)
+            scope.showToast(date.toString())
           },
           wrapper: this.$el.find('.wrapper')
         });
       }
       this.calendar.show();
+    },
+
+    demo11: function () {
+var scope = this;
+
+//日历显示索引
+this.cIndex = 0;
+this.preCalendar = this.curCalendar = this.nextCalendar = null;
+
+var data = [];
+for (var i = 0; i < 20; i++) {
+  data[i] = {};
+}
+
+if (!this.cSlider1) {
+  this.cSlider1 = new UISlider({
+    datamodel: { data: data,
+      itemFn: function (item, key, index) {
+        return '';
+      }
+    },
+    momentum: false,
+    displayNum: 1,
+    wrapper: this.$('.wrapper11'),
+    changed: function (item) {
+      monthChanged();
+    }
+  });
+}
+this.cSlider1.show();
+
+var monthChanged = $.proxy(function () {
+  this.cIndex = this.cSlider1.getIndex();
+
+  var dateObj = new Date();
+
+  if (!this.preCalendar) {
+    this.preCalendar = new UICalendar({
+      datamodel: {
+        MonthClapFn: function () {
+          return '';
+        },
+        displayMonthNum: 1
+      }
+    });
+  }
+  if (!this.curCalendar) {
+    this.curCalendar = new UICalendar({
+      datamodel: {
+        MonthClapFn: function () {
+          return '';
+        },
+        displayMonthNum: 1
+      }
+    });
+  }
+  if (!this.nextCalendar) {
+    this.nextCalendar = new UICalendar({
+      datamodel: {
+        MonthClapFn: function () {
+          return '';
+        },
+        displayMonthNum: 1
+      }
+    });
+  }
+
+  this.preCalendar.dateObj = new Date(dateObj.getFullYear(), (dateObj.getMonth() + this.cIndex - 1), dateObj.getDate());
+  this.preCalendar.wrapper = this.cSlider1.$el.find('li[data-index="' + (this.cIndex - 1) + '"]');
+
+  this.curCalendar.dateObj = new Date(dateObj.getFullYear(), (dateObj.getMonth() + this.cIndex), dateObj.getDate());
+  this.curCalendar.wrapper = this.cSlider1.$el.find('li[data-index="' + (this.cIndex) + '"]');
+
+  this.nextCalendar.dateObj = new Date(dateObj.getFullYear(), (dateObj.getMonth() + this.cIndex + 1), dateObj.getDate());
+  this.nextCalendar.wrapper = this.cSlider1.$el.find('li[data-index="' + (this.cIndex + 1) + '"]');
+
+  if (this.cSlider1.$el.find('li[data-index="' + (this.cIndex - 1) + '"]')[0]) {
+    this.preCalendar.refresh();
+    this.preCalendar.show();
+  } else {
+    this.preCalendar.hide();
+  }
+
+  this.curCalendar.refresh();
+  this.curCalendar.show();
+
+  this.nextCalendar.refresh();
+  this.nextCalendar.show();
+
+  scope.$('.cur_calendar').html(this.curCalendar.dateObj.getFullYear() + '年' + (this.curCalendar.dateObj.getMonth() + 1) + '月');
+
+}, this);
+
+monthChanged();
+
     },
 
     demo2: function () {
@@ -118,7 +221,7 @@ define(['View', getViewTemplatePath('calendar'), 'UICalendar', 'UIPageview'], fu
       if (!this.calendar3) {
         this.calendar3 = new UICalendar({
           datamodel: {
-            displayMonthNum: 5,
+            displayMonthNum: 3,
             dayItemFn: function (year, month, day, dateObj, difftime) {
               //当前时间戳
               var curTime = dateObj.getTime();
@@ -193,18 +296,24 @@ define(['View', getViewTemplatePath('calendar'), 'UICalendar', 'UIPageview'], fu
       this.calendar3.show();
       this.calendar3.refresh();
 
+    },
+
+    demo4: function () {
+
 
     },
 
     onPreShow: function () {
-      this.demo1();
-      this.demo2();
-      this.demo3();
+            this.demo1();
+            this.demo2();
+            this.demo3();
+            this.demo4();
 
       this.turning();
     },
 
     onShow: function () {
+      this.demo11();
 
     },
 

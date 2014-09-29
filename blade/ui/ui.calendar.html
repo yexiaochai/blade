@@ -17,10 +17,14 @@
   var d = new Date(changedYear, changedMonth);
   var days = _.dateUtil.getDaysOfMonth(d);
   var beginWeek = _.dateUtil.getBeginDayOfMouth(d);
+
+  var str_month = MonthClapFn(changedYear, changedMonth);
 %>
+  <%if(str_month.length > 0 ) { %>
   <h1 class="cui_cldmonth">
-    <%=MonthClapFn(changedYear, changedMonth) %>
-    </h1>
+    <%=str_month %>
+  </h1>
+    <% } %>
   <ul class="cui_cld_daybox">
      <% for(i = 0; i < beginWeek; i++) { %>
         <li class="cui_invalid"></li>

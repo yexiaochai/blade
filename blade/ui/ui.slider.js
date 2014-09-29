@@ -31,7 +31,7 @@
       this.scroll = null;
 
       this.events = {
-        'click ul-list>li': 'itemClickAction'
+        'click .ul-list>li': 'itemClickAction'
 
       };
 
@@ -105,7 +105,9 @@
 
       this.itemHeight = this.scroller.height();
 
-      if (ph > this.itemHeight) this.itemHeight = ph;
+      //无论如何itemHeight都要相等才行
+//      if (ph != this.itemHeight) this.itemHeight = ph;
+      this.itemHeight = ph;
 
       this.scroller.find('li').height(this.itemHeight);
 
