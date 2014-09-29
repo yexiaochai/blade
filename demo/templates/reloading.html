@@ -59,7 +59,7 @@ hideAction如果设置的话会有一个关闭的按钮，并可以绑定回调�
 showLoading: function (message, hideAction) {
 
 */
-
+//设置关闭时间
 'click .fxdemo': function () {
   this.showLoading();
   setTimeout($.proxy(function () {
@@ -67,17 +67,20 @@ showLoading: function (message, hideAction) {
   }, this), 2000);
 
 },
+//loading只传入一个参数，设置文字
 'click .fxdemo01': function () {
   this.showLoading('我是文字');
   setTimeout($.proxy(function () {
     this.hideLoading();
   }, this), 2000);
 },
+//第一个参数缺省，不含文字，第二个参数设置关闭按钮
 'click .fxdemo02': function () {
   this.showLoading(null, function () {
     this.hide();
   });
 },
+//带上第一个参数，设置文字，第二个参数设置关闭按钮
 'click .fxdemo03': function () {
   this.showLoading('我是文字信息', function () {
     this.hide();

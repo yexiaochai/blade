@@ -40,7 +40,7 @@
       this.template = '';
       this.datamodel = {};
       this.events = {};
-     
+
       //自定义事件
       //此处需要注意mask 绑定事件前后问题，考虑scroll.radio插件类型的mask应用，考虑组件通信
       this.eventArr = {};
@@ -203,6 +203,7 @@
     },
 
     show: function () {
+      if (!this.wrapper[0] || !this.$el[0]) return;
       //如果包含就不要乱搞了
       if (!$.contains(this.wrapper[0], this.$el[0])) {
         this.wrapper.append(this.$el);

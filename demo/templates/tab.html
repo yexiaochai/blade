@@ -105,6 +105,25 @@ setIndex: function() {
 注意，组件的实例化最好放到页面渲染（显示）结束后
 如果tab数量过多的话便不建议使用tab组件了，而采用slider组件，模拟tab组件，比如：
 */
-
+this.tab2 = new UISlider({
+    datamodel: {
+       data: [
+          { id: 1, name: '图片' },
+          { id: 2, name: '音乐' },
+          { id: 3, name: '视频' },
+          { id: 4, name: '其它' },
+          { id: 11, name: '图1片' },
+          { id: 12, name: '音1乐' },
+          { id: 13, name: '视1频' },
+          { id: 14, name: '其1它' }
+       ],
+       index: 0
+    },
+    changed: function (item) {
+       scope.showToast(item.id+ ': '+item.name);
+    },
+    wrapper: this.$el.find('.wrapper2')
+});
+this.tab2.show();
 </code>
 </pre>

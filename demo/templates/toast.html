@@ -57,9 +57,48 @@ hideAction为关闭时执行的回调
 clickToHide，布尔型是否需要点击mask关闭组件
 showToast: function (title, timeout, hideAction, clickToHide) {
 */
-
-this.showToast('框架用法');
-
+//只传入一个参数，即为toast内容
+this.showToast({
+    datamodel: {
+       content: '框架使用'
+    }
+});
+//显示toast，不带蒙层
+this.showToast({
+    datamodel: {
+       content: '框架使用-不带蒙版'
+    },
+    needMask: false
+});
+//设置自动关闭时间
+this.showToast({
+    datamodel: {
+       content: '带蒙版，点击蒙版不关闭，5秒关闭'
+    },
+    maskToHide: false,
+    hideSec: 5000
+});
+//重写animateShowAction，控制动画
+this.showToast({
+    datamodel: {
+       content: '动画'
+    },
+    animateShowAction: function (el) {
+       el.css({
+          '-webkit-transform': 'translate(0, -50%)',
+          transform: 'translate(0,  -50%)'
+       });
+       el.show().animate({
+          '-webkit-transform': 'translate(0, 0)',
+           transform: 'translate(0, 0)'
+       }, 200, 'ease-in-out', $.proxy(function () {
+          this.$el.css({
+             '-webkit-transform': '',
+              transform: ''
+          });
+       }, this));
+       }
+    });
 </code></pre>
 
   	<h2 class="dh2">基本使用</h2>
