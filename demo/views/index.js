@@ -102,6 +102,8 @@
       ];
 
       var groupList2 = [
+
+        { 'uiname': 'identity', 'name': '身份证键盘' },
         { 'uiname': 'imageslider', 'name': '图片轮播' },
         { 'uiname': 'num', 'name': '数字组件' },
         { 'uiname': 'select', 'name': 'select组件' },
@@ -130,8 +132,8 @@
       var uidata = [
         { name: '提示类组件', data: groupList1 },
         { name: '常用组件', data: groupList2 },
-        { name: '滚动类组件', data: groupList3 },
-        { name: '全局类', data: groupList4 }
+        { name: '滚动类组件', data: groupList3 }
+//        { name: '全局类', data: groupList4 }
       ];
 
       this.uidata = uidata;

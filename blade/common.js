@@ -55,6 +55,11 @@
       'UISlider': app + 'ui/ui.slider',
       'UIImageSlider': app + 'ui/ui.image.slider',
 
+
+      'UIIdentitycard': app + 'ui/ui.identitycard',
+
+
+
       'UIInputClear': app + 'ui/ui.inputclear',
       'UIWarning404': app + 'ui/ui.warning404'
 
