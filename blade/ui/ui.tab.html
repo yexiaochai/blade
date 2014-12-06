@@ -1,8 +1,9 @@
-﻿<ul class="cui-tab-mod">
+﻿<nav class="cm-tabs-nav">
+  <ul class="cm-tabs-title-list js_item_wrapper">
   <%for(var i = 0, len = data.length; i < len; i++) { %>
-  <li data-key="<%=data[i].id %>" data-index="<%=i%>" <%if(i == index){ %>class=" <%=curClass %>"
-    <%} %>>
+   <li data-key="<%=data[i].id %>" data-index="<%=i%>" <%if(i == index){ %>class="active"<%} %>>
     <%=data[i].name %></li>
   <%} %>
-  <i class="cui-tab-scrollbar cui-tabnum<%=len %>"></i>
-</ul>
+  </ul>
+  <i class="icon-active js_scrollbar"></i>
+</nav>

@@ -1,7 +1,7 @@
 ﻿﻿/*
 扮演游戏时钟，全局控制器角色
 */
-define(['AbstractView', getViewTemplatePath('index'), 'MoveObj', 'Tank', 'Bullet', 'Boom', 'NPCTank'], function (View, viewhtml, MoveObj, Tank, Bullet, Boom, NPCTank) {
+define(['AbstractView', getViewTemplatePath('index'), 'MoveObj', 'Tank', 'Bullet', 'Boom', 'NPCTank', 'UIAlert'], function (View, viewhtml, MoveObj, Tank, Bullet, Boom, NPCTank, UIAlert) {
 
   var rAF = window.requestAnimationFrame ||
 	window.webkitRequestAnimationFrame ||
@@ -139,7 +139,14 @@ define(['AbstractView', getViewTemplatePath('index'), 'MoveObj', 'Tank', 'Bullet
           { speed: 2, bulletSpeed: 6, maxBulletSize: 3, init: 64 },
           { speed: 2, bulletSpeed: 6, maxBulletSize: 4, init: 64 },
           { speed: 2, bulletSpeed: 6, maxBulletSize: 4, init: 96 },
-          { speed: 2, bulletSpeed: 7, maxBulletSize: 5, init: 96 }
+          { speed: 2, bulletSpeed: 7, maxBulletSize: 5, init: 96 },
+          { speed: 2, bulletSpeed: 7, maxBulletSize: 5, init: 96 },
+          { speed: 2, bulletSpeed: 8, maxBulletSize: 6, init: 96 },
+          { speed: 2, bulletSpeed: 8, maxBulletSize: 7, init: 96 },
+          { speed: 2, bulletSpeed: 9, maxBulletSize: 8, init: 96 },
+          { speed: 2, bulletSpeed: 9, maxBulletSize: 9, init: 96 },
+          { speed: 2, bulletSpeed: 9, maxBulletSize: 10, init: 96 }
+
         ],
         npcObj: {
           NO1: {
@@ -183,6 +190,25 @@ define(['AbstractView', getViewTemplatePath('index'), 'MoveObj', 'Tank', 'Bullet
         tick: $.proxy(function () {
           if (this.me.status == 'destroy') {
             this.app.gameStatus = false;
+
+            var scope = this;
+            var alert = new UIAlert({
+              datamodel: {
+                title: '游戏结束',
+                content: '英雄，要不我们再来一局？'
+              },
+              okAction: function () {
+//                location.reload();
+                  scope.gameRestar();
+                this.hide();
+              },
+              cancelAction: function () {
+//                location.reload();
+                this.hide();
+              }
+            });
+            alert.show();
+
           }
 
           $.each(this.app.GAMEOBJ, $.proxy(function (k, v) {
@@ -327,8 +353,23 @@ define(['AbstractView', getViewTemplatePath('index'), 'MoveObj', 'Tank', 'Bullet
     gameOver: function () {
 
     },
+  //重新开始
+  gameRestar: function() {
+      //创建英雄
+      this.app.createHero();
+      this.app.gameStatus = true;
+      this.me.status = 'move';
+      //清除npc坦克
+      $.each(this.app.GAMEOBJ.npc, function (i, item) {
+          item.destroy()
+      });
 
-    onShow: function () {
+      //开始游戏计时
+      this.app.tick();
+  },
+
+
+      onShow: function () {
       this.gameStart();
     },
 

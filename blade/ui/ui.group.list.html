@@ -1,4 +1,4 @@
-﻿<%filter = _.removeAllSpace(filter).split(','); %>
+﻿<%filter = filter.replace(/\s+/g, "").split(','); %>
 
 <ul class="cui-city-itmes">
 <%for(var i = 0, len = data.length; i < len; i++) { %>

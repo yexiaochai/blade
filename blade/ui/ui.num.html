@@ -1,5 +1,4 @@
-﻿<span class="cui-number-ma">
-<i class="<%=minusClass %> <% if(min == curNum) { %>num-invalid<% } %>" ></i>
-  <input type="tel" class="<%=curClass %>" <%if(needText == false){ %>disabled="disabled"<%} %> value="<%=curNum %><%=unit %>">
-<i class="<%=addClass %> <% if(max == curNum) { %>num-invalid<% } %> "></i>
-</span>
+﻿<div class="cm-num-adjust">
+  <span class="cm-adjust-minus js_num_minus <% if(min == curNum) { %> disabled <% } %> "></span><span class="cm-adjust-view js_cur_num " <%if(needText == true){ %>contenteditable="true"<%} %>><%=curNum %><%=unit %></span>
+  <span class="cm-adjust-plus js_num_plus <% if(max == curNum) { %> disabled <% } %>"></span>
+</div>

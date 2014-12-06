@@ -54,7 +54,7 @@
 
       //满足条件就重写
       if (ancestor && typeof value == 'function') {
-        var argslist = /^\s*function\s*\(([^\(\)]*?)\)\s*?\{/i.exec(value.toString())[1].replace(/\s/i, '').split(',');
+        var argslist = /^\s*function\s*\(([^\(\)]*?)\)\s*?\{/i.exec(value.toString())[1].replace(/\s/g, '').split(',');
         //只有在第一个参数为$super情况下才需要处理（是否具有重复方法需要用户自己决定）
         if (argslist[0] === '$super' && ancestor[k]) {
           value = (function (methodName, fn) {
@@ -137,8 +137,8 @@
 
   })();
 
-//flip手势工具
-(function () {
+//l_wang flip手势工具
+  (function () {
 
     //偏移步长
     var step = 20;
@@ -174,48 +174,82 @@
     }
 
     //sensibility设置灵敏度，值为0-1
-    function flip(el, dir, fn, noDefault, sensibility) {
-      if (!el) return;
+    function flip(el, dir, fn, noDefault, sensibility, stepSet) {
+      if (!el || !el[0]) return;
+      var _dir = '', _step = stepSet || step;
 
+      /*
+      这里原来的逻辑是绑定几次flip便会执行几次，这里做一次优化
+      */
+      if (el[0].__flipEventObj) {
+        el[0].__flipEventObj['__flip_' + dir] = fn;
+//        el[0].__flipEventObj['__flip_noDefault'] = noDefault;
+//        el[0].__flipEventObj['__flip_sensibility'] = sensibility;
+        return;
+      } 
+
+      el[0].__flipEventObj = {};
+      el[0].__flipEventObj['__flip_' + dir] = fn;
+
+      //var _step = sensibility || step;
       el.on(down, function (e) {
         var pos = (e.touches && e.touches[0]) || e;
         touch.x1 = pos.pageX;
         touch.y1 = pos.pageY;
 
       }).on(move, function (e) {
+
         var pos = (e.touches && e.touches[0]) || e;
         touch.x2 = pos.pageX;
         touch.y2 = pos.pageY;
 
         //如果view过长滑不动是有问题的
-        if (!noDefault) { e.preventDefault(); }
+        //if (!noDefault) { e.preventDefault(); }
+        if ((touch.x2 && Math.abs(touch.x1 - touch.x2) > _step) ||
+          (touch.y2 && Math.abs(touch.y1 - touch.y2) > _step)) {
+          _dir = swipeDirection(touch.x1, touch.x2, touch.y1, touch.y2, sensibility);
+        }
+        var preventDefultFlag = typeof noDefault == 'function' ? noDefault(_dir) : noDefault;
+        if (!preventDefultFlag) {
+          e.preventDefault();
+        }
       }).on(up, function (e) {
+        var pos = (e.changedTouches && e.changedTouches[0]) || e;
+        touch.x2 = pos.pageX;
+        touch.y2 = pos.pageY;
 
-
-        if ((touch.x2 && Math.abs(touch.x1 - touch.x2) > step) ||
-        (touch.y2 && Math.abs(touch.y1 - touch.y2) > step)) {
+        if ((touch.x2 && Math.abs(touch.x1 - touch.x2) > _step) ||
+        (touch.y2 && Math.abs(touch.y1 - touch.y2) > _step)) {
           var _dir = swipeDirection(touch.x1, touch.x2, touch.y1, touch.y2, sensibility);
-          if (dir === _dir) {
-            typeof fn == 'function' && fn();
+
+          if (_.isFunction(el[0].__flipEventObj['__flip_' + _dir])) {
+            el[0].__flipEventObj['__flip_' + _dir]();
           }
+
         } else {
-          //tap的情况
-          if (dir === 'tap') {
-            typeof fn == 'function' && fn();
+
+          if (_.isFunction(el[0].__flipEventObj['__flip_tap'])) {
+            el[0].__flipEventObj['__flip_tap']();
           }
         }
+        //l_wang 每次up后皆重置
+        touch = {};
       });
     }
 
     function flipDestroy(el) {
-      if (!el) return;
+      if (!el || !el[0]) return;
+
       el.off(down).off(move).off(up);
+      if (el[0].__flipEventObj) delete el[0].__flipEventObj;
+
     }
 
     _.flip = flip;
     _.flipDestroy = flipDestroy;
 
   })();
+
 
 //日期操作类
 (function () {

@@ -225,7 +225,13 @@
 
     },
 
+    //重写
+    moveStartAction: function () {
+
+    },
+
     move: function () {
+      this.moveStartAction();
       if (this.datamodel.status == 'stop') return;
       var x = this.datamodel.x, y = this.datamodel.y;
       this[this.datamodel.dir + 'Action']();

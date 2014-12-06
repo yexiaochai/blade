@@ -40,7 +40,7 @@
 		  "UIAlert": "ui/ui.alert",
 		  "UIMask": "ui/ui.mask",
 		  "UILoading": "ui/ui.loading",
-		  "UIReLoading": "ui/ui.reloading",
+		  "UILoadingLayer": "ui/ui.loading.layer",
 		  "UIToast": "ui/ui.toast",
 		  "UIInlineView": "ui/ui.inline.view",
 		  "UINum": "ui/ui.num",
@@ -55,16 +55,16 @@
 		  "UIGroupSelect": "ui/ui.group.select",
 		  "UIGroupList": "ui/ui.group.list",
 		  "UICalendar": "ui/ui.calendar",
-		  "UISlider": "ui/ui.slider"
+		  "UISlider": "ui/ui.slider",
+		  "UIWarning404": "ui/ui.warning404",
+
+		  "T_UIToast": "ui/ui.toast.html"
+
+		  
 
         },
         "include": [
-		  "common_dest",
-          "AbstractApp",
-		  "AbstractView",
-		  "cLazyload",
-		  "cValidate",
-		  "cHighlight",
+		
 
 		  "text!ui/ui.alert.html",
 		  "text!ui/ui.bubble.layer.html",
@@ -74,36 +74,23 @@
 		  "text!ui/ui.loading.html",
 		  "text!ui/ui.mask.html",
 		  "text!ui/ui.num.html",
+		  "text!ui/ui.pageview.html",
+
 		  "text!ui/ui.radio.list.html",
-		  "text!ui/ui.reloading.html",
+		  "text!ui/ui.loading.layer.html",
 		  "text!ui/ui.scroll.layer.html",
 		  "text!ui/ui.select.html",
+		  "text!ui/ui.slider.html",
+
 		  "text!ui/ui.switch.html",
 		  "text!ui/ui.tab.html",
 		  "text!ui/ui.toast.html",
-		  "text!ui/ui.slider.html",
 
-		  "UIView",
-		  "UILayer",
-		  "UIAlert",
-		  "UIMask",
-		  "UILoading",
-		  "UIReLoading",
-		  "UIToast",
-		  "UIInlineView",
-		  "UINum",
-		  "UISwitch",
-		  "UIBubbleLayer",
-		  "UITab",
-		  "UITabs",
-		  "UIScroll",
-		  "UIScrollLayer",
-		  "UIRadioList",
-		  "UISelect",
-		  "UIGroupSelect",
-		  "UIGroupList",
-		  "UICalendar",
-		  "UISlider"
+		  "text!ui/ui.header.html",
+
+		  "text!ui/ui.warning404.html"
+
+
         ],
         "out": "<%= config.destDir %>/common.js"
       }

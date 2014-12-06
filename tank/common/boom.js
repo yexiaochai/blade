@@ -1,5 +1,5 @@
 ﻿﻿//爆炸对象，出现的意义便是为了消失
-define(['MoveObj', 'text!tank/common/boom.html'], function (MoveObj, template) {
+define(['MoveObj'], function (MoveObj) {
 
   return _.inherit(MoveObj, {
     propertys: function ($super) {

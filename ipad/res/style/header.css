@@ -1,0 +1,90 @@
+.cm-header .cm-page-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cm-page-select-title  { overflow: hidden; }
+
+.cm-header .cm-page-title {
+  line-height: 44px;
+  margin: 0 44px;
+  font-size: 18px;
+}
+.cm-header .cm-page-title .cm-title-l {
+  line-height: 28px;
+  display: block;
+}
+.cm-header .cm-page-title .cm-title-s {
+  line-height: 1;
+  font-size: 12px;
+  display: block;
+}
+.cm-header .cm-page-mutil-title {
+  font-size: 14px;
+  line-height: 18px;
+  padding-top: 4px;
+  margin-right: 20px;
+}
+.cm-header .cm-page-tabs-title {
+  display: inline-block;
+  background-color: #066f9b;
+  border-radius: 4px;
+  padding: 1px;
+  line-height: 32px;
+  margin: 5px 0 0 0;
+}
+.cm-header .cm-page-tabs-title span {
+  float: left;
+  padding: 0 15px;
+}
+.cm-header .cm-page-tabs-title span.active {
+  border-radius: 4px;
+  background-color: #099fde;
+}
+.cm-header .cm-page-select-title {
+  line-height: 34px;
+  margin-top: 5px;
+  margin-right: 44px;
+}
+.cm-header .cm-page-select-title::after {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  width: 6px;
+  height: 6px;
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+  display: inline-block;
+  margin-left: 5px;
+  vertical-align: middle;
+  position: relative;
+  top: -2px;
+  -webkit-transition: all 0.3s ease-in-out;
+          transition: all 0.3s ease-in-out;
+}
+.cm-header .cm-page-select-title.expanded::after {
+  -webkit-transform: rotate(135deg);
+          transform: rotate(135deg);
+  top: 1px;
+}
+.cm-header .cm-header-icon {
+  width: 44px;
+  height: 44px;
+  display: inline-block;
+  text-align: center;
+  background-color: #099fde;
+  cursor: pointer;
+}
+.cm-header .cm-header-icon:active, .cm-header .cm-header-icon:hover {
+  background-color: #077cad;
+}
+.cm-header .cm-header-btn {
+  padding: 0 10px;
+  cursor: pointer;
+}
+.cm-header .cm-header-btn:active, .cm-header .cm-header-btn:hover {
+  background-color: #077cad;
+}

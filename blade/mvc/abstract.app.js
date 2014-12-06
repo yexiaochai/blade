@@ -49,7 +49,7 @@
 
       this.container = $('body');
 
-      this.interface = ['forward', 'back'];
+      this.interface = ['forward', 'back', 'loadSubView'];
 
     },
 
@@ -197,6 +197,29 @@
         });
       }
     },
+
+//这里暂时不处理History逻辑，也不管子View的管理，先单纯实现功能
+//这样会导致back的错乱，View重复实例化，这里先不予关注
+loadSubView: function (viewId, wrapper, callback) {
+
+  //子View要在哪里显示需要处理
+  if (!wrapper[0]) return;
+
+  this.loadView(viewId, function (View) {
+
+    var curView = new View(this, viewId, wrapper);
+
+    //这个是唯一需要改变的
+    curView.turning = $.proxy(function () {
+      curView.show();
+      curView.$el.show();
+    }, this);
+    curView.onPreShow();
+    callback && callback(curView);
+
+  });
+
+},
 
     //动画相关参数，这里要做修改，给一个noAnimat
     startAnimation: function (callback) {

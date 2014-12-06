@@ -13,6 +13,8 @@ define(['UILayer', getAppUITemplatePath('ui.loading')], function (UILayer, templ
       this.template = template;
       this.maskToHide = false;
 
+      this.hasPushState = false;
+
       //重写Type定义
       this.type = "loading";
     },

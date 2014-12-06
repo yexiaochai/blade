@@ -1,9 +1,22 @@
-﻿<ul class="ul-list horizontal" style="position: absolute; top: 0; left: 0;">
-  <%for(var i = 0, len = data.length; i < len; i++) { %>
-  <li data-key="<%=data[i].id %>" data-index="<%=i%>" <%if(data[i].disabled){ %> class="disabled"
-    <%} %>>
-      <div class="slider-item-wrapper" style=" width: 100%; height: 98%; border: 1px solid black; "><%=((typeof itemFn == 'function' && itemFn(data[i])) || data[i].name) %></div>
-    </li>
-  <%} %>
-</ul>
+﻿<div class="cm-slide">
+  <ul class="cm-slide-list js_scroller <%=className %>" style=" position: absolute; ">
+    
+    <%if(typeof firstLoopItem != 'undefined'){ %> 
+     <li class="cm-slide-item" data-key="first" >
+      <%=((typeof itemFn == 'function' && itemFn(firstLoopItem, -1)) || firstLoopItem.name) %>
+     </li>
+    <%} %>
 
+    <%for(var i = 0, len = data.length; i < len; i++) { %>
+    <li class="cm-slide-item" data-key="<%=data[i].id %>" data-index="<%=i%>" >
+      <%=((typeof itemFn == 'function' && itemFn(data[i], i)) || data[i].name) %>
+    </li>
+    <%} %>
+
+    <%if(typeof lastLoopItem != 'undefined'){ %> 
+     <li class="cm-slide-item" data-key="last" >
+      <%=((typeof itemFn == 'function' && itemFn(lastLoopItem, -1)) || lastLoopItem.name) %>
+     </li>
+    <%} %>
+  </ul>
+</div>

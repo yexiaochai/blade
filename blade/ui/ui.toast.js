@@ -9,16 +9,21 @@ define(['UILayer', getAppUITemplatePath('ui.toast')], function (UILayer, templat
   return _.inherit(UILayer, {
     propertys: function ($super) {
       $super();
+    },
+
+    resetDefaultProperty: function ($super) {
+      $super();
       this.template = template;
       this.datamodel = {
         content: 'toast'
       };
       this.hideSec = 2000;
+      this.hasPushState = false;
       this.TIMERRES = null;
-    },
 
-    hideAction: function () {
-      console.log('hide')
+      this.hideAction = function () {
+      };
+
     },
 
     initialize: function ($super, opts) {
@@ -46,9 +51,19 @@ define(['UILayer', getAppUITemplatePath('ui.toast')], function (UILayer, templat
       });
     },
 
-    setDatamodel: function (content, fn) {
+    /**
+    * 显示Toast
+    * @param title 标题
+    * @param timeout 显示时长
+    * @param callback 隐藏时回调
+    * @param clickToHide 是否允许点击界面任一处,隐藏Toast
+    */
+    setDatamodel: function (content, timeout, hideAction, clickToHide) {
       this.datamodel.content = content;
-      this.hideAction = fn;
+      timeout && (this.hideSec = timeout);
+      hideAction && (this.hideAction = hideAction);
+      this.maskToHide = clickToHide;
+
       this.refresh();
     }
 

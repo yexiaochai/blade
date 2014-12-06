@@ -14,10 +14,10 @@ define(['UIView', getAppUITemplatePath('ui.group.list')], function (UIView, temp
         filter: 'name'
       };
 
-      this.events = {
+      this.addEvents({
         'click .cui-city-t': 'groupAction',
         'click .cui-city-n>li': 'itemAction'
-      };
+      });
 
       this.onGroupClick = function (index, items, e) {
       };

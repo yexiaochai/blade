@@ -121,3 +121,150 @@ this.month.show();
 this.day.show();
 fn();
 </code></pre>
+<style>
+    .date-widget {
+        position: fixed;
+        float: left;
+        width: 100%;
+        bottom: -256px;
+        height: 256px;
+        overflow: auto;
+        background: white;
+    }
+    .move {
+        -webkit-animation:bt-move .6s ease both;
+    }
+    .back {
+        -webkit-animation:bt-back .6s ease both;
+    }
+    .chooseDate {
+        background: #fff;
+    }
+    .choose-header {
+/*        position: fixed;
+        bottom:220px;*/
+        width: 100%;
+        height: 36px;
+        color:#fff;
+        text-align: center;
+        background: rgba(80,80,80, 0.8);
+    }
+    .scancel, .sconfirm {
+        padding: 0 15px;
+        line-height: 36px;
+        float: left;
+        color:rgb(30,80,220);
+        background: transparent;
+    }
+    .sconfirm {
+        float: right;
+    }
+    .stitle {
+        width: auto;
+        overflow: hidden;
+        display: inline-block;
+        line-height: 36px;
+    }
+    .row1, .row2, .row3 {
+        float: left;
+    }
+
+    @-webkit-keyframes bt-move {
+        0% {
+            bottom:-256px;
+        }
+        100% {
+            bottom:0;
+        }
+    }
+
+    @-webkit-keyframes bt-back {
+        0% {
+            bottom:0;
+        }
+        100% {
+            bottom:-256px;
+        }
+    }
+
+</style>
+
+<h2 class="dh2">
+ 其它使用方法</h2>
+    <input type="text" class="chooseDate" placeholder="请选择出生日期" />
+    <section class="date-widget">
+    <div class="choose-header">
+        <button class="scancel">取消</button>
+        <h3 class="stitle">选择出生日期</h3>
+        <button class="sconfirm">确定</button>
+    </div>
+    <div class="row1" style=" width: 33%;"></div>
+    <div class="row2" style=" width: 33%;"></div>
+    <div class="row3" style=" width: 33%;"></div>
+</section>
+
+<pre><code>
+if (!this.demo1 || !this.demo2 || !this.demo3) {
+  var dayFlag = { 1: 31, 2: 28, 3: 31, 4: 30, 5: 31, 6: 30, 7: 31, 8: 31, 9: 30, 10: 31, 11: 30, 12: 31 };
+  var data1 = [], data2 = [], data3 = [], scope = this;
+  for (var i = 2000; i <= 2014; i++) {
+    var obj = { id: 'y_' + i, name: i + '年' };
+    data1.push(obj);
+  }
+
+  for (var i = 1; i <= 12; i++) {
+    var obj = { id: 'm_' + i, name: i + '月' };
+    data2.push(obj);
+  }
+
+  for (var i = 1; i <= 31; i++) {
+    var obj = { id: 'd_' + i, name: i + '日' };
+    data3.push(obj);
+  }
+
+  this.demo1 = new UISelect({
+    wrapper: this.$('.row1'),
+    datamodel: {
+      data: data1
+    },
+    changed: function (item) {
+      this.item = item;
+    }
+  });
+
+  this.demo2 = new UISelect({
+    wrapper: this.$('.row2'),
+    datamodel: {
+      data: data2
+    },
+    changed: function (item) {
+      var curMonth = parseInt(item.name);
+      var maxDay = dayFlag[curMonth];
+
+      for (var i = 31; i > 28; i--) {
+        scope.demo3.datamodel.data[i - 1].disabled = false;
+        if (i > maxDay) {
+          scope.demo3.datamodel.data[i - 1].disabled = true;
+        }
+      }
+      scope.demo3.reload()
+    }
+  });
+
+  this.demo3 = new UISelect({
+    wrapper: this.$('.row3'),
+    datamodel: {
+      data: data3
+    }
+  });
+
+}
+
+this.demo1.show();
+this.demo2.show();
+this.demo3.show();
+
+//出场动画
+this.$('.date-widget').addClass('move').removeClass('back');
+
+</code></pre>

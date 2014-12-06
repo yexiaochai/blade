@@ -1,0 +1,55 @@
+﻿
+<header class="cm-header">
+<%
+var left = data.left;
+var center = data.center||data.centerButtons||[];
+var right = data.right?right.reverse():[];
+%>
+
+<%_.each(left, function(item){%>
+  <%if(_.isFunction(item.itemFn)) { %>
+    <%=item.itemFn() %>
+  <%} else if(item.type=="btn") { %>
+    <span class="cm-header-btn fl js_<%=item.tagname %>" tagname="<%=item.tagname %>"><%=item.title %></span>
+  <%} else { %>
+    <span class="cm-header-icon fl  js_<%=item.tagname %>" tagname="<%=item.tagname %>">
+      <i class="icon-<%=item.tagname %>"></i>
+    </span>
+  <%} %>
+<%}) %>
+
+<%_.each(right, function(item){%>
+  <%if(_.isFunction(item.itemFn)) { %>
+    <%=item.itemFn() %>
+  <%} else if(item.type=="btn") { %>
+    <span class="cm-header-btn fl js_<%=item.tagname %>" tagname="<%=item.tagname %>"><%=item.title %></span>
+  <%} else { %>
+    <span class="cm-header-icon fl  js_<%=item.tagname %>" tagname="<%=item.tagname %>">
+      <i class="<%=item.type %>-<%=item.tagname %>"></i>
+    </span>
+  <%} %>
+<%}) %>
+
+<%_.each(center, function(item){%>
+  <%if(item.type=="title") { %>
+    <h1 class="cm-page-title js_<%=item.tagname %>" tagname="<%=item.tagname %>">
+      <%if(typeof(item.title) == "object" && item.title.length == 2) { %>
+        <span class="cm-title-l"><%=item.title[0]%></span>
+        <span class="cm-title-s"><%=item.title[1]%></span>
+      <%} else { %>
+        <%=item.title %>
+      <%} %>
+    </h1>
+  <%} else if(item.type=="select"){ %>
+    <h1 class="cm-page-select-title js_<%=item.tagname %>" tagname="<%=item.tagname %>">
+      <%=item.title %>
+    </h1>
+  <%} else if(item.type=="tabs") { %>
+    <h1 class="cm-page-tabs-title js_<%=item.tagname %>" tagname="<%=item.tagname %>">
+      <%for(var j = 0; j < item.data.length; j ++) { %>
+        <span data-key="<%=item.data[j].id %>" class="<%if(item.index===j){ %>active<%} %>" ><%=item.data[j].name %></span>
+      <% } %>
+    </h1>
+  <% } %>
+<%}) %>
+</header>

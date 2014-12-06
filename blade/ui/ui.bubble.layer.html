@@ -1,6 +1,12 @@
-﻿<ul class="cui-f-layer <%if(dir == 'up'){ %> <%=upClass %> <% } else { %> <%=downClass %> <% } %>" >
-  <% for(var i = 0, len = data.length; i < len; i++) { %>
-  <% var itemData = data[i]; %>
-  <li data-index="<%=i%>" data-flag="c" class="<% if(index == i){ %><%=curClass %><%} %>"  ><%=itemData.name %></li>
-  <% } %>
-</ul>
+﻿<section class="cm-pop cm-pop--radius <%=wrapperClass %>  <%if(dir == 'up'){ %> <%=upClass %> <% } else { %> <%=downClass %> <% } %>">
+<i class="icon-pop-triangle"></i>
+<div class="cm-pop-bd">
+  <ul class="cm-pop-list <%=itemStyleClass %>">
+    <% for(var i = 0, len = data.length; i < len; i++) { %>
+    <% var itemData = data[i]; %>
+    <li data-index="<%=i%>" data-flag="c" class="<% if(index == i){ %><%=curClass %><%} %>"  ><%if(typeof itemFn == 'function') { %><%=itemFn.call(scope, itemData, i) %> <% } else { %><%=itemData.name%><%} %></li>
+    <% } %>
+  </ul>
+</div>
+</section>
+

@@ -18,9 +18,13 @@ define([], function () {
     createDom: function (id) {
       this.viewname = id;
       this.id = _.uniqueId('view_');
-      this.$el = $('<div class="sub-viewport" page-id="' + id + '" id="' + this.id + '"></div>');
-      this.$el.hide();
-      this.app.viewport.append(this.$el);
+      if (this.wrapper) 
+        this.$el = this.wrapper;
+      else {
+        this.$el = $('<div class="sub-viewport" page-id="' + id + '" id="' + this.id + '"></div>');
+        this.$el.hide();
+        this.app.viewport.append(this.$el);
+      }
     },
 
     initInterface: function () {
@@ -32,9 +36,12 @@ define([], function () {
 
     },
 
-    initialize: function (app, id) {
+    initialize: function (app, id, wrapper) {
       this.propertys();
       this.app = app;
+      if (wrapper) this.wrapper = wrapper;
+//      else this.wrapper = this.app.viewport
+
       this.createDom(id);
       this.initInterface();
 

@@ -10,13 +10,17 @@
       this.template = template;
 
       this.datamodel = {
-        curClass: 'current',
+        curClass: 'active',
         data: [],
         id: null,
         index: 0
       };
 
+      this.needRootWrapper = false;
+
       this.animatTime = 100;
+
+      this.stepTime = 150;
 
       this.itemNum = this.datamodel.data.length;
 
@@ -61,17 +65,20 @@
       //几个容器的高度必须统一
       this.swrapper = this.$el;
       this.scroller = this.$('.ul-list');
+      this.scroller = this.$('.js_scroller');
+
     },
 
     initSize: function () {
-      this.sheight = this.scroller.height();
-      this.itemHeight = parseInt(this.sheight / this.itemNum);
+      //      this.sheight = Math.max(this.scroller.height(), this.scroller[0].scrollHeight);
+      //      this.sheight =  this.scroller.height() 
+      //      this.itemHeight = parseInt(this.sheight / this.itemNum);
 
       //偶尔不能正确获取高度，这里要处理
-      if (this.itemHeight == 0) {
-        this.itemHeight = parseInt(window.getComputedStyle && getComputedStyle(this.scroller.find('li').eq(0)[0]).height);
-        this.scroller.height(this.itemHeight * this.itemNum);
-      }
+      //      if (this.itemHeight == 0) {
+      this.itemHeight = parseInt(window.getComputedStyle && getComputedStyle(this.scroller.find('li').eq(0)[0]).height);
+      this.scroller.height(this.itemHeight * this.itemNum);
+      //      }
       this.swrapper.height(this.itemHeight * this.displayNum);
       this.scrollOffset = ((this.displayNum - 1) / 2) * (this.itemHeight);
     },
@@ -79,7 +86,11 @@
     //修正位置信息
     adjustPosition: function (hasAnimate) {
       if (!this.scroll) return;
+      if (this.datamodel.index < 0) this.datamodel.index = 0
+      if (this.datamodel.index > this.itemNum - 1) this.datamodel.index = this.itemNum - 1;
+
       var index = this.datamodel.index, _top, time = 0;
+      //index数据验证
       _top = (this.itemHeight * index) * (-1) + this.scrollOffset;
       if (hasAnimate) time = this.animatTime;
       this.scroll.scrollTo(0, _top, time);
@@ -106,18 +117,26 @@
       }, this));
 
       //为了解决鼠标离屏幕时导致的问题
-      this.scroll.on('beforeScrollStart', $.proxy(function () {
-        this.setIndex(this.getIndexByPosition(), true)
+      this.scroll.on('scrollCancel', $.proxy(function () {
+        this.setIndex(this.getIndexByPosition(), false)
       }, this));
 
     },
 
     reload: function (datamodel) {
-      _.extend(this.datamodel, datamodel);
+      if (typeof datamodel == 'object')
+        if (datamodel instanceof Array) this.datamodel.data = datamodel;
+        else {
+          _.extend(this.datamodel, datamodel);
+        }
       if (this.scroll) {
         this.scroll.destroy();
         this.scroll = null;
       }
+
+      //执行reload的话，数据源便发生了变化
+      this._dataChanged = true;
+
       this.refresh();
     },
 
@@ -125,7 +144,7 @@
     checkDisable: function (dir) {
       dir = dir || 'down'; //默认向下搜索
       var isFind = false, index = this.datamodel.index;
-      if (this.datamodel.data[index] && (typeof this.datamodel.data[index].disabled != 'undefined' && this.datamodel.data[index].disabled == true)) {
+      if (this.datamodel.data[index] && (typeof this.datamodel.data[index].disabled != 'undefined' && this.datamodel.data[index].disabled == false)) {
         //向下的情况
         if (dir == 'up') {
           this.datamodel.index = this._checkSelectedDown(index);
@@ -147,7 +166,7 @@
     _checkSelectedUp: function (index) {
       var isFind = false;
       for (var i = index; i != -1; i--) {
-        if (this.datamodel.data[i] && (typeof this.datamodel.data[i].disabled == 'undefined' || this.datamodel.data[i].disabled == false)) {
+        if (this.datamodel.data[i] && (typeof this.datamodel.data[i].disabled == 'undefined' || this.datamodel.data[i].disabled == true)) {
           index = i;
           isFind = true;
           break;
@@ -164,7 +183,7 @@
     _checkSelectedDown: function (index) {
       var isFind = false;
       for (var i = index, len = this.datamodel.data.length; i < len; i++) {
-        if (this.datamodel.data[i] && (typeof this.datamodel.data[i].disabled == 'undefined' || this.datamodel.data[i].disabled == false)) {
+        if (this.datamodel.data[i] && (typeof this.datamodel.data[i].disabled == 'undefined' || this.datamodel.data[i].disabled == true)) {
           index = i;
           isFind = true;
           break;
@@ -211,12 +230,24 @@
 
       if (!noPosition) this.adjustPosition(true);
       this.resetCss();
-      if (noEvent !== true && isChange) this.changed && this.changed.call(this, this.getSelected());
+
+      //如果数据源发生变化一定会执行changed事件，否则一定会判断原有逻辑
+      if (this._dataChanged) {
+        this.triggerChangedAction();
+        this._dataChanged = false;
+      } else {
+        if (noEvent !== true && isChange) this.triggerChangedAction();
+      }
+    },
+
+    //触发change事件
+    triggerChangedAction: function () {
+      this.changed && this.changed.call(this, this.getSelected());
     },
 
     resetCss: function () {
-      this.$('li').removeClass('current');
-      this.$('li[data-index="' + this.datamodel.index + '"]').addClass('current');
+      this.$('li').removeClass('active');
+      this.$('li[data-index="' + this.datamodel.index + '"]').addClass('active');
     },
 
     resetIndex: function () {
@@ -242,7 +273,6 @@
       return this.getSelected().id;
     },
 
-
     getSelected: function () {
       return this.datamodel.data[this.datamodel.index];
     },
@@ -251,7 +281,7 @@
     getIndexByPosition: function () {
       var pos = this.scroll.y - this.scrollOffset;
       var index = Math.abs(pos) / this.itemHeight;
-      return index;
+      return Math.round(index);
     },
 
     initialize: function ($super, opts) {
@@ -261,12 +291,6 @@
 
     addEvent: function ($super) {
       $super();
-
-      this.on('onCreate', function () {
-        this.$el.addClass('cui-roller-bd');
-        this.$el.addClass('cui-roller');
-
-      });
 
       //这个要在第一位，因为后面会执行父类的position方法居中，尺寸没有就不行
       this.on('onShow', function () {

@@ -1,0 +1,141 @@
+<!doctype html>
+<!--[if (gte IE 9)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!-->
+<html class="ie">
+<!--<![endif]-->
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Blade Demo</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta content="telephone=no" name="format-detection" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <link rel="stylesheet" href="http://git.dev.sh.ctripcorp.com/ued-h5/thumb/raw/master/docs/thumb/global.css">
+  <link href="../res/style/hightlight/github.css" rel="stylesheet" type="text/css" />
+  <style>
+    #headerview .old-header, .sub-viewport .old-header { z-index: 2000; }
+    
+    .old-header { position: fixed; top: 0; left: 0; z-index: 9999; width: 100%; height: 48px; background-color: #1491c5; }
+    
+    .old-header h1 { position: absolute; width: 100%; line-height: 48px; text-align: center; letter-spacing: 2px; color: #fff; }
+    
+    .old-header h1 a { color: #fff; }
+    
+    .old-header h2 { position: absolute; width: 100%; line-height: 48px; text-align: center; letter-spacing: 1px; color: #fff; }
+    
+    .old-header h2 a { color: #fff; }
+    
+    
+    .returnico { position: absolute; left: 0; top: 0; width: 68px; height: 48px; background-color: #15a4d5; }
+    
+    .returnico:before { left: 25px; top: 14px; width: 12px; height: 20px; content: ""; position: absolute; background-position: -100px -105px; }
+    
+    .icon_home, .icon_phone, .icon_share, .icon_unfav, .icon_fav, .icon_search_w { width: 42px; height: 100%; top: 0; position: relative; z-index: 9; float: right; }
+    
+    .checked, .i, .i_bef:before, .i_aft:after, .arr_r:after, .arr_down:after, .arr_up:after, .tuan_tag li:before, .mulselect_yes, #city_list li.citylistcrt:after, .fselect.current i, .delivy.s_tickets .light.current:after, .delivy.s_tickets .light:active:after, #city_list .cur-selected:after, .returnico:before, .citylist .ok_crt:after, body .cui-select-fullscreen .cui-option-selected:after, .cui-keyboard .cui-letter-x, .cui-keyboard .cui-btn-delete, .cui-fail-icon { background: url(//pic.c-ctrip.com/h5/common/comm_bg.png) no-repeat; background-size: 242px 260px; }
+    .icon_home:before { width: 21px; height: 19px; top: 14px; right: 10px; background-position: -145px 0; }
+    
+    .icon_phone:before { width: 17px; height: 20px; top: 14px; right: 12px; background-position: -170.5px 0; }
+    
+    .icon_search_w:before { background-position: -220px -133px; width: 20px; height: 20px; right: 10px; top: 14px; }
+    
+    .icon_share:before { width: 20px; height: 15px; top: 16px; right: 11px; background-position: -198px -134px; }
+    
+    .icon_unfav:before, .icon_fav:before { width: 18px; height: 16px; top: 16px; right: 12px; }
+    
+    .icon_unfav:before { background-position: -152px -134px; }
+    
+    .icon_fav:before { background-position: -175px -134px; }
+    
+    .icon_city:before, .icon_date:before, .icon_star:before, .icon_keyword:before, .icon_vctk:before, .icon_vctl:before { left: 0; top: 8px; width: 22px; height: 20px; }
+    
+    .icon_city:before { background-position: -100px -43px; }
+    
+    .icon_date:before { top: 10px; background-position: -100px -23px; }
+    
+    .icon_date1:before { background-position: 0 0; }
+    
+    .icon_star:before { background-position: -100px -83px; }
+    
+    .icon_keyword:before { width: 20px; background-position: -100px 0; }
+    
+    .call:before { top: 8px; left: 8px; width: 13px; height: 16px; background-position: -168px -23px; }
+    
+    .icon_ok { display: inline-block; width: 34.5px; height: 33.5px; margin: -10px 10px 0 0; vertical-align: middle; background-position: -50px -64px; }
+    
+    .icon_vctk:before { background-position: -124px -105.5px; }
+    
+    .icon_vctl:before { height: 22px; background-position: -150.5px -104px; }
+    
+    .order_ok { padding: 20px 10px !important; text-align: center; font: 600 1.143em/1.8 STXihei; color: #7ab541; }
+    
+    .order_okinfo { padding: 10px 10px 20px; font: 400 12px/1.5 STXihei; color: #000; }
+    
+    .returnico { position: absolute; left: 0; top: 0; width: 68px; height: 48px; background-color: #15a4d5; }
+    
+    .returnico:before { left: 25px; top: 14px; width: 12px; height: 20px; content: ""; position: absolute; background-position: -100px -105px; }
+    
+    .icon_home:before { width: 21px; height: 19px; top: 14px; right: 10px; background-position: -145px 0; }
+    
+    .icon_phone:before { width: 17px; height: 20px; top: 14px; right: 12px; background-position: -170.5px 0; }
+    
+    .icon_search_w:before { background-position: -220px -133px; width: 20px; height: 20px; right: 10px; top: 14px; }
+    
+    .icon_share:before { width: 20px; height: 15px; top: 16px; right: 11px; background-position: -198px -134px; }
+    
+    .icon_unfav:before, .icon_fav:before { width: 18px; height: 16px; top: 16px; right: 12px; }
+    
+    .icon_unfav:before { background-position: -152px -134px; }
+    
+    .icon_fav:before { background-position: -175px -134px; }
+    
+    .icon_city:before, .icon_date:before, .icon_star:before, .icon_keyword:before, .icon_vctk:before, .icon_vctl:before { left: 0; top: 8px; width: 22px; height: 20px; }
+    
+    .icon_city:before { background-position: -100px -43px; }
+    
+    .icon_date:before { top: 10px; background-position: -100px -23px; }
+    
+    .icon_date1:before { background-position: 0 0; }
+    
+    .icon_star:before { background-position: -100px -83px; }
+    
+    .icon_keyword:before { width: 20px; background-position: -100px 0; }
+    
+    .call:before { top: 8px; left: 8px; width: 13px; height: 16px; background-position: -168px -23px; }
+    
+    .icon_ok { display: inline-block; width: 34.5px; height: 33.5px; margin: -10px 10px 0 0; vertical-align: middle; background-position: -50px -64px; }
+    
+    .icon_vctk:before { background-position: -124px -105.5px; }
+    
+    .icon_vctl:before { height: 22px; background-position: -150.5px -104px; }
+    
+    
+    .animatestart1 { position: absolute; top: 0; left: 0; z-index: 5000; width: 100%; overflow-x: hidden; }
+    .animatestart1.sub-viewport { overflow-x: hidden; -webkit-backface-visibility: hidden; background-color: #f5f5f5; }
+    
+    .tview { z-index: 6000; }
+    .lview { z-index: 5500; }
+    .hiddenx { overflow: hidden; }
+    
+     #headerview , #headerview header, #headerview header.old-header { position: static; width: 100%; }
+    
+    .main, main-viewport,.sub-viewport { height: 100%; }
+    .main_viewport { width: 40%; position:  absolute; height: 100%; left: 0; top: 0; overflow: auto; }
+    .main_viewport header{ width: 40%; }
+    
+    .sub_viewport { width: 57%; margin-left: 42%;  position: relative;  background: white }
+    .sub_viewport #headerview { position: relative; }
+    .sub_viewport #headerview .old-header{ position: relative; }
+    .sub_viewport header{ width: 58%; }
+    
+  </style>
+</head>
+<body>
+  <script src="../blade/libs/require.js" type="text/javascript"></script>
+  <script src="../blade/libs/zepto.js" type="text/javascript"></script>
+  <script src="../blade/libs/underscore.js" type="text/javascript"></script>
+  <script src="../blade/libs/underscore.extend.js" type="text/javascript"></script>
+  <script src="../blade/libs/fastclick.js" type="text/javascript"></script>
+  <script src="../blade/common.js" type="text/javascript"></script>
+  <script type="text/javascript" src="./main.js"></script>
+</body>
+</html>

@@ -1,0 +1,250 @@
+﻿<style>
+  .center { display: inline-block; width: 100%; text-align: center; }
+  
+  
+  .cm-pop .cm-pop-list li { border-bottom: 1px solid #dbdbdb; background-color: #fff; line-height: 33px; padding: 5px 10px; position: relative; display: block; cursor: pointer; }
+  .cm-pop .cm-pop-list li:first-child { border-top: 1px solid #dbdbdb; }
+  .cm-pop .cm-pop-list li:active, .cm-pop .cm-pop-list li:hover { background-color: whitesmoke; }
+  
+  .cm-pop { position: absolute; z-index: 985; width: 100%; }
+  .cm-pop .icond-pop-triangle { width: 10px; height: 10px; background-color: #fff; position: absolute; bottom: -5px; left: 50%; margin-left: -5px; -webkit-transform: rotate(45deg); transform: rotate(45deg); z-index: -1; }
+  .cm-pop .cm-pop-bd { background-color: #fff; }
+  .cm-pop .cm-pop-list li:first-child { border-top: none; }
+  .cm-pop .cm-pop-list li:last-child { border-bottom: none; }
+  .cm-pop .cm-pop-list li.active, .cm-pop .cm-pop-list li:active, .cm-pop .cm-pop-list li:hover { background-color: #099fde; color: #fff; }
+  .cm-pop .cm-pop-list--checked li { padding-right: 30px; }
+  .cm-pop .cm-pop-list--checked li.active { background-color: #fff; color: #099fde; }
+  .cm-pop .cm-pop-list--checked li.active::after { content: ""; width: 14px; height: 6px; border-bottom: 2px solid #099fde; border-left: 2px solid #099fde; position: absolute; top: 50%; right: 8px; margin-top: -4px; -webkit-transform: rotate(-45deg) translateY(-50%); transform: rotate(-45deg) translateY(-50%); }
+  
+  .cm-pop--triangle-up .icond-pop-triangle { top: -5px; }
+  
+  .cm-pop--border { border: 1px solid #dbdbdb; }
+  .cm-pop--border .icond-pop-triangle { border: 1px solid #dbdbdb; border-color: #fff #dbdbdb #dbdbdb #fff; }
+  .cm-pop--border.cm-pop--triangle-up .icond-pop-triangle { border-color: #dbdbdb #fff #fff #dbdbdb; }
+  .cm-pop--border.cm-pop--radius { border-radius: 6px; }
+  
+  .cm-pop--radius .cm-pop-bd { border-radius: 4px; overflow: hidden; }
+  
+  .cm-page-pop { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: #efefef; z-index: 985; }
+  .cm-page-pop .cm-pop-bd { position: absolute; top: 44px; left: 0; right: 0; bottom: 0; border-radius: 0; }
+  
+  
+  
+  
+  .cm-page-pop { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: #efefef; z-index: 985; }
+  .cm-page-pop .cm-pop-bd { position: absolute; top: 44px; left: 0; right: 0; bottom: 0; border-radius: 0; }
+  
+  .cm-pop--user-nav { top: 44px; right: 0; color: #fff; width: 128px; }
+  .cm-pop--user-nav .icond-pop-triangle { background-color: #283847; left: auto; right: 10px; }
+  .cm-pop--user-nav .cm-pop-list li { background-color: #283847; border-bottom: 1px solid rgba(255, 255, 255, 0.2); }
+  .cm-pop--user-nav .cm-pop-list li i[class^="icon-"] { margin-right: 10px; }
+  .cm-pop--user-nav .cm-pop-list li:active, .cm-pop--user-nav .cm-pop-list li:hover { background-color: #161e26; }
+  
+  
+  .icon-refund, .icon-offline, .icon-phone, .icon-home, .icon-loved, .icon-love, .icon-comment, .icon-compass, .icon-file, .icon-share, .icon-email, .icon-edit, .icon-sucess, .icon-date, .icon-rate, .icon-rate-half::before, .cm-rate-view--four-half .icon-rate:nth-of-type(5)::before, .cm-rate-view--three-half .icon-rate:nth-of-type(4)::before, .cm-rate-view--two-half .icon-rate:nth-of-type(3)::before, .cm-rate-view--one-half .icon-rate:nth-of-type(2)::before, .cm-rate-view--half .icon-rate:first-child::before, .icon-loading, .icon-loading .icon-loading-circle { background-image: url(http://doc.ui.sh.ctriptravel.com/utools/thumb/docs/images/bg-global.png); background-repeat: no-repeat; -webkit-background-size: 240px auto; background-size: 240px auto; vertical-align: middle; display: inline-block; }
+  
+  .icon-refund { width: 43px; height: 43px; background-position: -181px 0; }
+  
+  .icon-offline { width: 38px; height: 38px; background-position: -130px 0; }
+  
+  .icon-phone { width: 20px; height: 20px; background-position: -23px -50px; }
+  
+  .icon-home { width: 20px; height: 20px; background-position: 0 -50px; }
+  
+  .icon-loved { width: 20px; height: 20px; background-position: -47px -50px; }
+  
+  .icon-love { width: 20px; height: 20px; background-position: -71px -50px; }
+  
+  .icon-comment { width: 20px; height: 20px; background-position: -97px -50px; }
+  
+  .icon-compass { width: 20px; height: 20px; background-position: -123px -50px; }
+  
+  .icon-file { width: 20px; height: 20px; background-position: -147px -50px; }
+  
+  .icon-share { width: 20px; height: 20px; background-position: -172px -50px; }
+  
+  .icon-email { width: 20px; height: 20px; background-position: -198px -50px; }
+  
+  .icon-edit { width: 18px; height: 18px; background-position: -47px -80px; }
+  
+  .icon-sucess { width: 33px; height: 33px; background-position: 0 -80px; }
+  
+  .icon-date { width: 15px; height: 15px; background-position: -48px -105px; }
+  
+  .icon-rate { display: inline-block; width: 15px; height: 15px; background-position: -225px -98px; position: relative; }
+  
+  
+  header .icond-list { display: inline-block; position: absolute; z-index: 3000; color: White; width: 68px; height: 48px; line-height: 48px; vertical-align: middle; text-align: center; right: 0; bottom: 0; font-size: xx-large; font-weight: bolder; left: auto; }
+  
+  
+</style>
+<div id="headerview" style="height: 48px;" class="old-header">
+  <header>
+    <h1>冒泡组件</h1>
+  </header>
+</div>
+
+<ul class="cui-cond-bar cui-top-fixed">
+  <li id="filter">筛选<i class="cui-fl-sort cui-fl-filter"></i></li>
+  <li id="orderBy" class="cond-bar-current">默认排序<i class="cui-fl-sort"></i></li>
+</ul>
+
+<section class="prams">
+    <h2 class="dh2">基本参数说明</h2>
+
+    <pre><code>
+    @param template     {String}    模板视图文本
+    @param needMask     {Bool}      是否需要mask
+    @param template     {String}    模板视图文本
+    @param events       {Object}    绑定事件
+    @param setDatamodel {Object}    动态设置属性、事件
+    @param datamodel    {
+      data:      {Array}            数据
+      upClass:   {String}           向上的class
+      upClass:   {String}           向上的class
+      upClass:   {String}           向上的class
+      index:     {Int}              选择的下标
+      dir:       {String}           箭头的方向
+    }
+    </code></pre>
+</section>
+ 
+<section class="demos">
+
+ <h2 class="dh2">注意项</h2>
+<pre><code>
+/*
+该组件功能将更新......
+*/
+</code></pre>
+
+
+<h2 class="dh2">demo1</h2>
+<input type="text" class="d-input demo-input1 ml-10" placeholder="请选择..." />
+<input type="button" class="demo1 btn" value="中间按钮" >
+<pre><code>
+if(!this.demo1) {
+    var data = [{ name: '&lt;span class="center">价格/星级&lt;/span>' },
+      { name: '&lt;span class="center">位置区域&lt;/span>' },
+      { name: '&lt;span class="center">品牌&lt;/span>' },
+      { name: '&lt;span class="center">测试&lt;/span>'}];
+
+
+    var el = $(e.currentTarget);
+    var index = parseInt(Math.random() * 4);
+    var dir = (e.pageY > 200) ? 'down' : 'up';
+    this.demo1 = new UIBubbleLayer({
+      triggerEl: el,
+      datamodel: {
+        data: data,
+        dir: dir,
+        index: index
+      },
+      onClick:  function (e, data, index, el) {
+        console.log(arguments);
+        this.setIndex(index);
+        this.hide();
+      }
+    });
+  }
+  this.demo1.show();
+</code></pre>
+
+ <h2 class="dh2">demo2</h2>
+<input type="text" class="d-input demo-input2 ml-10" placeholder="请选择..." />
+<input type="button" style=" width: 200px;" class="demo2 btn" value="点击选项关闭，在显示项目还在" >
+<pre><code>
+  if(!this.demo2) {
+    var data = [{ name: '&lt;span class="center">价格/星级&lt;/span>' },
+      { name: '&lt;span class="center">位置区域&lt;/span>' },
+      { name: '&lt;span class="center">品牌&lt;/span>' },
+      { name: '&lt;span class="center">测试&lt;/span>'}];
+
+
+    var el = $(e.currentTarget);
+    var index = parseInt(Math.random() * 4);
+    var dir =  'up';
+    this.demo2 = new UIBubbleLayer({
+      triggerEl: el,
+      datamodel: {
+        data: data,
+        dir: dir,
+        index: index
+      },
+      onClick:  function (e, data, index, el) {
+        console.log(arguments);
+        this.setIndex(index);
+        this.hide();
+      }
+    });
+  }
+  this.demo2.show();
+</code></pre>
+
+ <h2 class="dh2">demo3</h2>
+<input type="text" class="d-input demo-input3 ml-10" placeholder="请选择..." />
+<input type="button" class="demo3 btn" value="需要mask"  style=" width: 100px;">
+<pre><code>
+  if(!this.demo3) {
+    var data = [{ name: '&lt;span class="center">价格/星级&lt;/span>' },
+      { name: '&lt;span class="center">位置区域&lt;/span>' },
+      { name: '&lt;span class="center">品牌&lt;/span>' },
+      { name: '&lt;span class="center">测试&lt;/span>'}];
+
+
+    var el = $(e.currentTarget);
+    var index = parseInt(Math.random() * 4);
+    var dir = (e.pageY > 200) ? 'down' : 'up';
+    this.demo3 = new UIBubbleLayer({
+      triggerEl: el,
+      datamodel: {
+        data: data,
+        dir: dir,
+        index: index
+      },
+      needMask:true,
+      onClick:  function (e, data, index, el) {
+        console.log(arguments);
+        this.setIndex(index);
+        this.hide();
+      }
+    });
+  }
+  this.demo3.show();
+</code></pre>
+
+ <h2 class="dh2">demo4</h2>
+<input type="text" class="d-input demo-input4 ml-10" placeholder="请选择..." />
+<input type="button" class="demo4 btn" value="定制化每个冒泡项目">
+<pre><code>
+  if(!this.demo4) {
+    var data = [{ name: '&lt;span class="center">普通会员&lt;/span>' },
+      { name: '&lt;span class="center">vip&lt;/span>' },
+      { name: '&lt;span class="center">高级vip&lt;/span>' },
+      { name: '&lt;span class="center">钻石vip&lt;/span>'}];
+
+
+    var el = $(e.currentTarget);
+    var index = parseInt(Math.random() * 4);
+    var dir = (e.pageY > 200) ? 'down' : 'up';
+    this.demo4 = new UIBubbleLayer({
+      triggerEl: el,
+      datamodel: {
+        data: data,
+        dir: dir,
+        index: index
+      },
+      onClick:  function (e, data, index, el) {
+        console.log(arguments);
+        this.setIndex(index);
+        this.hide();
+      }
+    });
+  }
+  this.demo4.show();
+</code></pre>
+
+<ul class="cui-cond-bar cui-bottom-fixed">
+	<li class="cond-bar-current">默认排序<i class="cui-fl-sort"></i></li>
+</ul>
+</section>

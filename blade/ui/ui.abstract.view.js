@@ -1,6 +1,26 @@
-﻿﻿define([], function () {
+﻿﻿/**
+* @File ui.abstract.view.js
+* @Description: UI组件基类
+* @author l_wang@ctrip.com
+* @date 2014-10-09
+* @version V1.0
+*/
 
-  //闭包保存所有UI共用的信息，比如z-index
+/**
+* UI组件基类，提供一个UI类基本功能，并可注册各个事件点：
+① onPreCreate 在dom创建时触发，只触发一次
+② onCreate 在dom创建后触发，只触发一次
+
+* @namespace UIView
+*/
+define([], function () {
+
+  /**
+  * @description 闭包保存所有UI共用的信息，这里是z-index
+  * @method getBiggerzIndex
+  * @param {Number} level
+  * @returns {Number}
+  */
   var getBiggerzIndex = (function () {
     var index = 3000;
     return function (level) {
@@ -31,14 +51,18 @@
 
   return _.inherit({
 
-    //默认属性
+    /**
+    * @description 设置实例默认属性
+    * @method propertys
+    */
     propertys: function () {
       //模板状态
+      this.wrapper = $('body');
+      this.id = _.uniqueId('ui-view-');
+
       this.template = '';
       this.datamodel = {};
       this.events = {};
-      this.wrapper = $('body');
-      this.id = _.uniqueId('ui-view-');
 
       //自定义事件
       //此处需要注意mask 绑定事件前后问题，考虑scroll.radio插件类型的mask应用，考虑组件通信
@@ -47,11 +71,34 @@
       //初始状态为实例化
       this.status = 'init';
 
+      //要开启动画，需要配置以下3个属性
+      this.needAnimat = false;
+      this.animateShowAction = null;
+      this.animateHideAction = null;
+
+      //是否需要div包裹根元素
+      this.needRootWrapper = true;
       //      this.availableFn = function () { }
 
     },
 
-    //绑定事件，这里应该提供一个方法，表明是insert 或者 push
+    //子类事件绑定若想保留父级的，应该使用该方法
+    addEvents: function (events) {
+      if (_.isObject(events)) _.extend(this.events, events);
+    },
+
+    //阻止默认冒泡事件
+    _preventDefault: function (e) {
+      e.preventDefault();
+    },
+
+    /**
+    * @description 绑定事件点回调，这里应该提供一个方法，表明是insert 或者 push，这样有一定手段可以控制各个同一事件集合的执行顺序
+    * @param {String} type
+    * @param {Function} fn
+    * @param {Boolean} insert
+    * @method on
+    */
     on: function (type, fn, insert) {
       if (!this.eventArr[type]) this.eventArr[type] = [];
 
@@ -63,6 +110,12 @@
       }
     },
 
+    /**
+    * @description 移除某一事件回调点集合中的一项
+    * @param {String} type
+    * @param {Function} fn
+    * @method off
+    */
     off: function (type, fn) {
       if (!this.eventArr[type]) return;
       if (fn) {
@@ -72,6 +125,13 @@
       }
     },
 
+    /**
+    * @description 触发某一事件点集合回调，按顺序触发
+    * @method trigger
+    * @param {String} type
+    * @returns {Array}
+    */
+    //PS：这里做的好点还可以参考js事件机制，冒泡捕获处于阶段
     trigger: function (type) {
       var _slice = Array.prototype.slice;
       var args = _slice.call(arguments, 1);
@@ -86,22 +146,53 @@
       return results;
     },
 
+    /**
+    * @description 创建dom根元素，并组装形成UI Dom树
+    * @override 这里可以重写该接口，比如有些场景不希望自己创建div为包裹层
+    * @method createRoot
+    * @param {String} html
+    */
     createRoot: function (html) {
-      this.$el = $('<div class="view" style="display: none; " id="' + this.id + '"></div>');
-      this.$el.html(html);
+      if (this.needRootWrapper) {
+        this.$el = $('<div class="view" style="display: none; " id="' + this.id + '"></div>');
+        this.$el.html(html);
+      } else {
+        this.$el = $(html).hide().attr('id', this.id);
+      }
     },
 
+    _isAddEvent: function (key) {
+      if (key == 'onCreate' || key == 'onPreShow' || key == 'onShow' || key == 'onRefresh' || key == 'onHide')
+        return true;
+      return false;
+    },
+
+    /**
+    * @description 设置参数，重写默认属性
+    * @override 
+    * @method setOption
+    * @param {Object} options
+    */
     setOption: function (options) {
+      //这里可以写成switch，开始没有想到有这么多分支
       for (var k in options) {
-        if (k == 'datamodel') {
-          _.extend(this.datamodel, options[k]);
+        if (k == 'datamodel' || k == 'events') {
+          _.extend(this[k], options[k]);
+          continue;
+        } else if (this._isAddEvent(k)) {
+          this.on(k, options[k])
           continue;
         }
-        this[k] = options[k]
+        this[k] = options[k];
       }
       //      _.extend(this, options);
     },
 
+    /**
+    * @description 构造函数
+    * @method initialize
+    * @param {Object} opts
+    */
     initialize: function (opts) {
       this.propertys();
       this.setOption(opts);
@@ -181,28 +272,68 @@
       if (needEvent) {
         this.create();
       } else {
-        this.render();
+        this.$el.html(this.render());
       }
       this.initElement();
       if (this.status == 'show') this.show();
+      this.trigger('onRefresh');
     },
 
     show: function () {
-      this.wrapper.append(this.$el);
+      if (!this.wrapper[0] || !this.$el[0]) return;
+      //如果包含就不要乱搞了
+      if (!$.contains(this.wrapper[0], this.$el[0])) {
+        this.wrapper.append(this.$el);
+      }
+
       this.trigger('onPreShow');
-      this.$el.show();
+
+      if (this.needAnimat && (this.animateInClass ? this.hasAnimationProperty(this.animateInClass) : (typeof this.animateShowAction == 'function')) && this.status != 'show') {
+        this.animateShowAction.call(this, this.$el);
+      } else
+        this.$el.show();
+
       this.status = 'show';
       this.bindEvents();
       this.trigger('onShow');
     },
 
     hide: function () {
+      if (!this.$el || this.status !== 'show') return;
+
       this.trigger('onPreHide');
-      this.$el.hide();
+
+      if (this.needAnimat && (this.animateOutClass ? this.hasAnimationProperty(this.animateOutClass) : (typeof this.animateShowAction == 'function')) && this.status != 'hide') {
+        this.animateHideAction.call(this, this.$el);
+      } else
+        this.$el.hide();
+
       this.status = 'hide';
       this.unBindEvents();
       this.removeSysEvents();
       this.trigger('onHide');
+    },
+
+    //检测某class是否包含动画特性
+    hasAnimationProperty: function (className) {
+      var animateProprtys = [
+      //有什么判断的便新增
+        $.fx.cssPrefix + 'animation-name'
+      ];
+      var el = $('<div></div>');
+
+      var i, len;
+
+      //赋予其class
+      el.attr('class', className);
+      $('body').append(el);
+
+      if (el.css(animateProprtys[0]) != 'none') {
+        el.remove();
+        return true;
+      }
+      el.remove();
+      return false;
     },
 
     destroy: function () {
@@ -211,6 +342,7 @@
       this.removeSysEvents();
       UIContainerUtil.removeItem(this.id);
       this.$el.remove();
+      this.trigger('onDestroy');
       delete this;
     },
 

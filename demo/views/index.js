@@ -19,20 +19,26 @@
 
     events: {
       'focus .cui-input-box': 'seachTxtFocus',
-      'click .cui-btn-cancle': function () {
-        this.closeSearch();
-      },
-      'click .seach-list>li': function (e) {
-        var gindex = $(e.currentTarget).attr('data-group');
-        var index = $(e.currentTarget).attr('data-index');
+      'click .cui-btn-cancle': 'closeSearchAction',
+      'click .seach-list>li': 'searchItemAction'
+    },
 
-        this.forward(this.uidata[gindex].data[index].uiname);
-      }
+    searchItemAction: function (e) {
+      var gindex = $(e.currentTarget).attr('data-group');
+      var index = $(e.currentTarget).attr('data-index');
+      this.forward(this.uidata[gindex].data[index].uiname);
+    },
+
+    closeSearchAction: function () {
+      this.closeSearch();
+    },
+
+    demoItemAction: function (item, groupIndex, index, e) {
+      scope.forward(item.uiname);
     },
 
     seachTxtFocus: function (e) {
       this.openSeach();
-
     },
 
     closeSearch: function () {
@@ -40,7 +46,6 @@
       this.groupList.show();
       this.searchList.hide();
       this.searchBox.val('');
-
     },
 
     //开启搜索状态
@@ -74,7 +79,6 @@
         var list = this.groupList.getFilterList(txt);
         this.searchList.html(list);
 
-
       }, this));
 
 
@@ -94,24 +98,28 @@
       var groupList1 = [
         { 'uiname': 'alert', 'name': '警告框' },
         { 'uiname': 'toast', 'name': 'toast框' },
-        { 'uiname': 'loading', 'name': 'loading框' },
-        { 'uiname': 'reloading', 'name': 'reloading框' },
-        { 'uiname': 'bubble.layer', 'name': '气泡框提示' }
+        { 'uiname': 'reloading', 'name': 'loading框' },
+        { 'uiname': 'bubble.layer', 'name': '气泡框提示' },
+        { 'uiname': 'warning404', 'name': '404提醒' },
+        { 'uiname': 'layerlist', 'name': '弹出层list' }
       ];
 
       var groupList2 = [
+
+        { 'uiname': 'identity', 'name': '身份证键盘' },
+        { 'uiname': 'imageslider', 'name': '图片轮播' },
         { 'uiname': 'num', 'name': '数字组件' },
         { 'uiname': 'select', 'name': 'select组件' },
-        { 'uiname': 'select2', 'name': 'select应用' },
         { 'uiname': 'switch', 'name': 'switch组件' },
         { 'uiname': 'tab', 'name': 'tab组件' },
         { 'uiname': 'calendar', 'name': '日历组件' },
-        { 'uiname': 'group.list', 'name': '分组列表' }
+        { 'uiname': 'group.list', 'name': '分组列表' },
+        { 'uiname': 'group.list', 'name': '搜索列表（城市搜索，地址搜索，待补充）' }
       ];
 
       var groupList3 = [
         { 'uiname': 'radio.list', 'name': '单列表选择组件' },
-        { 'uiname': 'scroll.layer', 'name': '滚动层组件' },
+        { 'uiname': 'scroll.layer', 'name': '滚动层组件（可定制化弹出层，比较常用）' },
         { 'uiname': 'group.select', 'name': '日期选择类组件' },
         { 'uiname': 'scroll', 'name': '滚动组件/横向滚动' },
       ];
@@ -125,7 +133,7 @@
       ];
 
       var uidata = [
-        { name: '提示类组件', data: groupList1 },
+        { name: '弹出层类组件', data: groupList1 },
         { name: '常用组件', data: groupList2 },
         { name: '滚动类组件', data: groupList3 },
         { name: '全局类', data: groupList4 }
@@ -140,22 +148,19 @@
         },
         wrapper: this.$('.cui-citys-bd'),
         onItemClick: function (item, groupIndex, index, e) {
-          scope.forward(item.uiname);
+          scope.demoItemAction(item.uiname);
         }
       });
 
-
       this.groupList.show();
-
     },
 
     onPreShow: function () {
-      this.initGoupList();
       this.turning();
     },
 
     onShow: function () {
-
+      this.initGoupList();
     },
 
     onHide: function () {

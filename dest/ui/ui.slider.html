@@ -1,8 +1,8 @@
-﻿<ul class="ul-list horizontal" style="position: absolute; top: 0; left: 0;">
+﻿<ul class="ul-list horizontal <%=className %>" style="position: absolute; top: 0; left: 0;">
   <%for(var i = 0, len = data.length; i < len; i++) { %>
   <li data-key="<%=data[i].id %>" data-index="<%=i%>" <%if(data[i].disabled){ %> class="disabled"
     <%} %>>
-      <div class="slider-item-wrapper" style=" width: 100%; height: 98%; border: 1px solid black; "><%=((typeof itemFn == 'function' && itemFn(data[i])) || data[i].name) %></div>
+      <%=((typeof itemFn == 'function' && itemFn(data[i], key, index)) || data[i].name) %>
     </li>
   <%} %>
 </ul>

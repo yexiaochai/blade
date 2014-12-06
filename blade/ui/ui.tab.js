@@ -8,18 +8,19 @@
       this.template = template;
       this.datamodel = {
         data: [],
-        curClass: 'cui-tab-current',
         index: 0
       };
 
       this.events = {
-        'click .cui-tab-mod>li': 'clickAction'
+        'click .js_item_wrapper>li': 'clickAction'
       };
 
       this.onChange = function (data) {
-
         console.log(arguments);
       };
+
+      this.itemWidth = 0;
+      this.needWrapperRoot = false;
 
     },
 
@@ -43,8 +44,8 @@
     },
 
     initElement: function () {
-      this.el = this.$('.cui-tab-current');
-      this.tab = this.$('.cui-tab-scrollbar')
+      this.el = this.$('.active');
+      this.scrollbar = this.$('.js_scrollbar')
       this.tabs = this.$('li');
 
     },
@@ -70,16 +71,10 @@
       var isChange = this.datamodel.selectedKey == v;
       this.datamodel.selectedKey = v;
 
-      this.tabs.removeClass(this.datamodel.curClass);
-      this.el && this.el.addClass(this.datamodel.curClass);
+      this.tabs.removeClass('active');
+      this.el && this.el.addClass('active');
 
-      //三星手机渲染有问题，这里动态引起一次回流，这个逻辑需要加入到基类
-      if (navigator.userAgent.toLowerCase().indexOf('android') > -1) {
-        var width = this._tab.css('width');
-        setTimeout($.proxy(function () {
-          this._tab.css('width', width);
-        }, this), 0);
-      }
+      this.scrollbar.css('left', this.itemWidth * index);
 
       if (isChange == false && typeof this.onChange == 'function') {
         this.onChange.call(this, d);
@@ -104,16 +99,18 @@
       return -1;
     },
 
-    initialize: function ($super, opts) {
-      $super(opts);
-    },
-
     addEvent: function ($super) {
       $super();
-      //      this.on('onCreate', function () {
-      //        this.$el.addClass('cui-loading');
-      //      });
+      this.on('onShow', function () {
+        if (this.scrollbar && this.tabs) {
+          this.itemWidth = $(this.tabs[0]).width();
+          this.scrollbar.width(this.itemWidth);
+        }
+      });
+    },
 
+    initialize: function ($super, opts) {
+      $super(opts);
     }
 
   });
