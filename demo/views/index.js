@@ -1,4 +1,4 @@
-﻿define(['View', getViewTemplatePath('index'), 'UIGroupList'], function (View, viewhtml, UIGroupList) {
+﻿﻿define(['View', getViewTemplatePath('index'), 'UIGroupList'], function (View, viewhtml, UIGroupList) {
 
   return _.inherit(View, {
     onCreate: function () {
@@ -19,8 +19,6 @@
 
     events: {
       'focus .cui-input-box': 'seachTxtFocus',
-      'click .sss': function () {
-      },
       'click .cui-btn-cancle': function () {
         this.closeSearch();
       },
@@ -94,28 +92,26 @@
 
       //提示类
       var groupList1 = [
-        { 'uiname': 'pageview', 'name': '全局遮盖工具组件pageview' },
         { 'uiname': 'alert', 'name': '警告框' },
         { 'uiname': 'toast', 'name': 'toast框' },
-        { 'uiname': 'reloading', 'name': 'loading框' },
-        { 'uiname': 'bubble.layer', 'name': '气泡框提示' },
-        { 'uiname': 'warning404', 'name': '404提醒' }
+        { 'uiname': 'loading', 'name': 'loading框' },
+        { 'uiname': 'reloading', 'name': 'reloading框' },
+        { 'uiname': 'bubble.layer', 'name': '气泡框提示' }
       ];
 
       var groupList2 = [
-        { 'uiname': 'imageslider', 'name': '图片轮播' },
         { 'uiname': 'num', 'name': '数字组件' },
         { 'uiname': 'select', 'name': 'select组件' },
+        { 'uiname': 'select2', 'name': 'select应用' },
         { 'uiname': 'switch', 'name': 'switch组件' },
         { 'uiname': 'tab', 'name': 'tab组件' },
         { 'uiname': 'calendar', 'name': '日历组件' },
-        { 'uiname': 'group.list', 'name': '分组列表' },
-        { 'uiname': 'group.list', 'name': '搜索列表（城市搜索，地址搜索，待补充）' }
+        { 'uiname': 'group.list', 'name': '分组列表' }
       ];
 
       var groupList3 = [
         { 'uiname': 'radio.list', 'name': '单列表选择组件' },
-        { 'uiname': 'scroll.layer', 'name': '滚动层组件（可定制化弹出层，比较常用）' },
+        { 'uiname': 'scroll.layer', 'name': '滚动层组件' },
         { 'uiname': 'group.select', 'name': '日期选择类组件' },
         { 'uiname': 'scroll', 'name': '滚动组件/横向滚动' },
       ];
@@ -159,9 +155,6 @@
     },
 
     onShow: function () {
-
-
-  
 
     },
 

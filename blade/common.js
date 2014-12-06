@@ -1,4 +1,4 @@
-﻿(function () {
+﻿﻿(function () {
 
   var app = './blade/';
 
@@ -30,23 +30,14 @@
       'UIAlert': app + 'ui/ui.alert',
       'UIMask': app + 'ui/ui.mask',
       'UILoading': app + 'ui/ui.loading',
-      'UILoadingLayer': app + 'ui/ui.loading.layer',
+      'UIReLoading': app + 'ui/ui.reloading',
       'UIToast': app + 'ui/ui.toast',
-
-
-
-      'T_UIToast': app + 'ui/ui.toast.html',
-
-//      'T_UIToast': 'http://localhost:5389/blade/demo/templates/toast.html',
-
-
-      'UIPageview': app + 'ui/ui.pageview',
-
       'UIInlineView': app + 'ui/ui.inline.view',
       'UINum': app + 'ui/ui.num',
       'UISwitch': app + 'ui/ui.switch',
       'UIBubbleLayer': app + 'ui/ui.bubble.layer',
       'UITab': app + 'ui/ui.tab',
+      'UITabs': app + 'ui/ui.tabs',
       'UIScroll': app + 'ui/ui.scroll',
       'UIScrollLayer': app + 'ui/ui.scroll.layer',
       'UIRadioList': app + 'ui/ui.radio.list',
@@ -55,11 +46,7 @@
       'UIGroupList': app + 'ui/ui.group.list',
       'UICalendar': app + 'ui/ui.calendar',
       'UISlider': app + 'ui/ui.slider',
-      'UIImageSlider': app + 'ui/ui.image.slider',
-
-      'UIInputClear': app + 'ui/ui.inputclear',
-      'UIWarning404': app + 'ui/ui.warning404'
-
+      'UIInputClear': app + 'ui/ui.inputclear'
 
     }
 

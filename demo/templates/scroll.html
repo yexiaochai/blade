@@ -24,7 +24,7 @@ new UISlider({
 </code></pre>
 
 <h2 class="dh2">简单使用</h2>
-<section class="demo1" style="height:100px; width: 92%; border: 1px solid black; margin: 0 auto;" >
+<section class="demo1" style="height:100px;">
 </section>
 <div class="demo1_sec"></div>
 <pre><code>
@@ -48,7 +48,7 @@ this.slider.show();
 
 <h2 class="dh2">图片slider</h2>
 
-<section class="demo2" style=" height: 200px; width: 92%;  border: 1px solid black; margin: 0 auto; "  >
+<section class="demo2" >
 </section>
 
 <pre><code>
@@ -74,102 +74,4 @@ changed: function (item) {
 });
 
 this.imgSlider.show();
-</code></pre>
-
-
-<h2 class="dh2">复杂使用</h2>
-<section class="demo3" style="height: 38px; width: 120px;  margin: 0 auto;" >
-</section>
-<br /><br />
-<div class="demo3_sec"></div>
-<pre><code>
-_initSwitch: function () {
-  if (this.switch1) return;
-
-  //      var sec = this.$('.demo1_sec');
-  var data = [
-    { id: 'on', name: 'on', checked: true }, { id: 'off', name: 'off', checked: false }
-  ];
-
-  this.switch1 = new UISlider({
-    datamodel: {
-      data: data
-    },
-    momentum: false,
-    displayNum: 1,
-    wrapper: this.$('.demo3'),
-    changed: function (item) {
-      console.log(item.checked);
-    },
-    itemClick: function (item) {
-      console.log(item.checked);
-      if (item.checked) {
-        this.setId('off');
-      } else {
-        this.setId('on');
-      }
-    }
-  });
-  this.switch1.show();
-},
-</code></pre>
-
-
-
-<h2 class="dh2">复杂日历使用</h2>
-
-<section class="demo4" style=" height: 340px; width: 96%; margin: 0 auto; "  >
-</section>
-<style>
-  .cui-roller .ul-list li.current { font-size: 1.3255em; color: #333; }
-</style>
-<pre><code>
-if (this.calendar) return;
-
-var sec = this.$('.demo3_sec');
-var data = [
-  {},
-  {},
-  {},
-  {},
-  {}
-];
-
-this.slider1 = new UISlider({
-  datamodel: {
-    data: data,
-    itemFn: function () {
-      return '<div style="width: 98%; height: 96%; border: 1px solid #bcbcbc;"></div>';
-    }
-  },
-  momentum: false,
-  displayNum: 1,
-  wrapper: this.$('.demo4'),
-  changed: function (item) {
-    //          sec.html('当前选择：' + 'id: ' + item.id + ', ' + 'name: ' + item.name);
-  },
-  itemClick: function (item) {
-  }
-});
-this.slider1.show();
-this.slider1.calendarArr = [];
-
-for (var i = 0, len = data.length; i < len; i++) {
-var dateObj = new Date();
-var dateObj = new Date(dateObj.getFullYear(), dateObj.getMonth() + i, dateObj.getDate());
-
-  this.slider1.calendarArr[i] = new UICalendar({
-    dateObj:dateObj,
-    datamodel: {
-      displayMonthNum: 1
-    },
-    wrapper: this.slider1.$('li[data-index="' + i + '"]').find('div')
-  });
-  this.slider1.calendarArr[i].show();
-}
-
-
-var item = this.slider1.getSelected();
-
-sec.html('当前选择：' + 'id: ' + item.id + ', ' + 'name: ' + item.name);
 </code></pre>

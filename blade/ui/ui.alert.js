@@ -1,4 +1,4 @@
-﻿
+﻿﻿
 /*
 用于继承的类，会自动垂直居中
 
@@ -8,19 +8,14 @@ define(['UILayer', getAppUITemplatePath('ui.alert')], function (UILayer, templat
   return _.inherit(UILayer, {
     propertys: function ($super) {
       $super();
-    },
-
-    resetDefaultProperty: function ($super) {
-      $super();
-
-      this.maskToHide = false;
 
       //数据模型
       this.datamodel = {
-        title: '',
+        title: 'alert',
         content: 'content',
         btns: [
-          { name: '知道了', className: 'cui-btns-ok' }
+          { name: 'cancel', className: 'cui-btns-cancel' },
+          { name: 'ok', className: 'cui-btns-ok' }
         ]
       };
 
@@ -32,15 +27,6 @@ define(['UILayer', getAppUITemplatePath('ui.alert')], function (UILayer, templat
         'click .cui-btns-ok': 'okAction',
         'click .cui-btns-cancel': 'cancelAction'
       };
-
-      this.okAction = function () {
-        this.hide();
-      };
-
-      this.cancelAction = function () {
-        this.hide();
-      };
-
     },
 
     initialize: function ($super, opts) {
@@ -55,11 +41,22 @@ define(['UILayer', getAppUITemplatePath('ui.alert')], function (UILayer, templat
       this.maskToHide = false;
     },
 
+    okAction: function () {
+      this.hide();
+      console.log('ok');
+    },
+
+    cancelAction: function () {
+      this.hide();
+      console.log('cancel');
+
+    },
+
     setDatamodel: function (datamodel, okAction, cancelAction) {
       if (!datamodel) datamodel = {};
       _.extend(this.datamodel, datamodel);
-      okAction && (this.okAction = okAction);
-      cancelAction && (this.cancelAction = cancelAction);
+      this.okAction = okAction;
+      this.cancelAction = cancelAction;
       this.refresh();
     }
 

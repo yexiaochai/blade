@@ -1,4 +1,4 @@
-﻿define(['UIView', getAppUITemplatePath('ui.slider'), 'UIScroll'], function (UIView, template, UIScroll) {
+﻿﻿define(['UIView', getAppUITemplatePath('ui.slider'), 'UIScroll'], function (UIView, template, UIScroll) {
 
 
   return _.inherit(UIView, {
@@ -7,22 +7,20 @@
       this.template = template;
 
       this.datamodel = {
-        key: this.id,
-        className: '',
         curClass: 'current',
         data: [],
         index: 0
       };
 
       this.itemNum = 0;
-      this.displayNum = 5;
+      this.displayNum = 3;
       this.animatTime = 100;
-      this.momentum = false;
 
       //该组件一定要设置宽高
       this.itemWidth = 0;
       this.itemHeight = 0;
       this.scrollWidth = 0;
+
 
       //选择时候的偏移量
       this.scrollOffset = 0;
@@ -30,31 +28,10 @@
       //滚动对象
       this.scroll = null;
 
-      this.events = {
-        'click .ul-list>li': 'itemClickAction'
-
-      };
-
       this.changed = function (item) {
-//        console.log(item);
+        console.log(item);
       };
 
-      this.itemClick = function (item) {
-//        console.log(item);
-      };
-
-    },
-
-    //重新父类创建根节点方法
-    //    createRoot: function (html) {
-    //      this.$el = $(html).hide().attr('id', this.id);
-    //    },
-
-    itemClickAction: function (e) {
-      var el = $(e.currentTarget);
-      var index = el.attr('data-index');
-      this.setIndex(index);
-      this.itemClick.call(this, this.getSelected());
     },
 
     initialize: function ($super, opts) {
@@ -78,7 +55,7 @@
     },
 
     _resetNum: function () {
-      //      this.displayNum = this.displayNum % 2 == 0 ? this.displayNum + 1 : this.displayNum;
+      this.displayNum = this.displayNum % 2 == 0 ? this.displayNum + 1 : this.displayNum;
       this.itemNum = this.datamodel.data.length;
     },
 
@@ -89,13 +66,32 @@
       this.scroller = this.$('.ul-list');
     },
 
+    //处理存在图片的情况
+    _initImgSize: function () {
+      var item = this.scroller.find('img').eq(0);
+      if (!item[0]) return;
+      item.on('load', $.proxy(function () {
+        var h = item.height();
+        if (this.itemHeight < h) {
+          this.itemHeight = h;
+          this.swrapper.css({
+            height: this.itemHeight + 'px'
+          });
+          this.scroller.find('li').height(this.itemHeight);
+
+        }
+        var s = '';
+      }, this));
+
+    },
+
     initSize: function () {
       var item = this.scroller.find('li').eq(0);
       var itemOffset = item.offset();
       var parent = this.$el.parent();
-      var ph = (parent[0] && parent[0].clientHeight) || parent.height();
+      var ph = parent.height();
 
-      this.wrapeWidth = (this.swrapper[0] && this.swrapper[0].clientWidth) || this.swrapper.width();
+      this.wrapeWidth = this.swrapper.width();
 
       this.itemWidth = parseInt(this.wrapeWidth / this.displayNum);
 
@@ -105,18 +101,18 @@
 
       this.itemHeight = this.scroller.height();
 
-      //无论如何itemHeight都要相等才行
-//      if (ph != this.itemHeight) this.itemHeight = ph;
-      this.itemHeight = ph;
+      if (ph > this.itemHeight) this.itemHeight = ph;
 
       this.scroller.find('li').height(this.itemHeight);
 
       //样式还需调整
       this.swrapper.css({
+        'background': '#f5f5f5',
         height: this.itemHeight + 'px'
       });
 
       this.scrollOffset = ((this.displayNum - 1) / 2) * (this.itemWidth);
+      this._initImgSize();
     },
 
     reload: function (datamodel) {
@@ -130,50 +126,38 @@
 
     _initScroll: function () {
       if (this.scroll) {
-        this.scroll.destroy();
+        this.scroll.refresh();
+        return;
       }
 
       this.scroll = new UIScroll({
         scrollbars: false,
-        scrollOffset: this.scrollOffset,
+        //        scrollOffset: this.scrollOffset,
         scrollType: 'x',
         step: this.itemWidth,
         wrapper: this.swrapper,
         bounceTime: 200,
-        momentum: this.momentum,
         scroller: this.scroller
 
       });
-
-      //重置包裹层尺寸，一定要是一个
-      //      this.swrapper.width(this.itemWidth * this.displayNum);
 
       this.scroll.on('scrollEnd', $.proxy(function () {
         this.setIndex(this.getIndexByPosition(), true)
       }, this));
 
-
       //为了解决鼠标离屏幕时导致的问题
-      this.scroll.on('scrollCancel', $.proxy(function () {
-        this.setIndex(this.getIndexByPosition(), false)
-      }, this));
-
-      //解决resize问题
-      $(window).off('.silder' + this.id);
-      $(window).on('resize.silder' + this.id, $.proxy(function () {
-        this.refresh();
+      this.scroll.on('beforeScrollStart', $.proxy(function () {
+        this.setIndex(this.getIndexByPosition(), true)
       }, this));
 
     },
 
-    adjustPosition: function (hasAnimate, time) {
+    adjustPosition: function (hasAnimate) {
       if (!this.scroll) return;
-      var index = this.datamodel.index, _dis, _time = 0;
+      var index = this.datamodel.index, _dis, time = 0;
       _dis = (this.itemWidth * index) * (-1) + this.scrollOffset;
-      if (hasAnimate) _time = this.animatTime;
-      if (time) _time = time;
-
-      this.scroll.scrollTo(_dis, 0, _time);
+      if (hasAnimate) time = this.animatTime;
+      this.scroll.scrollTo(_dis, 0, time);
     },
 
     resetCss: function () {
@@ -189,26 +173,23 @@
     getIndexByPosition: function () {
       var pos = this.scroll.x - this.scrollOffset;
       var index = Math.abs(pos) / this.itemWidth;
-      return Math.round(index);
+      return index;
     },
 
     getIndex: function () {
       return this.datamodel.index;
     },
 
-    setIndex: function (i, noPosition, noEvent, time) {
+    setIndex: function (i, noPosition, noEvent) {
       if (typeof noPosition == 'undefined' && i == this.datamodel.index) noPosition = true;
 
       //index值是否改变
       var isChange = this.datamodel.index != i;
       this.datamodel.index = i;
 
-      if (!noPosition) this.adjustPosition(true, time);
+      if (!noPosition) this.adjustPosition(true);
       this.resetCss();
-      if (noEvent !== true && isChange) {
-        this.changedAction && this.changedAction.call(this, this.getSelected());
-        this.changed && this.changed.call(this, this.getSelected());
-      }
+      if (noEvent !== true && isChange) this.changed && this.changed.call(this, this.getSelected());
     },
 
     setId: function (id) {
@@ -218,6 +199,7 @@
         if (this.datamodel.data[i].id == id) { index = i; break; }
       }
       if (index == -1) return;
+      this.datamodel.index = index;
       this.setIndex(index, false);
     },
 
@@ -227,17 +209,6 @@
 
     getSelected: function () {
       return this.datamodel.data[this.datamodel.index];
-    },
-
-    //释放给各用户的接口，操作每项
-    handleItem: function (index, wrapper) {
-
-    },
-
-    handleEachItem: function () {
-      for (var i = 0, len = this.datamodel.data.length; i < len; i++) {
-        this.handleItem && this.handleItem.call(this, i, this.$('li[data-index="' + i + '"]'));
-      }
     },
 
     addEvent: function ($super) {
@@ -256,16 +227,13 @@
         this.adjustPosition();
         this.resetCss();
         this.resetIndex();
-        this.handleEachItem();
+
       }, 1);
 
       this.on('onHide', function () {
         if (this.scroll) {
           this.scroll.destroy();
           this.scroll = null;
-          $(window).off('.silder' + this.id);
-          this.freeInstance();
-
         }
       });
 

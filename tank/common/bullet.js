@@ -1,4 +1,4 @@
-﻿define(['MoveObj'], function (MoveObj) {
+﻿define(['MoveObj', 'text!tank/common/move.obj.html', 'Boom'], function (MoveObj, template, Boom) {
 
   return _.inherit(MoveObj, {
     propertys: function ($super) {
@@ -10,6 +10,8 @@
       this.datamodel.width = this.datamodel.height = 8;
 
       this.datamodel.speed = 4;
+
+      //      this.template = template;
 
     },
 

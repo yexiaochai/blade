@@ -170,7 +170,6 @@ define([], function () {
       scrollbars: true,
       // 其实时期Y的位置
       startY: 0,
-      preventDefault: true,
 
       scrollOffset: 0,
 
@@ -184,8 +183,6 @@ define([], function () {
 
       //超出边界时候是否还能拖动
       bounce: true,
-
-      momentum: true,
 
       bindToWrapper: true,
 
@@ -208,12 +205,6 @@ define([], function () {
     //默认方向是向前
     this.dir = 'forward';
 
-    //尺寸不过关便不要实例化了
-//    if (this.options.scrollType == 'x') {
-//      if (this.wrapper.clientWidth > this.scroller.clientWidth) return;
-//    } else {
-//      if (this.wrapper.clientHeight > this.scroller.clientHeight)   return;
-//    }
 
     this._init();
 
@@ -225,9 +216,29 @@ define([], function () {
 
     this.enable();
 
+    this.checkWrapperDisplay();
+
   };
 
   IScroll.prototype = {
+    //用以解决父容器不显示导致高度失效问题
+    checkWrapperDisplay: function () {
+      //如果容器高度为0，一定是父容器高度不显示导致
+      this.TIMERRESCOUNT = 0;
+      this.TIMERRES && clearInterval(this.TIMERRES);
+      if (this.swrapper.height() == 0 && this.swrapper.width() == 0) {
+        this.TIMERRES = setInterval($.proxy(function () {
+          console.log('Scroll组件检测容器高度......' + this.TIMERRESCOUNT)
+          this.TIMERRESCOUNT++;
+          if (this.swrapper.height() > 0 || this.swrapper.width() > 0 || this.TIMERRESCOUNT > 1000) {
+            this.TIMERRES && clearInterval(this.TIMERRES);
+            console.log('Scroll组件检测容器高度结束，重设高度')
+            this.refresh();
+          }
+        }, this), 100);
+      }
+    },
+
     _init: function () {
       this._initEvents();
 
@@ -250,18 +261,6 @@ define([], function () {
       //增加偏移量概念
       this.maxScrollX = this.maxScrollX - this.options.scrollOffset
       this.maxScrollY = this.maxScrollY - this.options.scrollOffset;
-
-
-      //处理步长问题
-      //      if (this.options.step) {
-      //        if (this.maxScrollX % this.options.step != 0) {
-      //          this.maxScrollX = Math.round(this.maxScrollX / this.options.step) * this.options.step;
-      //          var s = '';
-      //        }
-      //        if (this.maxScrollY % this.options.step != 0) {
-      //          this.maxScrollY = Math.round(this.maxScrollY / this.options.step) * this.options.step;
-      //        }
-      //      }
 
       if (this.options.scrollType == 'y') {
         this.maxScrollX = 0;
@@ -327,7 +326,6 @@ define([], function () {
         //移动过去
         this._translate(_x, _y);
         this._execEvent('scrollEnd');
-
       }
 
       this.startX = this.x;
@@ -339,7 +337,7 @@ define([], function () {
 
       this._execEvent('beforeScrollStart');
 
-      //      e.preventDefault();
+      e.preventDefault();
 
     },
 
@@ -347,6 +345,7 @@ define([], function () {
       if (!this.enabled || utils.eventType[e.type] !== this.initiated) {
         return;
       }
+      e.preventDefault();
 
       var point = e.touches ? e.touches[0] : e,
       deltaX = point.pageX - this.pointX,
@@ -354,13 +353,6 @@ define([], function () {
       timestamp = utils.getTime(),
       newX, newY,
       absDistX, absDistY;
-
-      var x1 = this.x;
-      var y1 = this.y;
-      var x2 = this.x + deltaX
-      var y2 = this.y + deltaY;
-
-      var dir = Math.abs(deltaX) >= Math.abs(deltaY) ? (x1 - x2 > 0 ? 'left' : 'right') : (y1 - y2 > 0 ? 'up' : 'down');
 
       this.pointX = point.pageX;
       this.pointY = point.pageY;
@@ -376,18 +368,10 @@ define([], function () {
       }
 
       if (this.options.scrollType == 'y') {
-        if (this.options.preventDefault && (dir == 'top' || dir == 'down')) {
-          e.preventDefault();
-        }
         deltaX = 0;
       } else {
-        if (this.options.preventDefault && (dir == 'left' || dir == 'right')) {
-          e.preventDefault();
-        }
         deltaY = 0;
       }
-
-      this.flipDir = dir;
 
       newX = this.x + deltaX;
       newY = this.y + deltaY;
@@ -447,10 +431,6 @@ define([], function () {
       newY = Math.round(this.y),
       distanceX = Math.abs(newX - this.startX),
       distanceY = Math.abs(newY - this.startY),
-
-      tdistanceX = Math.abs(newX - this.startX),
-      tdistanceY = Math.abs(newY - this.startY),
-
       time = 0,
       easing = '';
 
@@ -461,16 +441,16 @@ define([], function () {
       if (this.resetPosition(this.options.bounceTime)) {
         return;
       }
-
+      
       this.scrollTo(newX, newY);
       if (!this.moved) {
+        //click 的情况
 
-        //这里需要监听使用步长问题
         this._execEvent('scrollCancel');
         return;
       }
 
-      if (this.options.momentum && duration < 300) {
+      if (duration < 300) {
         momentumX = utils.momentum(this.x, this.startX, duration, this.maxScrollX, this.options.bounce ? this.wrapperWidth : 0);
         momentumY = utils.momentum(this.y, this.startY, duration, this.maxScrollY, this.options.bounce ? this.wrapperHeight : 0);
         newX = momentumX.destination;
@@ -484,67 +464,34 @@ define([], function () {
         this.isInTransition = 1;
       }
 
-      tdistanceX = Math.abs(newX - this.startX);
-      tdistanceY = Math.abs(newY - this.startY);
 
       //处理步长
       //这块处理有问题，需要重新写*******************************
       if (this.options.step) {
         var x = newX, y = newY;
-        var left = Math.abs(x);
-        var top = Math.abs(y);
 
-        var flag1 = x > 0 ? 1 : -1;
         var flag2 = y > 0 ? 1 : -1;
+        var flag3 = x > 0 ? 1 : -1;
 
-        var difStepX = this.options.step - (tdistanceX % this.options.step);
-        var difStepY = this.options.step - (tdistanceY % this.options.step);
+        var top = Math.abs(y);
+        var left = Math.abs(x);
 
-        //        console.log('left: ' + left + ', newX: ' + +newX + ', distanceX: ' + tdistanceX + ', step: ' + this.options.step + ', difStepX: ' + difStepX + ', scrollOffset: ' + this.options.scrollOffset + ', maxX: ' + this.maxScrollX + ', minX: ' + this.options.scrollOffset);
+        var mod = top % this.options.step;
+        var mod1 = left % this.options.step;
 
-        if (this.dir == 'forward') {
-          if (x > 0) {
-            x = left + difStepX;
-          } else {
-            x = left - difStepX;
-          }
-          if (y > 0) {
-            y = top + difStepY;
-          } else {
-            y = top - difStepY;
-          }
-        } else {
+        top = (parseInt(top / this.options.step) * this.options.step + (mod > (this.options.step / 3) ? this.options.step : 0)) * flag2;
+        left = (parseInt(left / this.options.step) * this.options.step + (mod1 > (this.options.step / 3) ? this.options.step : 0)) * flag3;
+        y = top;
+        x = left;
 
-          if (x > 0) {
-            x = left - difStepX;
-          } else {
-            x = left + difStepX;
-          }
-          if (y > 0) {
-            y = top - difStepY;
-          } else {
-            y = top + difStepY;
-          }
-        }
-
-        if (x % this.options.step != 0) {
-          x = Math.round((x / this.options.step)) * this.options.step;
-        }
-
-        if (y % this.options.step != 0) {
-          y = Math.round((y / this.options.step)) * this.options.step;
-        }
-
-        x = x * flag1;
-        y = y * flag2;
-
-        time = this.options.stepTime || 200;
-        if ((this.options.scrollType == 'x' && tdistanceX < 50) || (this.options.scrollType == 'y' && tdistanceY < 50)) time = 100;
+        time = Math.max(
+		  Math.max(
+			Math.min(Math.abs(newX - x), 1000),
+			Math.min(Math.abs(newY - y), 1000)
+		), 300);
 
         newX = x;
         newY = y;
-
-        //        console.log('newX: ' + newX + '===' + newX / this.options.step);
 
         easing = this.options.bounceEasing;
       }
@@ -558,6 +505,7 @@ define([], function () {
         this.scrollTo(newX, newY, time, easing);
         return;
       }
+
 
       this._execEvent('scrollEnd');
     },

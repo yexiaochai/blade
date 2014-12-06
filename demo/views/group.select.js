@@ -1,4 +1,4 @@
-﻿define(['View', getViewTemplatePath('group.select'), 'UIGroupSelect'], function (View, viewhtml, UIGroupSelect) {
+﻿﻿define(['View', getViewTemplatePath('group.select'), 'UIGroupSelect'], function (View, viewhtml, UIGroupSelect) {
 
   return _.inherit(View, {
     onCreate: function () {
@@ -26,11 +26,11 @@
         if (!this.groupSelect) {
           this.groupSelect = new UIGroupSelect({
             data: [data1, data2],
-            onOkAction: function (items) {
+            onOkAction: function(items) {
               console.log('ok', items);
               this.hide();
             },
-            onCancelAction: function () {
+            onCancelAction:function() {
               console.log('cancel');
               this.hide();
             }
@@ -45,7 +45,7 @@
         var dayFlag = { 1: 31, 2: 28, 3: 31, 4: 30, 5: 31, 6: 30, 7: 31, 8: 31, 9: 30, 10: 31, 11: 30, 12: 31 };
 
         for (var i = 2000; i <= 2014; i++) {
-          var obj = { id: 'y_' + i, name: i + '年' };
+          var obj = { id: 'y_' + i, name:  i + '年' };
           data1.push(obj);
         }
 
@@ -55,7 +55,7 @@
         }
 
         for (var i = 1; i <= 31; i++) {
-          var obj = { id: 'd_' + i, name: i + '日' };
+          var obj = { id: 'd_' + i, name: i + '日'};
           data3.push(obj);
         }
 
@@ -66,33 +66,31 @@
               tips: ''
             },
             data: [data1, data2, data3],
-            changedArr: [function (item) {
+            changedArr: [function(item) {
               console.log('my year:', item);
-              this.scrollArr[1].reload();
-
-            }, function (item) {
-              var d = this.scrollArr[2],           //获取日select组件
+            }, function(item) {
+              var  d = this.scrollArr[2],           //获取日select组件
                    item_m = parseInt(item.name),      //获取当前选中的月
                    tmp = dayFlag[item_m];
 
-              for (var i = 31; i > 28; i--) {
+              for(var i=31;i>28;i--) {
                 //重置可选
-                d.datamodel.data[i - 1].disabled = false;
+                d.datamodel.data[i-1].disabled = false;
                 //如果当月最大日数小于i，则为不可选
-                if (i > tmp) d.datamodel.data[i - 1].disabled = true;
+                if(i > tmp)  d.datamodel.data[i-1].disabled = true;
               }
               //重绘数据模型
               this.scrollArr[2].reload();
               console.log('my month:', item);
-            }, function (item) {
+            },function(item) {
               console.log('my day:', item);
-            } ],
+            }],
             //
-            onOkAction: function (item) {
+            onOkAction: function(item) {
               console.log('my okAction', item);
               this.hide();
             },
-            onCancelAction: function (item) {
+            onCancelAction: function(item) {
               console.log('my cancelAction', item);
               this.hide();
             }

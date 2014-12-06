@@ -1,17 +1,8 @@
-﻿define(['AbstractView', 'cHighlight',  'UILoadingLayer','UIWarning404', 'UIAlert', 'UIToast', 'UIPageview'], function (AbstractView, cHighlight, Loading, Warning404, Alert, Toast, UIPageview) {
-
-
-      var _loading = new Loading();
-       var _alert = new Alert();
-         var _confirm = new Alert();
-         var _toast = new Toast();
-         var _warning404 = new Warning404();
-         var _pageview = new UIPageview();
-
+﻿define(['AbstractView', 'cHighlight'], function (AbstractView, cHighlight) {
 
   var hljs = new cHighlight();
 
-hljs.registerLanguage("javascript", function(a) {
+  hljs.registerLanguage("javascript", function(a) {
     return {aliases: ["js"],k: {keyword: "in if for while finally var new function do return void else break catch instanceof with throw case default try this switch continue typeof delete let yield const class",literal: "true false null undefined NaN Infinity",built_in: "eval isFinite isNaN parseFloat parseInt decodeURI decodeURIComponent encodeURI encodeURIComponent escape unescape Object Function Boolean Error EvalError InternalError RangeError ReferenceError StopIteration SyntaxError TypeError URIError Number Math Date String RegExp Array Float32Array Float64Array Int16Array Int32Array Int8Array Uint16Array Uint32Array Uint8Array Uint8ClampedArray ArrayBuffer DataView JSON Intl arguments require"},c: [{cN: "pi",b: /^\s*('|")use strict('|")/,r: 10}, a.ASM, a.QSM, a.CLCM, a.CBLCLM, a.CNM, {b: "(" + a.RSR + "|\\b(case|return|throw)\\b)\\s*",k: "return throw case",c: [a.CLCM, a.CBLCLM, a.REGEXP_MODE, {b: /</,e: />;/,r: 0,sL: "xml"}],r: 0}, {cN: "function",bK: "function",e: /\{/,c: [a.inherit(a.TM, {b: /[A-Za-z$_][0-9A-Za-z$_]*/}), {cN: "params",b: /\(/,e: /\)/,c: [a.CLCM, a.CBLCLM],i: /["'\(]/}],i: /\[|%/}, {b: /\$[(.]/}, {b: "\\." + a.IR,r: 0}]}
 });
 hljs.registerLanguage("xml", function(a) {
@@ -44,114 +35,7 @@ hljs.registerLanguage("json", function(a) {
     propertys: function ($super) {
       $super();
 
-         this._loading = _loading;
-        this._alert = _alert;
-        this._confirm = _confirm;
-        this._toast = _toast;
-        this._warning404 = _warning404;
-        this._pageview = _pageview;
-
     },
-
-     showMessage: function (params) {
-        if(!params) params = {};
-        if(typeof params == 'string') {
-          params = {
-            datamodel : {
-              content: params
-            }
-          };
-        }
-
-       //每次需要重置属性，以防组件互相影响
-        this._alert.resetDefaultProperty();
-        this._alert.setOption(params);
-        this._alert.refresh();
-        this._alert.show();
-
-      },
-
-      hideMessage: function () {
-        this.alert.hide();
-      },
-
-      showConfirm: function (params) {
-        if(!params) params = {};
-        if(typeof params == 'string') {
-          params = {
-            datamodel : {
-              content: params
-            }
-          };
-        }
-
-        this._confirm.resetDefaultProperty();
-
-        //与showMessage不一样的地方
-        this._confirm.datamodel.btns = [
-          { name: '取消', className: 'cui-btns-cancel' },
-          { name: '确定', className: 'cui-btns-ok' }
-        ];
-        this._confirm.setOption(params);
-        this._confirm.refresh();
-        this._confirm.show();
-      },
-
-      hideConfirm: function () {
-        this._confirm.hide();
-      },
-
-      showToast: function (params) {
-        if(!params) params = {};
-          if(typeof params == 'string') {
-          params = {
-            datamodel : {
-              content: params
-            }
-          };
-        }
-
-        this._toast.resetDefaultProperty();
-        this._toast.setOption(params);
-        this._toast.refresh();
-        this._toast.show();
-      },
-
-      hideToast: function () {
-        this._toast.hide();
-      },
-
-      showLoading: function (params) {
-        if(!params) params = {};
-
-        this._loading.resetDefaultProperty();
-        this._loading.setOption(params);
-        this._loading.refresh();
-        this._loading.show();
-      },
-
-      hideLoading: function () {
-        this._loading.hide();
-      },
-
-      showWarning404: function (callback, showAction, hideAction,  animateSwitch, telAction,datamodel ) {
-        if (callback) this._warning404.setDatamodel(datamodel, callback, telAction);
-        this.showPageview(this._warning404, showAction, hideAction, animateSwitch);
-      },
-
-      hideWarning404: function () {
-        this.hidePageview();
-      },
-
-      showPageview: function (instance, showAction, hideAction, animateSwitch) {
-        this._pageview.addAction(showAction, hideAction);
-       this._pageview.animateSwitch = animateSwitch;
-        this._pageview.animateShow(instance);
-      },
-
-      hidePageview: function () {
-        this._pageview.animateHide();
-      },
 
     _initHead: function () {
 
@@ -181,7 +65,7 @@ hljs.registerLanguage("json", function(a) {
 
     show: function ($super) {
       $super();
-      window.sss = this;
+
       hljs.initHighlighting(this);
 
     }

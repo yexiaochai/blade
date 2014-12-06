@@ -1,4 +1,4 @@
-﻿define(['UILayer', getAppUITemplatePath('ui.scroll.layer'), 'UIScroll'], function (UILayer, template, UIScroll) {
+﻿﻿define(['UILayer', getAppUITemplatePath('ui.scroll.layer'), 'UIScroll'], function (UILayer, template, UIScroll) {
 
 
   return _.inherit(UILayer, {
@@ -8,7 +8,7 @@
       this.template = template;
 
       this.datamodel = {
-        title: '',
+        title: 'scrollLayer',
         btns: [
           { name: 'cancel', className: 'cui-btns-cancel' },
           { name: 'ok', className: 'cui-btns-ok' }
@@ -29,7 +29,6 @@
 
       this.maxHeight = 300;
       this.sheight = 0;
-      this.scrollOpts = {};
 
     },
 
@@ -47,7 +46,8 @@
 
     initElement: function () {
       this.swrapper = this.$('.cui-bd');
-      this.box_wrapper = this.$('.cui-pop-box');
+      //      this.scroller = this.$('.cui-select-view');
+      s = '';
     },
 
     initSize: function () {
@@ -64,23 +64,19 @@
       });
 
       this.swrapper.append(this.html);
-      this._initWrapperSize();
+      this.initWrapperHeight();
     },
 
-    _initWrapperSize: function () {
+    initWrapperHeight: function () {
       var h = 0;
       this.sheight = this.html.height()
       h = Math.min(this.sheight, this.maxHeight);
       this.swrapper.height(h);
-
-      if (this.width)
-        this.box_wrapper.width(this.width);
-
     },
 
     //内部高度变化时要刷新操作
     refreshHeight: function () {
-      this._initWrapperSize();
+      this.initWrapperHeight();
       if (this.scroll && this.scroll.refresh) this.scroll.refresh();
       this._initScroll();
     },
@@ -92,9 +88,10 @@
     _initScroll: function () {
       if (this.scroll && this.scroll.destory) this.scroll.destory();
       if (this.sheight >= this.maxHeight) {
-        this.scrollOpts.wrapper = this.swrapper;
-        this.scrollOpts.scroller = this.html;
-        this.scroll = new UIScroll(this.scrollOpts);
+        this.scroll = new UIScroll({
+          wrapper: this.swrapper,
+          scroller: this.html
+        });
       }
     },
 

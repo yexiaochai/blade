@@ -1,4 +1,4 @@
-﻿(function () {
+﻿﻿(function () {
 
   var app = '';
 
@@ -36,6 +36,7 @@
       'UISwitch': app + 'ui/ui.switch',
       'UIBubbleLayer': app + 'ui/ui.bubble.layer',
       'UITab': app + 'ui/ui.tab',
+      'UITabs': app + 'ui/ui.tabs',
       'UIScroll': app + 'ui/ui.scroll',
       'UIScrollLayer': app + 'ui/ui.scroll.layer',
       'UIRadioList': app + 'ui/ui.radio.list',

@@ -1,4 +1,4 @@
-﻿define(['MoveObj', 'text!tank/common/move.obj.html'], function (MoveObj, template) {
+﻿﻿define(['MoveObj', 'text!tank/common/move.obj.html'], function (MoveObj, template) {
 
   return _.inherit(MoveObj, {
     propertys: function ($super) {
@@ -113,8 +113,8 @@
       this.bulletSize++;
     },
 
-    moveStartAction: function () {
-            this.fire();
+    moveEndAction: function () {
+      this.fire();
     },
 
     //根据方向，设置样式

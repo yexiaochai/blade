@@ -1,4 +1,4 @@
-﻿/*
+﻿﻿/*
 这里需要考虑这个方案是否值得
 每一次数据的改变皆会引发dom 的重组事件的解绑与绑定，datamodel方案是否真的就是好？
 */
@@ -73,7 +73,7 @@ define(['UIView', getAppUITemplatePath('ui.num')], function (UIView, template) {
         if (v > this.datamodel.max) {
           this.datamodel.curNum = this.datamodel.max;
         }
-        this.curNum.val(this.datamodel.curNum);
+
         isChange = (this.datamodel.curNum != tmp);
       }
 
@@ -98,6 +98,7 @@ define(['UIView', getAppUITemplatePath('ui.num')], function (UIView, template) {
       } else if (this.datamodel.curNum < this.datamodel.min) {
         this.datamodel.curNum = this.datamodel.min;
       }
+      return this.datamodel;
     },
 
     addEvent: function ($super) {

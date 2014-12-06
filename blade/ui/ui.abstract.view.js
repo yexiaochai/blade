@@ -1,4 +1,4 @@
-﻿define([], function () {
+﻿﻿define([], function () {
 
   //闭包保存所有UI共用的信息，比如z-index
   var getBiggerzIndex = (function () {
@@ -34,12 +34,11 @@
     //默认属性
     propertys: function () {
       //模板状态
-      this.wrapper = $('body');
-      this.id = _.uniqueId('ui-view-');
-
       this.template = '';
       this.datamodel = {};
       this.events = {};
+      this.wrapper = $('body');
+      this.id = _.uniqueId('ui-view-');
 
       //自定义事件
       //此处需要注意mask 绑定事件前后问题，考虑scroll.radio插件类型的mask应用，考虑组件通信
@@ -47,9 +46,6 @@
 
       //初始状态为实例化
       this.status = 'init';
-
-      this.animateShowAction = null;
-      this.animateHideAction = null;
 
       //      this.availableFn = function () { }
 
@@ -95,23 +91,13 @@
       this.$el.html(html);
     },
 
-    _isAddEvent: function (key) {
-      if (key == 'onCreate' || key == 'onPreShow' || key == 'onShow' || key == 'onRefresh' || key == 'onHide')
-        return true;
-      return false;
-    },
-
     setOption: function (options) {
-      //这里可以写成switch，开始没有想到有这么多分支
       for (var k in options) {
-        if (k == 'datamodel' || k == 'events') {
-          _.extend(this[k], options[k]);
-          continue;
-        } else if (this._isAddEvent(k)) {
-          this.on(k, options[k])
+        if (k == 'datamodel') {
+          _.extend(this.datamodel, options[k]);
           continue;
         }
-        this[k] = options[k];
+        this[k] = options[k]
       }
       //      _.extend(this, options);
     },
@@ -191,46 +177,28 @@
     //刷新根据传入参数判断是否走onCreate事件
     //这里原来的dom会被移除，事件会全部丢失 需要修复*****************************
     refresh: function (needEvent) {
-      this.trigger('onRefresh');
       this.resetPropery();
       if (needEvent) {
         this.create();
       } else {
-        this.$el.html(this.render());
+        this.render();
       }
       this.initElement();
       if (this.status == 'show') this.show();
     },
 
     show: function () {
-      if (!this.wrapper[0] || !this.$el[0]) return;
-      //如果包含就不要乱搞了
-      if (!$.contains(this.wrapper[0], this.$el[0])) {
-        this.wrapper.append(this.$el);
-      }
-
+      this.wrapper.append(this.$el);
       this.trigger('onPreShow');
-
-      if (typeof this.animateShowAction == 'function')
-        this.animateShowAction.call(this, this.$el);
-      else
-        this.$el.show();
-
+      this.$el.show();
       this.status = 'show';
       this.bindEvents();
       this.trigger('onShow');
     },
 
     hide: function () {
-      if (!this.$el || this.status !== 'show') return;
-
       this.trigger('onPreHide');
-
-      if (typeof this.animateHideAction == 'function')
-        this.animateHideAction.call(this, this.$el);
-      else
-        this.$el.hide();
-
+      this.$el.hide();
       this.status = 'hide';
       this.unBindEvents();
       this.removeSysEvents();

@@ -1,4 +1,4 @@
-﻿
+﻿﻿
 /*
 用于继承的类，会自动垂直居中
 
@@ -9,22 +9,16 @@ define(['UILayer', getAppUITemplatePath('ui.toast')], function (UILayer, templat
   return _.inherit(UILayer, {
     propertys: function ($super) {
       $super();
-    },
-
-    resetDefaultProperty: function ($super) {
-      $super();
       this.template = template;
       this.datamodel = {
         content: 'toast'
       };
       this.hideSec = 2000;
-      this.hasPushState = false;
       this.TIMERRES = null;
+    },
 
-      this.hideAction = function () {
-        console.log('hide')
-      };
-
+    hideAction: function () {
+      console.log('hide')
     },
 
     initialize: function ($super, opts) {
@@ -52,19 +46,9 @@ define(['UILayer', getAppUITemplatePath('ui.toast')], function (UILayer, templat
       });
     },
 
-    /**
-    * 显示Toast
-    * @param title 标题
-    * @param timeout 显示时长
-    * @param callback 隐藏时回调
-    * @param clickToHide 是否允许点击界面任一处,隐藏Toast
-    */
-    setDatamodel: function (content, timeout, hideAction, clickToHide) {
+    setDatamodel: function (content, fn) {
       this.datamodel.content = content;
-      timeout && (this.hideSec = timeout);
-      hideAction && (this.hideAction = hideAction);
-      this.maskToHide = clickToHide;
-
+      this.hideAction = fn;
       this.refresh();
     }
 

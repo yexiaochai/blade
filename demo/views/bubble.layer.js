@@ -1,4 +1,4 @@
-﻿define(['View', getViewTemplatePath('bubble.layer'), 'UIBubbleLayer'], function (View, viewhtml, UIBubbleLayer) {
+﻿﻿define(['View', getViewTemplatePath('bubble.layer'), 'UIBubbleLayer'], function (View, viewhtml, UIBubbleLayer) {
 
   return _.inherit(View, {
     onCreate: function () {
@@ -51,7 +51,6 @@
             dir: dir,
             index: index
           },
-          width: 200,
           onClick:  function (e, data, index, el) {
             console.log(arguments);
             this.setIndex(index);
@@ -112,7 +111,6 @@
             dir: dir,
             index: index
           },
-          width: 300,
           needMask:true,
           onClick:  function (e, data, index, el) {
             console.log(arguments);

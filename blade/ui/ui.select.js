@@ -1,4 +1,4 @@
-﻿define(['UIView', getAppUITemplatePath('ui.select'), 'UIScroll'], function (UIView, template, UIScroll) {
+﻿﻿define(['UIView', getAppUITemplatePath('ui.select'), 'UIScroll'], function (UIView, template, UIScroll) {
   /*
   该组件使用时，其父容器一定是显示状态，如果不是显示状态，高度计算会失效
   */
@@ -17,8 +17,6 @@
       };
 
       this.animatTime = 100;
-
-      this.stepTime = 150;
 
       this.itemNum = this.datamodel.data.length;
 
@@ -66,15 +64,14 @@
     },
 
     initSize: function () {
-      //      this.sheight = Math.max(this.scroller.height(), this.scroller[0].scrollHeight);
-      //      this.sheight =  this.scroller.height() 
-      //      this.itemHeight = parseInt(this.sheight / this.itemNum);
+      this.sheight = this.scroller.height();
+      this.itemHeight = parseInt(this.sheight / this.itemNum);
 
       //偶尔不能正确获取高度，这里要处理
-      //      if (this.itemHeight == 0) {
-      this.itemHeight = parseInt(window.getComputedStyle && getComputedStyle(this.scroller.find('li').eq(0)[0]).height);
-      this.scroller.height(this.itemHeight * this.itemNum);
-      //      }
+      if (this.itemHeight == 0) {
+        this.itemHeight = parseInt(window.getComputedStyle && getComputedStyle(this.scroller.find('li').eq(0)[0]).height);
+        this.scroller.height(this.itemHeight * this.itemNum);
+      }
       this.swrapper.height(this.itemHeight * this.displayNum);
       this.scrollOffset = ((this.displayNum - 1) / 2) * (this.itemHeight);
     },
@@ -109,8 +106,8 @@
       }, this));
 
       //为了解决鼠标离屏幕时导致的问题
-      this.scroll.on('scrollCancel', $.proxy(function () {
-        this.setIndex(this.getIndexByPosition(), false)
+      this.scroll.on('beforeScrollStart', $.proxy(function () {
+        this.setIndex(this.getIndexByPosition(), true)
       }, this));
 
     },
@@ -245,6 +242,7 @@
       return this.getSelected().id;
     },
 
+
     getSelected: function () {
       return this.datamodel.data[this.datamodel.index];
     },
@@ -253,7 +251,7 @@
     getIndexByPosition: function () {
       var pos = this.scroll.y - this.scrollOffset;
       var index = Math.abs(pos) / this.itemHeight;
-      return Math.round(index);
+      return index;
     },
 
     initialize: function ($super, opts) {

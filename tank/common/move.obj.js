@@ -1,4 +1,4 @@
-﻿define(['UIView', 'text!tank/common/move.obj.html'], function (UIView, template) {
+﻿﻿define(['UIView', 'text!tank/common/move.obj.html'], function (UIView, template) {
 
   return _.inherit(UIView, {
     propertys: function ($super) {
@@ -225,13 +225,7 @@
 
     },
 
-    //重写
-    moveStartAction: function () {
-
-    },
-
     move: function () {
-      this.moveStartAction();
       if (this.datamodel.status == 'stop') return;
       var x = this.datamodel.x, y = this.datamodel.y;
       this[this.datamodel.dir + 'Action']();
