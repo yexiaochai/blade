@@ -1,0 +1,210 @@
+/*header {
+    background-image: -webkit-linear-gradient(top,#563d7c 0,#6f5499 100%);
+}*/
+.btn{
+    height: 32px;
+    line-height: 32px;
+    background-color: #5bc0de;
+    border-color: #46b8da;
+    padding: 0px 25.6px;
+    margin-left:0px !important;
+}
+.btn:hover {
+    background-color: #31b0d5;
+    border-color: #269abc;
+}
+code {
+    margin:10px;
+    border: 1px solid #ddd;
+    color: #000;
+    line-height: 1.5;
+    border-radius: 3px;
+    -webkit-box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    word-wrap: break-word;
+}
+.dh2 {
+    margin:10px;
+    font-size: 16px;
+}
+.demos .btn {
+    margin-left:10px !important;
+}
+.dis-no {
+    display: none;
+}
+.s-tpl {
+    text-align: center;
+}
+.imgs-area {
+    margin:10px;
+    min-height: 500px;
+    background: lightgoldenrodyellow;
+    text-align: center;
+}
+.imgs-area li {
+    list-style: none;
+}
+.ml-10 {
+    margin-left:10px;
+}
+.mlr-10 {
+    margin: 0 10px;
+}
+.ta-c {
+    text-align: center;
+}
+.f22 {
+    font-size: 22px;
+}
+.flip-content {
+    margin: 0 10px;
+    height: 200px;
+    line-height: 200px;
+    background: #d9d9d9;
+}
+.validate-form div {
+    margin-top: 10px;
+}
+.validate-form label {
+    width: 80px;
+    display: inline-block;
+    line-height: 30px;
+    text-align: right;
+}
+.validate-form input, .d-input {
+    width: 150px;
+    height: 30px;
+    background: #fff;
+    border:1px solid #ccc;
+}
+
+ .dh2 { font-weight: bold; margin-bottom: -1px; border: 1px solid #bcbcbc; background: #fff; padding: 5px 10px; margin: 10px 5px; }
+.horizontal>li { float: left; width: 100px;border-radius: 5px; }
+.horizontal .slider-item-wrapper { width: 100%; height: 100%;}
+.error_info {
+    position: absolute;
+    top: 108px;
+    left: 299px;
+    border-radius: 3px;
+    color: #000;
+    padding: 5px 15px;
+    text-align: center;
+    background: #ff8c00;
+    font-size: 12px;
+}
+.error_info:before {
+    content: '';
+    border-color: transparent;
+    border: 5px solid transparent;
+    top: 9px;
+    position: absolute;
+    left: -10px;
+    border-right: 5px solid #ff8c00;
+}
+.pos-rel {
+    position: relative;
+}
+.d-input {
+    width: 200px;
+    background: #fff;
+    display: block;
+    margin: 10px;
+}
+.input-div {
+    width: 200px;
+    margin-left:10px;
+    margin-bottom: 5px;
+}
+.other-input {
+    width: 300px;
+    height: 50px;
+}
+.my-area {
+    width: 400px;
+    height: 200px;
+    resize: none;
+    margin:10px;
+}
+
+
+
+  .c-switch
+  {
+  cursor: pointer;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  border: 1px solid;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  position: relative;
+  text-align: left;
+  overflow: hidden;
+  line-height: 8px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  min-width: 100px;
+  
+  margin-bottom:20px
+    }
+      .c-switch-on,.c-switch-off
+    {
+       -webkit-border-radius: 5px;
+       -moz-border-radius: 5px;
+       border-radius: 5px;
+      }
+      .c-switch-show 
+      {
+        display: inline-block;
+        text-align:center;
+        padding: 1px 16px;
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #005fcc;
+  background-image: -moz-linear-gradient(top, #0044cc, #0088cc);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0044cc), to(#0088cc));
+  background-image: -webkit-linear-gradient(top, #0044cc, #0088cc);
+  background-image: -o-linear-gradient(top, #0044cc, #0088cc);
+  background-image: linear-gradient(to bottom, #0044cc, #0088cc);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0044cc', endColorstr='#ff0088cc', GradientType=0);
+  border-color: #0088cc #0088cc #005580;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  *background-color: #0088cc;
+ 
+  /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+.c-switch label 
+{
+  cursor:pointer;
+  text-align: center;
+  padding: 13px 30px;
+  margin-left: -5px;
+  margin-top: -1px;
+  margin-bottom: -1px;
+  z-index: 100;
+  border-left: 1px solid #cccccc;
+  border-right: 1px solid #cccccc;
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #f5f5f5;
+  background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
+  background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0);
+  border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  *background-color: #e6e6e6;
+  /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+

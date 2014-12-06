@@ -1,0 +1,129 @@
+
+{
+  "requirejs": {
+   "blade": {
+      "options": {
+        "uglify": {
+          "except": ["$super"]
+        },
+        "baseUrl": "<%= config.srcDir %>",
+        "paths": {
+          "text": "../blade/libs/require.text",
+		  "View": "ex_mvc/view",
+
+		  "AbstractApp": "http://mvc/abstract.app",
+		  "AbstractView": "http://mvc/abstract.view",
+		  "cLazyload": "http://common/c.lazyload",
+		  "cValidate": "http://common/c.validate",
+		  "cHighlight": "http://common/c.highlight",
+
+		  "UIView": "http://ui/ui.abstract.view",
+		  "UILayer": "http://ui/ui.layer",
+		  "UIAlert": "http://ui/ui.alert",
+		  "UIMask": "http://ui/ui.mask",
+		  "UILoading": "http://ui/ui.loading",
+		  "UIReLoading": "http://ui/ui.reloading",
+		  "UIToast": "http://ui/ui.toast",
+		  "UIInlineView": "http://ui/ui.inline.view",
+		  "UINum": "http://ui/ui.num",
+		  "UISwitch": "http://ui/ui.switch",
+		  "UIBubbleLayer": "http://ui/ui.bubble.layer",
+		  "UITab": "http://ui/ui.tab",
+		  "UITabs": "http://ui/ui.tabs",
+		  "UIScroll": "http://ui/ui.scroll",
+		  "UIScrollLayer": "http://ui/ui.scroll.layer",
+		  "UIRadioList": "http://ui/ui.radio.list",
+		  "UISelect": "http://ui/ui.select",
+		  "UIGroupSelect": "http://ui/ui.group.select",
+		  "UIGroupList": "http://ui/ui.group.list",
+		  "UICalendar": "http://ui/ui.calendar",
+		  "UISlider": "http://ui/ui.slider"
+		  
+        },
+        "include": [
+		  "main_dest",
+		  "View",
+
+		  "views/alert",
+          "text!templates/alert.html",
+
+		  "views/bubble.layer",
+          "text!templates/bubble.layer.html",
+
+		  "views/calendar",
+          "text!templates/calendar.html",
+
+		  "views/group.list",
+          "text!templates/group.list.html",
+
+		  "views/group.select",
+          "text!templates/group.select.html",
+
+
+		  "views/index",
+          "text!templates/index.html",
+		  
+		  "views/lazyload",
+          "text!templates/lazyload.html",
+
+		  "views/loading",
+          "text!templates/loading.html",
+
+		  "views/reloading",
+          "text!templates/reloading.html",
+
+		  "views/num",
+          "text!templates/num.html",
+
+		  "views/radio.list",
+          "text!templates/radio.list.html",
+
+		  "views/scroll.across",
+          "text!templates/scroll.across.html",
+
+		  "views/scroll",
+          "text!templates/scroll.html",
+
+		  "views/scroll.layer",
+          "text!templates/scroll.layer.html",
+
+		  "views/select",
+          "text!templates/select.html",
+
+		  "views/select2",
+          "text!templates/select2.html",
+
+		   "views/switch",
+          "text!templates/switch.html",
+
+		   "views/tab",
+          "text!templates/tab.html",
+
+		   "views/toast",
+          "text!templates/toast.html",
+
+		   "views/scroll",
+          "text!templates/scroll.html",
+
+          "views/filp",
+          "text!templates/filp.html",
+
+          "views/validate1",
+          "text!templates/validate1.html",
+
+          "views/validate2",
+          "text!templates/validate2.html",
+
+		
+
+
+          "views/slider",
+          "text!templates/slider.html"
+
+         
+        ],
+        "out": "<%= config.destDir %>/main.js"
+      }
+    }
+  }
+}

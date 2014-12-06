@@ -1,8 +1,13 @@
 ﻿define(['View', getViewTemplatePath('index'), 'UIGroupList'], function (View, viewhtml, UIGroupList) {
 
   return _.inherit(View, {
+    propertys: function ($super) {
+      $super();
+      this.template = viewhtml;
+    },
+
     onCreate: function () {
-      this.$el.html(viewhtml);
+      this.$el.html(this.template);
       this.initElement();
 
       this.TXTTIMERRES = null;
@@ -148,7 +153,7 @@
         },
         wrapper: this.$('.cui-citys-bd'),
         onItemClick: function (item, groupIndex, index, e) {
-          scope.demoItemAction(item.uiname);
+          scope.demoItemAction(item, groupIndex, index, e);
         }
       });
 

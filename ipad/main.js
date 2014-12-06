@@ -1,12 +1,14 @@
 ﻿
 (function () {
-  var project = 'demo/';
+  var project = 'ipad/';
 
   window.getViewTemplatePath = function (path) {
     return 'text!' + project + 'templates/' + path + '.html';
   };
 
-
+  window.getViewClass = function (viewId) {
+    return  'views/' + viewId + '.js';
+  };
 
   require.config({
     baseUrl: '../',

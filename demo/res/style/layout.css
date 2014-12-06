@@ -1,0 +1,64 @@
+.cm-header,
+.cm-footer,
+.cm-header-sub {
+  position: fixed;
+  left: 0;
+  right: 0;
+}
+
+.cm-header {
+  top: 0;
+  height: 44px;
+  line-height: 44px;
+  text-align: center;
+  background-color: #099fde;
+  color: #fff;
+  z-index: 960;
+}
+
+.cm-header-sub {
+  top: 44px;
+  height: 44px;
+  z-index: 960;
+}
+
+.cm-footer {
+  bottom: 0;
+  height: 48px;
+  z-index: 940;
+}
+
+.cm-page {
+  padding-top: 44px;
+}
+.cm-page.no-header-sub {
+  padding-top: 88px;
+}
+.cm-page.no-footer .cm-scroll-inner {
+  margin-bottom: 48px;
+}
+
+.cm-page--left {
+  -webkit-transform: translate3d(-100%, 0, 0);
+          transform: translate3d(-100%, 0, 0);
+}
+
+.cm-page--right {
+  -webkit-transform: translate3d(100%, 0, 0);
+          transform: translate3d(100%, 0, 0);
+}
+
+.cm-page--active {
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+}
+
+.cm-page--in {
+  -webkit-transition: -webkit-transform 0.3s cubic-bezier(0.42, 0, 0.58, 1);
+          transition: transform 0.3s cubic-bezier(0.42, 0, 0.58, 1);
+}
+
+.cm-page--out {
+  -webkit-transition: -webkit-transform 0.4s cubic-bezier(0.42, 0, 0.58, 1) 0.1s;
+          transition: transform 0.4s cubic-bezier(0.42, 0, 0.58, 1) 0.1s;
+}
