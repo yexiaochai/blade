@@ -33,7 +33,7 @@ define(['View', getViewTemplatePath('radio.list'), 'UIRadioList'], function (Vie
         this.radio1 = new UIRadioList({
           //数据模型
           datamodel: {
-            title: '豆瓣fm',
+            title: '',
             data: demodata1
           },
           displayNum: 5,

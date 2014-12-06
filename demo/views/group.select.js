@@ -13,13 +13,13 @@
 
         for (var i = 0; i < 10; i++) {
           var obj = { id: 'q_' + i, name: '项目_' + i };
-          if (i % 3 == 0) obj.disabled = true;
+          if (i % 3 == 0) obj.disabled = false;
           data1.push(obj);
         }
 
         for (var i = 0; i < 10; i++) {
           var obj = { id: 'qqq_' + i, name: '项目_' + i };
-          if (i % 4 == 0) obj.disabled = true;
+          if (i % 4 == 0) obj.disabled = false;
           data2.push(obj);
         }
 
@@ -77,9 +77,9 @@
 
               for (var i = 31; i > 28; i--) {
                 //重置可选
-                d.datamodel.data[i - 1].disabled = false;
+                d.datamodel.data[i - 1].disabled = true;
                 //如果当月最大日数小于i，则为不可选
-                if (i > tmp) d.datamodel.data[i - 1].disabled = true;
+                if (i > tmp) d.datamodel.data[i - 1].disabled = false;
               }
               //重绘数据模型
               this.scrollArr[2].reload();

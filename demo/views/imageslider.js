@@ -57,7 +57,7 @@ define(['View', getViewTemplatePath('imageslider'), 'UIImageSlider'], function (
           }
           nav += '</div>';
           this.sliderNav = $(nav);
-          this.sliderNav.find('span').width(this.wrapper.width() / this.itemNum);
+          this.sliderNav.find('span').width(this.wrapper.width() / this.itemNum - 1);
 
           this.$el.append(this.sliderNav);
           this.setzIndexTop(this.sliderNav);

@@ -89,6 +89,14 @@ define(['UILayer', getAppUITemplatePath('ui.group.select'), 'UISelect'], functio
           changed: $.proxy(changeAction, this),
           wrapper: this.scrollWrapper
         });
+
+        //纯粹业务需求
+        if (i == 0 && len == 3) {
+          this.scrollArr[i].on('onShow', function () {
+            this.$el.addClass('cui-flex2');
+          });
+        }
+
         this.scrollArr[i].show();
       }
     },
@@ -103,7 +111,7 @@ define(['UILayer', getAppUITemplatePath('ui.group.select'), 'UISelect'], functio
       var i, len;
       for (i = 0, len = this.data.length; i < len; i++) {
         if (this.scrollArr[i]) {
-          this.scrollArr[i].hide();
+          this.scrollArr[i].destroy();
           this.scrollArr[i] = null;
         }
       }

@@ -20,7 +20,12 @@ define(['UIView', 'UIMask'], function (UIView, UIMask) {
 
     resetDefaultProperty: function () {
       //需要蒙版
+
+      this.mask.resetDefaultProperty();
+
       this.needMask = true;
+
+      this.needAnimat = true;
 
       //需要点击蒙版删除
       this.maskToHide = true;
@@ -35,9 +40,17 @@ define(['UIView', 'UIMask'], function (UIView, UIMask) {
       //是否为浏览器回退
       this.historyBack = false;
 
-    
+      this.animateInClass = 'cm-up-in';
+      this.animateOutClass = 'cm-up-out';
+
       this.animateShowAction = null;
       this.animateHideAction = null;
+
+      //调整事件绑定位置
+      this.events = {
+        'touchmove': '_preventDefault'
+      };
+
     },
 
     initialize: function ($super, opts) {
@@ -46,28 +59,62 @@ define(['UIView', 'UIMask'], function (UIView, UIMask) {
       this.clearRes();
     },
 
+    resetPropery: function () {
+      var scope = this;
+      if (this.needAnimat) {
+        if (!this.animateShowAction)
+          this.animateShowAction = function (el) {
+            el.show();
+            el.addClass(scope.animateInClass);
+            //防止class不存在的情况下导致动画不执行，而程序出错
+            el.one($.fx.animationEnd, function () {
+              el.removeClass(scope.animateInClass);
+            });
+          };
 
+        if (!this.animateHideAction)
+          this.animateHideAction = function (el) {
+            el.addClass(scope.animateOutClass);
+            el.one($.fx.animationEnd, function () {
+              el.removeClass(scope.animateOutClass);
+              el.hide();
+            });
+
+          };
+      }
+
+      //如果存在关闭动画接口，需要为mask加动画
+      if (this.animateHideAction) {
+        this.mask.needAnimat = true;
+        this.mask.animateHideAction = function (el) {
+          el.addClass(scope.mask.animateOutClass);
+          el.one($.fx.animationEnd, function () {
+            el.removeClass(scope.mask.animateOutClass);
+            el.hide();
+          });
+        };
+      } else {
+        this.mask.animateHideAction = null;
+      }
+      this._setMaskEvent();
+    },
+
+    _setMaskEvent: function () {
+      var scope = this;
+      //这里处理是否点击关闭蒙版的操作
+      if (this.needMask && this.maskToHide) {
+        //mask显示之前为mask绑定关闭事件，一次执行便不予理睬了
+        this.mask.addEvents({
+          'click': function () {
+            scope.hide();
+          }
+        });
+      }
+    },
 
     //资源清理
     clearRes: function () {
       //      if (this.needMask == false) this.mask = null;
-    },
-
-    _addTouchEvent: function () {
-      var scope = this;
-      this._removeTouchEvent();
-
-      var _handler = function (e) {
-        e.preventDefault();
-      };
-
-      this.$el.on('touchmove.layertouchmove' + this.id, _handler);
-      this.$el.on('mousemove.layertouchmove' + this.id, _handler);
-
-    },
-
-    _removeTouchEvent: function () {
-      this.$el.off('.layertouchmove' + this.id);
     },
 
     _addPushStateEvent: function () {
@@ -91,26 +138,14 @@ define(['UIView', 'UIMask'], function (UIView, UIMask) {
       });
 
       this.on('onPreShow', function () {
-        var scope = this;
-
-        if (this.needMask) {
-          this.mask.show();
-        }
-
-        if (this.needMask && this.maskToHide) {
-          //mask显示之前为mask绑定关闭事件，一次执行便不予理睬了
-          this.mask.$el.on('click.uimask' + this.mask.id, function () {
-            scope.hide();
-          });
-        }
+        if (this.needMask) this.mask.show();
 
       });
 
       this.on('onShow', function () {
-        if (this.needReposition) this.reposition();
         this.setzIndexTop();
-        this._addTouchEvent();
         this._addPushStateEvent();
+        if (this.needReposition) this.reposition();
 
       });
 
@@ -127,11 +162,13 @@ define(['UIView', 'UIMask'], function (UIView, UIMask) {
         if (this.hasPushState && !this.historyBack) {
           return;
         }
-        this.mask.$el.off('.uimask' + this.mask.id);
         this.mask.hide();
-        this._removeTouchEvent();
         this._removePushStateEvent();
 
+      });
+
+      this.on('onDestroy', function () {
+        this.mask.destroy();
       });
 
     },

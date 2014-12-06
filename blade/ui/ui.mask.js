@@ -9,6 +9,19 @@ define(['UIView', getAppUITemplatePath('ui.mask')], function (UIView, template) 
   return _.inherit(UIView, {
     propertys: function ($super) {
       $super();
+
+    },
+
+    resetDefaultProperty: function () {
+      this.events = {};
+
+//      this.animateInClass = 'cm-up-in';
+      this.animateOutClass = 'cm-overlay-out';
+
+      //阻止浏览器默认事件，这里是阻止滚动
+      this.addEvents({
+        'touchmove': '_preventDefault'
+      });
     },
 
     initialize: function ($super, opts) {

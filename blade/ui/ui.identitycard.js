@@ -8,10 +8,16 @@ define(['UILayer', getAppUITemplatePath('ui.identitycard')], function (UILayer, 
       this.needMask = false;
       this.needReposition = false;
 
-      this.events = {
-        'click .cui-hd span': 'closeAction',
-        'click .cui-bd li': 'itemAction'
-      };
+      this.addEvents({
+        'click .js_ok': 'closeAction',
+        'click .js_num_item li': 'itemAction'
+      });
+
+      this.animateInClass = 'cm-down-in';
+      this.animateOutClass = 'cm-down-out';
+
+      //不要包裹层
+      this.needRootWrapper = false;
 
       //目标元素，必填
       this.targetEl = null;
@@ -29,34 +35,21 @@ define(['UILayer', getAppUITemplatePath('ui.identitycard')], function (UILayer, 
 
     itemAction: function (e) {
       var el = $(e.currentTarget);
-      el.addClass('cui-on-t');
-      setTimeout(function () {
-        el.removeClass('cui-on-t');
-      }, 150);
 
-      if (el.hasClass('cui-wrapper-delete')) {
+      if (el.hasClass('js_item_del')) {
         this.deleteAction();
         return;
       }
       var val = el.html();
-      if (el.hasClass('cui-wrapper-x')) val = 'X';
-
       this.itemClickAction(val);
     },
 
     closeAction: function () {
-      this.$el.addClass("cui-keyboard-hide");
-      setTimeout($.proxy(function () {
-        this.hide();
-      }, this), 200);
+      this.hide();
     },
 
     initialize: function ($super, opts) {
       $super(opts);
-    },
-
-    createRoot: function (html) {
-      this.$el = $(html).hide().attr('id', this.id);
     },
 
     initElement: function () {
@@ -65,34 +58,26 @@ define(['UILayer', getAppUITemplatePath('ui.identitycard')], function (UILayer, 
 
     _scrollToTarget: function () {
       var offset = this.targetEl.offset();
-
       window.scrollTo(0, offset.top - 50);
-      this.$el.removeClass('cui-keyboard-hide');
-
-      //      $.scrollTo({ endY: (offset.top - 50) });
-
     },
 
     addEvent: function ($super) {
       $super();
-      this.on('onCreate', function () {
+
+      this.on('onShow', function () {
         this.$el.removeClass('cui-layer');
-        this.$el.css({ position: 'fixed' });
       });
 
       this.on('onShow', function () {
         this.setzIndexTop(this.$el);
-
         $('body').append(this.emptyEl);
         this._scrollToTarget();
       });
 
       this.on('onHide', function () {
-        this.$el.addClass('cui-keyboard-hide');
         this.emptyEl.remove();
       });
     }
-
   });
 
 });

@@ -59,6 +59,7 @@
       'UIIdentitycard': app + 'ui/ui.identitycard',
       'UILayerList': app + 'ui/ui.layer.list',
 
+      'UIHeader': app + 'ui/ui.header',
 
 
       'UIInputClear': app + 'ui/ui.inputclear',

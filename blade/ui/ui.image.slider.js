@@ -3,12 +3,15 @@
     propertys: function ($super) {
       $super();
 
+      this.momentum = false;
       this.autoPlay = false;
       this.timerSrc = null;
       this.delaySec = 3000;
       this.playTime = 500;
       this.sliderNav = null;
       this.displayNum = 1;
+      this.needLoop = true;
+
     },
 
     //循环播放
@@ -43,6 +46,12 @@
       this._setNavPos();
       this.setzIndexTop(this.sliderNav);
       this._setNavIndex(this.datamodel.index);
+    },
+
+    //父级元素resize事件重写
+    resizeRefresh: function ($super) {
+      $super();
+      this._setNavPos();
     },
 
     _setNavPos: function () {

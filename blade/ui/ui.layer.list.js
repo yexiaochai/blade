@@ -21,7 +21,8 @@ define(['UILayer', getAppUITemplatePath('ui.layer.list')], function (UILayer, te
 
       this.onItemAction = function (data, index, e) {
       };
-
+      this.animateInClass = 'cm-down-in';
+      this.animateOutClass = 'cm-down-out';
     },
 
     initialize: function ($super, opts) {
@@ -37,8 +38,6 @@ define(['UILayer', getAppUITemplatePath('ui.layer.list')], function (UILayer, te
     cancelAction: function (e) {
       this.hide();
     },
-
-
 
     itemAction: function (e) {
       var el = $(e.currentTarget);

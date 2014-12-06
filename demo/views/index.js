@@ -133,8 +133,8 @@
       var uidata = [
         { name: '弹出层类组件', data: groupList1 },
         { name: '常用组件', data: groupList2 },
-        { name: '滚动类组件', data: groupList3 }
-//        { name: '全局类', data: groupList4 }
+        { name: '滚动类组件', data: groupList3 },
+        { name: '全局类', data: groupList4 }
       ];
 
       this.uidata = uidata;

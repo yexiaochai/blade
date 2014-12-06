@@ -11,10 +11,14 @@ define(['UIView', getAppUITemplatePath('ui.switch')], function (UIView, template
       this.template = template;
 
       this.datamodel = {
-        checkedFlag: false,
-        checkedClass: 'current'
+        checkedFlag: false
       };
 
+      this.needRootWrapper = false;
+
+      this.events = {
+        'click': 'clickAction'
+      };
     },
 
     initialize: function ($super, opts) {
@@ -25,19 +29,13 @@ define(['UIView', getAppUITemplatePath('ui.switch')], function (UIView, template
       console.log(status);
     },
 
-    initElement: function () {
-      this.el = this.$('.cui-switch');
-      this.switchBar = this.$('.cui-switch-bg');
-    },
-
     checked: function () {
       if (typeof this.checkAvailabe == 'function' && !this.checkAvailabe()) {
-          return;
+        return;
       }
 
       if (this.getStatus()) return;
-      this.el.addClass('current');
-      this.switchBar.addClass('current');
+      this.$el.addClass('active');
       this.datamodel.checkedFlag = true;
       this._triggerChanged();
     },
@@ -48,8 +46,7 @@ define(['UIView', getAppUITemplatePath('ui.switch')], function (UIView, template
       }
 
       if (!this.getStatus()) return;
-      this.el.removeClass('current');
-      this.switchBar.removeClass('current');
+      this.$el.removeClass('active');
       this.datamodel.checkedFlag = false;
       this._triggerChanged();
     },
@@ -63,11 +60,16 @@ define(['UIView', getAppUITemplatePath('ui.switch')], function (UIView, template
       return this.datamodel.checkedFlag;
     },
 
+    clickAction: function () {
+      if (this.getStatus()) {
+        this.unChecked();
+      } else {
+        this.checked();
+      }
+    },
+
     addEvent: function ($super) {
       $super();
-      this.on('onCreate', function () {
-        this.$el.addClass('cui-switch');
-      });
 
       this.on('onShow', function () {
         _.flip(this.$el, 'left', $.proxy(function () {
@@ -78,14 +80,6 @@ define(['UIView', getAppUITemplatePath('ui.switch')], function (UIView, template
           this.checked();
         }, this));
 
-        _.flip(this.$el, 'tap', $.proxy(function () {
-          if (this.getStatus()) {
-            this.unChecked();
-          } else {
-            this.checked();
-          }
-          return;
-        }, this));
       });
 
       this.on('onHide', function () {
@@ -94,6 +88,5 @@ define(['UIView', getAppUITemplatePath('ui.switch')], function (UIView, template
     }
 
   });
-
 
 });

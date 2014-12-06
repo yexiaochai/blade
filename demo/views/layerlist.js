@@ -13,26 +13,37 @@ define(['View', 'UILayerList', getViewTemplatePath('layerlist')], function (View
 
     events: {
       'click .demo': function () {
-var scope = this;
-if (!this.list) {
-  var data = [];
+        var scope = this;
+        if (!this.list) {
+          var data = [];
 
-  for (var i = 0; i < 4; i++) {
-    data.push({ name: '更多操作' + i });
-  }
+          for (var i = 0; i < 4; i++) {
+            data.push({ name: '更多操作' + i });
+          }
 
-  this.list = new UILayerList({
-    datamodel: {
-      list: data
-    },
-    onItemAction: function (item) {
-      scope.$('.listSec').html(item.name);
-      this.hide();
-    }
-  });
-}
+          this.list = new UILayerList({
+            datamodel: {
+              list: data
+            },
+            onItemAction: function (item) {
+              scope.$('.listSec').html(item.name);
+              this.hide();
+            },
+            animateShowAction: function (el) {
+              el.css('bottom', '-100%');
+              el.show();
+              el.animate({ bottom: 0 }, 300);
 
-this.list.show();
+            },
+            animateHideAction: function (el) {
+              el.animate({ 'bottom': '-100%'}, 300, function () {
+                el.hide();
+              });
+            }
+          });
+        }
+
+        this.list.show();
       }
     },
 

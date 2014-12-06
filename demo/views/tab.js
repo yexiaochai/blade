@@ -21,6 +21,9 @@ define(['View', getViewTemplatePath('tab'), 'UITab', 'UISlider'], function (View
     },
 
     onPreShow: function () {
+      this.turning();
+
+
       //简单初始化
       if (!this.tab) {
         this.tab = new UITab({
@@ -60,7 +63,6 @@ define(['View', getViewTemplatePath('tab'), 'UITab', 'UISlider'], function (View
 
 
 
-      this.turning();
     },
 
     onShow: function () {
@@ -81,6 +83,7 @@ define(['View', getViewTemplatePath('tab'), 'UITab', 'UISlider'], function (View
             ],
             index: 0
           },
+          displayNum: 3,
           changed: function (item) {
             scope.showToast(item.id+ ': '+item.name);
           },

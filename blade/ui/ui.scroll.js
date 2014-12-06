@@ -858,7 +858,8 @@ define([], function () {
       this.updatePosition();
     },
     destroy: function () {
-      this.wrapper.remove();
+    //remove bug
+      $(this.wrapper).remove();
     },
     updatePosition: function () {
       var x = (this.scrollType == 'x') && Math.round(this.sizeRatioX * this.scroller.x) || 0,

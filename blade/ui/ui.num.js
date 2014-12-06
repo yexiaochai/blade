@@ -13,33 +13,33 @@ define(['UIView', getAppUITemplatePath('ui.num')], function (UIView, template) {
         min: 1,
         max: 9,
         curNum: 1,
-        addClass: 'num-add',
-        minusClass: 'num-minus',
-        curClass: 'num-value-txt',
         unit: '',
-        needText: true
+        needText: false
       };
 
       this.template = template;
 
       this.events = {
-        'click .num-minus': 'minusAction',
-        'click .num-add': 'addAction',
-        'focus .num-value-txt': 'txtFocus',
-        'blur .num-value-txt': 'txtBlur'
+        'click .js_num_minus': 'minusAction',
+        'click .js_num_plus': 'addAction',
+        'focus .js_cur_num': 'txtFocus',
+        'blur .js_cur_num': 'txtBlur'
       };
+
+      this.needRootWrapper = false;
+
     },
 
     initElement: function () {
-      this.curNum = this.$('.num-value-txt');
+      this.curNum = this.$('.js_cur_num');
     },
 
     txtFocus: function () {
-      this.curNum.val('');
+      this.curNum.html('');
     },
 
     txtBlur: function () {
-      this.setVal(this.curNum.val());
+      this.setVal(this.curNum.html());
     },
 
     addAction: function () {
@@ -62,7 +62,7 @@ define(['UIView', getAppUITemplatePath('ui.num')], function (UIView, template) {
     setVal: function (v) {
       var isChange = true;
       var tmp = this.datamodel.curNum;
-      if (v == '') v = tmp;
+      if (v === '') v = tmp;
       if (v == parseInt(v)) {
         //设置值不等的时候才触发reset
         v = parseInt(v);
@@ -102,9 +102,6 @@ define(['UIView', getAppUITemplatePath('ui.num')], function (UIView, template) {
 
     addEvent: function ($super) {
       $super();
-      this.on('onCreate', function () {
-        this.$el.addClass('cui-add');
-      });
     }
 
   });

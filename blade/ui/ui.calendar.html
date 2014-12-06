@@ -35,8 +35,9 @@
         <% var calendar_time = (new Date(changedYear, changedMonth, day )).getTime(); %>
         <% var difftime = calendar_time - curTime; %>
         <% var dateObj = new Date(changedYear, changedMonth, day ); %>
+        <% var isSelectDate = (typeof selectDate != 'undefined' && _.isDate(selectDate) && selectDate.getTime() == calendar_time ); %>
 
-        <li class="cui_calendar_item <%if(calendar_time == endDateTime){ %>cui_endDate <%} %> <%if(difftime < 0) { %> cui_cld_daypass <%} %>"data-date="<%=changedYear%>-<%=changedMonth%>-<%=day%>"><%=dayItemFn.call(scope, changedYear, changedMonth, day, dateObj, difftime)%> </li>
+        <li class=" <%if(isSelectDate){ %> selected-departdate <%} %>cui_calendar_item cui_cld_day_havetxt <%if(calendar_time == endDateTime){ %>cui_endDate <%} %> <%if(difftime < 0) { %> cui_cld_daypass <%} %>"data-date="<%=changedYear%>-<%=changedMonth%>-<%=day%>"><%=dayItemFn.call(scope, changedYear, changedMonth, day, dateObj, difftime)%> </li>
       <% } %>
   </ul>
 <%} %>

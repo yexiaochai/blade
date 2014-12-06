@@ -33,7 +33,7 @@ define(['View', getViewTemplatePath('calendar'), 'UICalendar', 'UISlider'], func
       if (!this.calendar) {
         this.calendar = new UICalendar({
           datamodel: {
-            displayMonthNum: 1
+            displayMonthNum: 8
           },
           onItemClick: function (date, el) {
             scope.showToast(date.toString())

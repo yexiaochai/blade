@@ -23,17 +23,18 @@
         'click .cui-select-view> li': 'clickAction'
       };
 
-      this.onClick = function (e, data) {
+      this.onClick = function (data, e) {
         console.log(data);
       };
 
     },
 
     //要求唯一标识，根据id确定index
-    resetPropery: function () {
+    resetPropery: function ($super) {
+      $super();
+
       this._resetNum();
       this._resetIndex();
-
     },
 
     _resetIndex: function () {
@@ -56,7 +57,7 @@
       var el = $(e.currentTarget)
       var i = el.attr('data-index');
       this.setIndex(i);
-      if (this.onClick) this.onClick.call(this, e, this.getSelected());
+      if (this.onClick) this.onClick.call(this, this.getSelected(), e);
 
     },
 

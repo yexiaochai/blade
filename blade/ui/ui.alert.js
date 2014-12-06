@@ -50,9 +50,8 @@ define(['UILayer', getAppUITemplatePath('ui.alert')], function (UILayer, templat
     addEvent: function ($super) {
       $super();
       this.on('onCreate', function () {
-        this.$el.addClass('cui-alert');
+//        this.$el.addClass('cui-alert');
       });
-      this.maskToHide = false;
     },
 
     setDatamodel: function (datamodel, okAction, cancelAction) {

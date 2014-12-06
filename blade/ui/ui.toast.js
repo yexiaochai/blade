@@ -22,7 +22,6 @@ define(['UILayer', getAppUITemplatePath('ui.toast')], function (UILayer, templat
       this.TIMERRES = null;
 
       this.hideAction = function () {
-        console.log('hide')
       };
 
     },

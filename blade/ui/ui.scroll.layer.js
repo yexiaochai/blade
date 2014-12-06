@@ -59,7 +59,7 @@
 
       this.html.css({
         'background-color': 'white',
-        'width': '100%',
+//        'width': '100%',
         'position': 'absolute'
       });
 
