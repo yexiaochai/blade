@@ -1,4 +1,4 @@
-﻿﻿/**
+﻿/**
 * @File ui.abstract.view.js
 * @Description: UI组件基类
 * @author l_wang@ctrip.com
