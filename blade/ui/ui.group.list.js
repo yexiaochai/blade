@@ -1,37 +1,50 @@
 ﻿/*
-getFilterList这块需要重新处理，不然事件会丢失
-*/
-define(['UIView', getAppUITemplatePath('ui.group.list')], function (UIView, template) {
+******bug******
+这里针对搜索所做功能过于薄弱，需要处理
 
+*/
+define(['UIView', getAppUITemplatePath('ui.group.list'), getAppUICssPath('ui.group.list')], function (UIView, template, style) {
+  'use strict';
 
   return _.inherit(UIView, {
     propertys: function ($super) {
       $super();
       this.template = template;
+      this.addUIStyle(style);
 
-      this.datamodel = {
-        data: [],
-        filter: 'name'
-      };
+      //数据源
+      this.data = [];
+      //搜索时候可以用于搜索的字段
+      this.filter = 'name';
+
+      //类型为layer
+      this.setUIType('grouplist');
+
+      //内部会用到的一些私有属性
+      this._expandedClass = 'expanded';
 
       this.addEvents({
-        'click .cui-city-t': 'groupAction',
-        'click .cui-city-n>li': 'itemAction'
+        'click .js_group': 'groupAction',
+        'click .js_items>li': 'itemAction'
       });
 
-      this.onGroupClick = function (index, items, e) {
-      };
+      this.onGroupClick = function (index, items, e) { };
 
       this.onItemClick = function (item, groupIndex, index, e) {
         console.log(arguments);
       };
     },
 
+    //根据组件属性生成用于生成事件的数据对象
+    getViewModel: function () {
+      return this._getDefaultViewModel(['data', 'filter']);
+    },
+
     itemAction: function (e) {
       var el = $(e.currentTarget);
       var gindex = el.attr('data-group');
       var index = el.attr('data-index');
-      var item = this.datamodel.data[gindex].data[index];
+      var item = this.data[gindex].data[index];
 
       if (this.onItemClick) this.onItemClick.call(this, item, gindex, index, e);
     },
@@ -39,43 +52,25 @@ define(['UIView', getAppUITemplatePath('ui.group.list')], function (UIView, temp
     groupAction: function (e) {
       var el = $(e.currentTarget).parent();
       var index = el.attr('data-groupindex');
-      var items = this.datamodel.data[index];
+      var items = this.data[index];
 
-      if (el.hasClass('cui-arrow-open')) {
-        this.closeGroup(index);
+      if (el.hasClass(this._expandedClass)) {
+        el.removeClass(this._expandedClass);
       } else {
-        this.openGroup(index);
+        el.addClass(this._expandedClass);
       }
 
       if (this.onGroupClick) this.onGroupClick.call(this, index, items, e);
     },
 
+    //这个代码需要再优化
     getFilterList: function (key) {
       var list = this.$('li[data-filter*="' + key + '"]');
       return list.clone(); ;
     },
 
-    openGroup: function (i) {
-      this._switchStatus(i, 'cui-arrow-close', 'cui-arrow-open')
-    },
-
-    closeGroup: function (i) {
-      this._switchStatus(i, 'cui-arrow-open', 'cui-arrow-close')
-    },
-
-    _switchStatus: function (i, cls1, cls2) {
-      if (typeof i == 'undefined') {
-        this.groups.removeClass(cls1);
-        this.groups.addClass(cls2);
-        return;
-      }
-      var el = this.$('li[data-groupindex="' + i + '"]')
-      el.addClass(cls2);
-      el.removeClass(cls1);
-    },
-
     initElement: function () {
-      this.groups = this.$('.cui-city-itmes>li');
+      this.groups = this.$('.js_group');
     },
 
     initialize: function ($super, opts) {

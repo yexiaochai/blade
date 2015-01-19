@@ -23,13 +23,11 @@
       //分别设置min、max、单位、是否可以input输入值
       if (!this.num1) {
         this.num1 = new UINum({
-          datamodel: {
             min: 2,
             max: 6,
             curNum: 1,  //默认值，小于min会自动设置为min值
             unit: '只',
-            needText: false
-          },
+            needText: false,
           //把组件放入指定容器，不知道这样对不对。
           wrapper: this.$el.find('.simple_num1')
         });
@@ -39,11 +37,9 @@
       //设置add和minus class
       if (!this.num2) {
         this.num2 = new UINum({
-          datamodel: {
             addClass: 'me_num-add',
             minusClass: 'me_num-minus',
-            curClass: 'me_num-value-txt'
-          },
+            curClass: 'me_num-value-txt',
           events: {
             'click .me_num-add': 'addAction',
             'click .me_num-minus': 'minusAction',
@@ -51,11 +47,11 @@
             'blur .me_num-value-txt': 'txtBlur'
           },
           addAction: function () {
-            this.setVal(this.datamodel.curNum + 2);
+            this.setVal(this.curNum + 2);
             console.log('me addAction');
           },
           minusAction: function () {
-            this.setVal(this.datamodel.curNum - 2);
+            this.setVal(this.curNum - 2);
             console.log('me minusAction');
           },
           txtFocus: function () {

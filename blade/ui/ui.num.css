@@ -1,0 +1,85 @@
+﻿.cm-num-adjust {
+  height: 33px;
+  color: #099fde;
+  background-color: #fff;
+  display: inline-block;
+  border-radius: 4px;
+}
+.cm-num-adjust .cm-adjust-minus,
+.cm-num-adjust .cm-adjust-plus,
+.cm-num-adjust .cm-adjust-view {
+  width: 33px;
+  height: 33px;
+  line-height: 31px;
+  text-align: center;
+  float: left;
+  box-sizing: border-box;
+}
+.cm-num-adjust .cm-adjust-minus,
+.cm-num-adjust .cm-adjust-plus {
+  cursor: pointer;
+  border: 1px solid #099fde;
+}
+.cm-num-adjust .cm-adjust-minus.disabled,
+.cm-num-adjust .cm-adjust-plus.disabled {
+  cursor: default !important;
+  background-color: #fff !important;
+  border-color: #999 !important;
+}
+.cm-num-adjust .cm-adjust-minus.disabled::before, .cm-num-adjust .cm-adjust-minus.disabled::after,
+.cm-num-adjust .cm-adjust-plus.disabled::before,
+.cm-num-adjust .cm-adjust-plus.disabled::after {
+  background-color: #999 !important;
+}
+.cm-num-adjust .cm-adjust-minus:active,
+.cm-num-adjust .cm-adjust-plus:active {
+  background-color: #099fde;
+}
+.cm-num-adjust .cm-adjust-minus:active::before, .cm-num-adjust .cm-adjust-minus:active::after,
+.cm-num-adjust .cm-adjust-plus:active::before,
+.cm-num-adjust .cm-adjust-plus:active::after {
+  background-color: #fff;
+}
+.cm-num-adjust .cm-adjust-minus {
+  border-right: none;
+  border-radius: 4px 0 0 4px;
+  position: relative;
+}
+.cm-num-adjust .cm-adjust-minus::before {
+  content: "";
+  height: 2px;
+  width: 16px;
+  background-color: #099fde;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, -50%, 0);
+}
+.cm-num-adjust .cm-adjust-minus + .cm-adjust-plus {
+  border-left: 1px solid #099fde;
+}
+.cm-num-adjust .cm-adjust-plus {
+  border-left: none;
+  border-radius: 0 4px 4px 0;
+  position: relative;
+}
+.cm-num-adjust .cm-adjust-plus::before, .cm-num-adjust .cm-adjust-plus::after {
+  content: "";
+  width: 16px;
+  height: 2px;
+  background-color: #099fde;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, -50%, 0);
+}
+.cm-num-adjust .cm-adjust-plus::after {
+  width: 2px;
+  height: 16px;
+}
+.cm-num-adjust .cm-adjust-view {
+  border: 1px solid #099fde;
+  overflow: hidden;
+}

@@ -1,18 +1,18 @@
-﻿<div class="cui-pop-box" style="border-radius: 0; ">
-  <div class="cui-hd">
-    <div class="cui-text-center">
-      <%=title %></div>
+﻿<section class="cm-modal ">
+  <div class="cm-modal-bd plr10 " >
+     <div class="js_wrapper cm-scroll-select-group cm-scroll-select-group--birthday">
+        <h3><%=title %></h3>
+     </div>    
   </div>
-  <div class="cui-bd ">
-    <div class="cui-roller">
-    </div>
-    <div class="cui-roller-tips">
-      <%=tips %></div>
-    <div class="cui-roller-btns">
-      <% for(var i = 0, len = btns.length; i < len; i++ ) {%>
-      <div class="cui-flexbd <%=btns[i].className%>">
-        <%=btns[i].name%></div>
-      <% } %>
-    </div>
-  </div>
-</div>
+  <p class="cm-scroll-select-tips js_tips"><%=tips %></p>
+  <footer class="cm-modal-ft cm-actions js_footer">
+    <%if(typeof btns == 'string'){ %>
+      <%=btns %>
+    <% } else { %>
+    <% for(var i = 0, len = btns.length; i < len; i++ ) {%>
+    <span class="cm-actions-btn <%=btns[i].className%>">
+      <%=btns[i].name%></span>
+    <% } %>
+    <%} %>
+  </footer>
+</section>

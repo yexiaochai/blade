@@ -2,41 +2,39 @@
 与num组件一样，此类datamodel的方案是否会浪费资源，是否影响手机渲染，需要实际验证了
 因为switch不太复杂，便抛弃完全render的做法
 */
-define(['UIView', getAppUITemplatePath('ui.switch')], function (UIView, template) {
+define(['UIView', getAppUITemplatePath('ui.switch'), getAppUICssPath('ui.switch')], function (UIView, template, style) {
 
   return _.inherit(UIView, {
     propertys: function ($super) {
       $super();
       //html模板
       this.template = template;
+      this.addUIStyle(style);
+      this.openShadowDom = false;
 
-      this.datamodel = {
-        checkedFlag: false
-      };
+      this.checkedFlag = false;
 
-      this.needRootWrapper = false;
+      //选择的标识
+      this.checkedClass = 'active';
 
-      this.events = {
-        'click': 'clickAction'
-      };
     },
 
-    initialize: function ($super, opts) {
-      $super(opts);
+    getViewModel: function () {
+      return this._getDefaultViewModel(['checkedFlag']);
     },
 
-    changed: function (status) {
-      console.log(status);
+
+    initElement: function () {
+      this.el = this.$('.js_switch');
     },
 
     checked: function () {
       if (typeof this.checkAvailabe == 'function' && !this.checkAvailabe()) {
         return;
       }
-
       if (this.getStatus()) return;
-      this.$el.addClass('active');
-      this.datamodel.checkedFlag = true;
+      this.el.addClass(this.checkedClass);
+      this.checkedFlag = true;
       this._triggerChanged();
     },
 
@@ -44,10 +42,9 @@ define(['UIView', getAppUITemplatePath('ui.switch')], function (UIView, template
       if (typeof this.checkAvailabe == 'function' && !this.checkAvailabe()) {
         return;
       }
-
       if (!this.getStatus()) return;
-      this.$el.removeClass('active');
-      this.datamodel.checkedFlag = false;
+      this.el.removeClass(this.checkedClass);
+      this.checkedFlag = false;
       this._triggerChanged();
     },
 
@@ -55,23 +52,24 @@ define(['UIView', getAppUITemplatePath('ui.switch')], function (UIView, template
       if (typeof this.changed == 'function') this.changed.call(this, this.getStatus());
     },
 
-    //这里不以dom判断，以内置变量判断
-    getStatus: function () {
-      return this.datamodel.checkedFlag;
+    changed: function (status) {
+      console.log(status);
     },
 
-    clickAction: function () {
-      if (this.getStatus()) {
-        this.unChecked();
-      } else {
-        this.checked();
-      }
+    //这里不以dom判断，以内置变量判断
+    getStatus: function () {
+      return this.checkedFlag;
     },
 
     addEvent: function ($super) {
       $super();
 
       this.on('onShow', function () {
+
+        this.$root.css('display', 'inline-block');
+
+        //******bug******
+        //这里的flip本身有BUG未修复，后期需要修复
         _.flip(this.$el, 'left', $.proxy(function () {
           this.unChecked();
         }, this));
@@ -80,6 +78,14 @@ define(['UIView', getAppUITemplatePath('ui.switch')], function (UIView, template
           this.checked();
         }, this));
 
+        _.flip(this.$el, 'tap', $.proxy(function () {
+          if (this.getStatus()) {
+            this.unChecked();
+          } else {
+            this.checked();
+          }
+          return;
+        }, this));
       });
 
       this.on('onHide', function () {
@@ -88,5 +94,6 @@ define(['UIView', getAppUITemplatePath('ui.switch')], function (UIView, template
     }
 
   });
+
 
 });

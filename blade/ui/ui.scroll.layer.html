@@ -1,23 +1,21 @@
-﻿﻿<div class="cui-pop-box">
-
-<%if(typeof title == 'string' && title.length > 0){ %>
-  <div class="cui-hd">
-    <%=title %><div class="lab-close-area">
-      <span class="cui-top-close">×</span></div>
+﻿<section class="cm-modal js_wrapper">
+  <%if(typeof title == 'string' && title.length > 0){ %>
+  <header class="cm-modal-hd js_header">
+    <h3 class="cm-modal-title js_title">
+      <%=title %></h3>
+    <i class="icon-close js_close"></i>
+  </header>
+  <%} %>
+  <div class="cm-modal-bd js_body" style="overflow: hidden; position: relative;">
   </div>
-<%} %>
-  <div class="cui-bd" style="overflow: hidden; position: relative; background-color: #fafafa;
-    width: 100%;">
-  
-  </div>
-  <div class="cui-roller-btns">
+  <footer class="cm-modal-ft cm-actions js_footer">
     <%if(typeof btns == 'string'){ %>
-      <%=btns %>
+    <%=btns %>
     <% } else { %>
-      <% for(var i = 0, len = btns.length; i < len; i++ ) {%>
-      <div class="cui-flexbd <%=btns[i].className%>">
-        <%=btns[i].name%></div>
-      <% } %>
+    <% for(var i = 0, len = btns.length; i < len; i++ ) {%>
+    <span class="cm-actions-btn <%=btns[i].className%>">
+      <%=btns[i].name%></span>
+    <% } %>
     <%} %>
-  </div>
-</div>
+  </footer>
+</section>

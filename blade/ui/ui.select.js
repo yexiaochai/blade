@@ -1,4 +1,4 @@
-﻿﻿define(['UIView', getAppUITemplatePath('ui.select'), 'UIScroll'], function (UIView, template, UIScroll) {
+﻿define(['UIView', getAppUITemplatePath('ui.select'), 'UIScroll', getAppUICssPath('ui.select')], function (UIView, template, UIScroll, style) {
   /*
   该组件使用时，其父容器一定是显示状态，如果不是显示状态，高度计算会失效
   */
@@ -8,21 +8,18 @@
       $super();
       //html模板
       this.template = template;
+      this.addUIStyle(style);
 
-      this.datamodel = {
-        curClass: 'active',
-        data: [],
-        id: null,
-        index: 0
-      };
+      //默认datamodel
+      this.curClass = 'active';
+      this.data = [];
+      this.key = null;
+      this.index = 0;
 
-      this.needRootWrapper = false;
 
       this.animatTime = 100;
-
       this.stepTime = 150;
-
-      this.itemNum = this.datamodel.data.length;
+      this.itemNum = this.data.length;
 
       //这里便只有一个接口了
       this.displayNum = 5;
@@ -39,6 +36,10 @@
 
     },
 
+    getViewModel: function () {
+      return this._getDefaultViewModel(['curClass', 'data', 'key', 'index']);
+    },
+
     //要求唯一标识，根据id确定index
     resetPropery: function () {
       this._resetNum();
@@ -46,10 +47,10 @@
     },
 
     _resetIndex: function () {
-      if (!this.datamodel.id) return;
-      for (var i = 0, len = this.datamodel.data.length; i < len; i++) {
-        if (this.datamodel.id == this.datamodel.data[i].id) {
-          this.datamodel.index = i;
+      if (!this.key) return;
+      for (var i = 0, len = this.data.length; i < len; i++) {
+        if (this.key === this.data[i].id) {
+          this.index = i;
           break;
         }
       }
@@ -57,22 +58,18 @@
 
     _resetNum: function () {
       this.displayNum = this.displayNum % 2 == 0 ? this.displayNum + 1 : this.displayNum;
-      this.itemNum = this.datamodel.data.length;
+      this.itemNum = this.data.length;
     },
 
     initElement: function () {
 
       //几个容器的高度必须统一
-      this.swrapper = this.$el;
-      this.scroller = this.$('.ul-list');
+      this.swrapper = this.$('.js_wrapper');
       this.scroller = this.$('.js_scroller');
 
     },
 
     initSize: function () {
-      //      this.sheight = Math.max(this.scroller.height(), this.scroller[0].scrollHeight);
-      //      this.sheight =  this.scroller.height() 
-      //      this.itemHeight = parseInt(this.sheight / this.itemNum);
 
       //偶尔不能正确获取高度，这里要处理
       //      if (this.itemHeight == 0) {
@@ -86,10 +83,10 @@
     //修正位置信息
     adjustPosition: function (hasAnimate) {
       if (!this.scroll) return;
-      if (this.datamodel.index < 0) this.datamodel.index = 0
-      if (this.datamodel.index > this.itemNum - 1) this.datamodel.index = this.itemNum - 1;
+      if (this.index < 0) this.index = 0
+      if (this.index > this.itemNum - 1) this.index = this.itemNum - 1;
 
-      var index = this.datamodel.index, _top, time = 0;
+      var index = this.index, _top, time = 0;
       //index数据验证
       _top = (this.itemHeight * index) * (-1) + this.scrollOffset;
       if (hasAnimate) time = this.animatTime;
@@ -123,12 +120,8 @@
 
     },
 
-    reload: function (datamodel) {
-      if (typeof datamodel == 'object')
-        if (datamodel instanceof Array) this.datamodel.data = datamodel;
-        else {
-          _.extend(this.datamodel, datamodel);
-        }
+    reload: function (data) {
+      if (data) this.setOpts(data);
       if (this.scroll) {
         this.scroll.destroy();
         this.scroll = null;
@@ -143,18 +136,18 @@
     //检测当前选项是否可选，首次不予关注
     checkDisable: function (dir) {
       dir = dir || 'down'; //默认向下搜索
-      var isFind = false, index = this.datamodel.index;
-      if (this.datamodel.data[index] && (typeof this.datamodel.data[index].disabled != 'undefined' && this.datamodel.data[index].disabled == false)) {
+      var isFind = false, index = this.index;
+      if (this.data[index] && (typeof this.data[index].disabled != 'undefined' && this.data[index].disabled == false)) {
         //向下的情况
         if (dir == 'up') {
-          this.datamodel.index = this._checkSelectedDown(index);
-          if (typeof this.datamodel.index != 'number') this.datamodel.index = this._checkSelectedUp(index);
+          this.index = this._checkSelectedDown(index);
+          if (typeof this.index != 'number') this.index = this._checkSelectedUp(index);
         } else {
-          this.datamodel.index = this._checkSelectedUp(index);
-          if (typeof this.datamodel.index != 'number') this.datamodel.index = this._checkSelectedDown(index);
+          this.index = this._checkSelectedUp(index);
+          if (typeof this.index != 'number') this.index = this._checkSelectedDown(index);
         }
       }
-      if (typeof this.datamodel.index != 'number') this.datamodel.index = index;
+      if (typeof this.index != 'number') this.index = index;
 
     },
 
@@ -166,7 +159,7 @@
     _checkSelectedUp: function (index) {
       var isFind = false;
       for (var i = index; i != -1; i--) {
-        if (this.datamodel.data[i] && (typeof this.datamodel.data[i].disabled == 'undefined' || this.datamodel.data[i].disabled == true)) {
+        if (this.data[i] && (typeof this.data[i].disabled == 'undefined' || this.data[i].disabled == true)) {
           index = i;
           isFind = true;
           break;
@@ -182,8 +175,8 @@
     */
     _checkSelectedDown: function (index) {
       var isFind = false;
-      for (var i = index, len = this.datamodel.data.length; i < len; i++) {
-        if (this.datamodel.data[i] && (typeof this.datamodel.data[i].disabled == 'undefined' || this.datamodel.data[i].disabled == true)) {
+      for (var i = index, len = this.data.length; i < len; i++) {
+        if (this.data[i] && (typeof this.data[i].disabled == 'undefined' || this.data[i].disabled == true)) {
           index = i;
           isFind = true;
           break;
@@ -201,30 +194,30 @@
 
     */
     setIndex: function (i, noPosition, noEvent) {
-      if (typeof noPosition == 'undefined' && i == this.datamodel.index) noPosition = true;
+      if (typeof noPosition == 'undefined' && i == this.index) noPosition = true;
       var tmpIndex = i;
       var tmpIndex2;
 
       //index值是否改变
-      var isChange = this.datamodel.index != i;
-      var dir = i > this.datamodel.index ? 'up' : 'down';
+      var isChange = this.index != i;
+      var dir = i > this.index ? 'up' : 'down';
 
       i = parseInt(i);
       if (i < 0 || i >= this.itemNum) return;
 
-      tmpIndex2 = this.datamodel.index;
+      tmpIndex2 = this.index;
 
-      this.datamodel.index = i;
+      this.index = i;
       this.checkDisable(dir);
 
       //被改变过了
-      if (tmpIndex2 != this.datamodel.index) {
+      if (tmpIndex2 != this.index) {
         isChange = true;
       } else {
         isChange = false;
       }
 
-      if (tmpIndex != this.datamodel.index) {
+      if (tmpIndex != this.index) {
         noPosition = false;
       }
 
@@ -247,25 +240,25 @@
 
     resetCss: function () {
       this.$('li').removeClass('active');
-      this.$('li[data-index="' + this.datamodel.index + '"]').addClass('active');
+      this.$('li[data-index="' + this.index + '"]').addClass('active');
     },
 
     resetIndex: function () {
-      this.setIndex(this.datamodel.index, true, true);
+      this.setIndex(this.index, true, true);
     },
 
     getIndex: function () {
-      return this.datamodel.index;
+      return this.index;
     },
 
     setId: function (id) {
       if (!id) return;
       var index = -1, i, len;
-      for (i = 0, len = this.datamodel.data.length; i < len; i++) {
-        if (this.datamodel.data[i].id == id) { index = i; break; }
+      for (i = 0, len = this.data.length; i < len; i++) {
+        if (this.data[i].id == id) { index = i; break; }
       }
       if (index == -1) return;
-      this.datamodel.index = index;
+      this.index = index;
       this.setIndex(index, false);
     },
 
@@ -274,7 +267,7 @@
     },
 
     getSelected: function () {
-      return this.datamodel.data[this.datamodel.index];
+      return this.data[this.index];
     },
 
     //根据位置信息重新设置当前选项
@@ -282,11 +275,6 @@
       var pos = this.scroll.y - this.scrollOffset;
       var index = Math.abs(pos) / this.itemHeight;
       return Math.round(index);
-    },
-
-    initialize: function ($super, opts) {
-      $super(opts);
-
     },
 
     addEvent: function ($super) {

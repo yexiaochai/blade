@@ -16,9 +16,7 @@ define(['View', 'UILoadingLayer', getViewTemplatePath('reloading')], function (V
       },
       'click .fxdemo01': function () {
         this.showLoading({
-          datamodel: {
-            content: '我是文字'
-          }
+          content: '我是文字'
         });
         setTimeout($.proxy(function () {
           this.hideLoading();
@@ -27,28 +25,22 @@ define(['View', 'UILoadingLayer', getViewTemplatePath('reloading')], function (V
       'click .fxdemo02': function () {
 
         this.showLoading({
-          datamodel: {
-            content: '',
-            closeBtn: true
-          }
+          content: '',
+          closeBtn: true
         });
 
       },
       'click .fxdemo03': function () {
         this.showLoading({
-          datamodel: {
-            content: '加载中',
-            closeBtn: true
-          }
+          content: '加载中',
+          closeBtn: true
         });
       },
 
       'click .widget0': function () {
         if (!this.reloading) {
           this.reloading = new UIReLoading({
-            datamodel: {
-              text: ''
-            },
+            text: '',
             maskToHide: true
           });
         }
@@ -59,9 +51,7 @@ define(['View', 'UILoadingLayer', getViewTemplatePath('reloading')], function (V
       'click .widget1': function () {
         if (!this.reloading1) {
           this.reloading1 = new UIReLoading({
-            datamodel: {
-              text: 'delete'
-            },
+            text: 'delete',
             needMask: false  //不需要蒙板
           });
         }
@@ -78,9 +68,7 @@ define(['View', 'UILoadingLayer', getViewTemplatePath('reloading')], function (V
       'click .widget2': function () {
         if (!this.reloading2) {
           this.reloading2 = new UIReLoading({
-            datamodel: {
-              text: 'delete'
-            },
+            text: 'delete',
             maskToHide: true
           });
         }

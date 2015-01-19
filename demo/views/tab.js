@@ -27,13 +27,11 @@ define(['View', getViewTemplatePath('tab'), 'UITab', 'UISlider'], function (View
       //简单初始化
       if (!this.tab) {
         this.tab = new UITab({
-          datamodel: {
-            data: [
+          data: [
               { id: 1, name: '中国' },
               { id: 2, name: '美国' },
               { id: 3, name: '日本' }
-            ]
-          },
+            ],
           wrapper: this.$el.find('.wrapper')
         });
         this.tab.show();
@@ -42,16 +40,14 @@ define(['View', getViewTemplatePath('tab'), 'UITab', 'UISlider'], function (View
       //设置参数，重写change
       if (!this.tab1) {
         this.tab1 = new UITab({
-          datamodel: {
-            data: [
+          data: [
               { id: 1, name: '图片' },
               { id: 2, name: '音乐' },
               { id: 3, name: '视频' },
               { id: 4, name: '其它' }
             ],
-            curClass: 'cui-tab-current',
-            index: 0
-          },
+          curClass: 'cui-tab-current',
+          index: 0,
           onChange: function () {
             console.log('onChange myself:' + this.el.attr('data-key') + this.el.html());
           },
@@ -60,18 +56,16 @@ define(['View', getViewTemplatePath('tab'), 'UITab', 'UISlider'], function (View
         this.tab1.show();
       }
 
-
-
-
     },
 
     onShow: function () {
+      return;
+
       var scope = this;
       //如果tab数量过多
       if (!this.tab2) {
         this.tab2 = new UISlider({
-          datamodel: {
-            data: [
+          data: [
               { id: 1, name: '图片' },
               { id: 2, name: '音乐' },
               { id: 3, name: '视频' },
@@ -81,11 +75,10 @@ define(['View', getViewTemplatePath('tab'), 'UITab', 'UISlider'], function (View
               { id: 13, name: '视1频' },
               { id: 14, name: '其1它' }
             ],
-            index: 0
-          },
+          index: 0,
           displayNum: 3,
           changed: function (item) {
-            scope.showToast(item.id+ ': '+item.name);
+            scope.showToast(item.id + ': ' + item.name);
           },
           wrapper: this.$el.find('.wrapper2')
         });

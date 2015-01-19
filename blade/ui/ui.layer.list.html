@@ -1,8 +1,12 @@
-﻿<ul class="list">
-  <%for(var i = 0, len = list.length; i < len; i++) {%>
-  <li data-index="<%=i%>" <%if(i == index) { %>class="current" <% } %>><%=((typeof itemFn == "function" && itemFn(list[i])) || list[i].name)%></li>
-  <%}%>
-</ul>
-<ul>
-  <li class="cancel"><%=cancelText%></li>
-</ul>
+﻿<section class="cm-modal cm-modal--action">
+  <div class="cm-modal-bd">
+    <ul class="cm-actions cm-actions--full">
+      <%for(var i = 0, len = list.length; i < len; i++) {%>
+        <li data-index="<%=i%>"  class="cm-actions-btn js_item <%if(i == index) { %>active<% } %>"><%=((typeof itemFn == "function" && itemFn(list[i])) || list[i].name)%></li>
+      <%}%>
+    </ul>
+  </div>
+  <div class="cm-modal-ft cm-actions">
+    <span class="cm-actions-btn js_cancel"><%=cancelText%></span>
+  </div>
+</section>

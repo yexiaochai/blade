@@ -1,9 +1,13 @@
-﻿﻿(function () {
+﻿(function () {
 
   var app = './blade/';
 
   window.getAppUITemplatePath = function (path) {
-    return 'text!' + app + 'ui/' + path + '.html'; 
+    return 'text!' + app + 'ui/' + path + '.html';
+  }
+
+  window.getAppUICssPath = function (path) {
+    return 'text!' + app + 'ui/' + path + '.css';
   }
 
   require.config({
@@ -24,8 +28,14 @@
       'cHighlight': app + 'common/c.highlight',
       'cInputclear': app + 'common/c.inputclear',
 
+
+
       //UI组件
       'UIView': app + 'ui/ui.abstract.view',
+      'text!ui.abstract.view': app + 'ui/ui.abstract.view.css',
+
+
+
       'UILayer': app + 'ui/ui.layer',
       'UIAlert': app + 'ui/ui.alert',
       'UIMask': app + 'ui/ui.mask',

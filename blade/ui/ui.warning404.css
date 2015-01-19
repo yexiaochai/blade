@@ -1,0 +1,57 @@
+﻿.cm-page-fail {
+  text-align: center;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.cm-page-fail .cm-fail-info {
+  margin: 15px 0;
+}
+
+.cm-page-fail .cm-fail-redo {
+  padding-top: 40px;
+  margin-bottom: 20px;
+}
+
+.cm-page-fail .cm-fail-redo .cm-fail-info {
+  font-size: 16px;
+}
+
+.cm-page-fail .cm-fail-service {
+  border-top: 1px solid #dbdbdb;
+}
+
+.cm-page-fail .cm-fail-redo-btn,
+.cm-page-fail .cm-fail-service-btn {
+  line-height: 44px;
+  height: 44px;
+  padding: 0 10px;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+}
+
+.cm-page-fail .cm-fail-redo-btn {
+  background-color: #ff9a14;
+  color: #fff;
+}
+
+.cm-page-fail .cm-fail-redo-btn:hover,
+.cm-page-fail .cm-fail-redo-btn:active {
+  background-color: #e08000;
+}
+
+.cm-page-fail .cm-fail-service-btn {
+  background-color: #fff;
+  border: 1px solid #dbdbdb;
+  color: #099fde;
+}
+
+.cm-page-fail .cm-fail-service-btn:hover,
+.cm-page-fail .cm-fail-service-btn:active {
+  background-color: #e6e6e6;
+}

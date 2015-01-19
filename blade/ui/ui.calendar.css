@@ -1,0 +1,140 @@
+﻿.cm-day-list:before, .cm-calendar .cm-calendar-hd:before, .cm-calendar .cm-calendar-ft .cm-calendar-quick-nav:before, .cm-day-list:after, .cm-calendar .cm-calendar-hd:after, .cm-calendar .cm-calendar-ft .cm-calendar-quick-nav:after {
+  content: "";
+  display: table;
+}
+.cm-day-list:after, .cm-calendar .cm-calendar-hd:after, .cm-calendar .cm-calendar-ft .cm-calendar-quick-nav:after {
+  clear: both;
+}
+
+.cm-day-list li, .cm-calendar .cm-calendar-hd li {
+  float: left;
+  width: 14.2%;
+  text-align: center;
+}
+.cm-day-list li:nth-of-type(7n), .cm-calendar .cm-calendar-hd li:nth-of-type(7n), .cm-day-list li:nth-of-type(7n+1), .cm-calendar .cm-calendar-hd li:nth-of-type(7n+1) {
+  color: #52bce8;
+  width: 14.5%;
+}
+
+.cm-day-list {
+  border-bottom: 1px solid #dbdbdb;
+}
+.cm-day-list:last-of-type {
+  border-bottom: none;
+}
+.cm-day-list li {
+  height: 48px;
+}
+.cm-day-list li.active {
+  background-color: #099fde;
+}
+.cm-day-list li.active .cm-field-title,
+.cm-day-list li.active .cm-field-price,
+.cm-day-list li.active .cm-field-label {
+  color: #fff;
+}
+.cm-day-list li.cm-item--disabled .cm-field-title,
+.cm-day-list li.cm-item--disabled .cm-field-price {
+  color: #cccccc;
+}
+.cm-day-list .cm-field-title {
+  line-height: 28px;
+  font-size: 16px;
+}
+.cm-day-list .cm-field-title--festival,
+.cm-day-list .cm-field-title--holiday {
+  font-size: 14px;
+}
+.cm-day-list .cm-field-title--holiday {
+  color: #52bce8;
+}
+.cm-day-list .cm-field-price {
+  font-size: 12px;
+  color: #666;
+}
+.cm-day-list .cm-field-price--sale {
+  color: #ff9a14;
+}
+.cm-day-list .cm-field-label {
+  font-size: 12px;
+}
+.cm-day-list .cm-item--multi {
+  background-color: rgba(9, 159, 222, 0.1);
+}
+
+.cm-day-list--special li {
+  height: 68px;
+}
+
+.cm-calendar .cm-calendar-hd {
+  border-bottom: 1px solid #dbdbdb;
+  background-color: #fff;
+  height: 30px;
+}
+.cm-calendar .cm-calendar-hd li {
+  line-height: 30px;
+}
+.cm-calendar .cm-calendar-bd {
+  background-color: #fff;
+  padding-bottom: 44px;
+}
+.cm-calendar .cm-month {
+  text-align: center;
+  font-size: 16px;
+  line-height: 50px;
+}
+.cm-calendar .cm-calendar-ft {
+  border-top: 1px solid #dbdbdb;
+  background-color: #efefef;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 5px 0;
+}
+.cm-calendar .cm-calendar-ft .cm-calendar-quick-nav {
+  width: 200%;
+}
+.cm-calendar .cm-calendar-ft li {
+  float: left;
+  line-height: 30px;
+  width: 60px;
+  border-radius: 4px;
+  text-align: center;
+  background-color: #cccccc;
+  margin: 0 5px 0 10px;
+}
+.cm-calendar .cm-calendar-ft li.active {
+  background-color: #099fde;
+  color: #fff;
+}
+
+.cm-calendar-tips {
+  width: 14.2%;
+  color: #fff;
+  text-align: center;
+  border-radius: 4px;
+  background-color: #099fde;
+  position: relative;
+}
+.cm-calendar-tips::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  margin-left: -6px;
+  bottom: -6px;
+  border-top: 6px solid #099fde;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+}
+.cm-calendar-tips .cm-tips-day {
+  padding-bottom: 5px;
+}
+.cm-calendar-tips .cm-tips-day .cm-tips-day-title {
+  line-height: 28px;
+  font-size: 16px;
+}
+.cm-calendar-tips .cm-tips-day .cm-tips-day-label,
+.cm-calendar-tips .cm-tips-day .cm-tips-day-price {
+  font-size: 12px;
+}

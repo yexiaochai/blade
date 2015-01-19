@@ -291,15 +291,15 @@ define(['View', getViewTemplatePath('calendar'), 'UICalendar', 'UISlider'], func
 
     onPreShow: function () {
       this.demo1();
-      this.demo2();
-      this.demo3();
-      this.demo4();
+//      this.demo2();
+//      this.demo3();
+//      this.demo4();
 
       this.turning();
     },
 
     onShow: function () {
-      this.demo11();
+//      this.demo11();
 
     },
 

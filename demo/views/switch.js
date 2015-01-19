@@ -29,9 +29,7 @@ define(['View', getViewTemplatePath('switch'), 'UISwitch'], function (View, view
       //设置默认值
       if (!this.uiSwitch1) {
         this.uiSwitch1 = new UISwitch({
-          datamodel: {
-            checkedFlag: true
-          },
+            checkedFlag: true,
           wrapper: this.$el.find('.simple_switch1')
         });
         this.uiSwitch1.show();

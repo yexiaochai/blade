@@ -1,4 +1,4 @@
-﻿﻿define(['UIView', 'text!tank/common/move.obj.html'], function (UIView, template) {
+﻿define(['UIView', 'text!tank/common/move.obj.html'], function (UIView, template) {
 
   return _.inherit(UIView, {
     propertys: function ($super) {

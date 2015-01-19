@@ -1,4 +1,4 @@
-﻿﻿define(['View', getViewTemplatePath('toast'), 'UIToast'], function (View, viewhtml, UIToast) {
+﻿define(['View', getViewTemplatePath('toast'), 'UIToast'], function (View, viewhtml, UIToast) {
 
   return _.inherit(View, {
     onCreate: function () {

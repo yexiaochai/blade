@@ -1,1 +1,0 @@
-define(["View",getViewTemplatePath("sample"),"UIGroupList"],function(a,b){return _.inherit(a,{onCreate:function(){this.$el.html(b)},events:{},onPreShow:function(){this.turning()},onShow:function(){},onHide:function(){}})});

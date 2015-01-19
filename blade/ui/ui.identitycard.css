@@ -1,0 +1,133 @@
+﻿.cm-keyboard-list:before, .cm-keyboard-list:after {
+  content: "";
+  display: table;
+}
+.cm-keyboard-list:after {
+  clear: both;
+}
+
+.btn-secondary {
+  line-height: 44px;
+  height: 44px;
+  padding: 0 10px;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.icon-del .icon-close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  text-align: center;
+  cursor: pointer;
+}
+.icon-del .icon-close::before, .icon-del .icon-close::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 16px;
+  transform: rotate(45deg);
+  top: 50%;
+  margin-top: -8px;
+}
+.icon-del .icon-close::after {
+  transform: rotate(-45deg);
+}
+
+.btn-secondary {
+  background-color: #099fde;
+  color: white;
+  border: 0 none;
+}
+.btn-secondary:active {
+  background: #077cad;
+}
+
+.icon-del {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  line-height: 1;
+  border: 1px solid #333333;
+  border-left: none;
+  position: relative;
+  border-radius: 0 4px 4px 0 0;
+  margin-left: 6px;
+}
+.icon-del::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  border: 1px solid #333333;
+  border-width: 1px 0 0 1px;
+  transform: rotate(-45deg);
+  position: absolute;
+  left: -6px;
+  top: 1px;
+  box-sizing: border-box;
+}
+.icon-del .icon-close {
+  width: 44px;
+  height: 44px;
+  line-height: 44px;
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  top: 2px;
+}
+.icon-del .icon-close::before, .icon-del .icon-close::after {
+  background-color: white;
+}
+.icon-del .icon-close::before, .icon-del .icon-close::after {
+  background-color: #333333;
+  width: 1px;
+  height: 10px;
+}
+
+.cm-modal--num-keyboard {
+  width: 100%;
+  border-radius: 0;
+}
+.cm-modal--num-keyboard .cm-keyboard-bar {
+  background-color: #e2e2e2;
+  padding-right: 10px;
+  height: 44px;
+  line-height: 44px;
+  border-top: 1px solid #dbdbdb;
+}
+.cm-modal--num-keyboard .cm-keyboard-bar .btn-secondary {
+  line-height: 30px;
+  height: 30px;
+  padding: 0 15px;
+  float: right;
+  margin-top: 7px;
+}
+
+.cm-keyboard-list {
+  font-size: 16px;
+}
+.cm-keyboard-list li {
+  float: left;
+  text-align: center;
+  width: 33%;
+  line-height: 54px;
+  border: 1px solid #dbdbdb;
+  border-width: 1px 1px 0 0;
+}
+.cm-keyboard-list li:active {
+  background-color: #efefef;
+}
+.cm-keyboard-list li:nth-of-type(3n+3) {
+  width: 34%;
+  border-right: none;
+}
+.cm-keyboard-list li:last-of-type, .cm-keyboard-list li:nth-last-of-type(3) {
+  background-color: #e2e2e2;
+}
+.cm-keyboard-list .icon-del {
+  top: 2px;
+}

@@ -1,9 +1,11 @@
-﻿﻿
-/*
-用于继承的类，会自动垂直居中
+﻿/*
+******bug******
+弹出层应该在外部有一个class做初始定位，而不用每次都reposition
+所有弹出层的基类，用于继承的类，默认会自动垂直居中
 
 */
-define(['UIView', 'UIMask'], function (UIView, UIMask) {
+define(['UIView', 'UIMask', getAppUICssPath('ui.layer')], function (UIView, UIMask, style) {
+  'use strict';
 
   return _.inherit(UIView, {
 
@@ -11,15 +13,17 @@ define(['UIView', 'UIMask'], function (UIView, UIMask) {
     propertys: function ($super) {
       $super();
       this.mask = new UIMask();
+
       //类型为layer
-      this.type = 'layer';
+      this.setUIType('layer');
 
       this.resetDefaultProperty();
 
     },
 
     resetDefaultProperty: function () {
-      //需要蒙版
+      //继承基类
+      this.addUIStyle(style);
 
       this.mask.resetDefaultProperty();
 
@@ -33,10 +37,6 @@ define(['UIView', 'UIMask'], function (UIView, UIMask) {
       //需要居中定位
       this.needReposition = true;
 
-      //是否具有后退关闭弹出层需求
-      this.hasPushState = (history && history.pushState);
-      this.hasPushState = false;
-
       //是否为浏览器回退
       this.historyBack = false;
 
@@ -46,57 +46,65 @@ define(['UIView', 'UIMask'], function (UIView, UIMask) {
       this.animateShowAction = null;
       this.animateHideAction = null;
 
-      //调整事件绑定位置
-      this.events = {
+      //所有弹出层类组件，统一touchmove时候神马也不干
+      this.addEvents({
         'touchmove': '_preventDefault'
-      };
+      });
 
     },
 
-    initialize: function ($super, opts) {
-      $super(opts);
-
-      this.clearRes();
+    resetPropery: function ($super) {
+      $super();
+      this._setAnimat();
+      this._setMaskEvent();
     },
 
-    resetPropery: function () {
+    _setAnimat: function () {
       var scope = this;
       if (this.needAnimat) {
-        if (!this.animateShowAction)
+        if (!this.animateShowAction) {
           this.animateShowAction = function (el) {
-            el.show();
-            el.addClass(scope.animateInClass);
-            //防止class不存在的情况下导致动画不执行，而程序出错
-            el.one($.fx.animationEnd, function () {
-              el.removeClass(scope.animateInClass);
-            });
+            scope._safeAnimat(el, scope.animateInClass, 'show');
           };
-
-        if (!this.animateHideAction)
+        }
+        if (!this.animateHideAction) {
           this.animateHideAction = function (el) {
-            el.addClass(scope.animateOutClass);
-            el.one($.fx.animationEnd, function () {
-              el.removeClass(scope.animateOutClass);
-              el.hide();
-            });
-
+            scope._safeAnimat(el, scope.animateOutClass, 'hide');
           };
+        }
       }
 
       //如果存在关闭动画接口，需要为mask加动画
       if (this.animateHideAction) {
         this.mask.needAnimat = true;
         this.mask.animateHideAction = function (el) {
-          el.addClass(scope.mask.animateOutClass);
-          el.one($.fx.animationEnd, function () {
-            el.removeClass(scope.mask.animateOutClass);
-            el.hide();
-          });
+          scope._safeAnimat(el, scope.mask.animateOutClass, 'hide');
         };
       } else {
         this.mask.animateHideAction = null;
       }
-      this._setMaskEvent();
+    },
+
+    //安全的执行animationEnd相关事件，防止class不存在而依赖animationEnd的回调不执行问题
+    _safeAnimat: function (el, classname, flag) {
+      var isTrigger = false;
+      if (flag == 'show') el.show();
+      el.addClass(classname);
+      //防止class不存在的情况下导致动画不执行，而程序出错
+      el.one($.fx.animationEnd, function () {
+        isTrigger = true;
+        el.removeClass(classname);
+        if (flag == 'hide') el.hide();
+      });
+
+      setTimeout(function () {
+        if (isTrigger) return;
+
+        el.removeClass(classname);
+        el.off($.fx.animationEnd);
+        if (flag == 'hide') el.hide();
+
+      }, 350);
     },
 
     _setMaskEvent: function () {
@@ -112,26 +120,6 @@ define(['UIView', 'UIMask'], function (UIView, UIMask) {
       }
     },
 
-    //资源清理
-    clearRes: function () {
-      //      if (this.needMask == false) this.mask = null;
-    },
-
-    _addPushStateEvent: function () {
-      if (!this.hasPushState) return;
-      history.pushState({}, document.title, location.href);
-      this.historyBack = false;
-      $(window).on('popstate.pageviewpopstate' + this.id, $.proxy(function (e) {
-        this.historyBack = true;
-        this.hide();
-      }, this));
-    },
-
-    _removePushStateEvent: function () {
-      if (!this.hasPushState) return;
-      $(window).off('.pageviewpopstate' + this.id);
-    },
-
     addEvent: function () {
       this.on('onCreate', function () {
         this.$el.addClass('cui-layer');
@@ -139,32 +127,16 @@ define(['UIView', 'UIMask'], function (UIView, UIMask) {
 
       this.on('onPreShow', function () {
         if (this.needMask) this.mask.show();
-
       });
 
       this.on('onShow', function () {
         this.setzIndexTop();
-        this._addPushStateEvent();
         if (this.needReposition) this.reposition();
 
       });
 
-      this.on('onPreHide', function () {
-        //执行两次hide方法
-        if (this.hasPushState && !this.historyBack) {
-          history.back();
-          return;
-        }
-
-      });
-
       this.on('onHide', function () {
-        if (this.hasPushState && !this.historyBack) {
-          return;
-        }
         this.mask.hide();
-        this._removePushStateEvent();
-
       });
 
       this.on('onDestroy', function () {
@@ -173,11 +145,18 @@ define(['UIView', 'UIMask'], function (UIView, UIMask) {
 
     },
 
-    //弹出层类垂直居中使用
     reposition: function () {
-      this.$el.css({
-        'margin-left': -(this.$el.width() / 2) + 'px',
-        'margin-top': -(this.$el.height() / 2) + 'px'
+
+      this.$root.css({
+        'width': '280px'
+      });
+
+      this.$root.css({
+        'position': 'fixed',
+        'left': '50%',
+        'top': '50%',
+        'margin-left': -(this.$root.width() / 2) + 'px',
+        'margin-top': -(this.$root.height() / 2) + 'px'
       });
     }
 

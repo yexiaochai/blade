@@ -1,4 +1,4 @@
-﻿﻿define(['View', getViewTemplatePath('bubble.layer'), 'UIBubbleLayer'], function (View, viewhtml, UIBubbleLayer) {
+﻿define(['View', getViewTemplatePath('bubble.layer'), 'UIBubbleLayer'], function (View, viewhtml, UIBubbleLayer) {
 
   return _.inherit(View, {
     onCreate: function () {
@@ -36,11 +36,9 @@
         var dir = 'up';
         this.sidbarnav = new UIBubbleLayer({
           triggerEl: el,
-          datamodel: {
-            needBorder: false,
-            data: data,
-            dir: dir
-          },
+          needBorder: false,
+          data: data,
+          dir: dir,
           triangleRight: '25px',
           width: 130,
           onCreate: function () {
@@ -85,13 +83,11 @@
         var dir = (e.pageY > 200) ? 'down' : 'up';
         this.demo1 = new UIBubbleLayer({
           triggerEl: el,
-          datamodel: {
-            data: data,
-            dir: dir,
-            index: index,
-            itemFn: function (item, index) {
-              return item.name + '_' + index;
-            }
+          data: data,
+          dir: dir,
+          index: index,
+          itemFn: function (item, index) {
+            return item.name + '_' + index;
           },
           width: 250,
           needMask: true,
@@ -120,11 +116,9 @@
         var dir = 'up';
         this.demo2 = new UIBubbleLayer({
           triggerEl: el,
-          datamodel: {
-            data: data,
-            dir: dir,
-            index: index
-          },
+          data: data,
+          dir: dir,
+          index: index,
           onClick: function (e, data, index, el) {
             console.log(arguments);
             this.setIndex(index);
@@ -150,11 +144,9 @@
         var dir = (e.pageY > 200) ? 'down' : 'up';
         this.demo3 = new UIBubbleLayer({
           triggerEl: el,
-          datamodel: {
-            data: data,
-            dir: dir,
-            index: index
-          },
+          data: data,
+          dir: dir,
+          index: index,
           width: 300,
           needMask: true,
           onClick: function (e, data, index, el) {

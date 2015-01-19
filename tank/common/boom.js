@@ -1,4 +1,4 @@
-﻿﻿//爆炸对象，出现的意义便是为了消失
+﻿//爆炸对象，出现的意义便是为了消失
 define(['MoveObj'], function (MoveObj) {
 
   return _.inherit(MoveObj, {

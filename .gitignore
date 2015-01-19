@@ -4,3 +4,9 @@
 **/*.bak
 *.sublime-project
 *.sublime-workspace
+
+**/*.lock
+**/*.bak
+node_modules
+.idea
+*.xml

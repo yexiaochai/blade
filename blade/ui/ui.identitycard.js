@@ -1,12 +1,14 @@
 ﻿
-define(['UILayer', getAppUITemplatePath('ui.identitycard')], function (UILayer, template) {
+define(['UILayer', getAppUITemplatePath('ui.identitycard'), getAppUICssPath('ui.identitycard')], function (UILayer, template, style) {
   return _.inherit(UILayer, {
     propertys: function ($super) {
       $super();
 
       this.template = template;
+      this.addUIStyle(style);
+      this.openShadowDom = false;
+
       this.needMask = false;
-      this.needReposition = false;
 
       this.addEvents({
         'click .js_ok': 'closeAction',
@@ -15,9 +17,6 @@ define(['UILayer', getAppUITemplatePath('ui.identitycard')], function (UILayer, 
 
       this.animateInClass = 'cm-down-in';
       this.animateOutClass = 'cm-down-out';
-
-      //不要包裹层
-      this.needRootWrapper = false;
 
       //目标元素，必填
       this.targetEl = null;
@@ -61,15 +60,19 @@ define(['UILayer', getAppUITemplatePath('ui.identitycard')], function (UILayer, 
       window.scrollTo(0, offset.top - 50);
     },
 
+    reposition: function () {
+      this.$root.css({
+        'position': 'fixed',
+        'width': '100%',
+        'left': '0',
+        'bottom': '0'
+      });
+    },
+
     addEvent: function ($super) {
       $super();
 
       this.on('onShow', function () {
-        this.$el.removeClass('cui-layer');
-      });
-
-      this.on('onShow', function () {
-        this.setzIndexTop(this.$el);
         $('body').append(this.emptyEl);
         this._scrollToTarget();
       });

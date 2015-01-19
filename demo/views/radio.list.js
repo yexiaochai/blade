@@ -32,10 +32,8 @@ define(['View', getViewTemplatePath('radio.list'), 'UIRadioList'], function (Vie
             scope = this;
         this.radio1 = new UIRadioList({
           //数据模型
-          datamodel: {
             title: '',
-            data: demodata1
-          },
+            data: demodata1,
           displayNum: 5,
           selectId: 4,
           index: 4,
@@ -54,10 +52,8 @@ define(['View', getViewTemplatePath('radio.list'), 'UIRadioList'], function (Vie
         var demodata2 = [{ id: '红茶' }, { id: '绿茶' }, { id: '菊花茶' }, { id: '茉莉茶' }, { id: '铁观音' }, { id: '乌龙茶' }, { id: '奶茶' }, { id: '打奶茶'}],
             scope = this;
         this.radio2 = new UIRadioList({
-          datamodel: {
             title: '茶',
-            data: demodata2
-          },
+            data: demodata2,
           //绑定事件
           events: {
             'click .cui-select-view> li': 'myClickAction'

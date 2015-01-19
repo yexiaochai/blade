@@ -1,4 +1,4 @@
-﻿﻿define(['MoveObj', 'text!tank/common/move.obj.html'], function (MoveObj, template) {
+﻿define(['MoveObj', 'text!tank/common/move.obj.html'], function (MoveObj, template) {
 
   return _.inherit(MoveObj, {
     propertys: function ($super) {

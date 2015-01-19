@@ -1,4 +1,4 @@
-﻿﻿define(['UISlider'], function (UISlider) {
+﻿define(['UISlider'], function (UISlider) {
   return _.inherit(UISlider, {
     propertys: function ($super) {
       $super();
@@ -19,7 +19,7 @@
       if (!this.autoPlay) return
       this.stop();
       this.timerSrc = setInterval($.proxy(function () {
-        var index = this.datamodel.index;
+        var index = this.index;
         index++;
         if (index == this.itemNum) index = 0
         this.setIndex(index, null, null, this.playTime);
@@ -34,18 +34,23 @@
     },
 
     //导航条
+    //******这个接口没有封装好！！！
     createNav: function () {
       if (this.sliderNav) return;
-      var nav = '<div class="cui-navContainer" style="color: rgb(20, 145, 197); position: absolute;">';
+      var nav = '<div class="cm-slide-bullet js_nav" style="position: absolute;">';
       for (var i = 0; i < this.itemNum; i++) {
-        nav += '<span class="cui-slide-nav-item" data-index="' + i + '"></span>';
+        nav += '<span class="cm-bullet-item js_nav_item" data-index="' + i + '"></span>';
       }
       nav += '</div>';
       this.sliderNav = $(nav);
-      this.$el.append(this.sliderNav);
+
+      //这块有点玄幻了，没有继承关系的话$swrapper是不存在的******
+      this.swrapper.append(this.sliderNav);
       this._setNavPos();
-      this.setzIndexTop(this.sliderNav);
-      this._setNavIndex(this.datamodel.index);
+
+      //这块地方z-index设置过高，会遮住header
+//      this.setzIndexTop(this.sliderNav);
+      this._setNavIndex(this.index);
     },
 
     //父级元素resize事件重写
@@ -54,9 +59,10 @@
       this._setNavPos();
     },
 
+    //******这块计算有问题暂时不予理睬，后续更改
     _setNavPos: function () {
-      var left = (parseInt(this.wrapper.width()) - 2 * (this.itemNum * 10)) / 2; //居中计算LEFT值
-      this.sliderNav.css({ "left": left, 'bottom': '10px' });
+      var left = (parseInt(this.wrapper.width()) - 2 * (this.itemNum * 8)) / 2; //居中计算LEFT值
+      this.sliderNav.css({'right': 'auto', 'top': 'auto', 'left': left, 'bottom': '10px', 'z-index': '500' });
     },
 
     _addTouchEvent: function () {
@@ -86,12 +92,12 @@
     },
 
     _setNavIndex: function (index) {
-      this.$('.cui-navContainer').find('span').removeClass('cui-slide-nav-item-current');
-      this.$('.cui-navContainer').find('span[data-index="' + index + '"]').addClass('cui-slide-nav-item-current');
+      this.sliderNav.find('.js_nav_item').removeClass('active');
+      this.sliderNav.find('.js_nav_item[data-index="' + index + '"]').addClass('active');
     },
 
     changedAction: function (item) {
-      this._setNavIndex(this.datamodel.index);
+      this._setNavIndex(this.index);
     },
 
     addEvent: function ($super) {
@@ -100,6 +106,10 @@
         this.sliderNav = null;
       });
 
+      this.on('onCreate', function () {
+        this.$el.addClass('cm-slide--full-img');
+      });
+      
       this.on('onShow', function () {
         this.createNav();
         this.play();

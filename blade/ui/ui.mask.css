@@ -1,0 +1,11 @@
+﻿.cm-overlay {
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 980;
+  width: 100%;
+}
+.cm-overlay.active {
+  display: block;
+}
+.cm-overlay.cm-overlay--transparent {
+  background: transparent;
+}

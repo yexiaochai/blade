@@ -1,4 +1,4 @@
-﻿﻿
+﻿
 /*
 用于继承的类，会自动垂直居中
 
@@ -14,9 +14,8 @@ define(['UILayer', getAppUITemplatePath('ui.toast')], function (UILayer, templat
     resetDefaultProperty: function ($super) {
       $super();
       this.template = template;
-      this.datamodel = {
-        content: 'toast'
-      };
+
+      this.content = 'toast';
       this.hideSec = 2000;
       this.hasPushState = false;
       this.TIMERRES = null;
@@ -26,8 +25,8 @@ define(['UILayer', getAppUITemplatePath('ui.toast')], function (UILayer, templat
 
     },
 
-    initialize: function ($super, opts) {
-      $super(opts);
+    getViewModel: function () {
+      return this._getDefaultViewModel(['content', 'btns']);
     },
 
     addEvent: function ($super) {
@@ -49,24 +48,7 @@ define(['UILayer', getAppUITemplatePath('ui.toast')], function (UILayer, templat
         if (this.TIMERRES) clearTimeout(this.TIMERRES);
         this.hideAction();
       });
-    },
-
-    /**
-    * 显示Toast
-    * @param title 标题
-    * @param timeout 显示时长
-    * @param callback 隐藏时回调
-    * @param clickToHide 是否允许点击界面任一处,隐藏Toast
-    */
-    setDatamodel: function (content, timeout, hideAction, clickToHide) {
-      this.datamodel.content = content;
-      timeout && (this.hideSec = timeout);
-      hideAction && (this.hideAction = hideAction);
-      this.maskToHide = clickToHide;
-
-      this.refresh();
     }
-
 
   });
 

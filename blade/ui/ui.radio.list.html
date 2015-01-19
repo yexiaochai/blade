@@ -1,16 +1,15 @@
-﻿<div class="cui-pop-box">
+﻿<section class="cm-modal">
 <%if(typeof title == 'string' && title.length > 0){ %>
-  <div class="cui-hd">
-    <div class="cui-text-center">
-      <%=title %></div>
-  </div>
+  <header class="cm-modal-hd cm-modal-hd--center js_header">
+    <h3 class="cm-modal-title js_title">
+      <%=title %></h3>
+  </header>
 <%} %>
-
-  <div class="cui-bd cui-roller-bd" style="overflow: hidden; position: relative;">
-    <ul class="cui-select-view " style="position: absolute; width: 100%; ">
+  <div class="cm-modal-bd js_wrapper" style="overflow: hidden; position: relative;" >
+    <ul class="cm-radio-list js_items"  style="position: absolute; width: 100%; ">
       <%for(var i = 0, len = data.length; i < len; i++) { %>
-        <li data-index="<%=i %>" <%if(i == index){ %>class="current"<%} %> ><%=data[i].name || data[i].id %></li>
+        <li data-index="<%=i %>" <%if(i == index){ %>class="active"<%} %> ><%=data[i].name || data[i].id %></li>
       <% } %>
     </ul>
   </div>
-</div>
+</section>

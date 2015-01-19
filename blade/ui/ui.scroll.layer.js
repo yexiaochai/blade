@@ -1,36 +1,45 @@
-﻿﻿define(['UILayer', getAppUITemplatePath('ui.scroll.layer'), 'UIScroll'], function (UILayer, template, UIScroll) {
-
+﻿/*
+******bug******
+宽度问题需要统一解决方案
+容器样式问题，没有好的解决方案
+*/
+define(['UILayer', getAppUITemplatePath('ui.scroll.layer'), 'UIScroll'], function (UILayer, template, UIScroll) {
 
   return _.inherit(UILayer, {
     propertys: function ($super) {
       $super();
       //html模板
       this.template = template;
+      //      this.addUIStyle(style);
 
-      this.datamodel = {
-        title: '',
-        btns: [
-          { name: 'cancel', className: 'cui-btns-cancel' },
-          { name: 'ok', className: 'cui-btns-ok' }
-        ]
-      };
+      this.openShadowDom = false;
+
+      this.title = '';
+      this.btns = [
+          { name: 'cancel', className: 'js_cancel' },
+          { name: 'ok', className: 'js_ok' }
+        ];
 
       //事件机制
-      this.events = {
-        'click .cui-btns-ok': 'okAction',
-        'click .cui-btns-cancel': 'cancelAction',
-        'click .cui-top-close': 'closeAction'
-      };
+      this.addEvents({
+        'click .js_ok': 'okAction',
+        'click .js_cancel': 'cancelAction',
+        'click .js_close': 'closeAction'
+      });
 
       //body内部需要装载的dom结构，可能是包装过的dom结构
       this.html = null;
 
-      this.html = '';
-
       this.maxHeight = 300;
+
+      //传入dom字符串所占的高度
       this.sheight = 0;
       this.scrollOpts = {};
 
+    },
+
+    getViewModel: function () {
+      return this._getDefaultViewModel(['title', 'btns']);
     },
 
     okAction: function () {
@@ -46,8 +55,8 @@
     },
 
     initElement: function () {
-      this.swrapper = this.$('.cui-bd');
-      this.box_wrapper = this.$('.cui-pop-box');
+      this.swrapper = this.$('.js_body');
+      this.footer = this.$('.js_footer');
     },
 
     initSize: function () {
@@ -58,8 +67,6 @@
       if (this.html.length > 1) this.html = $('<div></div>').append(this.html);
 
       this.html.css({
-        'background-color': 'white',
-//        'width': '100%',
         'position': 'absolute'
       });
 
@@ -73,8 +80,10 @@
       h = Math.min(this.sheight, this.maxHeight);
       this.swrapper.height(h);
 
+      this.footer.height(this.footer.height());
+
       if (this.width)
-        this.box_wrapper.width(this.width);
+        this.$root.width(this.width);
 
     },
 
@@ -83,10 +92,6 @@
       this._initWrapperSize();
       if (this.scroll && this.scroll.refresh) this.scroll.refresh();
       this._initScroll();
-    },
-
-    initialize: function ($super, opts) {
-      $super(opts);
     },
 
     _initScroll: function () {
@@ -103,6 +108,7 @@
       this.on('onShow', function () {
         this.initSize();
         this._initScroll();
+        //        this.handleShadowContainer();
       }, 1);
 
       this.on('onHide', function () {

@@ -3,27 +3,31 @@
 用于继承的类，会自动垂直居中
 
 */
-define(['UILayer', getAppUITemplatePath('ui.loading.layer')], function (UILayer, template) {
-
+define(['UILayer', getAppUITemplatePath('ui.loading.layer'), getAppUICssPath('ui.loading.layer')], function (UILayer, template, style) {
+  'use strict';
 
   return _.inherit(UILayer, {
     propertys: function ($super) {
       $super();
+      //类型为layer
+      this.setUIType('loading');
 
+      this.resetDefaultProperty();
     },
 
     resetDefaultProperty: function ($super) {
       $super();
       //html模板
       this.template = template;
-      this.datamodel = {
-        closeBtn: false,
-        content: ''
-      };
+      //只继承基类的重置css
+      this.uiStyle[1] = style;
 
-      this.events = {
-        'click .cui-grayload-close': 'closeAction'
-      };
+      this.closeBtn = false;
+      this.content = '';
+
+      this.addEvents({
+        'click .js_close': 'closeAction'
+      });
 
       this.maskToHide = false;
       this.hasPushState = false;
@@ -31,46 +35,30 @@ define(['UILayer', getAppUITemplatePath('ui.loading.layer')], function (UILayer,
       this.closeAction = function (e) {
         this.hide();
       };
-
     },
 
-    initElement: function () {
-      this.el = this.$('.cui-grayload-text');
+    getViewModel: function () {
+      return this._getDefaultViewModel(['closeBtn', 'content']);
     },
 
     reposition: function () {
-      this.el.css({
-        'margin-left': -(this.el.width() / 2) + 'px',
-        'margin-top': -(this.el.height() / 2) + 'px'
-      });
-    },
-
-    initialize: function ($super, opts) {
-      $super(opts);
-    },
-
-    addEvent: function ($super) {
-      $super();
-      this.on('onCreate', function () {
-        this.$el.addClass('cui-loading');
-      });
-    },
-
-    setDatamodel: function (content, fn) {
-      var isChange = false;
-      if (content) {
-        this.datamodel.content = content;
-        isChange = true;
-      } else {
-        this.datamodel.content = '';
+      var w = '60px';
+      if (this.closeBtn || this.content.length > 0) {
+        w = '100px';
       }
-      if (fn) {
-        this.closeAction = fn; isChange = true;
-        this.datamodel.closeBtn = true;
-      } else {
-        this.datamodel.closeBtn = false;
-      }
-      if (isChange) this.refresh();
+
+      this.$root.css({
+        'width': w
+      });
+
+      this.$root.css({
+        'position': 'fixed',
+        'left': '50%',
+        'top': '50%',
+        'margin-left': -(this.$el.width() / 2) + 'px',
+        'margin-top': -(this.$el.height() / 2) + 'px'
+      });
+
     }
 
   });

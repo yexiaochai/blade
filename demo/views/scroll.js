@@ -1,4 +1,4 @@
-﻿﻿define(['View', getViewTemplatePath('scroll'), 'UISlider', 'UICalendar', 'UIImageSlider'], function (View, viewhtml, UISlider, UICalendar, UIImageSlider) {
+﻿define(['View', getViewTemplatePath('scroll'), 'UISlider'], function (View, viewhtml, UISlider) {
   return _.inherit(View, {
     onCreate: function () {
       this.$el.html(viewhtml);
@@ -25,12 +25,10 @@
       }
 
       this.slider = new UISlider({
-        datamodel: {
           data: data,
           itemFn: function (item) {
             return '<div style="width: 90%; height: 95%; background: white; border: 1px solid black; ">' + item.name + '</div>';
-          }
-        },
+          },
         momentum: true,
         displayNum: 3,
         wrapper: this.$('.demo1'),
@@ -43,8 +41,6 @@
     },
 
     /*
- 
-
     */
     _imgSlider: function () {
       if (this.imgSlider) return;
@@ -141,10 +137,7 @@
       var data = [{}, {}, {}, {}, {}];
 
       this.slider1 = new UISlider({
-        datamodel: {
-          data: data
-
-        },
+          data: data,
         momentum: false,
         displayNum: 1,
         wrapper: this.$('.demo4'),
@@ -190,10 +183,6 @@
         }
       });
       this.slider1.show();
-
-      window.sss = this.slider1;
-
-
     },
 
     onShow: function () {
@@ -202,20 +191,15 @@
         var flag = parseInt(demo.width() - 400);
         demo.height(150 + 0.4 * flag);
       };
-      sss();
       this._initSlider();
-      this._imgSlider();
-      this._initSwitch();
-      this._initCalendar();
+//      this._imgSlider();
+//      this._initSwitch();
+//      this._initCalendar();
 
-      $(window).on('resize.ttt', $.proxy(function () {
-        sss();
-      }, this));
+
 
     },
     onHide: function () {
-      this.imgSlider.stop();
-      $(window).off('ttt');
     }
   });
 });

@@ -1,4 +1,4 @@
-﻿﻿define(['View', getViewTemplatePath('warning404'), 'UIGroupList', 'UIWarning404'], function (View, viewhtml, UIGroupList, UIWarning404) {
+﻿define(['View', getViewTemplatePath('warning404'), 'UIGroupList', 'UIWarning404'], function (View, viewhtml, UIGroupList, UIWarning404) {
 
   return _.inherit(View, {
     onCreate: function () {

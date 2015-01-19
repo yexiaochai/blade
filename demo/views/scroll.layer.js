@@ -1,4 +1,4 @@
-﻿﻿define(['View', getViewTemplatePath('scroll.layer'), 'UIScrollLayer', 'UIImageSlider'], function (View, viewhtml, UIScrollLayer, UIImageSlider) {
+﻿define(['View', getViewTemplatePath('scroll.layer'), 'UIScrollLayer', 'UIImageSlider'], function (View, viewhtml, UIScrollLayer, UIImageSlider) {
   return _.inherit(View, {
     onCreate: function () {
       this.$el.html(viewhtml);
@@ -15,10 +15,8 @@
         var html = '<div class="isd-mapbox"><h3>&nbsp;大宁店<i class="x-ico"></i></h3><div id="mapcontainer" class="amap-container amap-fade-anim" style="width: 100%; height: 175px;"><div class="amap-maps" style="transform: translate3d(0px, 0px, 0px);"><div class="amap-layers"><div class="amap-layer" style="z-index: 1;"><div class="amap-tile-container amap-zoom-animated"></div><div class="amap-tile-container amap-zoom-animated"><div class="amap-copyright" style="display: none;">地图数据 ©2014 AutoNavi - GS(2014)6002号</div></div><div class="content"><p>营业时间：<span>08:00&nbsp;-&nbsp;20:00</span></p><p>联系电话：<span>021-66306100</span></p><p><span style="float: left;">具体地址：</span><span style="-webkit-box-orient: vertical;overflow: hidden;display: -webkit-box;-webkit-line-clamp: 3;">上海市闸北区灵石路695号</span></p></div><div class="btn-bar"><p>¥<span>79</span>/天</p><span class="obtn" id="bookBtn" data-index="0">立即预订</span></div><p></p></div>';
 
         this.scrollLayer0 = new UIScrollLayer({
-          datamodel: {
             title: '',
-            btns: []
-          },
+            btns: [],
           events: {
             'click  .x-ico': 'selfClick'
           },
@@ -110,13 +108,11 @@
         this.scroll3 = new UIScrollLayer({
           maxHeight: 250,
           html: html,
-          datamodel: {
             title: '模拟list',
             btns: [
       { name: '取消', className: 'cui-btns-cancel' },
       { name: '确定', className: 'cui-btns-ok' }
-    ]
-          },
+    ],
           events: {
             'click .cui-btns-ok': 'myOkAction',
             'click .cui-btns-cancel': 'myCancelAction',
@@ -163,10 +159,8 @@
             scrollbars: false,
             bounce: false
           },
-          datamodel: {
             title: '高级大床房',
-            btns: '<div class="hotel-detail-layer"><ul class="layer-bd"><li><button class="hotel-g-btn js_btn_book ">预订</button><em class="g-price"><small>¥</small>830</em></li></ul></div>'
-          },
+            btns: '<div class="hotel-detail-layer"><ul class="layer-bd"><li><button class="hotel-g-btn js_btn_book ">预订</button><em class="g-price"><small>¥</small>830</em></li></ul></div>',
           events: {
             'click .cui-btns-ok': 'myOkAction',
             'click .cui-btns-cancel': 'myCancelAction',
@@ -207,12 +201,10 @@
 
       if (!this.imgSlider) {
         this.imgSlider = new UIImageSlider({
-          datamodel: {
             data: data,
             itemFn: function (item) {
               return '<img src="' + item.src + '" class="xslide-image-loading">';
-            }
-          },
+            },
 
           displayNum: 1,
           wrapper: slider_wrapper,

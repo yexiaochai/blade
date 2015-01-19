@@ -50,12 +50,14 @@ define([], function () {
     lowerMargin：y可移动的最大距离，这个一般为计算得出 this.wrapperHeight - this.scrollerHeight
     wrapperSize：如果有边界距离的话就是可拖动，不然碰到0的时候便停止
     */
-    me.momentum = function (current, start, time, lowerMargin, wrapperSize) {
+    me.momentum = function (current, start, time, lowerMargin, wrapperSize, scrollOffset) {
       var distance = current - start,
 		speed = Math.abs(distance) / time,
 		destination,
 		duration,
 		deceleration = 0.0006;
+
+      scrollOffset = scrollOffset || 0;
 
       destination = current + (speed * speed) / (2 * deceleration) * (distance < 0 ? -1 : 1);
       duration = speed / deceleration;
@@ -64,10 +66,10 @@ define([], function () {
         destination = wrapperSize ? lowerMargin - (wrapperSize / 2.5 * (speed / 8)) : lowerMargin;
         distance = Math.abs(destination - current);
         duration = distance / speed;
-      } else if (destination > 0) {
-        destination = wrapperSize ? wrapperSize / 2.5 * (speed / 8) : 0;
+      } else if (destination > 0 + scrollOffset) {
+        destination = wrapperSize ? wrapperSize / 2.5 * (speed / 8) + scrollOffset : 0;
         distance = Math.abs(current) + destination;
-        duration = distance / speed;
+        duration = distance / speed ;
       }
 
       return {
@@ -199,6 +201,13 @@ define([], function () {
       this.options[i] = opts[i];
     }
 
+    //    if (this.options.scrollType == 'y') {
+    //      if (this.scroller.clientHeight < this.wrapper.clientHeight) return;
+    //    } else {
+    //      if (this.scroller.clientWidth < this.wrapper.clientWidth) return;
+    //    }
+
+
     this.translateZ = ' translateZ(0)';
 
     this.x = 0;
@@ -207,13 +216,6 @@ define([], function () {
 
     //默认方向是向前
     this.dir = 'forward';
-
-    //尺寸不过关便不要实例化了
-//    if (this.options.scrollType == 'x') {
-//      if (this.wrapper.clientWidth > this.scroller.clientWidth) return;
-//    } else {
-//      if (this.wrapper.clientHeight > this.scroller.clientHeight)   return;
-//    }
 
     this._init();
 
@@ -339,7 +341,10 @@ define([], function () {
 
       this._execEvent('beforeScrollStart');
 
-      //      e.preventDefault();
+      //解决三星问题
+      if (this.options.preventDefault) {
+        e.preventDefault();
+      }
 
     },
 
@@ -376,7 +381,7 @@ define([], function () {
       }
 
       if (this.options.scrollType == 'y') {
-        if (this.options.preventDefault && (dir == 'top' || dir == 'down')) {
+        if (this.options.preventDefault && (dir == 'up' || dir == 'down')) {
           e.preventDefault();
         }
         deltaX = 0;
@@ -471,8 +476,8 @@ define([], function () {
       }
 
       if (this.options.momentum && duration < 300) {
-        momentumX = utils.momentum(this.x, this.startX, duration, this.maxScrollX, this.options.bounce ? this.wrapperWidth : 0);
-        momentumY = utils.momentum(this.y, this.startY, duration, this.maxScrollY, this.options.bounce ? this.wrapperHeight : 0);
+        momentumX = utils.momentum(this.x, this.startX, duration, this.maxScrollX, this.options.bounce ? this.wrapperWidth : 0, this.options.scrollOffset);
+        momentumY = utils.momentum(this.y, this.startY, duration, this.maxScrollY, this.options.bounce ? this.wrapperHeight : 0, this.options.scrollOffset);
         newX = momentumX.destination;
         newY = momentumY.destination;
 
@@ -655,17 +660,15 @@ define([], function () {
       time = time || 0;
 
       if (this.options.scrollType == 'x') {
-        if (this.x > this.options.scrollOffset) {
+        if (this.x >= this.options.scrollOffset) {
           x = this.options.scrollOffset;
-        }
-        if (this.x < this.maxScrollX) {
+        } else if (this.x < this.maxScrollX) {
           x = this.maxScrollX;
         }
       } else {
-        if (this.y > this.options.scrollOffset) {
+        if (this.y >= this.options.scrollOffset) {
           y = this.options.scrollOffset;
-        }
-        if (this.y < this.maxScrollY) {
+        } else if (this.y < this.maxScrollY) {
           y = this.maxScrollY;
         }
       }
@@ -858,7 +861,7 @@ define([], function () {
       this.updatePosition();
     },
     destroy: function () {
-    //remove bug
+      //remove bug
       $(this.wrapper).remove();
     },
     updatePosition: function () {

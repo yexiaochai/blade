@@ -1,0 +1,30 @@
+﻿
+.cm-scroll-select-group--birthday h3 {
+  border-bottom: 1px solid #dbdbdb;
+  line-height: 44px;
+  text-align: center;
+}
+.cm-scroll-select-group--birthday .cm-scroll-select::before, .cm-scroll-select-group--birthday .cm-scroll-select::after {
+  left: 3px;
+  right: 3px;
+}
+
+.cm-scroll-select-tips {
+  text-align: center;
+  line-height: 30px;
+}
+
+.cm-scroll-select-group .cm-scroll-select-wrap {
+  float: left;
+  width: 50%;
+}
+
+.cm-scroll-select-group--birthday .cm-scroll-select-wrap {
+  float: left;
+  width: 33.3%;
+  margin: 5px 0;
+  border-right: 1px solid #dbdbdb;
+}
+.cm-scroll-select-group--birthday .cm-scroll-select-wrap:nth-last-of-type(1) {
+  border-right: none;
+}

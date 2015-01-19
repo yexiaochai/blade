@@ -1,20 +1,25 @@
-﻿﻿define(['UIView', getAppUITemplatePath('ui.slider'), 'UIScroll'], function (UIView, template, UIScroll) {
+﻿/*
+******bug******
+容器类组件，css传递是一个痛点
+*/
+define(['UIView', getAppUITemplatePath('ui.slider'), 'UIScroll', getAppUICssPath('ui.slider')], function (UIView, template, UIScroll, style) {
 
   return _.inherit(UIView, {
     propertys: function ($super) {
       $super();
       this.template = template;
+      this.addUIStyle(style);
 
-      this.datamodel = {
-        //当前选择id
-        key: this.id,
-        //滚动层的class，感觉没有意义
-        className: '',
-        curClass: 'current',
-        data: [],
-        //索引，内部以此为准
-        index: 0
-      };
+      this.openShadowDom = false;
+
+      //当前选择id
+      this.key = null;
+      //滚动层的class，感觉没有意义
+      this.className = '';
+      this.curClass = 'current';
+      this.data = [];
+      //索引，内部以此为准
+      this.index = 0;
 
       this.itemNum = 0;
       this.displayNum = 3;
@@ -29,8 +34,6 @@
       this.itemHeight = 0;
       this.scrollWidth = 0;
 
-      //不需要包裹层
-      this.needRootWrapper = false;
 
       //选择时候的偏移量
       this.scrollOffset = 0;
@@ -38,10 +41,10 @@
       //滚动对象
       this.scroll = null;
 
-      this.events = {
+      this.addEvents({
         'click .js_scroller>li': 'itemClickAction'
+      });
 
-      };
 
       this.changed = function (item) {
         //        console.log(item);
@@ -53,10 +56,9 @@
 
     },
 
-    //重新父类创建根节点方法
-    //    createRoot: function (html) {
-    //      this.$el = $(html).hide().attr('id', this.id);
-    //    },
+    getViewModel: function () {
+      return this._getDefaultViewModel(['key', 'className', 'curClass', 'data', 'index', 'itemFn', 'firstLoopItem', 'lastLoopItem']);
+    },
 
     itemClickAction: function (e) {
       var el = $(e.currentTarget);
@@ -69,7 +71,8 @@
       $super(opts);
     },
 
-    resetPropery: function () {
+    resetPropery: function ($super) {
+      $super();
       this._resetLoop();
       this._resetNum();
       this._resetIndex();
@@ -77,16 +80,16 @@
 
     _resetLoop: function () {
       if (!this.needLoop) return;
-      this.datamodel.firstLoopItem = $.extend({}, this.datamodel.data[this.datamodel.data.length - 1], true);
-      this.datamodel.lastLoopItem = $.extend({}, this.datamodel.data[0], true);
+      this.firstLoopItem = $.extend({}, this.data[this.data.length - 1], true);
+      this.lastLoopItem = $.extend({}, this.data[0], true);
     },
 
     //这里差一个index值判断**************************
     _resetIndex: function () {
-      if (!this.datamodel.id) return;
-      for (var i = 0, len = this.datamodel.data.length; i < len; i++) {
-        if (this.datamodel.id == this.datamodel.data[i].id) {
-          this.datamodel.index = i;
+      if (!this.key) return;
+      for (var i = 0, len = this.data.length; i < len; i++) {
+        if (this.key == this.data[i].id) {
+          this.index = i;
           break;
         }
       }
@@ -94,20 +97,22 @@
 
     _resetNum: function () {
       //      this.displayNum = this.displayNum % 2 == 0 ? this.displayNum + 1 : this.displayNum;
-      this.itemNum = this.datamodel.data.length;
+      this.itemNum = this.data.length;
     },
 
     initElement: function () {
 
       //几个容器的高度必须统一
-      this.swrapper = this.$el;
+      this.swrapper = this.$('.js_wrapper');
       this.scroller = this.$('.js_scroller');
     },
 
     initSize: function () {
       var item = this.scroller.find('li').eq(0);
       var itemOffset = item.offset();
-      var parent = this.$el.parent();
+
+      //找到包裹层，并求其高度
+      var parent = this.wrapper;
       var ph = (parent[0] && parent[0].clientHeight) || parent.height();
       var _itemNum = this.needLoop ? this.itemNum + 2 : this.itemNum;
       this.wrapeWidth = (this.swrapper[0] && this.swrapper[0].clientWidth) || this.swrapper.width();
@@ -134,8 +139,8 @@
       this.scrollOffset = ((this.displayNum - 1) / 2) * (this.itemWidth);
     },
 
-    reload: function (datamodel) {
-      _.extend(this.datamodel, datamodel);
+    reload: function (data) {
+      this.setOpts(data);
       if (this.scroll) {
         this.scroll.destroy();
         this.scroll = null;
@@ -167,24 +172,19 @@
         var index;
         //处理循环滚动
         if (this.needLoop) {
-
           index = this.getIndexByPosition();
           if (index == this.itemNum) {
             this.setIndex(0, null, null, 0);
             return;
           }
-
           if (index == -1) {
             //多增了两项
             this.setIndex(this.itemNum - 1, null, null, 0);
             return;
           }
-
         }
-
         this.setIndex(this.getIndexByPosition(), true);
       }, this));
-
 
       //为了解决鼠标离屏幕时导致的问题
       this.scroll.on('scrollCancel', $.proxy(function () {
@@ -210,7 +210,7 @@
 
     adjustPosition: function (hasAnimate, time) {
       if (!this.scroll) return;
-      var index = this.datamodel.index, _dis, _time = 0;
+      var index = this.index, _dis, _time = 0;
 
       if (this.needLoop) {
         if (index === 0) {
@@ -229,11 +229,11 @@
 
     resetCss: function () {
       this.$('li').removeClass('current');
-      this.$('li[data-index="' + this.datamodel.index + '"]').addClass('current');
+      this.$('li[data-index="' + this.index + '"]').addClass('current');
     },
 
     resetIndex: function () {
-      this.setIndex(this.datamodel.index, true, true);
+      this.setIndex(this.index, true, true);
     },
 
     //根据位置信息重新设置当前选项
@@ -248,15 +248,15 @@
     },
 
     getIndex: function () {
-      return this.datamodel.index;
+      return this.index;
     },
 
     setIndex: function (i, noPosition, noEvent, time) {
-      if (typeof noPosition == 'undefined' && i == this.datamodel.index) noPosition = true;
+      if (typeof noPosition == 'undefined' && i == this.index) noPosition = true;
 
       //index值是否改变
-      var isChange = this.datamodel.index != i;
-      this.datamodel.index = i;
+      var isChange = this.index != i;
+      this.index = i;
 
       if (!noPosition) this.adjustPosition(true, time);
       this.resetCss();
@@ -269,8 +269,8 @@
     setId: function (id) {
       if (!id) return;
       var index = -1, i, len;
-      for (i = 0, len = this.datamodel.data.length; i < len; i++) {
-        if (this.datamodel.data[i].id == id) { index = i; break; }
+      for (i = 0, len = this.data.length; i < len; i++) {
+        if (this.data[i].id == id) { index = i; break; }
       }
       if (index == -1) return;
       this.setIndex(index, false);
@@ -281,7 +281,7 @@
     },
 
     getSelected: function () {
-      return this.datamodel.data[this.datamodel.index];
+      return this.data[this.index];
     },
 
     addEvent: function ($super) {

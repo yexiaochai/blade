@@ -19,12 +19,10 @@ define(['View', getViewTemplatePath('imageslider'), 'UIImageSlider'], function (
       ];
 
       this.imgSlider = new UIImageSlider({
-        datamodel: {
           data: data,
           itemFn: function (item) {
             return '<img data-src="' + item.src + '" src="' + item.src + '" >';
-          }
-        },
+          },
         displayNum: 1,
         wrapper: this.$('.silder')
       });

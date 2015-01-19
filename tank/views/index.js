@@ -1,4 +1,4 @@
-﻿﻿/*
+﻿/*
 扮演游戏时钟，全局控制器角色
 */
 define(['AbstractView', getViewTemplatePath('index'), 'MoveObj', 'Tank', 'Bullet', 'Boom', 'NPCTank', 'UIAlert'], function (View, viewhtml, MoveObj, Tank, Bullet, Boom, NPCTank, UIAlert) {

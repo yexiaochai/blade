@@ -1,28 +1,36 @@
-﻿﻿
-define(['UILayer', getAppUITemplatePath('ui.bubble.layer')], function (UILayer, template) {
+﻿
+define(['UILayer', getAppUITemplatePath('ui.bubble.layer'), getAppUICssPath('ui.bubble.layer')], function (UILayer, template, style) {
+
+  'use strict';
+
   return _.inherit(UILayer, {
     propertys: function ($super) {
       $super();
       //html模板
       this.template = template;
+      //只继承基类的重置css
+      this.uiStyle[1] = style;
+
+      this.setUIType('bubbleLayer');
+
       this.needMask = true;
 
       this.needReposition = true;
-      this.animateInClass = 'cm-fade-in';
-      this.animateOutClass = 'cm-fade-out';
+      this.animateInClass = 'cm-up-in';
+      this.animateOutClass = 'cm-up-out';
 
-      this.datamodel = {
-        scope: this,
-        data: [],
-        upClass: 'cm-pop--triangle-up',
-        downClass: 'cm-pop--triangle-down',
-        wrapperClass: 'cm-pop--border',
-        curClass: 'active',
-        itemStyleClass: '',
-        needBorder: true,
-        index: -1,
-        dir: 'up'  //箭头方向默认值
-      };
+      //默认数据源
+      this.scope = this;
+      this.data = [];
+      this.upClass = 'cm-pop--triangle-up';
+      this.downClass = 'cm-pop--triangle-down';
+      this.wrapperClass = 'cm-pop--border';
+      this.curClass = 'active';
+      this.itemStyleClass = '';
+      this.needBorder = true;
+      this.index = -1;
+      //箭头方向默认值
+      this.dir = 'up';
 
       this.addEvents({
         'click .cm-pop-list>li': 'clickAction'
@@ -47,34 +55,30 @@ define(['UILayer', getAppUITemplatePath('ui.bubble.layer')], function (UILayer, 
 
     },
 
-    initialize: function ($super, opts) {
-      $super(opts);
-    },
-
-    createRoot: function (html) {
-      this.$el = $(html).hide().attr('id', this.id);
+    getViewModel: function () {
+      return this._getDefaultViewModel(['scope', 'data', 'upClass', 'downClass', 'wrapperClass', 'curClass', 'itemStyleClass', 'needBorder', 'index', 'dir']);
     },
 
     clickAction: function (e) {
       var el = $(e.currentTarget);
       var i = el.attr('data-index');
-      var data = this.datamodel.data[i];
+      var data = this.data[i];
       this.onClick.call(this, data, i, el, e);
     },
 
     initElement: function () {
-      this.el = this.$el;
+      this.el = this.$root;
       this.triangleEl = this.$('.icon-pop-triangle');
       this.windowWidth = $(window).width();
     },
 
     setIndex: function (i) {
-      var curClass = this.datamodel.curClass;
+      var curClass = this.curClass;
       i = parseInt(i);
-      if (i < 0 || i > this.datamodel.data.length || i == this.datamodel.index) return;
-      this.datamodel.index = i;
+      if (i < 0 || i > this.data.length || i == this.index) return;
+      this.index = i;
 
-      //这里不以datamodel改变引起整个dom变化了，不划算
+      //这里不以改变引起整个dom变化了，不划算
       this.$('.cm-pop-list li').removeClass(curClass);
       this.$('li[data-index="' + i + '"]').addClass(curClass);
     },
@@ -97,7 +101,7 @@ define(['UILayer', getAppUITemplatePath('ui.bubble.layer')], function (UILayer, 
 
       var step = 6, w = offset.width - step;
       var top = 0, left = 0, right;
-      if (this.datamodel.dir == 'up') {
+      if (this.dir == 'up') {
         top = (offset.top + offset.height + 8) + 'px';
       } else {
         top = (offset.top - this.el.offset().height - 8) + 'px';
@@ -108,12 +112,14 @@ define(['UILayer', getAppUITemplatePath('ui.bubble.layer')], function (UILayer, 
 
       if (offset.left + (parseInt(this.width) || w) > this.windowWidth) {
         this.el.css({
+          'position': 'absolute',
           width: this.width || w,
           top: top,
           right: '2px'
         });
       } else {
         this.el.css({
+          'position': 'absolute',
           width: this.width || w,
           top: top,
           left: left
@@ -132,11 +138,8 @@ define(['UILayer', getAppUITemplatePath('ui.bubble.layer')], function (UILayer, 
     addEvent: function ($super) {
       $super();
       this.on('onCreate', function () {
-        this.$el.removeClass('cui-layer');
         this.mask.$el.addClass('cm-overlay--transparent');
         this.mask.$el.removeClass('cui-mask');
-
-        this.$el.css({ position: 'absolute' });
       });
       this.on('onShow', function () {
         this.setzIndexTop(this.el);

@@ -1,9 +1,9 @@
-﻿﻿/*
+﻿/*
+******bug******
+这个布局是个大问题，布局需要重做
 对select组件的使用，当前最复杂的组件
-
 */
-define(['UILayer', getAppUITemplatePath('ui.group.select'), 'UISelect'], function (UILayer, template, UISelect) {
-
+define(['UILayer', getAppUITemplatePath('ui.group.select'), 'UISelect', getAppUICssPath('ui.group.select')], function (UILayer, template, UISelect, style) {
 
   return _.inherit(UILayer, {
     propertys: function ($super) {
@@ -11,14 +11,16 @@ define(['UILayer', getAppUITemplatePath('ui.group.select'), 'UISelect'], functio
       //html模板
       this.template = template;
 
-      this.datamodel = {
-        title: 'scrollLayer',
-        tips: 'tips',
-        btns: [
-          { name: '取消', className: 'cui-btns-cancel' },
-          { name: '确定', className: 'cui-btns-ok' }
-        ]
-      };
+      this.addUIStyle(style);
+
+      this.scrollCreated = false;
+
+      this.title = '';
+      this.tips = '';
+      this.btns = [
+        { name: '取消', className: 'cui-btns-cancel js_cancel' },
+        { name: '确定', className: 'cui-btns-ok js_ok' }
+      ];
 
       this.data = [];
       this.indexArr = [0, 0, 0];
@@ -33,9 +35,7 @@ define(['UILayer', getAppUITemplatePath('ui.group.select'), 'UISelect'], functio
         }
       ];
 
-      this.onOkAction = function (items) {
-
-      };
+      this.onOkAction = function (items) { };
 
       this.onCancelAction = function (items) {
         this.hide();
@@ -44,12 +44,17 @@ define(['UILayer', getAppUITemplatePath('ui.group.select'), 'UISelect'], functio
       //这里便只有一个接口了
       this.displayNum = 5;
 
-      this.events = {
-        'click .cui-btns-ok': 'okAction',
-        'click .cui-btns-cancel': 'cancelAction'
-      };
+      this.addEvents({
+        'click .js_ok': 'okAction',
+        'click .js_cancel': 'cancelAction'
+      });
 
     },
+
+    getViewModel: function () {
+      return this._getDefaultViewModel(['title', 'tips', 'btns']);
+    },
+
 
     okAction: function (e) {
       var items = [];
@@ -68,22 +73,25 @@ define(['UILayer', getAppUITemplatePath('ui.group.select'), 'UISelect'], functio
     },
 
     initElement: function () {
-      this.scrollWrapper = this.$('.cui-roller');
-      this.tips = this.$('.cui-roller-tips');
+      this.scrollWrapper = this.$('.js_wrapper');
+      this.tips = this.$('.js_tips');
     },
 
 
     _initScroll: function () {
-      this._destroyScroll();
+      if (this.scrollCreated) return;
+      this.scrollCreated = true;
+      //      this._destroyScroll();
       var i, len, item, changeAction;
       for (i = 0, len = this.data.length; i < len; i++) {
         item = this.data[i];
         changeAction = this.changedArr[i] || function () { };
         this.scrollArr[i] = new UISelect({
-          datamodel: {
-            data: item,
-            index: this.indexArr[i],
-            id: this.idArr[i]
+          data: item,
+          index: this.indexArr[i],
+          key: this.idArr[i],
+          onCreate: function () {
+            this.$root.addClass('cm-scroll-select-wrap');
           },
           displayNum: this.displayNum,
           changed: $.proxy(changeAction, this),
@@ -93,7 +101,7 @@ define(['UILayer', getAppUITemplatePath('ui.group.select'), 'UISelect'], functio
         //纯粹业务需求
         if (i == 0 && len == 3) {
           this.scrollArr[i].on('onShow', function () {
-            this.$el.addClass('cui-flex2');
+            //            this.$el.addClass('cm-scroll-select-wrap');
           });
         }
 
@@ -103,7 +111,7 @@ define(['UILayer', getAppUITemplatePath('ui.group.select'), 'UISelect'], functio
 
     //缺少接口
     setTips: function (msg) {
-      this.datamodel.tips = msg;
+      this.tips = msg;
       this.tips.html(msg);
     },
 
@@ -115,7 +123,7 @@ define(['UILayer', getAppUITemplatePath('ui.group.select'), 'UISelect'], functio
           this.scrollArr[i] = null;
         }
       }
-
+      this.scrollCreated = false;
     },
 
     initialize: function ($super, opts) {
@@ -132,7 +140,7 @@ define(['UILayer', getAppUITemplatePath('ui.group.select'), 'UISelect'], functio
       }, 1);
 
       this.on('onHide', function () {
-        this._destroyScroll();
+        //        this._destroyScroll();
 
       }, 1);
 

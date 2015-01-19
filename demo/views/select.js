@@ -1,4 +1,4 @@
-﻿﻿define(['View', getViewTemplatePath('select'), 'UISelect'], function (View, viewhtml, UISelect) {
+﻿define(['View', getViewTemplatePath('select'), 'UISelect'], function (View, viewhtml, UISelect) {
 
   return _.inherit(View, {
     onCreate: function () {
@@ -54,9 +54,7 @@
 
         this.demo2 = new UISelect({
           wrapper: this.$('.row2'),
-          datamodel: {
-            data: data2
-          },
+            data: data2,
           changed: function (item) {
             var curMonth = parseInt(item.name);
             var maxDay = dayFlag[curMonth];
@@ -95,11 +93,10 @@
       var scope = this, curItem;
       var demo1Sec = scope.$('.demo1Sec');
       this.demo1 = new UISelect({
-        datamodel: {
           data: [
-            { id: 1, name: '中国' }, { id: 2, name: '美国' }, { id: 3, name: '英国' }
-          ]
-        },
+            { id: 1, name: '中国' }, { id: 2, name: '美国' }, { id: 3, name: '英国' },
+            { id: 4, name: '中国4' }, { id: 5, name: '美国5' }, { id: 6, name: '英国6' }
+          ],
         displayNum: 3,
         changed: function (item) {
           demo1Sec.html(item.id + ': ' + item.name);
@@ -135,10 +132,8 @@
       };
 
       this.month = new UISelect({
-        datamodel: {
-          data: m
-        },
-        displayNum: 3,
+          data: m,
+        displayNum: 5,
         changed: function (item) {
         },
         wrapper: this.$('.month'),
@@ -146,9 +141,9 @@
           var m = item.id, i, index, tmp = dayFlag[m];
           for (i = 31; i > 28; i--) {
             index = i - 1;
-            scope.day.datamodel.data[index].disabled = false;
+            scope.day.data[index].disabled = false;
             if (i > tmp) {
-              scope.day.datamodel.data[index].disabled = true;
+              scope.day.data[index].disabled = true;
             }
           }
           scope.day.reload();
@@ -157,10 +152,8 @@
       });
 
       this.day = new UISelect({
-        datamodel: {
-          data: d
-        },
-        displayNum: 3,
+          data: d,
+        displayNum: 5,
         changed: function (item) {
         },
         wrapper: this.$('.day'),

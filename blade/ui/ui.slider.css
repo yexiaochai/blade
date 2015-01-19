@@ -1,0 +1,54 @@
+﻿.cm-slide .cm-slide-list:before, .cm-slide .cm-slide-list:after {
+  content: "";
+  display: table;
+}
+.cm-slide .cm-slide-list:after {
+  clear: both;
+}
+
+.cm-slide {
+  overflow: hidden;
+  position: relative;
+  height: 210px;
+}
+.cm-slide .cm-slide-view {
+  width: 100%;
+}
+.cm-slide .cm-slide-list {
+  width: 4000px;
+  position: absolute;
+}
+.cm-slide .cm-slide-list .cm-slide-item {
+  float: left;
+}
+.cm-slide.cm-slide--vertical .cm-slide-list {
+  width: 100%;
+}
+.cm-slide.cm-slide--vertical .cm-slide-list .cm-slide-item {
+  float: none;
+}
+.cm-slide .cm-slide-bullet {
+  position: absolute;
+  z-index: 99;
+  left: 0;
+  right: 0;
+  bottom: 10px;
+  text-align: center;
+}
+.cm-slide .cm-slide-bullet .cm-bullet-item {
+  font-style: normal;
+  font-size: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 5px;
+  margin: 2px;
+}
+.cm-slide .cm-slide-bullet .cm-bullet-item.active {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.cm-slide--full-img img {
+  width: 100%;
+}

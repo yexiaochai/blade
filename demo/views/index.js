@@ -1,4 +1,4 @@
-﻿﻿define(['View', getViewTemplatePath('index'), 'UIGroupList'], function (View, viewhtml, UIGroupList) {
+﻿define(['View', getViewTemplatePath('index'), 'UIGroupList'], function (View, viewhtml, UIGroupList) {
 
   return _.inherit(View, {
     onCreate: function () {
@@ -26,7 +26,7 @@
     searchItemAction: function (e) {
       var gindex = $(e.currentTarget).attr('data-group');
       var index = $(e.currentTarget).attr('data-index');
-      this.forward(this.uidata[gindex].data[index].uiname);
+      this.forward(this.uidata[gindex].data[index]);
     },
 
     closeSearchAction: function () {
@@ -34,6 +34,7 @@
     },
 
     demoItemAction: function (item, groupIndex, index, e) {
+      var scope = this;
       scope.forward(item.uiname);
     },
 
@@ -112,9 +113,9 @@
         { 'uiname': 'select', 'name': 'select组件' },
         { 'uiname': 'switch', 'name': 'switch组件' },
         { 'uiname': 'tab', 'name': 'tab组件' },
-        { 'uiname': 'calendar', 'name': '日历组件' },
-        { 'uiname': 'group.list', 'name': '分组列表' },
-        { 'uiname': 'group.list', 'name': '搜索列表（城市搜索，地址搜索，待补充）' }
+        { 'uiname': 'calendar', 'name': '日历组件' }
+//        { 'uiname': 'group.list', 'name': '分组列表' },
+//        { 'uiname': 'group.list', 'name': '搜索列表（城市搜索，地址搜索，待补充）' }
       ];
 
       var groupList3 = [
@@ -136,19 +137,17 @@
         { name: '弹出层类组件', data: groupList1 },
         { name: '常用组件', data: groupList2 },
         { name: '滚动类组件', data: groupList3 },
-        { name: '全局类', data: groupList4 }
+//        { name: '全局类', data: groupList4 }
       ];
 
       this.uidata = uidata;
 
       this.groupList = new UIGroupList({
-        datamodel: {
-          data: uidata,
-          filter: 'uiname,name'
-        },
+        data: uidata,
+        filter: 'uiname,name',
         wrapper: this.$('.cui-citys-bd'),
         onItemClick: function (item, groupIndex, index, e) {
-          scope.demoItemAction(item.uiname);
+          scope.demoItemAction(item);
         }
       });
 

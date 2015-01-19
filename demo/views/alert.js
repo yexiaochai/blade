@@ -1,4 +1,4 @@
-﻿﻿define(['View', getViewTemplatePath('alert'), 'UIAlert'], function (View, viewhtml, UIAlert) {
+﻿define(['View', getViewTemplatePath('alert'), 'UIAlert'], function (View, viewhtml, UIAlert) {
 
   return _.inherit(View, {
     onCreate: function () {
@@ -21,40 +21,32 @@
     },
 
     fxdemo: function () {
-this.showMessage({
-  datamodel: {
-    content: '框架使用'
-  }
-});
+      this.showMessage({
+        content: '框架使用'
+      });
     },
 
     fxdemo01: function () {
-this.showMessage({
-  datamodel: {
-    title: '带标题',
-    content: '框架使用'
-  }
-});
+      this.showMessage({
+        title: '带标题',
+        content: '框架使用'
+      });
     },
 
     fxdemo02: function () {
-this.showMessage({
-  datamodel: {
-    title: '带标题',
-    content: '框架使用'
-  },
-  okAction: function () {
-    alert('重置回调');
-    this.hide();
-  }
-});
+      this.showMessage({
+        title: '带标题',
+        content: '框架使用',
+        okAction: function () {
+          alert('重置回调');
+          this.hide();
+        }
+      });
     },
 
     fxdemo03: function () {
       this.showMessage({
-        datamodel: {
-          content: '框架使用-带动画'
-        },
+        content: '框架使用-带动画',
         animateShowAction: function (el) {
           el.css({
             '-webkit-transform': 'translate(0, -50%)',
@@ -87,22 +79,18 @@ this.showMessage({
 
     fxdemo04: function () {
       this.showConfirm({
-        datamodel: {
-          title: '带标题',
-          content: '框架使用'
-        }
+        title: '带标题',
+        content: '框架使用'
       });
     },
 
     fxdemo05: function () {
       this.showConfirm({
-        datamodel: {
-          content: '框架使用',
-          btns: [
+        content: '框架使用',
+        btns: [
             { name: '取消1', className: 'cui-btns-cancel' },
             { name: '确定1', className: 'cui-btns-ok' }
-          ]
-        },
+          ],
         okAction: function () {
           alert('重置');
           this.hide();
@@ -113,6 +101,7 @@ this.showMessage({
     demo1: function () {
       if (!this.alert1) {
         this.alert1 = new UIAlert({
+        content: '带动画',
           animateShowAction: function (el) {
             el.css({
               '-webkit-transform': 'translate(0, -50%)',
@@ -136,10 +125,8 @@ this.showMessage({
     demo2: function () {
       if (!this.alert2) {
         this.alert2 = new UIAlert({
-          datamodel: {
-            title: 'demo01',
-            content: 'content01'
-          },
+          title: 'demo01',
+          content: 'content01',
           okAction: function () {
             alert('ok');
             this.hide();
@@ -156,15 +143,13 @@ this.showMessage({
     demo3: function () {
       if (!this.alert3) {
         this.alert3 = new UIAlert({
-          datamodel: {
-            title: 'demo02',
-            content: 'content02',
-            btns: [
+          title: 'demo02',
+          content: 'content02',
+          btns: [
               { name: '知道了', className: 'cui-btns-ok' },
               { name: '不知道', className: 'cui-btns-no' },
               { name: '未知', className: 'cui-btns-unknown' }
-            ]
-          },
+            ],
           events: {
             'click .cui-btns-ok': 'okAction',
             'click .cui-btns-no': 'noAction',
@@ -190,13 +175,11 @@ this.showMessage({
     demo4: function () {
       if (!this.alert4) {
         this.alert4 = new UIAlert({
-          datamodel: {
-            title: 'demo02',
-            content: 'content02',
-            btns: [
+          title: 'demo02',
+          content: 'content02',
+          btns: [
               { name: '知道了', className: 'cui-btns-ok' }
-            ]
-          },
+            ],
           events: {
             'click .cui-btns-ok': 'okAction'
           },

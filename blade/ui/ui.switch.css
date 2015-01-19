@@ -1,0 +1,41 @@
+﻿.icon-switch {
+  height: 28px;
+  width: 46px;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  background-color: #CCCCCC;
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  z-index: 1;
+}
+.icon-switch::before {
+  content: "";
+  height: 28px;
+  width: 46px;
+  position: absolute;
+  left: -46px;
+  background-color: #099FDE;
+  border-radius: 14px;
+  transition: left 0.2s ease 0s;
+  z-index: 2;
+}
+.icon-switch::after {
+  content: "";
+  height: 24px;
+  width: 24px;
+  background-color: #fff;
+  border-radius: 14px;
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  transition: left 0.2s ease 0s;
+  z-index: 3;
+}
+.icon-switch.active::before {
+  left: 0;
+}
+.icon-switch.active::after {
+  left: 20px;
+}

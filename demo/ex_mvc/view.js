@@ -101,9 +101,7 @@ hljs.registerLanguage("json", function(a) {
         if(!params) params = {};
           if(typeof params == 'string') {
           params = {
-            datamodel : {
               content: params
-            }
           };
         }
 

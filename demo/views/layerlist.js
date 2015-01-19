@@ -22,9 +22,7 @@ define(['View', 'UILayerList', getViewTemplatePath('layerlist')], function (View
           }
 
           this.list = new UILayerList({
-            datamodel: {
-              list: data
-            },
+              list: data,
             onItemAction: function (item) {
               scope.$('.listSec').html(item.name);
               this.hide();

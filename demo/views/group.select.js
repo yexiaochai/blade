@@ -1,4 +1,4 @@
-﻿﻿define(['View', getViewTemplatePath('group.select'), 'UIGroupSelect'], function (View, viewhtml, UIGroupSelect) {
+﻿define(['View', getViewTemplatePath('group.select'), 'UIGroupSelect'], function (View, viewhtml, UIGroupSelect) {
 
   return _.inherit(View, {
     onCreate: function () {
@@ -25,6 +25,7 @@
 
         if (!this.groupSelect) {
           this.groupSelect = new UIGroupSelect({
+          title: 'sdfd',
             data: [data1, data2],
             onOkAction: function (items) {
               console.log('ok', items);
@@ -61,10 +62,8 @@
 
         if (!this.groupSelect2) {
           this.groupSelect2 = new UIGroupSelect({
-            datamodel: {
               title: '日期选择',
-              tips: ''
-            },
+              tips: '',
             data: [data1, data2, data3],
             changedArr: [function (item) {
               console.log('my year:', item);
@@ -77,9 +76,9 @@
 
               for (var i = 31; i > 28; i--) {
                 //重置可选
-                d.datamodel.data[i - 1].disabled = true;
+                d.data[i - 1].disabled = true;
                 //如果当月最大日数小于i，则为不可选
-                if (i > tmp) d.datamodel.data[i - 1].disabled = false;
+                if (i > tmp) d.data[i - 1].disabled = false;
               }
               //重绘数据模型
               this.scrollArr[2].reload();
