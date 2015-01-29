@@ -3,33 +3,91 @@
 <html class="ie">
 <!--<![endif]-->
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <title>hello world</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta content="telephone=no" name="format-detection" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <link href="../res/style/style.css" rel="stylesheet" type="text/css" />
-    <link href="test.css" rel="stylesheet" type="text/css" />
-
-  </head>
-  <body onselectstart="return false">
-
-    <script src="../blade/libs/require.js" type="text/javascript"></script>
-
-    <script src="../blade/libs/zepto.js" type="text/javascript"></script>
-    <script src="../blade/libs/underscore.js" type="text/javascript"></script>
-    <script src="../blade/libs/underscore.extend.js" type="text/javascript"></script>
-    <script src="../blade/libs/fastclick.js" type="text/javascript"></script>
-
-    <script src="../blade/common.js" type="text/javascript"></script>
-    <script type="text/javascript" src="./main.js"></script>
-
-    <!--
+<head>
+  <meta charset="utf-8" />
+  <title>hello world</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta content="telephone=no" name="format-detection" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <link href="../res/style/style.css" rel="stylesheet" type="text/css" />
+  <link href="test.css" rel="stylesheet" type="text/css" />
+</head>
+<body onselectstart="return false">
+<header >
+  <a class="header" href="taobao://wireless">后退</a>
+  <h1 class="js_title">
+    标题
+  </h1>
+</header>
+  <script src="../blade/libs/require.js" type="text/javascript"></script>
+  <script src="../blade/libs/zepto.js" type="text/javascript"></script>
+  <script src="../blade/libs/underscore.js" type="text/javascript"></script>
+  <script src="../blade/libs/underscore.extend.js" type="text/javascript"></script>
+  <script src="../blade/libs/fastclick.js" type="text/javascript"></script>
+  <script src="../blade/common.js" type="text/javascript"></script>
+  <script type="text/javascript" src="./main.js"></script>
+  <!--
     //todo   bugs
      1、三个按钮样式有问题
 
      -->
 
-  </body>
+
+<script type="text/javascript">
+window.Hybrid = {};
+
+//封装统一的发送url接口，解决ios、android兼容问题，这里发出的url会被拦截，会获取其中参数，比如：
+//这里会获取getAdressList参数，调用native接口回去通讯录数据，形成json data数据，拿到webview的window执行，window.Hybrid['hybrid12334'](data)
+var bridgePostMessage = function (url) {
+  if (isIOS()) {
+    window.location = url;
+  } if (isAndriond()) {
+    var ifr = $('<iframe src="' + url + '"/>');
+    $('body').append(ifr);
+  }
+};
+
+//根据参数返回满足Hybrid条件的url，比如taobao://getAdressList?callback=hybrid12334
+var _getHybridUrl = function (params) {
+  var url = '';
+  //...aa操作paramss生成url
+  return url;
+};
+
+//页面级用户调用的方法
+var requestHybrid = function (params) {
+  //其它操作......
+
+  //生成唯一执行函数，执行后销毁
+  var t = 'hybrid_' + (new Date().getTime());
+  //处理有回调的情况
+  if (params.callback) {
+    window.Hybrid[t] = function (data) {
+      params.callback(data);
+      delete window.Hybrid[t];
+    }
+  }
+
+  bridgePostMessage(_getHybridUrl(params))
+};
+
+//h5页面开发，调用Hybrid接口，获取通讯录数据
+define([], function () {
+  return function () {
+    //业务实际调用点
+    requestHybrid({
+      //native标志位
+      tagname: 'getAdressList',
+      //返回后执行回调函数
+      callback: function (data) {
+        //处理data，生成html结构，装载页面
+      }
+    });
+  }
+});
+
+     
+</script>
+
+</body>
 </html>
