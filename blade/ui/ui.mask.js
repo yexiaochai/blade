@@ -3,7 +3,7 @@
 用于继承的类，会自动垂直居中
 
 */
-define(['UIView', getAppUICssPath('ui.mask')], function (UIView, style) {
+define(['UIView', 'text!C_UIMask'], function (UIView, style) {
   'use strict';
 
   return _.inherit(UIView, {

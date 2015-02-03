@@ -3,7 +3,7 @@
 这个使用与定制化接太困难，需要更加方便的使用
 太定制化的功能业务团队往往不能接受
 */
-define(['UIView', getAppUITemplatePath('ui.calendar'), getAppUICssPath('ui.calendar')], function (UIView, template, style) {
+define(['UIView', 'text!T_UICalendar', 'text!C_UICalendar'], function (UIView, template, style) {
 
   return _.inherit(UIView, {
     propertys: function ($super) {

@@ -1,0 +1,234 @@
+﻿.cm-header .cm-page-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.icon-tel,
+.icon-home {
+  background-image: url(http://pic.c-ctrip.com/h5/common/bg-global.png);
+  background-repeat: no-repeat;
+  -webkit-background-size: 240px auto;
+  background-size: 240px auto;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+.icon-back {
+  width: 44px;
+  height: 44px;
+  line-height: 44px;
+}
+
+.icon-back::before {
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  vertical-align: middle;
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.icon-list {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  line-height: 25px;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.icon-list::before {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  width: 5px;
+  height: 5px;
+  border-radius: 3px;
+  background-color: #fff;
+  -webkit-box-shadow: 10px 0 0 #fff, -10px 0 0 #fff;
+  box-shadow: 10px 0 0 #fff, -10px 0 0 #fff;
+}
+
+.icon-search {
+  border: 2px solid #fff;
+  border-radius: 50%;
+  height: 14px;
+  width: 14px;
+  display: inline-block;
+  position: relative;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.icon-search::after {
+  content: "";
+  background: #fff;
+  height: 7px;
+  width: 2px;
+  position: absolute;
+  left: 11px;
+  top: 8px;
+  -webkit-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+.icon-tel {
+  width: 20px;
+  height: 20px;
+  background-position: -23px -50px;
+}
+
+.icon-home {
+  width: 20px;
+  height: 20px;
+  background-position: 0 -52px;
+}
+
+.cm-header {
+  position: fixed;
+  left: 0;
+  right: 0;
+}
+
+.cm-header {
+  -webkit-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  top: 0;
+  height: 44px;
+  line-height: 44px;
+  text-align: center;
+  background-color: #099fde;
+  color: #fff;
+  z-index: 960;
+}
+
+.cm-header .cm-page-title,
+.cm-header .cm-page-mutil-title,
+.cm-header .cm-page-select-title {
+  position: absolute;
+  left: 88px;
+  right: 88px;
+}
+
+.cm-header .cm-page-title {
+  line-height: 44px;
+  font-size: 18px;
+}
+
+.cm-header .cm-page-title .cm-title-l {
+  line-height: 28px;
+  display: block;
+}
+
+.cm-header .cm-page-title .cm-title-s {
+  line-height: 1;
+  font-size: 12px;
+  display: block;
+}
+
+.cm-header .cm-page-mutil-title {
+  font-size: 14px;
+  line-height: 19px;
+  padding-top: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  height: 44px;
+}
+
+.cm-header .cm-page-tabs-title {
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0);
+  -ms-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
+  display: inline-block;
+  background-color: #066f9b;
+  border-radius: 4px;
+  padding: 1px;
+  line-height: 32px;
+  margin: 5px 0 0 0;
+}
+
+.cm-header .cm-page-tabs-title span {
+  float: left;
+  padding: 0 15px;
+}
+
+.cm-header .cm-page-tabs-title span.active {
+  border-radius: 4px;
+  background-color: #099fde;
+}
+
+.cm-header .cm-page-select-title {
+  line-height: 44px;
+}
+
+.cm-header .cm-page-select-title::after {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  width: 6px;
+  height: 6px;
+  border-left: 2px solid white;
+  border-bottom: 2px solid white;
+  -webkit-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  display: inline-block;
+  margin-left: 5px;
+  vertical-align: middle;
+  position: relative;
+  top: -2px;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.cm-header .cm-page-select-title.expanded::after {
+  -webkit-transform: rotate(135deg);
+  -ms-transform: rotate(135deg);
+  transform: rotate(135deg);
+  top: 1px;
+}
+
+.cm-header .cm-header-icon {
+  width: 44px;
+  height: 44px;
+  display: inline-block;
+  text-align: center;
+  background-color: #099fde;
+  cursor: pointer;
+}
+
+.cm-header .cm-header-icon:active {
+  background-color: #077cad;
+}
+
+.cm-header .cm-header-btn {
+  padding: 0 10px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.cm-header .cm-header-btn:active {
+  background-color: #077cad;
+}

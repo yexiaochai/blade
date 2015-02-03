@@ -2,8 +2,7 @@
 这里需要考虑这个方案是否值得
 每一次数据的改变皆会引发dom 的重组事件的解绑与绑定，datamodel方案是否真的就是好？
 */
-define(['UIView', getAppUITemplatePath('ui.num'), getAppUICssPath('ui.num')], function (UIView, template, style) {
-
+define(['UIView', 'text!T_UINum', 'text!C_UINum'], function (UIView, template, style) {
 
   return _.inherit(UIView, {
     propertys: function ($super) {

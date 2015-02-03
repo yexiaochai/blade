@@ -1,14 +1,8 @@
 ﻿(function () {
 
+  //项目根路径，这个会跟着外层入口index.html而变化
   var app = './blade/';
-
-  window.getAppUITemplatePath = function (path) {
-    return 'text!' + app + 'ui/' + path + '.html';
-  }
-
-  window.getAppUICssPath = function (path) {
-    return 'text!' + app + 'ui/' + path + '.css';
-  }
+  //模板路径
 
   require.config({
     shim: {
@@ -18,64 +12,112 @@
     },
     paths: {
       'text': app + 'libs/require.text',
-
-      //核心MVC
       'AbstractApp': app + 'mvc/abstract.app',
-      'AbstractView': app + 'mvc/abstract.view',
 
-      'cLazyload': app + 'common/c.lazyload',
-      'cValidate': app + 'common/c.validate',
-      'cHighlight': app + 'common/c.highlight',
-      'cInputclear': app + 'common/c.inputclear',
-
-
-
-      //UI组件
+      //抽象view
       'UIView': app + 'ui/ui.abstract.view',
-      'text!ui.abstract.view': app + 'ui/ui.abstract.view.css',
+      'C_UIView': app + 'ui/ui.abstract.view.css',
 
-
-
-      'UILayer': app + 'ui/ui.layer',
+      //alert组件
       'UIAlert': app + 'ui/ui.alert',
-      'UIMask': app + 'ui/ui.mask',
-      'UILoading': app + 'ui/ui.loading',
-      'UILoadingLayer': app + 'ui/ui.loading.layer',
-      'UIToast': app + 'ui/ui.toast',
+      'T_UIAlert': app + 'ui/ui.alert.html',
 
-
-
-      'T_UIToast': app + 'ui/ui.toast.html',
-
-//      'T_UIToast': 'http://localhost:5389/blade/demo/templates/toast.html',
-
-
-      'UIInlineView': app + 'ui/ui.inline.view',
-      'UINum': app + 'ui/ui.num',
-      'UISwitch': app + 'ui/ui.switch',
+      //气泡组件
       'UIBubbleLayer': app + 'ui/ui.bubble.layer',
-      'UITab': app + 'ui/ui.tab',
-      'UIScroll': app + 'ui/ui.scroll',
-      'UIScrollLayer': app + 'ui/ui.scroll.layer',
-      'UIRadioList': app + 'ui/ui.radio.list',
-      'UISelect': app + 'ui/ui.select',
-      'UIGroupSelect': app + 'ui/ui.group.select',
-      'UIGroupList': app + 'ui/ui.group.list',
+      'T_UIBubbleLayer': app + 'ui/ui.bubble.layer.html',
+      'C_UIBubbleLayer': app + 'ui/ui.bubble.layer.css',
+
+      //日历
       'UICalendar': app + 'ui/ui.calendar',
-      'UISlider': app + 'ui/ui.slider',
+      'T_UICalendar': app + 'ui/ui.calendar.html',
+      'C_UICalendar': app + 'ui/ui.calendar.css',
+
+      //分组列表
+      'UIGroupList': app + 'ui/ui.group.list',
+      'T_UIGroupList': app + 'ui/ui.group.list.html',
+      'C_UIGroupList': app + 'ui/ui.group.list.css',
+
+      //头部组件
+      'UIHeader': app + 'ui/ui.header',
+      'T_UIHeader': app + 'ui/ui.header.html',
+      'C_UIHeader': app + 'ui/ui.header.css',
+
+      //身份证组件
+      'UIIdentitycard': app + 'ui/ui.identitycard',
+      'T_UIIdentitycard': app + 'ui/ui.identitycard.html',
+      'C_UIIdentitycard': app + 'ui/ui.identitycard.css',
+
+      //图片轮播
       'UIImageSlider': app + 'ui/ui.image.slider',
 
+      //弹出层基类
+      'UILayer': app + 'ui/ui.layer',
+      'T_UILayer': app + 'ui/ui.layer.html',
+      'C_UILayer': app + 'ui/ui.layer.css',
 
-      'UIIdentitycard': app + 'ui/ui.identitycard',
+      //底部弹出层列表
       'UILayerList': app + 'ui/ui.layer.list',
+      'T_UILayerList': app + 'ui/ui.layer.list.html',
+      'C_UILayerList': app + 'ui/ui.layer.list.css',
 
-      'UIHeader': app + 'ui/ui.header',
+      //loading弹出层
+      'UILoadingLayer': app + 'ui/ui.loading.layer',
+      'T_UILoadingLayer': app + 'ui/ui.loading.layer.html',
+      'C_UILoadingLayer': app + 'ui/ui.loading.layer.css',
+
+      //蒙版
+      'UIMask': app + 'ui/ui.mask',
+      'C_UIMask': app + 'ui/ui.mask.css',
+
+      //数字组件
+      'UINum': app + 'ui/ui.num',
+      'T_UINum': app + 'ui/ui.num.html',
+      'C_UINum': app + 'ui/ui.num.css',
+
+      //可拖动选择弹出层
+      'UIRadioList': app + 'ui/ui.radio.list',
+      'T_UIRadioList': app + 'ui/ui.radio.list.html',
+
+      //IScroll滚动基类
+      'UIScroll': app + 'ui/ui.scroll',
+
+      //滚动容器层
+      'UIScrollLayer': app + 'ui/ui.scroll.layer',
+      'T_UIScrollLayer': app + 'ui/ui.radio.layer.html',
+
+      //select组件
+      'UISelect': app + 'ui/ui.select',
+      'T_UISelect': app + 'ui/ui.select.html',
+      'C_UISelect': app + 'ui/ui.select.css',
+
+      //slider横向滚动组件
+      'UISlider': app + 'ui/ui.slider',
+      'T_UISlider': app + 'ui/ui.slider.html',
+      'C_UISlider': app + 'ui/ui.slider.css',
+
+      //switch组件
+      'UISwitch': app + 'ui/ui.switch',
+      'T_UISwitch': app + 'ui/ui.switch.html',
+      'C_UISwitch': app + 'ui/ui.switch.css',
+
+      //tab组件
+      'UITab': app + 'ui/ui.tab',
+      'T_UITab': app + 'ui/ui.tab.html',
+      'C_UITab': app + 'ui/ui.tab.css',
+
+      //toast提升
+      'UIToast': app + 'ui/ui.toast',
+      'T_UIToast': app + 'ui/ui.toast.html',
+      'C_UIToast': app + 'ui/ui.toast.css',
+
+      //404提示
+      'UIWarning404': app + 'ui/ui.warning404',
+      'T_UIWarning404': app + 'ui/ui.warning404.html',
+      'C_UIWarning404': app + 'ui/ui.warning404.css',
 
 
-      'UIInputClear': app + 'ui/ui.inputclear',
-      'UIWarning404': app + 'ui/ui.warning404'
 
-
+      'cHighlight': app + 'common/c.highlight',
     }
 
   });

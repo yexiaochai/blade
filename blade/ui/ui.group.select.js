@@ -3,7 +3,7 @@
 这个布局是个大问题，布局需要重做
 对select组件的使用，当前最复杂的组件
 */
-define(['UILayer', getAppUITemplatePath('ui.group.select'), 'UISelect', getAppUICssPath('ui.group.select')], function (UILayer, template, UISelect, style) {
+define(['UILayer', 'text!T_UIGroupSelect', 'text!C_UIGroupSelect', 'UISelect'], function (UILayer, template, style, UISelect) {
 
   return _.inherit(UILayer, {
     propertys: function ($super) {

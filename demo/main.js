@@ -3,7 +3,7 @@
   var project = 'demo/';
 
   window.getViewTemplatePath = function (path) {
-    return 'text!' + project + 'templates/' + path + '.html';
+    return 'text!' + project + 'views/' + path + '.html';
   };
 
 
@@ -83,6 +83,9 @@
       'viewRootPath': '' + project + 'views/',
       animations: animations
     });
+
+    window.Blade = app;
+
     $.bindFastClick && $.bindFastClick();
 
   });

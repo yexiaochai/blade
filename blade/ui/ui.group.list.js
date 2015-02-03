@@ -3,7 +3,7 @@
 这里针对搜索所做功能过于薄弱，需要处理
 
 */
-define(['UIView', getAppUITemplatePath('ui.group.list'), getAppUICssPath('ui.group.list')], function (UIView, template, style) {
+define(['UIView', 'text!T_UIGroupList', 'text!C_UIGroupList'], function (UIView, template, style) {
   'use strict';
 
   return _.inherit(UIView, {

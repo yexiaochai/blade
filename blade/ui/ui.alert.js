@@ -3,7 +3,7 @@
 用于继承的类，会自动垂直居中
 
 */
-define(['UILayer', getAppUITemplatePath('ui.alert')], function (UILayer, template) {
+define(['UILayer', 'text!T_UIAlert'], function (UILayer, template) {
 
   return _.inherit(UILayer, {
     propertys: function ($super) {

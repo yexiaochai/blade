@@ -1,0 +1,27 @@
+﻿<pre><code>
+/*
+这是老代码的调用，接口与老header保持一致，这里做了兼容
+*/
+this.header.set({
+  title: '基本Header使用',
+  subtitle: '中间副标题',
+  back: true,
+  backtext: '取消',
+  tel: { number: 1111 },
+  home: true,
+  search: true,
+  btn: { title: "登录", id: 'confirmBtn', classname: 'header_r' },
+  events: {
+    returnHandler: function () {
+      console.log('back');
+    },
+    homeHandler: function (e) {
+      console.log('home');
+    },
+    commitHandler: function (e) {
+      console.log('commit');
+    }
+  }
+});
+this.header.show();
+</code></pre>

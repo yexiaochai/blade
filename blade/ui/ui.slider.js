@@ -2,7 +2,7 @@
 ******bug******
 容器类组件，css传递是一个痛点
 */
-define(['UIView', getAppUITemplatePath('ui.slider'), 'UIScroll', getAppUICssPath('ui.slider')], function (UIView, template, UIScroll, style) {
+define(['UIView', 'text!T_UISlider', 'text!C_UISlider', 'UIScroll'], function (UIView, template, style, UIScroll) {
 
   return _.inherit(UIView, {
     propertys: function ($super) {

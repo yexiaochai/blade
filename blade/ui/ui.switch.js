@@ -2,7 +2,7 @@
 与num组件一样，此类datamodel的方案是否会浪费资源，是否影响手机渲染，需要实际验证了
 因为switch不太复杂，便抛弃完全render的做法
 */
-define(['UIView', getAppUITemplatePath('ui.switch'), getAppUICssPath('ui.switch')], function (UIView, template, style) {
+define(['UIView', 'text!T_UISwitch', 'text!C_UISwitch'], function (UIView, template, style) {
 
   return _.inherit(UIView, {
     propertys: function ($super) {

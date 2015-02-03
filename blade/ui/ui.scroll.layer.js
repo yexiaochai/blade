@@ -3,7 +3,7 @@
 宽度问题需要统一解决方案
 容器样式问题，没有好的解决方案
 */
-define(['UILayer', getAppUITemplatePath('ui.scroll.layer'), 'UIScroll'], function (UILayer, template, UIScroll) {
+define(['UILayer', 'text!T_UIScrollLayer', 'UIScroll'], function (UILayer, template, UIScroll) {
 
   return _.inherit(UILayer, {
     propertys: function ($super) {

@@ -1,5 +1,5 @@
 ﻿
-define(['UILayer', getAppUITemplatePath('ui.identitycard'), getAppUICssPath('ui.identitycard')], function (UILayer, template, style) {
+define(['UILayer', 'text!T_UIIdentityCard', 'text!C_UIIdentityCard'], function (UILayer, template, style) {
   return _.inherit(UILayer, {
     propertys: function ($super) {
       $super();

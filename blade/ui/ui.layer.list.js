@@ -1,5 +1,5 @@
 ﻿
-define(['UILayer', getAppUITemplatePath('ui.layer.list')], function (UILayer, template) {
+define(['UILayer', 'text!T_UILayerList'], function (UILayer, template) {
   return _.inherit(UILayer, {
     propertys: function ($super) {
       $super();

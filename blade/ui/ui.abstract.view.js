@@ -16,7 +16,7 @@
 
 * @namespace UIView
 */
-define([getAppUICssPath('ui.abstract.view')], function (style) {
+define(['text!C_UIView'], function (style) {
   'use strict';
 
   /**

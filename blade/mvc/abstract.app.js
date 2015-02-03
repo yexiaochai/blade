@@ -1,55 +1,51 @@
-﻿define([], function () {
+﻿/*
+这里应该提供一个机制，设置已经装载了的dom结构
+
+*/
+
+define(['UIHeader'], function (UIHeader) {
 
   return _.inherit({
     propertys: function () {
       //view搜索目录
-      this.viewRootPath = 'app/views/';
+      this.viewRootPath = 'demo/views/';
+
       //默认view
       this.defaultView = 'index';
+
       //请求对象
       this.request;
+
       //当前视图路径
       this.viewId;
+
       //主框架
       this.mainframe;
+
       //视图框架
       this.viewport;
+
       //视图集
       this.views = {};
-      //当前视图
-      this.curView;
-      //最后访问视图视图
-      this.lastView;
+
+      this.viewMapping = {};
 
       //结构是否创建好
       this.isCreate = false;
-      //历史记录
-      this.history = [];
 
       //app状态
       this.status = 'init';
 
-      this.animations = {};
+      //框架装载的包裹层，默认为body
+      this.$wrapper = $('body');
 
-      //是否使用动画，这个属性只能控制单次是否开启动画
-      this.isAnimat = true;
-
-      //向前动画名
-      this.animForwardName = 'slideleft';
-      this.animBackwardName = 'slideright';
-      this.animNoName = 'noAnimate';
-
-      //pushState的支持能力
-      this.hasPushState = !!(window.history && window.history.pushState);
-
-      //动画名
-      this.animatName = null;
-
-      this.viewMapping = {};
-
-      this.container = $('body');
+      //框架根节点
+      this.$mainframe = $('#main');
 
       this.interface = ['forward', 'back', 'loadSubView'];
+
+      //当前模式
+      this.appmode = 'mobile';
 
     },
 
@@ -57,13 +53,12 @@
       this.propertys();
       this.setOption(options);
       this.createViewPort();
-      this.buildEvent();
-
-      //首次将加载时,放入history
-      this.pushHistory();
 
       //首次必须执行该方法加载相关view
-      this.start();
+      this.loadViewByUrl();
+
+      //载入结束后绑定hashchange事件
+      this.buildEvent();
 
     },
 
@@ -74,16 +69,29 @@
     //创建dom结构
     createViewPort: function () {
       if (this.isCreate) return;
-      var html = [
-        '<div class="main">',
-        '<div class="main-viewport"></div>',
-        '</div>'
-      ].join('');
-      this.mainframe = $(html);
-      this.viewport = this.mainframe.find('.main-viewport');
 
-      this.container.empty();
-      this.container.append(this.mainframe);
+      var html = '', header = '<div class="header-wrapper"></div>', viewport = '<div class="viewport-wrapper"></div>';
+
+      //首先搜索页面上是否具有main标签
+      if (!this.$mainframe[0]) {
+        html = [
+          '<div class="main">',
+          '</div>'
+        ].join('');
+        this.$mainframe = $(html);
+        this.$wrapper.append(this.$mainframe);
+      }
+
+      //
+      this.$mainframe.html(header + viewport);
+      this.$header = this.$mainframe.find('.header-wrapper');
+      this.$viewport = this.$mainframe.find('.viewport-wrapper');
+
+      //实例化全局使用的header，这里好像有点不对
+      this.header = new UIHeader({
+        wrapper: this.$header
+      });
+
       this.isCreate = true;
     },
 
@@ -96,14 +104,7 @@
       }
     },
 
-    //第一次非hashChange触发
-    start: function () {
-      this.loadViewByUrl();
-    },
-
     loadViewByUrl: function (e) {
-
-      if (!this.animatName) this.animatName = this.animBackwardName;
 
       this.parseUrl();
 
@@ -115,15 +116,13 @@
     parseUrl: function () {
       var url = decodeURIComponent(location.href).toLowerCase();
       var viewId = this.getViewIdRule(url);
-      var query = _.getUrlParam(url);
 
       viewId = viewId || this.defaultView;
       this.viewId = viewId;
 
       this.request = {
         viewId: viewId,
-        path: url,
-        query: query
+        path: url
       };
 
     },
@@ -157,10 +156,8 @@
         //这里有一个问题，view与view之间并不需要知道上一个view是什么，下一个是什么，这个接口应该在app中
         this.curView = curView;
 
-        var lastViewName = (lastView || curView).viewname;
-
-        this.curView.onPreShow();
-
+        this.curView.show();
+        this.lastView && this.lastView.hide();
       } else {
 
         //重来没有加载过view的话需要异步加载文件
@@ -169,81 +166,26 @@
           if ($('[page-url="' + id + '"]').length > 0) {
             return;
           }
-          curView = new View(this, id);
+
+          this.curView = new View({
+            APP: this,
+            wrapper: this.$viewport
+          });
+
+          //设置网页上的view标志
+          this.curView.$root.attr('page-url', id);
 
           //保存至队列
-          this.views[id] = curView;
-          //这个是唯一需要改变的
-          curView.turning = _.bind($.proxy(function () {
-            //            this.createViewPort();
-            //动画会触发inView的show outView 的hide
-            this.startAnimation(function (inView, outView) {
-              //防止view显示错误，后面点去掉
-              $('.sub-viewport').hide();
-              //防止白屏
-              inView.$el.show();
-              this.animatName = null;
-            });
-
-          }, this), this);
-
-          this.curView = curView;
+          this.views[id] = this.curView;
 
           //首次进入时候，若是defaultView的话，不应该记录
           var lastViewName = typeof lastView != 'undefined' ? lastView.viewname : null;
 
-          this.curView.onPreShow();
+          this.curView.show();
+          this.lastView && this.lastView.hide();
 
         });
       }
-    },
-
-//这里暂时不处理History逻辑，也不管子View的管理，先单纯实现功能
-//这样会导致back的错乱，View重复实例化，这里先不予关注
-loadSubView: function (viewId, wrapper, callback) {
-
-  //子View要在哪里显示需要处理
-  if (!wrapper[0]) return;
-
-  this.loadView(viewId, function (View) {
-
-    var curView = new View(this, viewId, wrapper);
-
-    //这个是唯一需要改变的
-    curView.turning = $.proxy(function () {
-      curView.show();
-      curView.$el.show();
-    }, this);
-    curView.onPreShow();
-    callback && callback(curView);
-
-  });
-
-},
-
-    //动画相关参数，这里要做修改，给一个noAnimat
-    startAnimation: function (callback) {
-      var inView = this.curView;
-      var outView = this.lastView;
-
-      //在此记录outview的位置，较为靠谱，解决记录位置不靠谱问题
-      if (outView) outView.setScrollPos(window.scrollX, window.scrollY);
-
-      if (!this.isAnimat) this.animatName = this.animNoName;
-
-      if (this.animations[this.animatName] && outView) {
-        this.animations[this.animatName].call(this, inView, outView, callback, this)
-      } else {
-
-        if (outView) outView.hide();
-        inView.show();
-        this.animatName = null;
-        callback && callback.call(this, inView, outView);
-      }
-      //此参数为一次性，调用一次后自动打开动画
-      this.isAnimat = true;
-      this.animatName = null;
-
     },
 
     //加载view
@@ -255,6 +197,11 @@ loadSubView: function (viewId, wrapper, callback) {
     },
 
     buildUrl: function (path) {
+
+      if (this.appmode == 'ipad') {
+        path = path + '.ipad';
+      }
+
       var mappingPath = this.viewMapping[path];
       return mappingPath ? mappingPath : this.viewRootPath + path;
     },
@@ -316,8 +263,6 @@ loadSubView: function (viewId, wrapper, callback) {
       this.animatName = opts.animatName || this.animForwardName;
 
       this.setUrlRule(viewId, replace, param);
-      //前进时填记录
-      this.pushHistory();
 
       if (this.hasPushState) {
         this.loadViewByUrl();
@@ -341,11 +286,6 @@ loadSubView: function (viewId, wrapper, callback) {
         }
       }
 
-    },
-
-    pushHistory: function () {
-      var href = window.location.href;
-      this.history.push(href);
     }
 
   });

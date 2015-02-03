@@ -1,5 +1,5 @@
 ﻿
-define(['UILayer', getAppUITemplatePath('ui.bubble.layer'), getAppUICssPath('ui.bubble.layer')], function (UILayer, template, style) {
+define(['UILayer', 'text!T_UIBubbleLayer', 'text!C_UIBubbleLayer'], function (UILayer, template, style) {
 
   'use strict';
 

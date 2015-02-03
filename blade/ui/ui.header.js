@@ -1,5 +1,5 @@
 ﻿
-define(['UIView', getAppUITemplatePath('ui.header'), 'UIBubbleLayer'], function (UIView, template, UIBubbleLayer) {
+define(['UIView', 'text!T_UIHeader', 'text!C_UIHeader'], function (UIView, template, style) {
 
   return _.inherit(UIView, {
     propertys: function ($super) {
@@ -16,6 +16,12 @@ define(['UIView', getAppUITemplatePath('ui.header'), 'UIBubbleLayer'], function 
 
       //html模板
       this.template = template;
+      this.addUIStyle(style);
+      this.openShadowDom = false;
+
+      //每次create时候清空容器
+      this.needEmptyWrapper = true;
+
       this.events = {};
     },
 
@@ -26,6 +32,10 @@ define(['UIView', getAppUITemplatePath('ui.header'), 'UIBubbleLayer'], function 
 
     //单纯的做老代码桥接......
     set: function (data) {
+
+      //默认参数处理
+      this.setOption(data);
+
       this._originData = data;
       if (typeof data != 'object') return;
 
@@ -44,35 +54,17 @@ define(['UIView', getAppUITemplatePath('ui.header'), 'UIBubbleLayer'], function 
       var _left = {};
 
       //处理左边模块，默认只有一个
-      if (_.isObject(data.back)) {
-        _data.left.push(data.back);
-      } else if (_.isBoolean(data.back)) {
-        _left.tagname = 'back';
-        if (_.isString(data.backtext)) _left.value = data.backtext;
-        _left.callback = data.events.returnHandler;
-        _data.left.push(_left);
-        if (Lizard.isHybrid || Lizard.isInCtripApp) {
-          var backScope = this.viewScope
-          require(['cHybridShell'], function (cHybridShell) {
-            cHybridShell.off('back').on('back', function () {
-              if (Lizard){
-                if (Lizard.instance._alert.status == 'show') {
-                  Lizard.hideMessage();
-                  return false;
-                }
-                if (Lizard.instance._confirm.status == 'show') {
-                  Lizard.hideConfirm();
-                  return false;
-                }
-                if (Lizard.instance._toast.status == 'show') {
-                  Lizard.hideToast();
-                  return false;
-                }
-              }
-              data.events.returnHandler.call(backScope);
-              return false;
-            });
-          });
+      if (data.back !== false) {
+        if (_.isObject(data.back)) {
+          _data.left.push(data.back);
+        } else if (_.isString(data.backtext)) {
+          _left.tagname = 'back';
+          _left.value = data.backtext;
+          if (_.isFunction(data.events.returnHandler)) _left.callback = data.events.returnHandler;
+          _data.left.push(_left);
+        } else if (!_.find(data.left, function (item) { return item.tagname == 'back' })) {
+          //如果没有显示定义back为false，则无论如何需要一个回退按钮，这里做老接口兼容
+          _data.left.push({ tagname: 'back', callback: data.events.returnHandler });
         }
       }
 
@@ -98,6 +90,7 @@ define(['UIView', getAppUITemplatePath('ui.header'), 'UIBubbleLayer'], function 
         _data.right.push({
           tagname: 'commit',
           value: data.btn.title,
+          classname: data.btn.classname,
           data: data.btn.data,
           callback: data.events.commitHandler
         });
@@ -109,7 +102,6 @@ define(['UIView', getAppUITemplatePath('ui.header'), 'UIBubbleLayer'], function 
           data: data.moreMenus
         });
       }
-
 
       //处理标题逻辑，由于title的唯一性，这里中间便只存一个对象
       var _title = {}
@@ -137,10 +129,10 @@ define(['UIView', getAppUITemplatePath('ui.header'), 'UIBubbleLayer'], function 
 
       if (data.left) _data.left = data.left.concat(_data.left);
       if (data.right) _data.right = data.right.concat(_data.right);
-      var menuObj = _.groupBy(_data.right, function (rightItem) { return (rightItem.tagName == 'list') ? 'a' : 'b' });
-      _data.right = (menuObj['a'] || []).concat(menuObj['b'] || []);
-      //      _.extend(_data.left, data.left);
-      //      _.extend(_data.right, data.right);
+
+      //将list一定放到右边
+      var menuObj = _.groupBy(_data.right, function (rightItem) { return (rightItem.tagname == 'list') ? 'a' : 'b' });
+      _data.right = (menuObj['b'] || []).concat(menuObj['a'] || []);
 
       //如果外部设置了center直接替换
       if (_.isObject(data.center)) _data.center = data.center;
@@ -152,6 +144,10 @@ define(['UIView', getAppUITemplatePath('ui.header'), 'UIBubbleLayer'], function 
 
       //在此生成具体事件绑定逻辑
       this.setEventsParam();
+
+      //兼容处理，保持最后一次的returnHandler存根
+      if (this.datamodel.left[0] && _.isFunction(this.datamodel.left[0].callback))
+        this.lastReturnHandler = this.datamodel.left[0].callback;
 
       this.refresh(true);
 
@@ -203,30 +199,12 @@ define(['UIView', getAppUITemplatePath('ui.header'), 'UIBubbleLayer'], function 
     },
 
     backDefaultCallback: function () {
+      if (this.lastReturnHandler) {
+        this.lastReturnHandler.call(this.viewScope);
+        return;
+      }
       console.log('默认back回调');
       Lizard.goBack();
-    },
-    /**
-     * 添加hybrid下，电话直落的功能
-     * @param e
-     */
-    telDefaultCallback:function(e){
-      //取出相关的数据，添加电话直落功能
-      var _data = _.find(this.datamodel.right, function (obj) {
-        return obj.tagname == 'tel';
-      });
-      if (_data && (Lizard.isHybrid || Lizard.isInCtripApp)) {
-        //首先阻止H5下 a标签触发打电话的功能
-        e.preventDefault();
-        require(['cHybridShell'], function (cHybridShell) {          
-          var fn = new cHybridShell.Fn('call_phone');
-          if (Lizard && Lizard.instance.curView && Lizard.instance.curView.businessCode){
-            fn.run(_data.number, Lizard.instance.curView.pageid, Lizard.instance.curView.businessCode);
-          } else {
-            fn.run(_data.number);
-          } 
-        });
-      }
     },
 
     setEventsParam: function () {
@@ -248,7 +226,6 @@ define(['UIView', getAppUITemplatePath('ui.header'), 'UIBubbleLayer'], function 
         }
         _callback = null;
       }
-
     },
 
     handleSpecialParam: function (data) {
@@ -270,22 +247,6 @@ define(['UIView', getAppUITemplatePath('ui.header'), 'UIBubbleLayer'], function 
       return kv[dir];
     },
 
-    //处理back的按钮逻辑
-    customtHandle_back: function (item, dir) {
-      dir = this._getDir(dir);
-      item.itemFn = function () {
-        var str = '';
-        if (item.value) {
-          var str = '<a href="http://m.ctrip.com/html5/" class="cm-header-btn ' + dir + ' js_' + item.tagname + ' " >';
-          str += item.value + '</a>';
-        } else {
-          var str = '<a href="http://m.ctrip.com/html5/" class="cm-header-icon ' + dir + ' js_' + item.tagname + ' " >';
-          str += '<i class="icon-' + item.tagname + '"></i></a>';
-        }
-        return str;
-      };
-    },
-
     //定制化信息
     customtHandle_tel: function (item, dir) {
       dir = this._getDir(dir);
@@ -294,23 +255,23 @@ define(['UIView', getAppUITemplatePath('ui.header'), 'UIBubbleLayer'], function 
       };
     },
 
-    initialize: function ($super, opts) {
-      $super(opts);
-      this.set({
-        back: true, 
-        events: { 
-          returnHandler: function () {
-            Lizard.goBack();
-          }
+    addEvent: function () {
+
+      this.on('onShow', function () {
+        this.wrapper.height('44px');
+        this.$el.removeClass('cm-header--no-right');
+        if (this.datamodel.right.length === 0) {
+          this.$el.addClass('cm-header--no-right');
         }
       });
+
     },
 
-    createRoot: function (html) {
-      var hDom = $('#headerview');
-      hDom.html('');
-      this.$el = $(html).hide().attr('id', this.id);
-    },
+    //    createRoot: function (html) {
+    //      var hDom = $('#headerview');
+    //      hDom.html('').css({height:'44px', backgroundColor: '#099fde'});
+    //      this.$el = $(html).hide().attr('id', this.id);
+    //    },
 
     updateHeader: function (name, val) {
       if (_.isObject(name)) {

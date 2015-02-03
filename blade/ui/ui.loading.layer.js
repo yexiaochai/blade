@@ -3,7 +3,7 @@
 用于继承的类，会自动垂直居中
 
 */
-define(['UILayer', getAppUITemplatePath('ui.loading.layer'), getAppUICssPath('ui.loading.layer')], function (UILayer, template, style) {
+define(['UILayer', 'text!T_UILoadingLayer', 'text!C_UILoadingLayer'], function (UILayer, template, style) {
   'use strict';
 
   return _.inherit(UILayer, {

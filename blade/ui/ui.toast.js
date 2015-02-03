@@ -1,10 +1,8 @@
-﻿
-/*
-用于继承的类，会自动垂直居中
+﻿/*
+
 
 */
-define(['UILayer', getAppUITemplatePath('ui.toast')], function (UILayer, template) {
-
+define(['UILayer', 'text!T_UIToast'], function (UILayer, template) {
 
   return _.inherit(UILayer, {
     propertys: function ($super) {

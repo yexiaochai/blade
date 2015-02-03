@@ -1,4 +1,4 @@
-﻿define(['UIView', getAppUITemplatePath('ui.select'), 'UIScroll', getAppUICssPath('ui.select')], function (UIView, template, UIScroll, style) {
+﻿define(['UIView', 'text!T_UISelect', 'text!C_UISelect', 'UIScroll'], function (UIView, template, style, UIScroll) {
   /*
   该组件使用时，其父容器一定是显示状态，如果不是显示状态，高度计算会失效
   */

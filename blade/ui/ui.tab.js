@@ -1,5 +1,4 @@
-﻿define(['UIView', getAppUITemplatePath('ui.tab'), getAppUICssPath('ui.tab')], function (UIView, template, style) {
-
+﻿define(['UIView', 'text!T_UITab', 'text!C_UITab'], function (UIView, template, style) {
 
   return _.inherit(UIView, {
     propertys: function ($super) {
