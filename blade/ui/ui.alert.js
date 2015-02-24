@@ -23,7 +23,7 @@ define(['UILayer', 'text!T_UIAlert'], function (UILayer, template) {
       this.content = '';
       this.btns = [
           { name: '知道了', className: 'js_ok' }
-        ]
+        ];
 
       //事件机制
       this.addEvents({

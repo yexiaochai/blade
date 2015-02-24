@@ -1,0 +1,40 @@
+﻿<span class="btn-primary full-width js_demo01">单独使用</span>
+
+<pre>
+<code>
+demo01: function () {
+    if (!this.loading1) {
+        this.loading1 = new UILoadingLayer();
+    }
+    this.loading1.show();
+
+    //2秒后自动隐藏
+    setTimeout(function () {
+        this.loading1.hide();
+    }.bind(this), 2000);
+}
+</code>
+</pre>
+
+<span class="btn-primary full-width js_demo02">自定义使用</span>
+
+<pre>
+<code>
+demo02: function() {
+    if (!this.loading2) {
+        this.loading2 = new UILoadingLayer({
+            content: 'two second close',
+            closeBtn: true,
+            maskToHide: true
+
+        });
+    }
+    this.loading2.show();
+
+    //2秒后自动隐藏
+    setTimeout(function () {
+        this.loading2.hide();
+    }.bind(this), 2000);
+}
+</code>
+</pre>

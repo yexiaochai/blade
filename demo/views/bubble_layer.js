@@ -1,4 +1,4 @@
-﻿define(['View', getViewTemplatePath('toast'), 'UIToast'], function (View, viewhtml, UIToast) {
+define(['View', getViewTemplatePath('bubble_layer'), 'UIBubbleLayer'], function (View, viewhtml, UIBubbleLayer) {
 
     return _.inherit(View, {
         propertys: function ($super) {
@@ -6,19 +6,19 @@
             this.template = viewhtml;
 
             this.addEvents({
-                'click .js_demo04': 'demo04'
+                'click .js_demo01': 'demo01'
             });
 
         },
 
-        demo04: function () {
-            if (!this.toast01) {
-                this.toast01 = new UIToast({
+        demo01: function () {
+            if (!this.bubble01) {
+                this.bubble01 = new UIBubbleLayer({
                     content: 'two second close',
                     hideSec: 2000
                 });
             }
-            this.toast01.show();
+            this.bubble01.show();
         }
 
 

@@ -1,25 +1,16 @@
 ﻿
+<span class="btn-primary full-width js_demo04">单独使用</span>
 
-  <span class="btn-primary full-width js_demo04">单独使用</span>
-
-  <pre>
+<pre>
 <code>
 demo04: function () {
-  if (!this.toast01) {
-    this.toast01 = new UIToast({
-      datamodel: {
-        content: 'two second close'
-      },
-      needAnimat: false,
-      hideSec: 2000
-    });
-  }
-  this.toast01.show();
-},
-onHide: function () {
-  if (this.toast01) {
-    this.toast01.hide();
-  }
+    if (!this.toast01) {
+        this.toast01 = new UIToast({
+            content: 'two second close',
+            hideSec: 2000
+        });
+    }
+    this.toast01.show();
 }
 </code>
 </pre>

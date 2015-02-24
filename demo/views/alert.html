@@ -1,6 +1,6 @@
-﻿
-  <span class="btn-primary full-width js_demo06">单独使用，需要释放接口</span>
-  <pre>
+﻿<span class="btn-primary full-width js_demo01">单独使用</span>
+
+<pre>
 <code>
 /*
 如果框架未提供样式，这里便需要业务
@@ -8,41 +8,65 @@
   border-left: 1px solid rgba(0, 0, 0, 0.3);
 }
 */
-  demo06: function () {
-  if (!this.alert01) {
-    this.alert01 = new UIAlert({
-      datamodel: {
-        content: '单独使用时，注意onHide时候释放资源，按钮样式需要自己定制',
-        btns: [
-          { name: '知道了', className: 'cui-btns-ok' },
-          { name: '不知道', className: 'cui-btns-no' },
-          { name: '未知', className: 'cui-btns-unknown' }
-        ]
-      },
-      events: {
-        'click .cui-btns-ok': 'okAction',
-        'click .cui-btns-no': 'noAction',
-        'click .cui-btns-unknown': 'unknownAction'
-      },
-      okAction: function () {
-        alert('知道了');
-        this.hide();
-      },
-      noAction: function () {
-        alert('不知道');
-        this.hide();
-      },
-      unknownAction: function () {
-        alert('未知');
-        this.hide();
-      }
-    });
-  }
-  this.alert01.show();
-},
-onHide: function () {
-  if (this.alert01)
-    this.alert01.hide();
+demo01: function () {
+    if (!this.alert01) {
+        this.alert01 = new UIAlert({
+            title: '购票须知',
+            content: '凭身份证可以通过',
+            btns: [
+                { name: '知道了', className: 'cui-btns-ok' }
+            ],
+            events: {
+                'click .cui-btns-ok': 'okAction'
+            },
+            okAction: function () {
+                alert('这里可以执行callback');
+                this.hide();
+            }
+        });
+    }
+
+    this.alert01.show();
+}
+</code>
+</pre>
+
+<span class="btn-primary full-width js_demo02">自定义使用</span>
+
+<pre>
+<code>
+demo02: function () {
+    if (!this.alert02) {
+        this.alert02 = new UIAlert({
+            title: '购票须知',
+            content: '凭身份证可以通过',
+            btns: [
+                { name: '知道了', className: 'cui-btns-ok' },
+                { name: '不知道', className: 'cui-btns-no' },
+                { name: '未知', className: 'cui-btns-unknown' }
+            ],
+
+            events: {
+                'click .cui-btns-ok': 'okAction',
+                'click .cui-btns-no': 'noAction',
+                'click .cui-btns-unknown': 'unknownAction'
+            },
+            okAction: function () {
+                alert('这里可以执行ok callback');
+                this.hide();
+            },
+            noAction: function () {
+                alert('这里可以执行no ok callback');
+                this.hide();
+            },
+            unknownAction: function () {
+                alert('这里可以执行unknow callback');
+                this.hide();
+            }
+        });
+    }
+
+    this.alert02.show();
 }
 </code>
 </pre>
