@@ -14,8 +14,8 @@ define(['View', getViewTemplatePath('bubble_layer'), 'UIBubbleLayer'], function 
         demo01: function () {
             if (!this.bubble01) {
                 this.bubble01 = new UIBubbleLayer({
-                    content: 'two second close',
-                    hideSec: 2000
+                    needMask: false,
+                    needReposition: false
                 });
             }
             this.bubble01.show();
