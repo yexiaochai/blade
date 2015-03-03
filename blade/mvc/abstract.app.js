@@ -3,7 +3,7 @@
 
 */
 
-define(['UIHeader'], function (UIHeader) {
+define(['UIHeader', 'UILoadingLayer'], function (UIHeader, UILoadingLayer) {
 
   return _.inherit({
     propertys: function () {
@@ -46,6 +46,11 @@ define(['UIHeader'], function (UIHeader) {
 
       //当前模式
       this.appmode = 'mobile';
+
+      this.loading = new UILoadingLayer({
+         content: '正在拉取js...',
+         closeBtn: true
+      });
 
     },
 
@@ -131,6 +136,7 @@ define(['UIHeader'], function (UIHeader) {
     //定义view的turing方法，这里不是直接放出去，而是通过app接口放出，并会触发各个阶段的方法
     //注意，这里是传递id，有可能乱跳，
     switchView: function (path) {
+
       var id = path;
       var curView = this.views[id];
 
@@ -159,6 +165,7 @@ define(['UIHeader'], function (UIHeader) {
         this.curView.show();
         this.lastView && this.lastView.hide();
       } else {
+        this.loading.show();
 
         //重来没有加载过view的话需要异步加载文件
         //此处快速切换可能导致view文件未加载结束，而已经开始执行其它view的逻辑而没有加入dom结构
@@ -183,6 +190,7 @@ define(['UIHeader'], function (UIHeader) {
 
           this.curView.show();
           this.lastView && this.lastView.hide();
+          this.loading.hide();
 
         });
       }
