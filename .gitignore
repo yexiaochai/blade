@@ -10,5 +10,3 @@
 node_modules
 .idea
 *.xml
-*.xml
-.idea/modules.xml
