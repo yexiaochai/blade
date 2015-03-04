@@ -15,7 +15,7 @@ define(['View', getViewTemplatePath('calendar'), 'UICalendar'], function (View, 
             if (!this.calendar01) {
                 this.calendar01 = new UICalendar({
                     wrapper: $('.cal_wrap'),
-                    displayMonthNum: 12,  //跨多小个月份
+                    displayMonthNum: 2,  //跨多小个月份
                     startTime: new Date('2015/04/10'),  //开始日期
                     endTime: new Date('2015/10/07')     //结束日期
 

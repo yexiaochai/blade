@@ -1,5 +1,5 @@
 ﻿
-define(['UILayer', 'text!T_UIIdentityCard', 'text!C_UIIdentityCard'], function (UILayer, template, style) {
+define(['UILayer', 'text!T_UIIdentitycard', 'text!C_UIIdentitycard'], function (UILayer, template, style) {
   return _.inherit(UILayer, {
     propertys: function ($super) {
       $super();

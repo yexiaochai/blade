@@ -1,0 +1,33 @@
+<style>
+    .identityCard {
+        margin: 10px;
+    }
+</style>
+<input class="identityCard js_demo01" placeholder="单独使用"  />
+<pre>
+<code>
+demo01: function () {
+    if (!this.identity01) {
+        var $target01 = $('.identityCard');
+        this.identity01 = new UIIdentitycard({
+            targetEl:$target01,
+            needMask:false,
+            itemClickAction: function(val) {
+                var curHtml = $target01.val();
+                $target01.val(curHtml + val);
+                console.log('item click action', val);
+            },
+            deleteAction: function() {
+                var curHtml = $target01.val();
+                if(curHtml.length > 0)
+                $target01.val(curHtml.substr(0,curHtml.length-1));
+            }
+
+        });
+    }
+
+    this.identity01.show();
+}
+</code>
+</pre>
+
