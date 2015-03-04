@@ -1,7 +1,7 @@
 ﻿/*
 扮演游戏时钟，全局控制器角色
 */
-define(['AbstractView', getViewTemplatePath('index'), 'MoveObj', 'Tank', 'Bullet', 'Boom', 'NPCTank', 'UIAlert'], function (View, viewhtml, MoveObj, Tank, Bullet, Boom, NPCTank, UIAlert) {
+define(['UIView', getViewTemplatePath('index'), 'MoveObj', 'Tank', 'Bullet', 'Boom', 'NPCTank', 'UIAlert'], function (View, viewhtml, MoveObj, Tank, Bullet, Boom, NPCTank, UIAlert) {
 
   var rAF = window.requestAnimationFrame ||
 	window.webkitRequestAnimationFrame ||
@@ -27,6 +27,34 @@ define(['AbstractView', getViewTemplatePath('index'), 'MoveObj', 'Tank', 'Bullet
   };
 
   return _.inherit(View, {
+      propertys: function ($super) {
+          $super();
+          this.template = viewhtml;
+
+      },
+      addEvent: function ($super) {
+          $super();
+
+          //在页面显示后做的事情
+          this.on('onPreShow', function () {
+//              this.turning();
+
+          });
+
+          this.on('onCreate', function () {
+
+              this._init();
+
+              this._bindEvent();
+          });
+
+          this.on('onShow', function () {
+              this.gameStart();
+          });
+
+
+
+      },
 
     _bindEvent: function () {
       document.onkeydown = $.proxy(function (evt) {
@@ -90,6 +118,7 @@ define(['AbstractView', getViewTemplatePath('index'), 'MoveObj', 'Tank', 'Bullet
         this.app.createNPC({
           app: this.app,
           wrapper: this.$el.find('#map'),
+
           datamodel: {
             x: coord[flag][0],
             y: coord[flag][1]
@@ -235,6 +264,7 @@ define(['AbstractView', getViewTemplatePath('index'), 'MoveObj', 'Tank', 'Bullet
           opts = $.extend({
             gameRule: 'npc',
             wrapper: this.$el.find('#map'),
+
             app: this.app
           }, opts, true);
           var flag = parseInt(Math.random() * 4);
@@ -247,6 +277,7 @@ define(['AbstractView', getViewTemplatePath('index'), 'MoveObj', 'Tank', 'Bullet
           var npc = new NPCTank(opts);
           var i, len, bullet;
 
+            npc.$root = npc.$el;
           npc.show();
 
           /*这里英雄每一步移动会对NPC产生影响，同样NPC会对影响造成影响
@@ -275,8 +306,10 @@ define(['AbstractView', getViewTemplatePath('index'), 'MoveObj', 'Tank', 'Bullet
             },
             gameRule: 'hero',
             wrapper: this.$el.find('#map'),
+
             app: this.app
           });
+            this.me.$root =  this.me.$el;
           this.me.show();
           window.me = this.me;
           this.app.GAMEOBJ.hero.push(this.me);
@@ -286,10 +319,12 @@ define(['AbstractView', getViewTemplatePath('index'), 'MoveObj', 'Tank', 'Bullet
           //子弹的创建要区分是hero还是npc
           opts = $.extend({
             wrapper: this.$el.find('#map'),
+
             app: this.app
           }, opts, true);
           var gameRule = opts.gameRule;
           var bullet = new Bullet(opts);
+            bullet.$root = bullet.$el;
           bullet.show();
 
           //这里根据子弹角色不同，会有不同的观察对象，npc子弹对应英雄，英雄子弹对象npc！
@@ -321,9 +356,11 @@ define(['AbstractView', getViewTemplatePath('index'), 'MoveObj', 'Tank', 'Bullet
         createBoom: $.proxy(function (opts) {
           opts = $.extend({
             wrapper: this.$el.find('#map'),
+
             app: this.app
           }, opts, true);
           var boom = new Boom(opts);
+            boom.$root = boom.$el;
           boom.show();
           this.app.GAMEOBJ.boom.push(boom);
           return boom;
