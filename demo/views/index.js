@@ -76,7 +76,7 @@
             var groupList3 = [
                 { 'uiname': 'calendar', 'name': '日历的各种用法' },
                 { 'uiname': 'identity', 'name': '身份证键盘' },
-//                { 'uiname': 'num', 'name': '数字组件' },
+                { 'uiname': 'num', 'name': '数字组件' },
 //                { 'uiname': 'switch1', 'name': 'switch组件' },
 //                { 'uiname': 'tab', 'name': 'tab组件' }
             ];

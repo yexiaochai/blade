@@ -1,0 +1,56 @@
+﻿<span class="btn-primary full-width js_demo01">单独使用</span>
+
+
+<div class="numWrap"></div>
+
+<pre>
+<code>
+demo01: function () {
+    if (!this.num01) {
+        this.num01 = new UINum({
+            wrapper: $('.numWrap'),
+            min: 2,
+            max: 6,
+            curNum: 1,  //默认值，小于min会自动设置为min值
+            unit: '个',
+            needText: false
+
+        });
+    }
+
+    this.num01.show();
+},
+</code>
+</pre>
+
+<span class="btn-primary full-width js_demo02">自定义使用</span>
+<div class="numWrap2"></div>
+<pre>
+<code>
+demo02: function() {
+    //设置add和minus class
+    if (!this.num02) {
+        this.num02 = new UINum({
+            wrapper: this.$el.find('.numWrap2'),
+
+            addAction: function () {
+                this.setVal(this.curNum + 2);
+                console.log('me addAction');
+            },
+            minusAction: function () {
+                this.setVal(this.curNum - 2);
+                console.log('me minusAction');
+            },
+            txtFocus: function () {
+                this.curNum.val('');
+            },
+            txtBlur: function () {
+                this.setVal(this.curNum.val());
+            }
+
+        });
+        this.num02.show();
+    }
+}
+</code>
+</pre>
