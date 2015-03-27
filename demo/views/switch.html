@@ -1,0 +1,23 @@
+<span class="btn-primary full-width js_demo01">单独使用</span>
+<button class="getstatus js_getStatus">获取switch1的状态:</button> <span class="switch1_status"></span>
+<div class="switch1_wrap">
+
+</div>
+<pre>
+<code>
+demo01: function () {
+    if (!this.switch01) {
+        this.switch01 = new UISwitch({
+            wrapper: $('.switch1_wrap'),
+            changed: function(status) {
+                console.log(status, '重写 changed事件');
+            }
+
+        });
+
+    }
+
+    this.switch01.show();
+}
+</code>
+</pre>

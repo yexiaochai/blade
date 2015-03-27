@@ -1,0 +1,70 @@
+<span class="btn-primary full-width js_demo01">单独使用</span>
+
+<div class="tab1-wrap">
+</div>
+<pre>
+<code>
+demo01: function () {
+    if (!this.tab01) {
+        this.tab01 = new UITab({
+            wrapper: $('.tab1-wrap'),
+            data: [{
+                id:1,
+                name: '好评'
+            },
+            {
+                id:2,
+                name: '中评'
+            },
+            {
+                id:3,
+                name: '差评'
+            }]
+
+        });
+
+    }
+
+    this.tab01.show();
+},
+</code>
+</pre>
+
+
+<span class="btn-primary full-width js_demo01">自定义使用</span>
+
+<div class="tab2-wrap">
+</div>
+<button class="js_tab_index">获取当前选中index:</button><span class="get-tab-index"></span>
+<pre>
+<code>
+demo02: function () {
+    if (!this.tab02) {
+        this.tab02 = new UITab({
+            wrapper: $('.tab2-wrap'),
+            data: [{
+                id:1,
+                name: '好评'
+            },
+                {
+                    id:2,
+                    name: '中评'
+                },
+                {
+                    id:3,
+                    name: '差评'
+                }],
+
+            onChange: function() {
+                console.log('onChange callback');
+            }
+
+
+        });
+
+    }
+
+    this.tab02.show();
+}
+</code>
+</pre>
