@@ -82,7 +82,9 @@
             ];
 
             var groupList4 = [
-//                { 'uiname': 'slider', 'name': '横向滚动slider' },
+                { 'uiname': 'slider', 'name': '横向滚动slider' },
+//                { 'uiname': 'scrolllayer', 'name': '滚动scrolllayer' },
+                { 'uiname': 'select', 'name': '滚动select' },
 //                { 'uiname': 'image_slider', 'name': '图片轮播组件' },
 //                { 'uiname': 'scroll_list', 'name': 'radiolist组件，弹出滚动列表' },
 //                { 'uiname': 'group_select', 'name': 'select组件组合应用-groupSelect' },
