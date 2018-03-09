@@ -12,7 +12,7 @@
         },
 
         demo01: function () {
-            var txt = this.$('js_txt001').val();
+            var txt = this.$('.js_txt001').val();
             var n = new Date();
             var t = txt;
             var arrTime = t.split(',');
