@@ -18,7 +18,16 @@
             var arrTime = t.split(',');
             var howLong = parseInt(arrTime[0]) * 3600 + parseInt(arrTime[1]) * 60 + parseInt(arrTime[2]);
             var theTime = new Date(n.getTime() + parseInt(howLong) * 1000);
-            this.alert(theTime.toLocaleTimeString())
+          
+            if (!this.alert01) {
+                this.alert01 = new UIAlert({
+                    title: '下次矿石时间',
+                    content: theTime.toLocaleTimeString()
+                   
+                });
+            }
+
+            this.alert01.show();
             
         },
         demo02: function () {
