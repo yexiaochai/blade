@@ -15,7 +15,7 @@
             var txt = this.$('.js_txt001').val();
             var n = new Date();
             var t = txt;
-            var arrTime = t.split(',');
+            var arrTime = t.split('-');
             var howLong = parseInt(arrTime[0]) * 3600 + parseInt(arrTime[1]) * 60 + parseInt(arrTime[2]);
             var theTime = new Date(n.getTime() + parseInt(howLong) * 1000);
           
