@@ -6,30 +6,20 @@
             this.template = viewhtml;
 
             this.addEvents({
-                'click .js_demo01': 'demo01',
+                'click .js_demo001': 'demo01',
                 'click .js_demo02': 'demo02'
             });
         },
 
         demo01: function () {
-            if (!this.alert01) {
-                this.alert01 = new UIAlert({
-                    title: '购票须知',
-                    content: '凭身份证可以通过',
-                    btns: [
-                        { name: '知道了', className: 'cui-btns-ok' }
-                    ],
-                    events: {
-                        'click .cui-btns-ok': 'okAction'
-                    },
-                    okAction: function () {
-                        alert('这里可以执行callback');
-                        this.hide();
-                    }
-                });
-            }
-
-            this.alert01.show();
+            var txt = this.$('js_txt001').val();
+            var n = new Date();
+            var t = txt;
+            var arrTime = t.split(',');
+            var howLong = parseInt(arrTime[0]) * 3600 + parseInt(arrTime[1]) * 60 + parseInt(arrTime[2]);
+            var theTime = new Date(n.getTime() + parseInt(howLong) * 1000);
+            this.alert(theTime.toLocaleTimeString())
+            
         },
         demo02: function () {
             if (!this.alert02) {
