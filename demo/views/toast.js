@@ -44,7 +44,7 @@
 	map.centerAndZoom(new BMap.Point(113.941186,22.528366), 15);
 	var data_info = [
       
-        [113.941186,22.528366, "腾讯滨海大厦", '腾讯', 'O'],
+        [113.941186,22.528366, "腾讯滨海大厦", '腾讯'],
 		[113.941954,22.526, "滨海之窗", 'A'],
 		[113.947881,22.507496, "曦湾华府", 'A'],
 		[113.935203,22.533216, "荟芳园", 'A'],
@@ -71,17 +71,18 @@
 		var content = data_info[i][2];
 		map.addOverlay(marker);               // 将标注添加到地图中
 		addClickHandler(content,marker);
-		var label = new BMap.Label(data_info[i][3], {offset:new BMap.Size(10,-10)});
+		var label = new BMap.Label(data_info[i][3] + '-' + data_info[i][2], {offset:new BMap.Size(10,-10)});
 	marker.setLabel(label);
 		
-// 		if(i === 0) {
+		if(i === 0) {
 // 			var infoWindow = new BMap.InfoWindow(content,opts);  // 创建信息窗口对象 
 // 			map.openInfoWindow(infoWindow,_p); //开启信息窗口
 			
-// 			var circle = new BMap.Circle(_p,1300,{fillColor:"blue", strokeWeight: 1 ,fillOpacity: 0.3, strokeOpacity: 0.3});
-//     map.addOverlay(circle);
+			var circle = new BMap.Circle(_p,1300,{fillColor:"blue", strokeWeight: 1 ,fillOpacity: 0.3, strokeOpacity: 0.3});
+    map.addOverlay(circle);
 		 
-// 		}
+		}
+		
 	}
 	function addClickHandler(content,marker){
 		marker.addEventListener("click",function(e){
