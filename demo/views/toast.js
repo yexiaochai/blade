@@ -29,7 +29,7 @@
 		}, 1000)
 		
 		this.$('#allmap').css({
-			'position', 'absolute'
+			'position': 'absolute'
 			
 		});
 		
