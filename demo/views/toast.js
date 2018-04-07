@@ -69,8 +69,6 @@
 		map.addOverlay(marker);               // 将标注添加到地图中
 		addClickHandler(content,marker);
 		if(i === 0) {
-			
-			var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
 			var infoWindow = new BMap.InfoWindow(content,opts);  // 创建信息窗口对象 
 			map.openInfoWindow(infoWindow,_p); //开启信息窗口
 		  
