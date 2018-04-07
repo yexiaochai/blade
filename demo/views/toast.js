@@ -65,6 +65,9 @@
 		var content = data_info[i][2];
 		map.addOverlay(marker);               // 将标注添加到地图中
 		addClickHandler(content,marker);
+		if(i === 0) {
+		   marker.click();
+		}
 	}
 	function addClickHandler(content,marker){
 		marker.addEventListener("click",function(e){
