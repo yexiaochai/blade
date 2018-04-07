@@ -71,7 +71,10 @@
 		if(i === 0) {
 			var infoWindow = new BMap.InfoWindow(content,opts);  // 创建信息窗口对象 
 			map.openInfoWindow(infoWindow,_p); //开启信息窗口
-		  marker.setAnimation(BMAP_ANIMATION_BOUNCE);
+			
+			var circle = new BMap.Circle(_p,1000,{fillColor:"blue", strokeWeight: 1 ,fillOpacity: 0.3, strokeOpacity: 0.3});
+    map.addOverlay(circle);
+		 
 		}
 	}
 	function addClickHandler(content,marker){
