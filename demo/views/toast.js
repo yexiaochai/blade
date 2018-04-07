@@ -24,7 +24,11 @@
         
         _init: function() {
             
-		$('.cm-header').hide();
+		setTimeout(function () {
+			$('.header-wrapper').hide();
+		}, 1000)
+		
+		
 		this.$('#allmap').width('100%');
          this.$('#allmap').height('100%');
             
