@@ -71,7 +71,7 @@
 		if(i === 0) {
 			var infoWindow = new BMap.InfoWindow(content,opts);  // 创建信息窗口对象 
 			map.openInfoWindow(infoWindow,_p); //开启信息窗口
-		  
+		  marker.setAnimation(BMAP_ANIMATION_BOUNCE);
 		}
 	}
 	function addClickHandler(content,marker){
