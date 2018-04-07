@@ -28,10 +28,11 @@
 			$('.header-wrapper').hide();
 		}, 1000)
 		
-		this.$('#allmap').parent().height('100%');
-		this.$('#allmap').parent().parent().height('100%');
-		this.$('#allmap').parent().parent().parent().height('100%');
-		this.$('#allmap').parent().parent().parent().parent().height('100%');
+		this.$('#allmap').css({
+			'position', 'absolute'
+			
+		});
+		
 		
 		this.$('#allmap').width('100%');
          this.$('#allmap').height('100%');
