@@ -41,7 +41,7 @@
             
             // 百度地图API功能	
 	map = new BMap.Map("allmap");
-	map.centerAndZoom(new BMap.Point(113.941186,22.528366), 10);
+	map.centerAndZoom(new BMap.Point(113.941186,22.528366), 15);
 	var data_info = [
       
         [113.941186,22.528366, "腾讯滨海大厦", '腾讯'],
