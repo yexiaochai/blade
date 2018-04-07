@@ -41,7 +41,7 @@
             
             // 百度地图API功能	
 	map = new BMap.Map("allmap");
-	map.centerAndZoom(new BMap.Point(113.941186,22.528366), 10);
+	map.centerAndZoom(new BMap.Point(113.941186,22.528366), 13);
 	var data_info = [
       
         [113.941186,22.528366, "腾讯滨海大厦", '腾讯'],
@@ -78,7 +78,7 @@
 // 			var infoWindow = new BMap.InfoWindow(content,opts);  // 创建信息窗口对象 
 // 			map.openInfoWindow(infoWindow,_p); //开启信息窗口
 			
-			var circle = new BMap.Circle(_p,1300,{fillColor:"blue", strokeWeight: 1 ,fillOpacity: 0.3, strokeOpacity: 0.3});
+			var circle = new BMap.Circle(_p,1500,{fillColor:"blue", strokeWeight: 1 ,fillOpacity: 0.3, strokeOpacity: 0.3});
     map.addOverlay(circle);
 		 
 		}
