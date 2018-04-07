@@ -54,6 +54,9 @@
 		[113.93401,22.523669, "深圳南山区海典居"]
       
 					];
+		
+		var _p = new BMap.Point(113.941186,22.528366);
+		
 	var opts = {
 				width : 250,     // 信息窗口宽度
 				height: 80,     // 信息窗口高度
@@ -66,7 +69,11 @@
 		map.addOverlay(marker);               // 将标注添加到地图中
 		addClickHandler(content,marker);
 		if(i === 0) {
-		   marker.click();
+			
+			var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
+			var infoWindow = new BMap.InfoWindow(content,_p);  // 创建信息窗口对象 
+			map.openInfoWindow(infoWindow,point); //开启信息窗口
+		  
 		}
 	}
 	function addClickHandler(content,marker){
