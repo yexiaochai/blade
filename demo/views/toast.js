@@ -24,7 +24,8 @@
         
         _init: function() {
             
-         
+		this.$('#allmap').width('100%');
+         this.$('#allmap').height('100%');
             
             // 百度地图API功能	
 	map = new BMap.Map("allmap");
