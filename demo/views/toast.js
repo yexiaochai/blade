@@ -71,7 +71,7 @@
 		var content = data_info[i][2];
 		map.addOverlay(marker);               // 将标注添加到地图中
 		addClickHandler(content,marker);
-		var label = new BMap.Label(data_info[i][3] + '-' + data_info[i][2], {offset:new BMap.Size(10,-10)});
+		var label = new BMap.Label(data_info[i][3] + '-' + data_info[i][2], {offset:new BMap.Size(10,10)});
 	marker.setLabel(label);
 		
 		if(i === 0) {
