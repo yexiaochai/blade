@@ -44,16 +44,17 @@
 	map.centerAndZoom(new BMap.Point(113.941186,22.528366), 15);
 	var data_info = [
       
-        [113.941186,22.528366, "腾讯滨海大厦"],
-        [113.899632,22.500471, "泛海城市广场"],
+        [113.941186,22.528366, "腾讯滨海大厦", '腾讯'],
+		[113.941954,22.526, "滨海之窗", 'A'],
+		[113.947881,22.507496, "曦湾华府", 'A'],
+		[113.935203,22.533216, "荟芳园", 'A'],
+		[113.93401,22.523669, "海典居", 'A']
 		
 		
-        [113.942148,22.52376, "深圳南山区天利名城"],
-		[113.947881,22.507496, "深圳南山区曦湾华府"],
-		[113.935203,22.533216, "深圳南山区荟芳园"],
-		[113.941954,22.526, "深圳南山区滨海之窗"],
-        [113.930818,22.528974, "深圳南山区光彩新世纪"],
-		[113.93401,22.523669, "深圳南山区海典居"]
+        [113.899632,22.500471, "泛海城市广场", 'B'],
+        [113.930818,22.528974, "光彩新世纪", 'B'],
+		
+        [113.942148,22.52376, "天利名城", 'C'],
       
 					];
 		
@@ -70,14 +71,17 @@
 		var content = data_info[i][2];
 		map.addOverlay(marker);               // 将标注添加到地图中
 		addClickHandler(content,marker);
-		if(i === 0) {
-			var infoWindow = new BMap.InfoWindow(content,opts);  // 创建信息窗口对象 
-			map.openInfoWindow(infoWindow,_p); //开启信息窗口
+		var label = new BMap.Label(data_info[i][3], {offset:new BMap.Size(10,-10)});
+	marker.setLabel(label);
+		
+// 		if(i === 0) {
+// 			var infoWindow = new BMap.InfoWindow(content,opts);  // 创建信息窗口对象 
+// 			map.openInfoWindow(infoWindow,_p); //开启信息窗口
 			
-			var circle = new BMap.Circle(_p,1300,{fillColor:"blue", strokeWeight: 1 ,fillOpacity: 0.3, strokeOpacity: 0.3});
-    map.addOverlay(circle);
+// 			var circle = new BMap.Circle(_p,1300,{fillColor:"blue", strokeWeight: 1 ,fillOpacity: 0.3, strokeOpacity: 0.3});
+//     map.addOverlay(circle);
 		 
-		}
+// 		}
 	}
 	function addClickHandler(content,marker){
 		marker.addEventListener("click",function(e){
