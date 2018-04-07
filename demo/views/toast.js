@@ -24,6 +24,7 @@
         
         _init: function() {
             
+		$('.cm-header').hide();
 		this.$('#allmap').width('100%');
          this.$('#allmap').height('100%');
             
