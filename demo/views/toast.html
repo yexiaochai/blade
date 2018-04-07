@@ -1,42 +1,4 @@
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=jTXi0gYdFy7xvy4l3lMkm8NSBwcb2QXN"></script>
 
+<div id="allmap"></div>
 
-<script type="text/javascript">
-	// 百度地图API功能	
-	map = new BMap.Map("allmap");
-	map.centerAndZoom(new BMap.Point(113.930818,22.528974), 15);
-	var data_info = [
-      
-        [113.942148,22.52376, "深圳南山区天利名城"],
-		[113.947881,22.507496, "深圳南山区曦湾华府"],
-		[113.935203,22.533216, "深圳南山区荟芳园"],
-		[113.941954,22.526, "深圳南山区滨海之窗"],
-        [113.930818,22.528974, "深圳南山区光彩新世纪"],
-		[113.93401,22.523669, "深圳南山区海典居"]
-      
-
-					];
-	var opts = {
-				width : 250,     // 信息窗口宽度
-				height: 80,     // 信息窗口高度
-				title : "信息窗口" , // 信息窗口标题
-				enableMessage:true//设置允许信息窗发送短息
-			   };
-	for(var i=0;i<data_info.length;i++){
-		var marker = new BMap.Marker(new BMap.Point(data_info[i][0],data_info[i][1]));  // 创建标注
-		var content = data_info[i][2];
-		map.addOverlay(marker);               // 将标注添加到地图中
-		addClickHandler(content,marker);
-	}
-	function addClickHandler(content,marker){
-		marker.addEventListener("click",function(e){
-			openInfo(content,e)}
-		);
-	}
-	function openInfo(content,e){
-		var p = e.target;
-		var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
-		var infoWindow = new BMap.InfoWindow(content,opts);  // 创建信息窗口对象 
-		map.openInfoWindow(infoWindow,point); //开启信息窗口
-	}
-</script>
