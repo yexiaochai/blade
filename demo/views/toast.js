@@ -24,7 +24,7 @@
         
         _init: function() {
             
-            this.header.hide();
+         
             
             // 百度地图API功能	
 	map = new BMap.Map("allmap");
