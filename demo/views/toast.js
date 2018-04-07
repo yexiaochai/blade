@@ -28,9 +28,15 @@
 			$('.header-wrapper').hide();
 		}, 1000)
 		
+		this.$('#allmap').parent().height('100%');
+		this.$('#allmap').parent().parent().height('100%');
+		this.$('#allmap').parent().parent().parent().height('100%');
+		this.$('#allmap').parent().parent().parent().parent().height('100%');
 		
 		this.$('#allmap').width('100%');
          this.$('#allmap').height('100%');
+		
+		
             
             // 百度地图API功能	
 	map = new BMap.Map("allmap");
