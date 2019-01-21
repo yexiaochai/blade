@@ -56,7 +56,7 @@ define(['text!C_UIView'], function (style) {
       this.shadowRoot = null;
 
       //框架统一开关，是否开启shadow dom
-      this.openShadowDom = true;
+      this.openShadowDom = false;
 
       //每次装载UI进wrapper时候是否需要清空容器，这个属性慎用，如果容器为body的话，就全部木有了
       this.needEmptyWrapper = false;
