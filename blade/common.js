@@ -90,6 +90,11 @@
       'T_UISelect': app + 'ui/ui.select.html',
       'C_UISelect': app + 'ui/ui.select.css',
 
+      //select组件
+      'UIGroupSelect': app + 'ui/ui.group.select',
+      'T_UIGroupSelect': app + 'ui/ui.group.select.html',
+      'C_UIGroupSelect': app + 'ui/ui.group.select.css',
+      
       //slider横向滚动组件
       'UISlider': app + 'ui/ui.slider',
       'T_UISlider': app + 'ui/ui.slider.html',
