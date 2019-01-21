@@ -12,7 +12,7 @@ define(['View', getViewTemplatePath('alert'), 'UIAlert', 'UIGroupSelect'], funct
     },
 
     showSelect: function () {
-      var i, h = [], m = [], s = [];
+      var i, h = [], m = [], s = [], scope = this;
       for(i = 1; i < 13; i++) {
         h.push({
           id: i,
@@ -35,8 +35,13 @@ define(['View', getViewTemplatePath('alert'), 'UIAlert', 'UIGroupSelect'], funct
         this.select = new UIGroupSelect({
           tips: '请选择时分秒',
           title: '选择矿石剩余时间',
-          idArr: [],
-          data: [h, m, s]
+          idArr: [5, 55, 30],
+          data: [h, m, s],
+          onOkAction: function (items) {
+            scope.$('.js_txt001').val(items[0].id + '-' + items[1].id + '-' +items[2].id);
+            scope.showTime();
+            this.hide();
+          }
         });
       }
       this.select.show();
@@ -50,7 +55,7 @@ define(['View', getViewTemplatePath('alert'), 'UIAlert', 'UIGroupSelect'], funct
       });
     },
 
-    demo01: function () {
+    showTime: function () {
       var txt = this.$('.js_txt001').val();
       var n = new Date();
       var t = txt;
@@ -67,7 +72,10 @@ define(['View', getViewTemplatePath('alert'), 'UIAlert', 'UIGroupSelect'], funct
       }
 
       this.alert01.show();
+    },
 
+    demo01: function () {
+      this.showTime();
     },
     demo02: function () {
       if (!this.alert02) {
