@@ -203,6 +203,7 @@ define(['text!C_UIView'], function (style) {
       //生成实际的dom结构，并且将之封装
       this.$el = $('<div class="js_shadow_root">' + html + '</div>');
 
+      this.openShadowDom = false;
       //如果开启shadow dom的话
       if (this.openShadowDom) {
         /*生成shadow dom的根节点，这里是以UI的根节点创建的shadow dom，创建后将之内存映射关系做保存，否则后期没有办法获取这个映射关系
