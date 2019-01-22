@@ -107,8 +107,11 @@
     var arrayReg = /(.+)\[\]$/;
     var urlParams = {};
     var match, name, value, isArray;
-
-    url = decodeURIComponent(url);
+    
+    //这里为什么要 decode，默认的 url 就应该是一个非 decode 的 url
+    //这里做 decode 会导致如下示例无法正常取 code 值，参数 decode 后已经乱套了
+    //示例如：http://m.ctrip.com/wechat/code.html?usertype=snsapi_userinfo&bindtype=bindwechat&jumpurl=http%3A%2F%2F10.0.0.119%3A8000%2Fwechat%2Fafterlogin%3Fbindtype%3Dbindwechat&code=0318f4f9425b94e272a68e58c81e0b5f&state=1440125203301
+    //url = decodeURIComponent(url);
     while (match = searchReg.exec(url)) {
       name = match[1];
       value = match[2];
